@@ -1,0 +1,13 @@
+package com.hmis.server.hmis.modules.lab.repository;
+
+import com.hmis.server.hmis.modules.lab.model.LabSpecimenAck;
+import com.hmis.server.hmis.modules.lab.model.LabTestRequestItem;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface LabSpecimenAckRepository extends JpaRepository<LabSpecimenAck, Long> {
+    Optional<LabSpecimenAck> findByLabTestRequestItem(LabTestRequestItem labTestRequestItem);
+}

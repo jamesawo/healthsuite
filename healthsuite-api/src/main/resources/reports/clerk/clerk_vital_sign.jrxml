@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clerk_vital_sign" pageWidth="794" pageHeight="595" orientation="Landscape" columnWidth="794" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="697255d5-d617-46fa-ba33-97bab5edd304">
+	<parameter name="subReportData" class="java.util.Map"/>
+	<parameter name="subRepDate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<detail>
+		<band height="220" splitType="Immediate">
+			<frame>
+				<reportElement x="3" y="21" width="790" height="188" uuid="ba434795-4a86-4ebf-9d38-8948113409ef"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement x="6" y="3" width="94" height="20" uuid="f7244b21-38ae-455b-a1a5-aa3cc00de9b2">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Temperature:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="6" y="26" width="94" height="14" uuid="739ad5f9-3e9d-48f2-ab7f-b1e53e18c851">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Weight:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="6" y="42" width="94" height="18" uuid="a52b163f-f9a1-4233-8a76-1489936d3e52">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Systolic B.P. :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="193" y="81" width="118" height="14" uuid="aaeb915f-f601-42cf-9ca7-0cc0a7ad4f81">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Random Blood Sugar:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="5" y="64" width="102" height="20" uuid="84668e75-1545-46c5-aec7-7b740c6f8525">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Oxygen Saturation:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="108" y="66" width="72" height="16" uuid="88f771a7-c364-4d5a-9d18-dd264579cc37">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("oxygenSaturation")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="103" y="26" width="98" height="14" uuid="34e65625-7f77-4c0f-b7db-47e1a6db71d6">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("weight")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="103" y="42" width="98" height="18" uuid="f2f87d6c-4c88-4eeb-ac8d-06dcebd25efc">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("systolicBp")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="103" y="3" width="98" height="20" uuid="9f669575-fd76-4a5e-9604-c63b1912f103">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("temperature")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="311" y="81" width="98" height="14" uuid="0effb3bb-5e2f-429d-986f-035aca579757">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("randomBloodSugar")]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="115" width="601" height="2" uuid="2436549f-a122-4205-b012-d27f6e6dc054">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+				</line>
+				<staticText>
+					<reportElement x="5" y="123" width="94" height="14" uuid="249116a0-a05a-4e5e-9d4c-bf7dfbc95bbc"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Comment:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="5" y="139" width="593" height="44" uuid="4c3e9144-86c1-4db8-ba50-13598251c89a"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Top">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("commentRemark")]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="604" y="-1" width="1" height="189" uuid="5c2f4928-a3b4-4c40-ba69-c5d1704c6938"/>
+				</line>
+				<staticText>
+					<reportElement x="223" y="3" width="86" height="20" uuid="a94cd5d2-6a24-4a11-a56f-a1d530ab3501"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Respiratory Rate: ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="310" y="3" width="78" height="20" uuid="45f9c51e-5102-418e-a2aa-e063c7c9f296"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("respiratoryRate")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="224" y="26" width="86" height="14" uuid="c034e865-51bb-4b01-a216-c21c02059b1f"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Height:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="311" y="26" width="78" height="14" uuid="7977af54-d23b-4c46-80c9-a514dec7ab64"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("height")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="224" y="41" width="86" height="18" uuid="eaf81769-2067-4ef3-b59a-36fc8844d5cd"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Diastolic B.P.:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="311" y="41" width="78" height="18" uuid="335edbce-72a0-4ca5-9c19-e85f0f3cfd4b"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("diastolicBp")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="193" y="62" width="117" height="14" uuid="8cb06dea-3647-4530-893c-d39311f6490d"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Fasting Blood Sugar:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="311" y="62" width="78" height="14" uuid="c8ea9249-faf6-45b7-8d19-23e19199335d"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("fastBloodSugar")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="442" y="80" width="78" height="20" uuid="40fd9c94-e079-46d4-a740-e917a3e529bf"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Pain Score:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="521" y="80" width="78" height="20" uuid="a9dc5e40-6ddc-484c-8d57-76c922f0adea"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("painScore")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="441" y="3" width="78" height="20" uuid="e92b4e96-f88b-49c2-be84-73a5e7de0af6"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Pulse Rate:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="521" y="3" width="78" height="20" uuid="441e6872-aff3-4a1e-8a26-4a2bead2b812"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("pulseRate")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="442" y="26" width="78" height="14" uuid="2d3f1d8a-8482-4c25-80d1-643f530621dc"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[BMI:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="522" y="26" width="78" height="14" uuid="a4012f37-9cc2-4c68-b55b-20e600586757"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("bodyMassIndex")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="442" y="41" width="78" height="18" uuid="0563169d-0df1-4a41-8ff6-70752ab9a9b8"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[BSA:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="522" y="41" width="78" height="18" uuid="1cb3c057-6b5a-4341-9f48-69b04f7d8cf9"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("bodySurfaceArea")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="442" y="61" width="78" height="14" uuid="aca4bf78-f6ec-43ea-9d23-0bce970b623f"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Urinalysis:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="522" y="61" width="78" height="14" uuid="27ca92e3-865e-475c-9ada-1a133841066c"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("urineAnalysis")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="608" y="4" width="178" height="19" uuid="6bcd2d8c-23f0-4f53-89e5-8e5e4653751d"/>
+					<box leftPadding="4"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("capturedByLabel")]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="3" y="5" width="792" height="15" backcolor="#DDE9FD" uuid="e13935c4-961c-4a9c-977f-dbcfa44a5cbe">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textField>
+					<reportElement mode="Transparent" x="30" y="0" width="268" height="15" backcolor="#FFFFFF" uuid="cfa49d02-b6ca-4610-b88c-e8a4ff6ed16e"/>
+					<box leftPadding="4">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subRepDate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="298" y="0" width="306" height="15" backcolor="#FFFFFF" uuid="de659c77-0da0-4c5f-b5c8-210e4fd6b8a7"/>
+					<box leftPadding="4">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[VITAL SIGNS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="608" y="0" width="176" height="15" backcolor="#FFFFFF" uuid="87d317f4-32f7-40cb-9ad4-eee887ccc9b8"/>
+					<box leftPadding="4">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PERFORMED BY]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

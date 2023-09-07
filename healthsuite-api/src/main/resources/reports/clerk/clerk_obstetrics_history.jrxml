@@ -1,0 +1,1489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clerk_obstetrics_history" pageWidth="794" pageHeight="900" orientation="Landscape" columnWidth="794" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isTitleNewPage="true" uuid="b553d6f6-6ff5-469a-a91b-4fb5bdb03e72">
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="ReportDataSet" uuid="3d139c11-82cc-4a90-a66a-c9aaa24c1b74">
+		<field name="duration" class="java.lang.String"/>
+		<field name="outcome" class="java.lang.String"/>
+		<field name="gender" class="java.lang.String"/>
+		<field name="dateOfBirth" class="java.lang.String"/>
+		<field name="birthWeight" class="java.lang.String"/>
+		<field name="alive" class="java.lang.String"/>
+		<field name="comment" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="subRepDate" class="java.lang.String"/>
+	<parameter name="subReportData" class="java.util.Map"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<detail>
+		<band height="880" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="2" y="3" width="791" height="15" backcolor="#DDE9FD" uuid="3a1c50ee-daf8-4bf0-b1fc-b20cc6e82983">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textField>
+					<reportElement mode="Transparent" x="0" y="0" width="298" height="15" backcolor="#FFFFFF" uuid="c50ba0cf-fdcf-42af-b31c-30565125a865"/>
+					<box leftPadding="4">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subRepDate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="298" y="0" width="306" height="15" backcolor="#FFFFFF" uuid="7cae2ad7-9bc1-45cc-aa38-5111097fe451"/>
+					<box leftPadding="4">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[OBSTETRIC HISTORY]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="605" y="0" width="176" height="15" backcolor="#FFFFFF" uuid="8f5d76cd-91a9-40fc-a506-7e61a029cf85"/>
+					<box leftPadding="4">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[RECORDED BY]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement x="2" y="19" width="788" height="861" uuid="a8b27ef9-eac9-4661-b667-479575625ab7"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<line>
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="604" y="0" width="1" height="861" isPrintWhenDetailOverflows="true" uuid="b1118d83-9ec5-4731-9c04-e97bda782867"/>
+				</line>
+				<textField>
+					<reportElement mode="Transparent" x="612" y="10" width="176" height="25" backcolor="#FFFFFF" uuid="e4f250a0-a0ec-4ed3-93a5-a483fc1d6bff"/>
+					<box leftPadding="4">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("recordedBy")]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement x="12" y="188" width="590" height="322" uuid="b51ad122-2e43-40d2-b077-5d181fc3fd48"/>
+					<line>
+						<reportElement x="1" y="15" width="588" height="2" uuid="d06509b5-f735-47eb-b829-aea22049e584"/>
+					</line>
+					<staticText>
+						<reportElement mode="Transparent" x="99" y="0" width="400" height="15" backcolor="#FFFFFF" uuid="68c6d017-7c66-4092-bdba-39a5fd397153"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[PREVIOUS MEDICAL HISTORY]]></text>
+					</staticText>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="155" width="582" height="31" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="d6316d5e-ea46-4e4d-ab58-fe0b2437b078"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("familyHypertension")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="94" width="581" height="36" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="23d7b0a9-a19d-43fe-9ec7-61a60ccf5e1e"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("familyMultiplePregnancy")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="35" width="581" height="35" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="9fc750e6-677e-45f2-a8b1-7c5feb11108e"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("heartDisease")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="209" width="582" height="31" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="7c51a02a-3ea5-4365-bca5-4f4532fe2728"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("familyTuberculosis")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="268" width="582" height="42" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="1ba5378c-8a38-439a-bd45-1c74c55a4d06"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("familyOthers")]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="19" width="88" height="15" backcolor="#FFFFFF" uuid="fe305af4-1c5b-4c8c-bcd8-7fb750dc6dd2"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Heart Disease: ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="76" width="190" height="15" backcolor="#FFFFFF" uuid="bc663d4d-4d23-4b63-938a-97a2839c5296"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Multiple Pregnancy:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="137" width="190" height="15" backcolor="#FFFFFF" uuid="ea22d316-4ba8-4e57-9e98-89f7622c04ca"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Hypertension: ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="189" width="190" height="15" backcolor="#FFFFFF" uuid="f21dbb24-e395-4a73-82fb-0282ecc73dff"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Tuberculosis: ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="247" width="190" height="15" backcolor="#FFFFFF" uuid="610bcc8e-a1e2-4824-8527-06a9ce5ad3cc"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Others: ]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="12" y="512" width="591" height="240" uuid="9830e0df-a434-4d95-8931-23bbfff34e01"/>
+					<line>
+						<reportElement x="2" y="15" width="588" height="1" uuid="1a94cf77-d4e4-4f94-b379-c883e8d4f318"/>
+					</line>
+					<staticText>
+						<reportElement mode="Transparent" x="99" y="0" width="400" height="15" backcolor="#FFFFFF" uuid="9fba69d6-90dc-4109-8b91-71867b8dc52d"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[FAMILY HISTORY]]></text>
+					</staticText>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="124" width="582" height="24" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="b70cadb1-d3c5-4c75-a70a-0d399daadac4"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("kidneyDisease")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="80" width="582" height="26" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="cfa29a1e-2fd0-4de9-b28f-e5297801d1f4"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("chestDisease")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="33" width="582" height="26" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="18d5300c-be6b-48ab-9cd3-9f5847ad0afc"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("familyHeartDisease")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="170" width="582" height="24" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="661dc750-adfc-4301-aa77-bec557f4e76b"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("bloodTransfusion")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="216" width="582" height="24" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="035e726f-2822-4194-8ad2-4a34a0cb0eeb"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("othersIncludingOperation")]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="17" width="190" height="15" backcolor="#FFFFFF" uuid="c21e0635-52a7-4159-9b67-bd9367d3bb30"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Heart Disease: ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="63" width="190" height="15" backcolor="#FFFFFF" uuid="6207c7b9-8aa1-410b-ba80-997c76b296bf"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Chest Disease:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="108" width="190" height="15" backcolor="#FFFFFF" uuid="5928d423-afba-4021-b498-7657f25a8a60"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Kidney Disease: ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="153" width="190" height="15" backcolor="#FFFFFF" uuid="4ca51412-18d6-4d04-b969-7356f54202fb"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Blood Transfussion: ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="196" width="190" height="15" backcolor="#FFFFFF" uuid="f6f24a7b-f519-4286-8458-b0f9ed7a5586"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Others (including operation):]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="13" y="757" width="588" height="59" uuid="c19f0e9f-9726-4e76-9166-c047c20b704c"/>
+					<line>
+						<reportElement x="0" y="18" width="588" height="1" uuid="c8c2ba54-adba-4de1-8545-97cdc3746a14"/>
+					</line>
+					<staticText>
+						<reportElement mode="Transparent" x="99" y="1" width="400" height="15" backcolor="#FFFFFF" uuid="f57b35bc-7ddd-4e40-92d6-2fef4ce13167"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[PREVIOUS PREGNANCY]]></text>
+					</staticText>
+					<componentElement>
+						<reportElement x="0" y="20" width="580" height="39" isPrintWhenDetailOverflows="true" uuid="a5a37912-b32d-486d-ab0b-830ea7d6fb42">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+							<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+							<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+						</reportElement>
+						<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+							<datasetRun subDataset="ReportDataSet" uuid="92e6cd37-482d-4ebe-8c02-5a46a9ff7289">
+								<dataSourceExpression><![CDATA[$P{subReportData}.get("prevPregnancies")]]></dataSourceExpression>
+							</datasetRun>
+							<jr:column width="70" uuid="1dfd111e-f3bb-4876-a56a-66138aa42272">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+								<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="70" height="20" uuid="1b4ee05c-e6f3-4c49-a1be-a2b88b569727"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="10" isBold="true"/>
+										</textElement>
+										<text><![CDATA[Duration]]></text>
+									</staticText>
+								</jr:tableHeader>
+								<jr:detailCell style="Table_TD" height="20">
+									<textField>
+										<reportElement x="0" y="0" width="70" height="20" uuid="a09da007-b2a0-43a0-a8e6-2276032eda5d"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="7.5"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{duration}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="83" uuid="5dbf9f14-c567-400a-8823-5ae3a7fe5e12">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+								<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="83" height="20" uuid="88445023-6a64-4a95-badb-a557d0698141"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="10" isBold="true"/>
+										</textElement>
+										<text><![CDATA[Outcome]]></text>
+									</staticText>
+								</jr:tableHeader>
+								<jr:detailCell style="Table_TD" height="20">
+									<textField>
+										<reportElement x="0" y="0" width="83" height="20" uuid="33d1d9af-aa90-4ed5-9090-393f20b145c0"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="7.5"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{outcome}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="83" uuid="a07173c2-75bb-42fc-bac3-db26d9dc9ff7">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+								<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="83" height="20" uuid="1348ddfa-2fe7-4bbe-a17d-fc0e3f29ed8c"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="10" isBold="true"/>
+										</textElement>
+										<text><![CDATA[Sex]]></text>
+									</staticText>
+								</jr:tableHeader>
+								<jr:detailCell style="Table_TD" height="20">
+									<textField>
+										<reportElement x="0" y="0" width="83" height="20" uuid="3fb5acfb-2b07-4d3b-b470-622e3f4a4459"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="7.5"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{gender}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="83" uuid="988b9383-0daa-4406-91b5-456cd315d389">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+								<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="83" height="20" uuid="464c5ff8-b2fc-487a-a312-7db408ed7a2f"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="10" isBold="true"/>
+										</textElement>
+										<text><![CDATA[Date of Birth]]></text>
+									</staticText>
+								</jr:tableHeader>
+								<jr:detailCell style="Table_TD" height="20">
+									<textField>
+										<reportElement x="0" y="0" width="83" height="20" uuid="2ee4f09c-c092-4c13-9485-f413b350d6ae"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="7.5"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{dateOfBirth}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="83" uuid="7b6fc169-28e0-4463-97ea-e2e76423aa9a">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+								<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="83" height="20" uuid="3a48df2d-aedb-4279-86f7-a32c7e81c51b"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="10" isBold="true"/>
+										</textElement>
+										<text><![CDATA[Birth Weight]]></text>
+									</staticText>
+								</jr:tableHeader>
+								<jr:detailCell style="Table_TD" height="20">
+									<textField>
+										<reportElement x="0" y="0" width="83" height="20" uuid="231e54ca-7354-461b-a220-4002ebb47625"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="7.5"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{birthWeight}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="48" uuid="d9fa8035-cae3-46e3-b168-715edb938a1d">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+								<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="48" height="20" uuid="1d1507b0-7433-4e8e-8806-0dd5fc880b34"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="10" isBold="true"/>
+										</textElement>
+										<text><![CDATA[Alive]]></text>
+									</staticText>
+								</jr:tableHeader>
+								<jr:detailCell style="Table_TD" height="20">
+									<textField>
+										<reportElement x="0" y="0" width="48" height="20" uuid="b5b0ea20-2cbe-466f-b9c2-60dfcc148a57"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="7.5"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{alive}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="130" uuid="04b23593-4065-4d1c-9034-2d7c869568fb">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+								<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+									<staticText>
+										<reportElement x="0" y="0" width="130" height="20" uuid="11c75269-3f83-4799-ac1a-b2d985b4a540"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="10" isBold="true"/>
+										</textElement>
+										<text><![CDATA[Comment]]></text>
+									</staticText>
+								</jr:tableHeader>
+								<jr:detailCell style="Table_TD" height="20">
+									<textField>
+										<reportElement x="0" y="0" width="130" height="20" uuid="7ffc73f1-c2d2-4834-b508-731d83bb69c2"/>
+										<box leftPadding="4"/>
+										<textElement verticalAlignment="Middle">
+											<font size="7.5"/>
+										</textElement>
+										<textFieldExpression><![CDATA[$F{comment}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+						</jr:table>
+					</componentElement>
+				</frame>
+				<frame>
+					<reportElement x="13" y="5" width="580" height="55" uuid="83b4e944-5f57-4c8f-ac43-99a36f28626f"/>
+					<textField isBlankWhenNull="true">
+						<reportElement mode="Transparent" x="1" y="18" width="281" height="37" backcolor="#FFFFFF" uuid="cb38118c-66cc-4ab6-9776-dfa7474e76df"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("specialPoints")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement mode="Transparent" x="289" y="18" width="291" height="37" backcolor="#FFFFFF" uuid="250ce456-1be1-43db-ab42-f84a167a237a"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("specialAttention")]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement mode="Transparent" x="1" y="0" width="88" height="15" backcolor="#FFFFFF" uuid="1b109756-47b4-4051-a4f7-d2bb1422f83b"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Special Points:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="289" y="2" width="197" height="15" backcolor="#FFFFFF" uuid="a380f377-f10e-484b-a52e-1269b5ed6df1"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Special Attention:]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="12" y="64" width="580" height="55" uuid="8a0a085c-c546-4faa-9c40-4ea3e3fb6a05"/>
+					<textField isBlankWhenNull="true">
+						<reportElement mode="Transparent" x="0" y="18" width="281" height="37" backcolor="#FFFFFF" uuid="195d401d-7aa0-4ec0-a0ea-b64f05fb3bed"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("lmp")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement mode="Transparent" x="289" y="18" width="291" height="37" backcolor="#FFFFFF" uuid="c7a0857b-f9af-4563-ae45-3206ffa9fc88"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("edd")]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="0" width="88" height="15" backcolor="#FFFFFF" uuid="43445de4-4ef9-4126-9eea-cbe133fbc03a"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[L.M.P: ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="289" y="2" width="197" height="15" backcolor="#FFFFFF" uuid="35764eed-61a7-4de8-b130-6225bc9a012d"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[E.D.D: ]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="12" y="123" width="580" height="55" uuid="cfef3823-4a33-401d-bd2c-39449969ca24"/>
+					<textField isBlankWhenNull="true">
+						<reportElement mode="Transparent" x="0" y="18" width="281" height="37" backcolor="#FFFFFF" uuid="45ed0334-2506-4a6d-b901-cbacfa2be492"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("ga")]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="0" width="88" height="15" backcolor="#FFFFFF" uuid="3f07fc7a-c150-4a80-9b57-7c38d1340743"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[G.A: ]]></text>
+					</staticText>
+				</frame>
+			</frame>
+		</band>
+		<band height="750">
+			<frame>
+				<reportElement x="2" y="0" width="790" height="750" uuid="008120c4-469b-4f5f-9159-3940155b9768"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<line>
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="604" y="-1" width="1" height="751" isPrintWhenDetailOverflows="true" uuid="d44f5fed-a527-445e-8eef-dd7f38934566"/>
+				</line>
+				<frame>
+					<reportElement x="13" y="3" width="590" height="277" uuid="dbed7293-7336-4a1d-901e-88eb4913fe73"/>
+					<line>
+						<reportElement x="1" y="15" width="560" height="1" uuid="a1a46ea8-0010-4e5d-a046-088c54204cdc"/>
+					</line>
+					<staticText>
+						<reportElement mode="Transparent" x="99" y="0" width="400" height="15" backcolor="#FFFFFF" uuid="dd64877c-9e89-4754-9b66-5451bbe2af47"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[HISTORY OF PRESENT PREGNANCY]]></text>
+					</staticText>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="140" width="582" height="32" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="be21def1-1c2e-4e4b-b960-0a8d1681300a"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("presentUrinarySymptom")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="86" width="581" height="34" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="894ec8bd-123b-4d99-9f42-fde9ad0a1e76"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("presentDischarge")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="35" width="581" height="34" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="fdb8419a-8c6a-476c-ba96-873bc394efc8"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("presentBleeding")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="192" width="582" height="32" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="4e87d76f-d0db-4b6c-ba10-45bf9a464545"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("presentSwellingOfAnkles")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="245" width="582" height="32" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="a76cae58-93b3-4499-b20c-563fb12cb42f"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("presentOtherSymptoms")]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="17" width="190" height="15" backcolor="#FFFFFF" uuid="7ca675c4-81af-4989-bd88-dc476a3f9120"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Present Bleeding:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="70" width="190" height="15" backcolor="#FFFFFF" uuid="2b36d819-3e29-4464-b6b0-914cd19a7007"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Discharge: ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="123" width="190" height="15" backcolor="#FFFFFF" uuid="dc686836-406b-4782-b11e-e21870a685f3"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Urinary Symtom: ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="176" width="190" height="15" backcolor="#FFFFFF" uuid="7da53c6a-7d22-423a-8880-5c7a2e1a7c7d"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Swelling Of Ankles: ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="227" width="190" height="15" backcolor="#FFFFFF" uuid="41015c7b-0f95-453b-a643-5fa9673a7ab6"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Others Symptom:]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="12" y="288" width="590" height="448" uuid="bf49079f-ba9e-4222-aff3-ed2a0d2aaa05"/>
+					<line>
+						<reportElement x="1" y="15" width="589" height="1" uuid="b37640a7-29e0-4d25-b059-19ccbcee25f0"/>
+					</line>
+					<staticText>
+						<reportElement mode="Transparent" x="99" y="0" width="400" height="15" backcolor="#FFFFFF" uuid="97ac8956-0193-491d-97b9-825639dbd150"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[PHYSICAL EXAMINATION]]></text>
+					</staticText>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="126" width="580" height="26" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="ae69c0be-b47b-43ad-9e20-128df3ab457f"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("physicalCardiovascularSystem")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="77" width="580" height="28" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="f2dec912-254c-4f00-a30d-2b45697df615"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("physicalRespiratorySystem")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="32" width="580" height="28" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="cd8134e2-b10c-4d89-b9d7-f52cfba0f64b"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("physicalGeneralCondition")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="172" width="580" height="26" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="7eb21cd0-ff43-4d64-ab88-1b7eb5526abc"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("physicalBreastAndNipples")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement mode="Transparent" x="0" y="218" width="580" height="31" backcolor="#FFFFFF" uuid="778ac896-603f-4493-9ead-16cf270c4856"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("physicalAbdomen")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement mode="Transparent" x="0" y="315" width="580" height="31" backcolor="#FFFFFF" uuid="e9ea695b-ca62-4b61-93a4-4446909aaca9"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("physicalOtherAbnormalities")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement mode="Transparent" x="0" y="268" width="580" height="31" backcolor="#FFFFFF" uuid="2772816b-2df6-4519-937a-f30dbf4e8b92"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("physicalVaginalExamination")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement mode="Transparent" x="0" y="417" width="580" height="31" backcolor="#FFFFFF" uuid="666f33e2-8fb4-4e29-b34d-f6b5c3fa047d"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("physicalSpecialInstructions")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement mode="Transparent" x="0" y="366" width="580" height="31" backcolor="#FFFFFF" uuid="b55c877d-b4d0-4008-98bc-3041772b6223"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("physicalComment")]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="17" width="190" height="15" backcolor="#FFFFFF" uuid="223882d3-8d53-4512-b306-a16a9f636302"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[General Condition:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="61" width="190" height="15" backcolor="#FFFFFF" uuid="2169912f-0d57-48a2-8906-0913a43c5c06"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Respiratory System: ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="109" width="190" height="15" backcolor="#FFFFFF" uuid="dbdaae11-6acb-46d2-961c-406f45f2f1ee"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Cardiovascular System:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="156" width="190" height="15" backcolor="#FFFFFF" uuid="0f2b0a59-4f6c-4614-9b53-857d78bb5240"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Breast and Nipples:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="199" width="190" height="15" backcolor="#FFFFFF" uuid="7c4d95ea-f35c-4e7d-9706-fdad4c7905c2"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Abdomen:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="252" width="190" height="15" backcolor="#FFFFFF" uuid="73e95299-1a31-4f58-ac8a-b8a0a0a8291c"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Vaginal Examination: ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="300" width="190" height="15" backcolor="#FFFFFF" uuid="c75116ec-d694-4a8c-a955-27237f2cb56b"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Other Abnormalities:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="347" width="190" height="15" backcolor="#FFFFFF" uuid="22f8366f-6443-4f8c-9a52-14ae438f9796"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Comment:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="399" width="390" height="15" backcolor="#FFFFFF" uuid="33510d32-89d1-4189-88d2-fecf256da2f8"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Special Instructions Regarding Puerperium: ]]></text>
+					</staticText>
+				</frame>
+			</frame>
+		</band>
+		<band height="516">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement x="2" y="0" width="791" height="516" uuid="c6e7bc2d-2155-473b-9aa5-cb19400cbab0"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<line>
+					<reportElement positionType="Float" stretchType="ContainerHeight" x="604" y="-1" width="1" height="516" isPrintWhenDetailOverflows="true" uuid="51dde4e6-64ae-49cb-a42d-45fd878a55af"/>
+				</line>
+				<frame>
+					<reportElement x="12" y="3" width="590" height="179" uuid="31a4dafe-5f94-4ff4-8d47-4c1f1b7811b1"/>
+					<line>
+						<reportElement x="0" y="21" width="589" height="1" uuid="fc69c471-c729-4429-999f-1a8fcd4b7564"/>
+					</line>
+					<staticText>
+						<reportElement mode="Transparent" x="99" y="3" width="400" height="15" backcolor="#FFFFFF" uuid="632a61c8-be02-4eee-8682-127155c26f9e"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[FURTHER ASSESSMENT]]></text>
+					</staticText>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="93" width="582" height="32" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="7ef5fb52-0379-4cfe-b201-43e1ed004cb3"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("measBloodPressure")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="315" y="39" width="273" height="34" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="0bcb4d67-b113-4203-a5fe-5dd5b2e04b28"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("measHeight")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="39" width="288" height="34" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="d30c5254-8d87-481b-856c-d44b0b3b280c"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{subReportData}.get("measWeight")]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement positionType="Float" mode="Transparent" x="0" y="147" width="582" height="32" isPrintWhenDetailOverflows="true" backcolor="#FFFFFF" uuid="a19a5a9e-1353-4fde-b850-2c72fd1557db"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[" Breast and Nipples: \n " + $P{subReportData}.get("measBreastAndNipples")]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="24" width="70" height="15" backcolor="#FFFFFF" uuid="7dc9c05b-f8a3-4000-89cf-9e18b16d4c2f"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Weight:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="315" y="24" width="70" height="15" backcolor="#FFFFFF" uuid="93cb6321-7f89-48a4-91cb-55a292866c44"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Height:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="77" width="186" height="15" backcolor="#FFFFFF" uuid="4e2c4964-6a7e-47cf-be07-064eb5efc54f"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Blood Pressure: ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="130" width="186" height="15" backcolor="#FFFFFF" uuid="17eaa4ef-8bbd-49f1-9b8f-73fea3f72518"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Blood Pressure: ]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="12" y="185" width="590" height="186" uuid="240c09d9-90d8-4964-a5c6-be4f85665764"/>
+					<line>
+						<reportElement x="0" y="15" width="589" height="1" uuid="e87a9271-0d0f-4ea7-91fe-be68a24ee648"/>
+					</line>
+					<staticText>
+						<reportElement mode="Transparent" x="99" y="0" width="400" height="15" backcolor="#FFFFFF" uuid="1f9df5a3-42e2-4c27-a570-443de193b1d6"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[PELVIC ASSESSMENT]]></text>
+					</staticText>
+					<textField>
+						<reportElement mode="Transparent" x="0" y="41" width="581" height="19" backcolor="#FFFFFF" uuid="b3e60cc9-3d37-4794-85cd-f244d15e5a6e"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[" Promontory:  " +$P{subReportData}.get("promontory")]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="20" width="89" height="14" backcolor="#FFFFFF" uuid="55dd123e-ec51-453e-a4db-b85025e2b3ac"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="false" isItalic="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Inlet]]></text>
+					</staticText>
+					<textField>
+						<reportElement mode="Transparent" x="0" y="84" width="581" height="19" backcolor="#FFFFFF" uuid="531b6dd6-e09e-4b5e-8d29-e2ac663bd70e"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[" Sacrum:  " +$P{subReportData}.get("sacrum")]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="67" width="89" height="14" backcolor="#FFFFFF" uuid="0e6f5a27-2b51-42b1-8c8a-fecf63ad2608"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="false" isItalic="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Cavity]]></text>
+					</staticText>
+					<textField>
+						<reportElement mode="Transparent" x="0" y="104" width="581" height="19" backcolor="#FFFFFF" uuid="2a6a016c-1812-4d41-9a95-1082170b6b35"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[" Sidewalls:  " +$P{subReportData}.get("sideWalls")]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="130" width="89" height="14" backcolor="#FFFFFF" uuid="41455305-1c52-4b48-b9f8-3d0637f28657"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="10" isBold="false" isItalic="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[Outlet]]></text>
+					</staticText>
+					<textField>
+						<reportElement mode="Transparent" x="0" y="147" width="581" height="19" backcolor="#FFFFFF" uuid="3698a355-bf75-4ed0-ad64-1e492256dd80"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[" Sub-pub:  " +$P{subReportData}.get("subPub")]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement mode="Transparent" x="0" y="167" width="581" height="19" backcolor="#FFFFFF" uuid="93729679-5bef-46c1-b17f-ac47d4a215a2"/>
+						<box leftPadding="4">
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[" Coccyx:  " +$P{subReportData}.get("coccyx")]]></textFieldExpression>
+					</textField>
+					<frame>
+						<reportElement x="0" y="188" width="590" height="143" uuid="137e2c03-e367-43fe-8dd9-1fae5c2e85a2"/>
+						<line>
+							<reportElement x="0" y="20" width="589" height="1" uuid="fd76fd2b-7c6c-456a-95f7-5bb7524b9392"/>
+						</line>
+						<textField>
+							<reportElement mode="Transparent" x="0" y="94" width="581" height="45" backcolor="#FFFFFF" uuid="00678185-c578-4878-8edd-253806f7e7b0"/>
+							<box leftPadding="4">
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Left" verticalAlignment="Top">
+								<font size="9" isBold="false"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$P{subReportData}.get("specialInstructions")]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement mode="Transparent" x="0" y="77" width="288" height="14" backcolor="#FFFFFF" uuid="0dbe4d3e-723d-4191-b9c9-f451a25867af"/>
+							<box leftPadding="4">
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Left" verticalAlignment="Top">
+								<font size="10" isBold="false" isItalic="true" isUnderline="true"/>
+							</textElement>
+							<text><![CDATA[Special Instructions Regarding Delivery:]]></text>
+						</staticText>
+						<textField>
+							<reportElement mode="Transparent" x="0" y="41" width="581" height="29" backcolor="#FFFFFF" uuid="5b2cfb95-eb0b-4248-a313-59b7feaa9f5f"/>
+							<box leftPadding="4">
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Left" verticalAlignment="Top">
+								<font size="9" isBold="false"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$P{subReportData}.get("comment")]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement mode="Transparent" x="0" y="24" width="288" height="14" backcolor="#FFFFFF" uuid="d2ebe924-fb4d-4aec-a1a4-668049d654b5"/>
+							<box leftPadding="4">
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Left" verticalAlignment="Top">
+								<font size="10" isBold="false" isItalic="true" isUnderline="true"/>
+							</textElement>
+							<text><![CDATA[Comments]]></text>
+						</staticText>
+					</frame>
+				</frame>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

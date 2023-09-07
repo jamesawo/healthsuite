@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="clerk_drug_administration" pageWidth="794" pageHeight="595" orientation="Landscape" columnWidth="794" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="697255d5-d617-46fa-ba33-97bab5edd304">
+	<parameter name="subReportData" class="java.util.Map"/>
+	<parameter name="subRepDate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<detail>
+		<band height="221" splitType="Stretch">
+			<frame>
+				<reportElement x="1" y="17" width="793" height="203" uuid="338379c2-6e3e-4489-9f97-588dda29c73e"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement x="6" y="3" width="95" height="19" uuid="de903713-58ab-4808-8f57-cfde4f8e0c7a"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Name:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="604" y="-1" width="1" height="204" uuid="0fa43798-50af-4637-ad40-95f9afd4e908"/>
+				</line>
+				<textField>
+					<reportElement x="609" y="2" width="178" height="19" uuid="a1e1277b-866a-4cc5-b858-01a6eb43a503"/>
+					<box leftPadding="4"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("performedBy")]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="6" y="26" width="95" height="19" uuid="0545fa0a-0ceb-4514-9888-12661e7a777c"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Formulation:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="6" y="48" width="95" height="19" uuid="62059d81-50dc-456c-a4b9-04f3cf79e52b"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Dosage:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="6" y="72" width="95" height="19" uuid="8a0e1c5e-388f-4725-bb4d-facd651e1203"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Frequency:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="6" y="95" width="95" height="19" uuid="67b028f7-305d-43f4-a843-4182340445e2"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Days:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="6" y="121" width="95" height="19" uuid="523ac4b9-9929-4694-b5ca-7926b3369634"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Top">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Quantity:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="118" width="139" height="1" uuid="def399b1-da75-41b1-8339-0c5ccefc9305"/>
+				</line>
+				<staticText>
+					<reportElement x="6" y="143" width="95" height="37" uuid="c8598c14-fcb8-4d95-849e-625ff5446bf6"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Top">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Comment:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="102" y="3" width="399" height="19" uuid="24ea2bb0-aa70-4093-8d9a-55ab233b0061"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("name")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="102" y="26" width="399" height="19" uuid="d4debea9-ebfc-4e9c-bb24-cbe0006cc07b"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("formulation")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="102" y="48" width="399" height="19" uuid="706272c0-68f5-420b-9375-22bde2bb864d"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("dosage")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="102" y="72" width="399" height="19" uuid="f7898125-494c-4846-be05-acb65867eef1"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("frequency")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="102" y="95" width="399" height="19" uuid="9124fedc-58b0-495a-b5d0-07a3cbdaf3d3"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("days")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="102" y="121" width="399" height="19" uuid="e43851f5-7c08-47b8-982d-137070b03aa2"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Top">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("quantity")]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="102" y="143" width="399" height="37" uuid="ab945a5a-bad5-4149-92a4-fbcc48a7538c"/>
+					<box leftPadding="4"/>
+					<textElement verticalAlignment="Top">
+						<font size="10" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subReportData}.get("comment")]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="1" y="2" width="792" height="15" backcolor="#DDE9FD" uuid="33e7c633-5103-494a-81a6-6b0cb5db9a7d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textField>
+					<reportElement mode="Transparent" x="30" y="0" width="220" height="14" backcolor="#FFFFFF" uuid="b8f62a85-56c8-45d1-b7b1-e618a462f083"/>
+					<box leftPadding="4">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{subRepDate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="250" y="0" width="354" height="14" backcolor="#FFFFFF" uuid="a2c02bfa-cb3e-4dce-9c35-b84889b7a754"/>
+					<box leftPadding="4">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DRUG ADMINISTRATION]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="615" y="0" width="160" height="14" backcolor="#FFFFFF" uuid="46c8949f-eb20-4dcd-97f1-c4435ce3362c"/>
+					<box leftPadding="4">
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PERFORMED BY]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>
