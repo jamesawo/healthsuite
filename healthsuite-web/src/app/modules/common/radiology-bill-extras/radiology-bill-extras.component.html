@@ -1,0 +1,62 @@
+
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div  class="form-padding" >
+        <div class="row mg-l-10">
+            <div class="col-md-6 row">
+                <div class="col-md-4">
+                    <div class="form-group w-100">
+                        <label>Patient Current Status: </label>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group w-100">
+                        <input class="form-control" [(ngModel)]="props.radiologyRequest.patientCurrentStatus">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <div class="col-md-4">
+                    <div class="form-group w-100">
+<!--                        <label>Radiology Number:</label>-->
+                        <label>Previous Imaging Details:</label>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group w-100">
+                        <input class="form-control" [(ngModel)]="props.radiologyRequest.previousImagingDetails">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mg-l-10">
+            <div class="col-md-6 row">
+                <div class="col-md-4">
+                    <div class="form-group w-100">
+<!--                        <label>Clinical Summary: </label>-->
+                        <label>Previous Operation Details: </label>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group w-100">
+                        <input class="form-control" [(ngModel)]="props.radiologyRequest.previousOperationDetails">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 row">
+                <div class="col-md-4">
+                    <div class="form-group w-100">
+                        <label>Requesting Physician:</label>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group w-100">
+                        <input class="form-control"
+                               [(ngModel)]="props.radiologyRequest.physician.label">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

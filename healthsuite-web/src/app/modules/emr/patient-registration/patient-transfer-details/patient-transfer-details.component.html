@@ -1,0 +1,90 @@
+<fieldset class="border p-2 rounded mg-t-20 mg-b-20">
+    <legend class="w-auto tx-16">Transfer Details</legend>
+    <form class="form-padding" autocomplete="off">
+        <!-- Transfer Detail -->
+        <div class="row form-group">
+            <div class="col-12">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Hospital Transfer From:</label>
+                    <div class="col-10">
+                        <input
+                            class="form-control form-control-sm"
+                            name="hospitalTransferFrom"
+                            [(ngModel)]="patientPayload.patientTransferDetails.hospitalTransferFrom"
+                            type="text"
+                            placeholder="Transfer From.."
+                            autocomplete="disabled"
+                        />
+                    </div>
+                </div>
+            </div>
+            <!-- Date Of Transfer -->
+            <div class="col-12">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Date Of Transfer:</label>
+                    <div class="col-10">
+                        <div class="input-group">
+
+                            <app-shared-date #dateOfTransferComponent
+                                [props]="{
+                                    hideCurrentDate: true
+                                }"
+                                (selected)="onDateSelected($event)"
+                            ></app-shared-date>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Hospital Address -->
+            <div class="col-12">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Hospital Address:</label>
+                    <div class="col-10">
+                        <input
+                            class="form-control form-control-sm"
+                            name="hospitalAddress"
+                            [(ngModel)]="patientPayload.patientTransferDetails.hospitalAddress"
+                            type="text"
+                            placeholder="Enter Hospital Address"
+                            autocomplete="disabled"
+                        />
+                    </div>
+                </div>
+            </div>
+            <!-- Authorized Doctors -->
+            <div class="col-12">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Authorized Doctor:</label>
+                    <div class="col-10">
+                        <input
+                            class="form-control form-control-sm"
+                            name="authorizedDoctor"
+                            [(ngModel)]="patientPayload.patientTransferDetails.authorizedDoctor"
+                            type="text"
+                            placeholder="Enter Authorized Doctor"
+                            autocomplete="disabled"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reason For Transfer -->
+            <div class="col-12">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Reason For Transfer:</label>
+                    <div class="col-10">
+                        <textarea
+                            name="reasonForTransfer"
+                            [(ngModel)]="patientPayload.patientTransferDetails.reasonForTransfer"
+                            id=""
+                            class="form-control form-control-sm"
+                            cols="30"
+                            rows="3"
+                            autocomplete="disabled"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>

@@ -1,0 +1,398 @@
+<div class="table-responsive" [ngSwitch]="props?.view">
+    <!-- service bill view -->
+    <ng-container *ngSwitchCase="serviceBillView">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                [checked]="isAllCheckBoxChecked()"
+                                (change)="checkAllCheckBox($event)"
+                            />
+                            <label class="form-check-label" *ngIf="props?.allowEdit">
+                                <i
+                                    (click)="onRemoveAllCheckedBillItems()"
+                                    class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                ></i>
+                            </label>
+                        </div>
+                    </th>
+                    <th class="wd-30p text-center">PRODUCT / SERVICE</th>
+                    <th class="wd-5p text-center">QTY</th>
+                    <th class="wd-10p text-center">PRICE</th>
+                    <th class="wd-10p text-center">GROSS</th>
+                    <th class="wd-10p text-center">NHIS PRICE</th>
+                    <th class="wd-10p text-center">NHIS %</th>
+                    <th class="wd-10p text-center">PAY CASH ?</th>
+                    <th class="wd-10p text-center">NET</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bill of serviceBillItems; let i = index">
+                    <!-- trash btn -->
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value="{{ bill.productService.id }}"
+                                [(ngModel)]="serviceBillItems[i].checked"
+                            />
+                            <label class="form-check-label" *ngIf="props?.allowEdit">
+                                <i
+                                    (click)="onRemoveBillItem(bill)"
+                                    class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                ></i>
+                            </label>
+                        </div>
+                    </td>
+                    <!-- product/service name -->
+                    <td class="text-center">{{ bill.productService.name }}</td>
+                    <!-- quantity -->
+                    <td class="wd-5p">
+                        <input
+                            [disabled]="!props?.allowEdit"
+                            type="number"
+                            class="wd-50"
+                            [value]="bill.quantity"
+                            (keyup)="onBillQuantityChange($event, bill)"
+                            (change)="onBillQuantityChange($event, bill)"
+                            (keypress)="numberMatch($event)"
+                            min="0"
+                        />
+                    </td>
+                    <!-- nhis price -->
+                    <td class="text-center">
+                        {{ checkIsPatientScheme() ? bill.nhisPrice : (bill.price | currency: ' ') }}
+                    </td>
+                    <!-- gross amount -->
+                    <td class="text-center">{{ bill.grossAmount | currency: ' ' }}</td>
+
+                    <!-- nhis price -->
+                    <td class="text-center">
+                        {{ bill.nhisPrice | currency: ' ' }}
+                    </td>
+                    <!-- nhis percent -->
+                    <td class="text-center">{{ bill.nhisPercent }}</td>
+                    <!-- pay cash-->
+                    <td class="text-center">
+                        <input
+                            type="checkbox"
+                            [checked]="bill.payCash"
+                            [(ngModel)]="serviceBillItems[i].payCash"
+                            (change)="onBillPayCashChanged($event, bill)"
+                        />
+                    </td>
+
+                    <!-- net amount -->
+                    <td class="text-center">
+                        {{ bill.netAmount | currency: ' ' }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
+    <!-- service payment view -->
+    <ng-container *ngSwitchCase="servicePaymentView">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                [checked]="isAllCheckBoxChecked()"
+                                (change)="checkAllCheckBox($event)"
+                            />
+                            <label class="form-check-label" *ngIf="props?.allowEdit">
+                                <i
+                                    (click)="onRemoveAllCheckedBillItems()"
+                                    class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                ></i>
+                            </label>
+                        </div>
+                    </th>
+                    <th class="wd-30p text-center">PRODUCT / SERVICE</th>
+                    <th class="wd-5p text-center">QTY</th>
+                    <th class="wd-10p text-center">PRICE</th>
+                    <th class="wd-10p text-center">GROSS</th>
+                    <th class="wd-10p text-center">WAIVED</th>
+                    <th class="wd-10p text-center">DISCOUNT</th>
+                    <th class="wd-10p text-center">ALLOCATE</th>
+                    <th class="wd-10p text-center">NET</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bill of serviceBillItems; let i = index">
+                    <!-- trash btn -->
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value="{{ bill.productService.id }}"
+                                [(ngModel)]="serviceBillItems[i].checked"
+                            />
+                            <label class="form-check-label" *ngIf="props?.allowEdit">
+                                <i
+                                    (click)="onRemoveBillItem(bill)"
+                                    class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                ></i>
+                            </label>
+                        </div>
+                    </td>
+                    <!-- product/service name -->
+                    <td class="text-center">{{ bill.productService.name }}</td>
+                    <!-- quantity -->
+                    <td class="wd-5p">
+                        <input
+                            [disabled]="!props?.allowEdit"
+                            type="number"
+                            class="wd-50"
+                            [value]="bill.quantity"
+                            (keyup)="onBillQuantityChange($event, bill)"
+                            (change)="onBillQuantityChange($event, bill)"
+                            (keypress)="numberMatch($event)"
+                            min="0"
+                        />
+                    </td>
+                    <!-- nhis price -->
+                    <td class="text-center">
+                        {{ checkIsPatientScheme() ? bill.nhisPrice : (bill.price | currency: ' ') }}
+                    </td>
+                    <!-- gross amount -->
+                    <td class="text-center">{{ bill.grossAmount | currency: ' ' }}</td>
+                    <!-- waived amount-->
+                    <td class="text-center">
+                        {{ bill.waivedAmount ? bill.waivedAmount : (0 | currency: ' ') }}
+                    </td>
+                    <!--discount amount-->
+                    <td class="text-center">
+                        {{ bill.discountAmount ? bill.discountAmount : (0 | currency: ' ') }}
+                    </td>
+                    <!-- allocate -->
+                    <td class="text-center">
+                        <input
+                            type="checkbox"
+                            [checked]="bill.isAllocate"
+                            [(ngModel)]="serviceBillItems[i].isAllocate"
+                            (click)="onBillAllocateDepositChange($event, bill)"
+                        />
+                    </td>
+                    <!-- net amount -->
+                    <td class="text-center">
+                        {{ bill.netAmount | currency: ' ' }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
+    <!-- drug bill view -->
+    <ng-container *ngSwitchCase="drugBillView">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                [checked]="isAllCheckBoxChecked()"
+                                (change)="checkAllCheckBox($event)"
+                            />
+                            <label class="form-check-label">
+                                <i
+                                    (click)="onRemoveAllCheckedBillItems()"
+                                    class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                ></i>
+                            </label>
+                        </div>
+                    </th>
+                    <th class="wd-30p text-center">DRUG / ITEM</th>
+                    <th class="wd-10p text-center">FORMULATION</th>
+                    <th class="text-center">AVL QTY</th>
+                    <th class="wd-10p text-center">DOSAGE</th>
+                    <th class="wd-20p text-center">FREQ</th>
+                    <th class="text-center">DAYS</th>
+                    <th class="text-center">PAY CASH ?</th>
+                    <th class="text-center">QTY</th>
+                    <th class="wd-10p text-center">PRICE</th>
+                    <th class="text-center">NHIS %</th>
+                    <th class="wd-10p text-center">GROSS</th>
+                    <th class="wd-10p text-center">NET</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bill of pharmBillItems; let i = index">
+                    <!-- trash btn -->
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value="{{ bill.id }}"
+                                [(ngModel)]="pharmBillItems[i].checked"
+                            />
+                            <label class="form-check-label">
+                                <i
+                                    (click)="onRemoveBillItem(bill)"
+                                    class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                ></i>
+                            </label>
+                        </div>
+                    </td>
+                    <!-- drug title -->
+                    <td class="text-center">{{ bill.drugRegister.description ? bill.drugRegister.description : bill.drugRegister.genericName +' '+bill.drugRegister.brandName   }}</td>
+                    <!-- formulation -->
+                    <td class="text-center">{{ bill.drugRegister.formulation.name }}</td>
+                    <!-- ava qty -->
+                    <td class="text-center">{{ bill.drugRegister.availableQty }}</td>
+                    <!-- dosage -->
+                    <td class="text-center">
+                        <input
+                            type="number"
+                            class="wd-50"
+                            [value]="bill.dosage"
+                            (keyup)="onDrugBillDosageChange($event, bill)"
+                            (change)="onDrugBillDosageChange($event, bill)"
+                            (keypress)="numberMatch($event)"
+                            min="0"
+                        />
+                    </td>
+                    <!-- frequency -->
+                    <td class="text-center">
+                        <app-drug-frequency-dropdown
+                            class="wd-40"
+                            (selected)="onDrugFrequencySelected($event, bill)"
+                        ></app-drug-frequency-dropdown>
+                    </td>
+                    <!-- days -->
+                    <td class="text-center">
+                        <input
+                            type="number"
+                            class="wd-50"
+                            [value]="bill.days"
+                            (keyup)="onDrugDaysChanged($event, bill)"
+                            (change)="onDrugDaysChanged($event, bill)"
+                            (keypress)="numberMatch($event)"
+                            min="0"
+                        />
+                    </td>
+                    <!-- pay cash -->
+                    <td class="text-center">
+                        <input
+                            type="checkbox"
+                            [checked]="bill.isPayCash"
+                            [(ngModel)]="pharmBillItems[i].isPayCash"
+                            (change)="onBillPayCashChanged($event, null, bill)"
+                        />
+                    </td>
+                    <!-- qty -->
+                    <td class="wd-5p">
+                        <input
+                            type="number"
+                            class="wd-50"
+                            [value]="bill.quantity"
+                            (keyup)="onBillQuantityChange($event, null, bill)"
+                            (change)="onBillQuantityChange($event, null, bill)"
+                            (keypress)="numberMatch($event)"
+                            min="0"
+                        />
+                    </td>
+                    <!-- price -->
+                    <td class="text-center">
+                        {{ bill.price | currency: ' ' }}
+                    </td>
+                    <!-- nhis percent -->
+                    <td class="text-center">
+                        {{ bill.nhisPercent }}
+                    </td>
+                    <!-- gross amount -->
+                    <td class="text-center">{{ bill.grossAmount | currency: ' ' }}</td>
+                    <!-- net amount -->
+                    <td class="text-center">{{ bill.netAmount | currency: ' ' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
+    <!-- drug payment view -->
+    <ng-container *ngSwitchCase="drugPaymentView">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                [checked]="isAllCheckBoxChecked()"
+                                (change)="checkAllCheckBox($event)"
+                            />
+                        </div>
+                    </th>
+                    <th class="wd-30p text-center">DRUG / ITEM</th>
+                    <th class="text-center">QTY</th>
+                    <th class="wd-10p text-center">PRICE</th>
+                    <th class="text-center">NHIS %</th>
+                    <th class="wd-10p text-center">GROSS</th>
+                    <th class="wd-10p text-center">WAIVED</th>
+                    <th class="wd-10p text-center">DISCOUNT</th>
+                    <th class="wd-10p text-center">ALLOCATE</th>
+                    <th class="wd-10p text-center">NET</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bill of pharmBillItems; let i = index">
+                    <!-- trash btn -->
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value="{{ bill.id }}"
+                                [(ngModel)]="pharmBillItems[i].checked"
+                            />
+                        </div>
+                    </td>
+                    <!-- description -->
+                    <td class="text-center">{{ bill.drugRegister.description }}</td>
+                    <!-- qty -->
+                    <td class="text-center">{{ bill.quantity }}</td>
+                    <!-- price -->
+                    <td class="text-center">{{ bill.price | currency: ' ' }}</td>
+                    <!-- discount percent -->
+                    <td class="text-center">{{ bill.drugRegister.discountPercent }}</td>
+                    <!-- gross amount -->
+                    <td class="text-center">{{ bill.grossAmount | currency: ' ' }}</td>
+                    <!-- waived amount -->
+                    <td class="text-center">
+                        {{ bill.waivedAmount ? bill.waivedAmount : (0 | currency: ' ') }}
+                    </td>
+                    <!-- discount amount -->
+                    <td class="text-center">
+                        {{ bill.discountAmount | currency: ' ' }}
+                    </td>
+                    <!-- allocate -->
+                    <td class="text-center">
+                        <input
+                            type="checkbox"
+                            [checked]="bill.isAllocate"
+                            [(ngModel)]="pharmBillItems[i].isAllocate"
+                            (click)="onBillAllocateDepositChange($event, null, bill)"
+                        />
+                    </td>
+                    <!-- net amount -->
+                    <td class="text-center">{{ bill.netAmount | currency: ' ' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+</div>
+

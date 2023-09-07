@@ -1,0 +1,8 @@
+<input
+    [type]="props?.inputType"
+    [value]="props?.value"
+    (blur)="onValueChanged($event)"
+    (keyup.enter)="onValueChanged($event)"
+    (keyup.escape)="onValueChanged($event)"
+    #inputElement
+/>

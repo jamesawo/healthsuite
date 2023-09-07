@@ -1,0 +1,61 @@
+<fieldset class="border p-2 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+        Add Gender
+        <i
+            class="fa fa-info-circle fa-sm tx-12"
+            [ngbPopover]="'Enter Gender Name. (ex: Male, Female, Etc)'"
+            placement="right"
+            triggers="mouseenter:mouseleave"
+            container="body"
+            aria-hidden="true"
+        ></i>
+    </legend>
+
+    <form [formGroup]="genderForm" (ngSubmit)="saveGender()">
+        <div class="form-group">
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Gender"
+                [formControlName]="'genderName'"
+                [ngClass]="{ 'is-invalid': isSubmitted && form.genderName.errors }"
+            />
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+    <div class="table-responsive mg-t-20">
+        <table class="table table-bordered mg-b-0">
+            <thead>
+                <tr>
+                    <th class="wd-3">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <th>Gender Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let gender of genders; let index">
+                    <th scope="row">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <td>
+                        <input
+                            type="text"
+                            class="faded-input"
+                            [attr.data-id]="gender.id"
+                            [attr.data-oldvalue]="gender.name"
+                            [value]="gender.name"
+                            (change)="onGenderChange($event)"
+                        />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- table-responsive -->
+</fieldset>

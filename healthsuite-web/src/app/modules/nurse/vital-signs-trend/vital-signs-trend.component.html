@@ -1,0 +1,120 @@
+<div class="main-wrapper az-content-body">
+    <fieldset class="border p-2 mg-t-0 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+
+        <div class="row col-12 mg-l-5">
+            <label class="w-15 align-self-center">Patient Search:</label>
+            <div class="w-75 mg-l-10">
+                <app-patient-search #patientSearchComponent  (selected)="onPatientSelected($event)" [props]="{
+                        showLabel: false,
+                        checkAdmission: true,
+                        loadAdmission: false}"
+                ></app-patient-search>
+            </div>
+        </div>
+        <div class="mg-t-10">
+            <app-patient-bio-card
+                    [selectedPatient]="payload.patient"
+            ></app-patient-bio-card>
+        </div>
+
+    </fieldset>
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+
+        <div class="row col-12 mg-l-5">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">Start Date</label>
+                    <app-shared-date (selected)="onDateSelected($event, start)"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">End Date</label>
+                    <app-shared-date (selected)="onDateSelected($event, end)"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="mg-t-30 btn btn-primary btn-sm" (click)="onSearchTrends()">VIEW</button>
+            </div>
+        </div>
+
+    </fieldset>
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+
+        <div class="mg-l-5">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+                <li [ngbNavItem]="1">
+                    <a ngbNavLink>TABLES</a>
+                    <ng-template ngbNavContent>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                </thead>
+                                <tbody>
+                                   <ng-container  *ngIf="dataList.hasData === true">
+                                       <tr style="background-color: lightgrey;">
+                                           <td> Date: <br> <small>Time:</small> </td>
+
+                                           <td *ngFor="let date of dataList.dateValues; let i = index">
+                                               {{date}} <br> <small> {{dataList.timeValues[i]}}  </small>
+                                           </td>
+                                       </tr>
+
+                                       <tr>
+                                           <td>Fasting Blood Sugar</td>
+                                           <td *ngFor="let fValue of dataList.fastBloodSugarValues">{{fValue}}</td>
+                                       </tr>
+
+                                       <tr>
+                                           <td>Random Blood Sugar</td>
+                                           <td *ngFor="let rValue of dataList.randomBloodSugarValues">{{rValue}}</td>
+                                       </tr>
+
+                                       <tr>
+                                           <td>Pain Score</td>
+                                           <td *ngFor="let pScore of dataList.fastBloodSugarValues">{{pScore}}</td>
+                                       </tr>
+
+                                       <tr>
+                                           <td>Oxygen Saturation</td>
+                                           <td *ngFor="let oxygen of dataList.fastBloodSugarValues">{{oxygen}}</td>
+
+                                       </tr>
+
+                                       <tr>
+                                           <td>Urinalysis</td>
+                                           <td *ngFor="let urine of dataList.fastBloodSugarValues">{{urine}}</td>
+
+                                       </tr>
+
+                                   </ng-container>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="2">
+                    <a ngbNavLink>CHARTS</a>
+                    <ng-template ngbNavContent>
+                        <div class="chart-container" *ngIf="chartList.length > 0">
+                            <ng-container *ngFor="let item of chartList">
+                                <app-vital-sign-chart [dataList]="item.arr" [labels]="item.labels"></app-vital-sign-chart>
+                            </ng-container>
+
+                        </div>
+
+                    </ng-template>
+                </li>
+            </ul>
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        </div>
+    </fieldset>
+</div>

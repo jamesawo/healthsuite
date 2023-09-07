@@ -1,0 +1,57 @@
+<!-- log info -->
+<app-lab-test-user-log [payload]="payload"></app-lab-test-user-log>
+
+<!-- MACROSCOPY -->
+<app-parasitology-macroscopy [prepOrVerifyEnum]="payload.verifyOrPrepEnum" [macroscopy]="payload.parasitologyTemplate.macroscopy"></app-parasitology-macroscopy>
+
+<!-- MICROSCOPY -->
+<app-parasitology-microscopy [prepOrVerifyEnum]="payload.verifyOrPrepEnum" [microscopy]="payload.parasitologyTemplate.microscopy"></app-parasitology-microscopy>
+
+<!-- CULTURE -->
+<app-parasitology-culture [prepOrVerifyEnum]="payload.verifyOrPrepEnum" [culture]="payload.parasitologyTemplate.culture"></app-parasitology-culture>
+
+<!-- Action Button -->
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="row">
+            <ng-container *ngIf="payload.verifyOrPrepEnum === resultPreparation">
+                <div class="col-md-10 form-group">
+                    <label >Previous Lab Note By:</label>
+                    <input type="text" class="form-control" readonly [value]="payload?.preparedBy?.label">
+                </div>
+                <div class="col-md-10 form-group">
+                    <label >Previous Lab Note: </label>
+                    <textarea rows="2" cols="10" name="nurseNote" class="w-100 form-control" readonly>{{payload.labNote}}</textarea>
+                </div>
+            </ng-container>
+            <fieldset class="w-100" [disabled]="payload.verifyOrPrepEnum !== resultPreparation">
+                <div class="col-md-10 form-group">
+                    <label >New Lab Note</label>
+                    <textarea rows="2" cols="10" name="nurseNote" class="w-100 form-control" [(ngModel)]="payload.parasitologyTemplate.newLabNote"></textarea>
+                </div>
+            </fieldset>
+
+            <ng-container *ngIf="payload.verifyOrPrepEnum === resultPreparation; else verifyActionButton">
+                <div class="col-md-12 form-group text-center">
+                    <button type="submit" class="btn btn-sm btn-primary" (click)="onLabSaveResultPreparation()"> SAVE</button>
+                    <button type="submit" class="btn btn-sm mg-l-5 btn-secondary" (click)="onInitForm()"> CLEAR </button>
+                </div>
+            </ng-container>
+
+            <ng-template #verifyActionButton>
+                <div class="col-md-10 form-group" *ngIf="payload.verificationTypeEnum===pathologistVerify" >
+                    <label>Pathologist Comment</label>
+                    <textarea rows="2" cols="10" name="commentNote" class="w-100 form-control" [(ngModel)]="payload.pathologistComment"></textarea>
+                </div>
+
+                <div class="col-md-12 form-group text-center">
+                    <button type="submit" class="btn btn-sm btn-primary" (click)="onApproveTestResult()"> APPROVE</button>
+                    <button type="submit" class="btn btn-sm mg-l-5 btn-danger" (click)="onDisapproveTestResult()"> DISAPPROVE </button>
+                </div>
+            </ng-template>
+
+        </div>
+    </div>
+</fieldset>

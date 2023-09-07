@@ -1,0 +1,240 @@
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label #infoElement class="btn btn-primary">
+        <input type="radio" name="options" checked value="info" (click)="onTypeChange($event)" />
+        Socio-Economic Info
+    </label>
+    <label #lifestyleElement class="btn">
+        <input type="radio" name="options" value="lifestyle" (click)="onTypeChange($event)" />
+        Lifestyle
+    </label>
+</div>
+<hr />
+<!-- Other Details -->
+<fieldset class="border p-2 rounded mg-t-20 mg-b-20">
+    <legend class="w-auto tx-16">Main Information</legend>
+    <form class="form-padding" autocomplete="off">
+        <div class="row form-group">
+            <div class="col-12">
+                <div class="form-group row tx-14">
+                    <div class="col-6 text-right">
+                        <label>Do you have access to telephone? :</label>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-inline">
+                            <label class="rdiobox">
+                                <input
+                                    name="telphone"
+                                    type="radio"
+                                    [value]="true"
+                                    checked
+                                    [(ngModel)]="
+                                        patientPayload.patientOtherDetails.accessToTelephone
+                                    "
+                                />
+                                <span>Yes</span>
+                            </label>
+
+                            <label class="rdiobox mg-l-8">
+                                <input
+                                    name="telphone"
+                                    type="radio"
+                                    [value]="false"
+                                    [(ngModel)]="
+                                        patientPayload.patientOtherDetails.accessToTelephone
+                                    "
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-12">
+                <div class="form-group row tx-14">
+                    <div class="col-6 text-right">
+                        <label>Do you have access to electricity? :</label>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-inline">
+                            <label class="rdiobox">
+                                <input
+                                    name="electricity"
+                                    type="radio"
+                                    checked
+                                    [(ngModel)]="
+                                        patientPayload.patientOtherDetails.accessToElectricity
+                                    "
+                                    [value]="true"
+                                />
+                                <span>Yes</span>
+                            </label>
+
+                            <label class="rdiobox mg-l-8">
+                                <input
+                                    name="electricity"
+                                    type="radio"
+                                    [(ngModel)]="
+                                        patientPayload.patientOtherDetails.accessToElectricity
+                                    "
+                                    [value]="false"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-12">
+                <div class="form-group row tx-14">
+                    <div class="col-6 text-right">
+                        <label>Do you have access to good road? :</label>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-inline">
+                            <label class="rdiobox">
+                                <input
+                                    name="goodRoad"
+                                    type="radio"
+                                    checked
+                                    [(ngModel)]="
+                                        patientPayload.patientOtherDetails.accessToGoodRoad
+                                    "
+                                    [value]="true"
+                                />
+                                <span>Yes</span>
+                            </label>
+
+                            <label class="rdiobox mg-l-8">
+                                <input
+                                    name="goodRoad"
+                                    type="radio"
+                                    [(ngModel)]="
+                                        patientPayload.patientOtherDetails.accessToGoodRoad
+                                    "
+                                    [value]="false"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-12">
+                <div class="form-group row tx-14">
+                    <div class="col-6 text-right">
+                        <label>Do you have access to clean water? :</label>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-inline">
+                            <label class="rdiobox">
+                                <input
+                                    name="cleanWater"
+                                    type="radio"
+                                    checked
+                                    [(ngModel)]="
+                                        patientPayload.patientOtherDetails.accessToCleanWater
+                                    "
+                                    [value]="true"
+                                />
+                                <span>Yes</span>
+                            </label>
+
+                            <label class="rdiobox mg-l-8">
+                                <input
+                                    name="cleanWater"
+                                    type="radio"
+                                    [(ngModel)]="
+                                        patientPayload.patientOtherDetails.accessToCleanWater
+                                    "
+                                    [value]="false"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-12">
+                <div class="form-group row tx-14">
+                    <div class="col-6 text-right">
+                        <label>Do you have access to internet? :</label>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-inline">
+                            <label class="rdiobox">
+                                <input
+                                    name="internet"
+                                    type="radio"
+                                    checked
+                                    [(ngModel)]="
+                                        patientPayload.patientOtherDetails.accessToInternet
+                                    "
+                                    [value]="true"
+                                />
+                                <span>Yes</span>
+                            </label>
+
+                            <label class="rdiobox mg-l-8">
+                                <input
+                                    name="internet"
+                                    type="radio"
+                                    [(ngModel)]="
+                                        patientPayload.patientOtherDetails.accessToInternet
+                                    "
+                                    [value]="false"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transfer Detail -->
+        <!--    <div class="row form-group">-->
+        <!--        <div class="col-12">-->
+        <!--            <div class="form-group row tx-14">-->
+        <!--                <div class="col-6 text-right">-->
+        <!--                    <label>Hospital Transfer From:</label>-->
+        <!--                </div>-->
+        <!--                <div class="col-6">-->
+        <!--                    <input class="form-control form-control-sm" type="text" placeholder="" />-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--    <div class="row form-group">-->
+        <!--        <div class="col-12">-->
+        <!--            <div class="form-group row tx-14">-->
+        <!--                <div class="col-6 text-right">-->
+        <!--                    <label>Hospital Transfer From:</label>-->
+        <!--                </div>-->
+        <!--                <div class="col-6">-->
+        <!--                    <input class="form-control form-control-sm" type="text" placeholder="" />-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--    <div class="row form-group">-->
+        <!--        <div class="col-12">-->
+        <!--            <div class="form-group row tx-14">-->
+        <!--                <div class="col-6 text-right">-->
+        <!--                    <label>Hospital Transfer From:</label>-->
+        <!--                </div>-->
+        <!--                <div class="col-6">-->
+        <!--                    <input class="form-control form-control-sm" type="text" placeholder="" />-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+    </form>
+</fieldset>

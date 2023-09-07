@@ -1,0 +1,84 @@
+<div class="content-wrapper">
+    <div class="flex-column">
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row mg-t-10">
+                <div class="form-group col-md-6">
+                    <label class="">Issuing Point:</label>
+                    <input
+                        type="text"
+                        readonly
+                        class="form-control bg-white"
+                        [value]="data.requisition.issuingDepartment.name"
+                    />
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="">Receiving Point:</label>
+                    <input
+                        type="text"
+                        readonly
+                        class="form-control bg-white"
+                        [value]="data.requisition.receivingDepartment.name"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th class="text-center">Generic Name</th>
+                            <th class="text-center">Brand Name</th>
+                            <th class="text-center">Strength</th>
+                            <th class="text-center">Formulation</th>
+                            <th class="text-center">Req. Qty</th>
+                            <th class="text-center">Unit of Issue</th>
+                            <th class="text-center">Qty. To Issue</th>
+                            <th class="text-center">Iss. Store Bal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of data.requisition.requisitionItems; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td class="text-center">{{ item.drugRegister.genericName }}</td>
+                            <td class="text-center">{{ item.drugRegister.brandName }}</td>
+                            <td class="text-center">{{ item.drugRegister.strength }}</td>
+                            <td class="text-center">{{ item.drugRegister.formulation.name }}</td>
+                            <td class="text-center">{{ item.requestingQuantity }}</td>
+                            <td class="text-center">{{ item.drugRegister.unitOfIssue }}</td>
+                            <ng-container *ngIf="!data.requisition.isFulfilled; else issuedQty">
+                                <td class="text-center">
+                                    <input
+                                        [(ngModel)]="item.issuingQuantity"
+                                        type="number"
+                                        class="wd-75 faded-input"
+                                        (keyup)="onItemQtyChange($event, item, i)"
+                                        (change)="onItemQtyChange($event, item, i)"
+                                        (keypress)="numberMatch($event)"
+                                        min="0"
+                                    />
+                                </td>
+                            </ng-container>
+
+                            <ng-template #issuedQty>
+                                <td>{{ item.issuingQuantity }}</td>
+                            </ng-template>
+
+                            <td class="text-center">{{ item.issuingOutletBalance }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+            <div class="form-group text-center" *ngIf="!data.requisition.isFulfilled">
+                <button class="btn btn-primary" (click)="onGrantRequisition()">
+                    GRANT REQUISITION
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

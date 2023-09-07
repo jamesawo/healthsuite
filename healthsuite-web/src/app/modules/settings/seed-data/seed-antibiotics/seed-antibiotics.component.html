@@ -1,0 +1,87 @@
+<fieldset class="border p-2 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+        Seed Antibiotics Data
+        <ng-template #statusTemplate>
+            To <code>create</code> new antibiotics record, follow the below steps:
+            <br />
+            1. Select Organism <br />
+            1. Enter Antibiotics Name <br />
+            2. Click on Save Button.
+            <br />
+        </ng-template>
+        <i
+            class="fa fa-info-circle fa-sm tx-12"
+            [ngbPopover]="statusTemplate"
+            placement="right"
+            triggers="mouseenter:mouseleave"
+            container="body"
+            aria-hidden="true"
+        ></i>
+    </legend>
+    <form (ngSubmit)="onCreateAntibiotics()" [formGroup]="antibioticsForm">
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label for="organism">Select Organism</label>
+                <select
+                    id="organism"
+                    class="form-control"
+                    [formControlName]="'organism'"
+                    [ngClass]="{ 'is-invalid': isSubmitted && form.organism.errors }"
+                >
+                    <option selected disabled>Select Organism</option>
+                    <option *ngFor="let data of organisms" [value]="data.id">{{
+                        data.name
+                    }}</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="name">Enter Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    [formControlName]="'name'"
+                    [ngClass]="{ 'is-invalid': isSubmitted && form.name.errors }"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+    </form>
+    <div class="table-responsive mg-t-20">
+        <table class="table table-bordered mg-b-0">
+            <thead>
+                <tr>
+                    <th class="wd-3">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <th>Name</th>
+                    <th>Organism</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let entry of antibiotics">
+                    <th scope="row">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <td>{{ entry.name }}</td>
+                    <td>
+                        <select>
+                            <option
+                                *ngFor="let data of organisms"
+                                [value]="data.id"
+                                [selected]="data.id === entry.organism.id"
+                                >{{ data.name }}</option
+                            >
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>

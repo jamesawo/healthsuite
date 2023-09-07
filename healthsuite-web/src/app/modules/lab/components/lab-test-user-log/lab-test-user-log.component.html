@@ -1,0 +1,30 @@
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold"></legend>
+    <div class="row pd-l-10 pd-r-10">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="tx-16 txt-black">Request Number</label>
+                <label class="form-control" readonly="">{{payload.requestNumber}}</label>
+
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group mg-b-10">
+                <label class="tx-16 txt-black">SPECIMEN</label>
+                <label class="form-control" readonly="">{{payload.specimen}}</label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="tx-16 txt-black">REQUEST DATE</label>
+                <label class="form-control" readonly="">{{payload.requestDate | date}}</label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="tx-16 txt-black">REQUESTING PHYSICIAN</label>
+                <label class="form-control" readonly="">{{payload.requestingDoctor}}</label>
+            </div>
+        </div>
+    </div>
+</fieldset>

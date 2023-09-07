@@ -1,0 +1,74 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-t-0">
+        <div class="row">
+            <div class="col-md-12 row bg-gray-200 mg-l-0 pd-10 mg-b-20">
+                <div class="col-md-12">
+                    <label>Search Lab Service:</label>
+                    <app-service-name-search [props]="{showLabel: false, viewType: labView}"
+                                             (selected)="onServiceSelected($event)"></app-service-name-search>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped w-100">
+                        <thead>
+                        <tr>
+                            <th class="wd-5p">
+                                <div class="form-check form-check-inline">
+                                    <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            [checked]="isAllCheckBoxChecked()"
+                                            (change)="checkAllCheckBox($event)"
+                                    />
+                                    <label class="form-check-label">
+                                        <i (click)="onRemoveAllCheckedBillItems()"
+                                           class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                        ></i>
+                                    </label>
+                                </div>
+                            </th>
+                            <th class="wd-30p">SERVICE NAME</th>
+                            <th class="wd-5p text-center">PRICE</th>
+                            <th class="wd-30p text-center">SPECIMEN</th>
+                            <th class="wd-30p text-center">COMMENT</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr *ngFor="let service of payload.labItems; let i = index">
+                            <td><input type="checkbox"></td>
+                            <td>{{service.service.name}}</td>
+                            <td>{{service.service.regularSellingPrice}}</td>
+                            <td>
+                                <app-specimen-search-dropdown (selected)="onSpecimenSelected($event, i)"></app-specimen-search-dropdown>
+                            </td>
+                            <td><input type="text" class="form-control" [(ngModel)]="service.comment"></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-12 row mg-t-50">
+                <div class="col-md-12 row">
+                    <div class="form-group col-md-3">
+                        <label>Other Information</label>
+                    </div>
+                    <div class="form-group col-md-9">
+                        <input type="text" class="form-control" [(ngModel)]="payload.otherInformation">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-12">
+                <button class="btn btn-az-primary btn-md" (click)="onSaveLabRequest()">Save & Close</button>
+                <button class="btn btn-danger btn-md mg-l-15" (click)="onCloseModal()">Close Only</button>
+            </div>
+
+        </div>
+    </div>
+</div>

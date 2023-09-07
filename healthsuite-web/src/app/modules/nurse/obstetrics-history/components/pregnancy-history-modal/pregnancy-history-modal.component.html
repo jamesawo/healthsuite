@@ -1,0 +1,80 @@
+<fieldset class="border p-2 mg-t-0 rounded">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="row  align-items-center mg-b-20">
+        <div class="row col-md-12 mg-t-0">
+            <div class="col-md-6">
+                <div class="d-flex flex-row">
+                    <label class="w-25 tx-12 mg-r-2 text-left"> Duration of Pregnancy (weeks):</label>
+                    <div class="w-75">
+                    <input type="number" class="input-control" [(ngModel)]="payload.durationOfPregnancy" >
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex flex-row">
+                    <label class="w-25 tx-12 mg-r-2 text-left"> Outcome:</label>
+                    <div class="w-75">
+                        <ng-select  (change)="onOutComeChanged($event)" placeholder="Select Outcome">
+                            <ng-option *ngFor="let item of outcomeList" [value]="item">{{item}}</ng-option>
+                        </ng-select>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="payload.outcome === delivered">
+            <div class="row col-md-12 mg-t-10">
+                <div class="col-md-6">
+                    <div class="d-flex flex-row">
+                        <label class="w-25 tx-12 mg-r-2 text-left">Birth Weight (Kg):</label>
+                        <input type="number" class="w-75 input-control"  [(ngModel)]="payload.birthWeight" >
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex flex-row">
+                        <label class="w-25 tx-12 mg-r-2 text-left">Sex:</label>
+                        <div class="w-75">
+                            <app-gender-dropdown (selected)="onGenderChanged($event)"></app-gender-dropdown>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row col-md-12 mg-t-30">
+                <div class="col-md-6">
+                    <div class="d-flex flex-row">
+                        <label class="w-25 tx-12 mg-r-2 text-left">Date of Birth:</label>
+                        <div class="w-75">
+                        <app-shared-date [props]="{hideCurrentDate: true}" (selected)="onDateSelected($event)"></app-shared-date>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex flex-row">
+                        <label class="w-25 tx-12 mg-r-2 text-left"> Alive: :</label>
+                        <div class=" w-75">
+                            <ng-select (change)="onAliveChanged($event)" placeholder="Select..">
+                                <ng-option *ngFor="let item of aliveList" [value]="item">{{item}}</ng-option>
+                            </ng-select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row col-md-12 mg-t-30">
+            <div class="col-md-12">
+                <div class="d-flex flex-row">
+                    <label class="w-25 tx-12 mg-r-2 text-left"> Comment (Labor, Pregnancy, Puerperium, others):</label>
+                    <textarea class="w-75 form-control" rows="2" cols="2" [(ngModel)]="payload.comment"></textarea>
+                </div>
+            </div>
+        </div>
+        </ng-container>
+    </div>
+
+    <div class="text-center mg-t-10">
+        <button class="btn btn-primary pd-x-30 mg-r-10" (click)="onAddData()">SAVE & CLOSE</button>
+        <button class="btn btn-danger pd-x-30 mg-l-10" (click)="onCloseModal()">CLOSE ONLY</button>
+    </div>
+</fieldset>

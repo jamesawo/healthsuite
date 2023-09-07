@@ -1,0 +1,8 @@
+<ng-select
+        (change)="onSelected($event)"
+        [name]="'treatmentType'"
+        [(ngModel)]="selected"
+        placeholder="Select Treatment Type...">
+    <ng-option [value]="primary">{{primary}}</ng-option>
+    <ng-option [value]="secondary">{{secondary}}</ng-option>
+</ng-select>

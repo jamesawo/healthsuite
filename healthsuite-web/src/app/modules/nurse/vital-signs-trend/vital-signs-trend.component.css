@@ -1,0 +1,9 @@
+.nav-tabs .nav-link.active {
+    background-color: #3366ff;
+    color: #f7f7f7;
+}
+
+.chart-container {
+    display: flex;
+    flex-flow: wrap;
+}

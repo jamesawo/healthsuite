@@ -1,0 +1,48 @@
+<div class="mg-b-20">
+    <h3 class="az-content-title tx-18 mg-b-5 mg-b-lg-8"></h3>
+    <hr />
+    <div class="border p-2 rounded bg-gray-100">
+        <div class="w-auto tx-16 tx-bold">
+            Set Location
+            <ng-template #statusTemplate>
+                Use this module to set this system's location <br />
+                Follow the steps below: <br />
+
+                <code>1. Find Location</code> <br />
+                <code>2. Select Location</code><br />
+                <code>3. Click on Set Location Button</code><br />
+            </ng-template>
+            <i
+                class="fa fa-info-circle fa-sm tx-12"
+                [ngbPopover]="statusTemplate"
+                placement="right"
+                triggers="mouseenter:mouseleave"
+                container="body"
+                aria-hidden="true"
+            ></i>
+        </div>
+        <form autocomplete="off">
+            <div class="form-row mg-t-20">
+                <div class="col text-right">
+                    <label>Select Location: </label>
+                </div>
+                <div class="col-7">
+                    <ng-select
+                        [placeholder]="'Enter Location'"
+                        [items]="departments"
+                        [(ngModel)]="model"
+                        [bindLabel]="'name'"
+                        name="model"
+                        [ngClass]="{
+                            'is-invalid': invalid
+                        }"
+                    >
+                    </ng-select>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-primary" (click)="onSetLocation()">SET LOCATION</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

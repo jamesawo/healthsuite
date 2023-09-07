@@ -1,0 +1,66 @@
+<fieldset class="border p-2 mg-t-0 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="row row-xs align-items-center mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25">Selected Drug:</label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <input type="text" class="input-control" readonly [value]="getDrugDescription()">
+        </div>
+    </div>
+    <div class="row row-xs align-items-center mg-t-20 mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25">Days:</label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <input type="text" class="input-control" readonly [value]="data.drugRequest.days">
+        </div>
+    </div>
+    <div class="row row-xs align-items-center mg-t-20 mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25">Dosage:</label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <input type="text" class="input-control" readonly [value]="data.drugRequest.dosage">
+        </div>
+    </div>
+    <div class="row row-xs align-items-center mg-t-20 mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25">Frequency:</label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <input type="text" class="input-control" readonly [value]="data.drugRequest.frequency">
+        </div>
+    </div>
+    <div class="row row-xs align-items-center mg-t-20 mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25">Quantity:</label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <input type="number" class="input-control">
+        </div>
+    </div>
+    <div class="row row-xs align-items-center mg-t-20 mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25">Unit:</label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <input type="number" class="input-control">
+        </div>
+    </div>
+    <div class="row row-xs align-items-center mg-t-20 mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25">Comment/Remarks:</label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <textarea class="form-control" cols="2" rows="2" [(ngModel)]="data.drugRequest.nurseComment"></textarea>
+        </div>
+    </div>
+
+    <div class="text-center mg-t-10">
+        <button class="btn btn-primary pd-x-30 mg-r-10" (click)="onSubmit()">SAVE</button>
+        <button class="btn btn-dark pd-x-30 mg-r-10" (click)="onCloseModal()">CLOSE </button>
+    </div>
+
+</fieldset>

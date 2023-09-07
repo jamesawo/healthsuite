@@ -1,0 +1,31 @@
+<div class="input-wrapper">
+    <ng-select
+        #selectComponent
+        [items]="responsePayload | async"
+        bindLabel="searchTitle"
+        [trackByFn]="trackByFn"
+        [minTermLength]="minLengthTerm"
+        [loading]="isLoading"
+        typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+        [typeahead]="searchInput$"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="selectedPayload"
+        (change)="onSelect($event)"
+        placeholder="Enter drug/item name..."
+    >
+        <ng-template ng-option-tmp let-item="item">
+            <strong> {{ item.genericName }} </strong>
+            <br/>
+            <small>
+                <i>Brand Name: {{ item.brandName }}</i> |
+                <i>Code: {{ item.code }}</i> |
+            </small>
+            <br>
+            <small>
+                <i class="{{ item.availableQty > 20 ? 'text-success' : 'text-danger' }}"
+                >Ava Qty: {{ item.availableQty ? item.availableQty : 0 }}</i
+                >
+            </small>
+        </ng-template>
+    </ng-select>
+</div>

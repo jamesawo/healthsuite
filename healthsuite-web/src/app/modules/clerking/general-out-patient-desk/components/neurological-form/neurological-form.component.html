@@ -1,0 +1,36 @@
+<fieldset>
+    <legend>Neurological</legend>
+    <hr>
+    <div class="row">
+
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Gait: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.gait">
+                        <ng-option value="Abnormal">Abnormal</ng-option>
+                        <ng-option value="Normal">Normal</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Abnormal Movement: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.abnormalMovement">
+                        <ng-option value="Hyper">Hyper</ng-option>
+                        <ng-option value="Hypotoma">Hypotoma</ng-option>
+                        <ng-option value="Normal">Normal</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</fieldset>

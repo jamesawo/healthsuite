@@ -1,0 +1,121 @@
+<div class="content-wrapper">
+    <div class="flex-column">
+        <div class="pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="edit">
+                        <input
+                            name="type"
+                            id="edit"
+                            type="radio"
+                            checked
+                            [value]="requisition"
+                            (change)="onTypeChange(requisition)"
+                        />
+                        <span>From Requisition</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="rdiobox" for="create">
+                        <input
+                            id="create"
+                            name="type"
+                            type="radio"
+                            [value]="new"
+                            (change)="onTypeChange(new)"
+                        />
+                        <span>New Issuance</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row mg-t-10">
+                <div class="form-group col-md-6">
+                    <label class="">Start Date:</label>
+                    <div class="">
+                        <app-shared-date
+                            [props]="{ hideCurrentDate: true }"
+                            (selected)="onDateSelected($event, 'start')"
+                        ></app-shared-date>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="">End Date:</label>
+                    <div class="">
+                        <app-shared-date
+                            [props]="{ hideCurrentDate: true }"
+                            (selected)="onDateSelected($event, 'end')"
+                        ></app-shared-date>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <button class="btn btn-sm btn-primary" (click)="onGetRequisitionByDateRange()">
+                        VIEW REQUISITION
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Requisition Number</th>
+                            <th class="text-center">Requisition Outlet</th>
+                            <th class="text-center">Requisition Date</th>
+                            <th class="text-center">Issuance Number</th>
+                            <th class="text-center">Issued By</th>
+                            <th class="text-center">Issuance Date</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="
+                                let item of collection
+                                    | paginate: { itemsPerPage: 10, currentPage: p }
+                            "
+                        >
+                            <td class="text-center">{{ item.code }}</td>
+                            <td class="text-center">{{ item.receivingDepartment.name }}</td>
+                            <td class="text-center">
+                                {{ item.date | date }} <br />
+                                <small>{{ item.date | amTimeAgo }}</small>
+                            </td>
+                            <td class="text-center">{{ item.issuance?.issuanceNumber }}</td>
+                            <td class="text-center">{{ item.issuance?.user?.label }}</td>
+                            <td class="text-center">
+                                {{ item?.issuance?.date | date }}
+                            </td>
+                            <td class="text-center">
+                                <span
+                                    [ngClass]="{
+                                        'text-primary': item.isFulfilled,
+                                        'text-danger': !item.isFulfilled
+                                    }"
+                                    >{{ item.isFulfilled ? 'Granted' : 'Pending' }}</span
+                                >
+                            </td>
+                            <td class="text-center">
+                                <i
+                                    title="View Requisition"
+                                    class="btn btn-sm btn-success pointer fa fa-eye"
+                                    (click)="viewRequisition(item)"
+                                ></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation" class="mg-t-15" *ngIf="collection?.length">
+                    <ul class="pagination justify-content-end">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

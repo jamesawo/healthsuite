@@ -1,0 +1,30 @@
+<div class="main-wrapper az-content-body">
+    <div class=" pd-t-0  pd-r-0-f  pd-l-0-f">
+        <fieldset class="flex-column border p-2 mg-t-0 rounded bg-gray-100">
+            <legend class="w-auto tx-14 tx-bold">
+            </legend>
+
+            <div class="search-form">
+                <span class="mg-t-10">Search By:</span>
+                <div class="wd-30p mg-l-15 mg-r-15">
+                    <ng-select placeholder="Please select category.." (change)="onCategorySelected($event)">
+                        <ng-option [value]="both">BOTH</ng-option>
+                        <ng-option [value]="serviceDepartment">SERVICE DEPARTMENT</ng-option>
+                        <ng-option [value]="revenueDepartment">REVENUE DEPARTMENT</ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="wd-30p mg-l-15 mg-r-15" *ngIf="category != both">
+                    <ng-container *ngIf="category === revenueDepartment; else serviceDepartmentTemplate">
+                        <app-revenue-department-search [props]="{showLabel: false}" (selected)="onRevenueDepartmentSelected($event)"></app-revenue-department-search>
+                    </ng-container>
+                    <ng-template #serviceDepartmentTemplate>
+                        <app-service-department-search [props]="{showLabel: false}" (selected)="onServiceDepartmentSelected($event)"></app-service-department-search>
+                    </ng-template>
+                </div>
+
+                <button class="btn btn-primary btn-sm" (click)="onPreviewReport()">PREVIEW</button>
+            </div>
+        </fieldset>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="image-case">
+    <div class="div-webcam">
+        <webcam
+            *ngIf="showWebcam"
+            [height]="captureData.height"
+            [width]="captureData.width"
+            [trigger]="triggerObservable"
+            (imageCapture)="handleImage($event)"
+            [allowCameraSwitch]="allowCameraSwitch"
+            [switchCamera]="nextWebcamObservable"
+            [captureImageData]="true"
+            (cameraSwitched)="cameraWasSwitched($event)"
+            (initError)="handleInitError($event)"
+
+        ></webcam>
+
+        <div class="snapshot" *ngIf="webcamImage && showImage">
+            <img
+                [src]="webcamImage.imageAsDataUrl"
+                [height]="captureData.height"
+                [width]="captureData.width"
+            />
+        </div>
+    </div>
+
+    <ng-container *ngIf="showWebcam; else camButton">
+        <button class="btn btn-primary btn-with-icon btn-block mg-t-4" (click)="triggerSnapshot()">
+            <i class="typcn typcn-camera"></i> Capture Image
+        </button>
+    </ng-container>
+    <ng-template #camButton>
+        <div *ngIf="!showWebcam" class="camera-display rounded text-center">
+            <a class="hand" (click)="toggleWebcam('no')">
+                <span class="">
+                    <i class="fa fa-camera fa-2x box-camera text-primary"></i>
+                </span>
+                <p>
+                    <i class="tx-sm-thin tx-12">Start Camera</i>
+                </p>
+            </a>
+        </div>
+    </ng-template>
+</div>

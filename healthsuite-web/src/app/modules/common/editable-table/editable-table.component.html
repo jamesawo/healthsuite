@@ -1,0 +1,27 @@
+<div class="table-responsive mg-t-20">
+    <table class="table table-bordered table-striped mg-b-0">
+        <thead>
+            <tr>
+                <th class="wd-3">
+                    <label><input type="checkbox" /></label>
+                </th>
+                <th *ngFor="let column of props?.columns">{{ column.name }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <label>
+                        <input type="checkbox" />
+                    </label>
+                </td>
+                <td *ngFor="let value of props?.columns">{{ value.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation" class="mg-t-15" *ngIf="props?.data?.length">
+        <ul class="pagination justify-content-end">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </ul>
+    </nav>
+</div>

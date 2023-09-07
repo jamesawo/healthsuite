@@ -1,0 +1,259 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NurseCarePayload } from '@app/shared/_payload/nurse/nurse-care.payload';
+import {
+    ModalSizeEnum,
+    NurseWaitingPayload,
+    ReportFileNameEnum,
+    WaitingViewTypeEnum,
+} from '@app/shared/_payload';
+import { Subscription } from 'rxjs';
+import { EmrService, ModalPopupService } from '@app/shared/_services';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+import { NurseService } from '@app/shared/_services/nurse/nurse.service';
+import { HmisConstants } from '@app/shared/_models/constant/hmisConstants';
+import { PatientPayload } from '@app/shared/_payload/erm/patient.payload';
+import { PatientFluidBalanceCaptureComponent } from '@app/modules/nurse/nursing-care/patient-fluid-balance-capture/patient-fluid-balance-capture.component';
+import { SharedPatientDrugAdministrationComponent } from '@app/modules/nurse/nursing-care/shared-patient-drug-administration/shared-patient-drug-administration.component';
+import { SharedWardTransferComponent } from '@app/modules/emr/patient-ward-transfer/shared-ward-transfer/shared-ward-transfer.component';
+import { ClerkPatientFolderComponent } from '@app/modules/clerking/general-out-patient-desk/components/clerk-patient-folder/clerk-patient-folder.component';
+import { ViewTakeVitalsComponent } from '@app/modules/clerking/general-out-patient-desk/components/view-take-vitals/view-take-vitals.component';
+import { PatientIcuBounceBackComponent } from '@app/modules/nurse/nursing-care/patient-icu-bounce-back/patient-icu-bounce-back.component';
+import { SharedNurseNoteComponent } from '@app/modules/nurse/nurse-note/shared-nurse-note/shared-nurse-note.component';
+import { saveAs } from 'file-saver';
+import { ClerkDrugRequestComponent } from '@app/modules/clerking/general-out-patient-desk/components/clerk-drug-request/clerk-drug-request.component';
+import {ClerkLabRequestComponent} from '@app/modules/clerking/general-out-patient-desk/components/clerk-lab-request/clerk-lab-request.component';
+import {ClerkXrayRequestComponent} from '@app/modules/clerking/general-out-patient-desk/components/clerk-xray-request/clerk-xray-request.component';
+
+@Component({
+    selector: 'app-inpatient-clerking',
+    templateUrl: './inpatient-clerking.component.html',
+    styleUrls: ['./inpatient-clerking.component.css'],
+})
+export class InpatientClerkingComponent implements OnInit, OnDestroy {
+    public payload: NurseCarePayload = new NurseCarePayload();
+    public activeView: 'waiting' | 'attended' = 'waiting';
+    public waitingCount = 0;
+    public attendedCount = 0;
+    public nurse = WaitingViewTypeEnum.NURSE;
+
+    private subscription: Subscription = new Subscription();
+
+    constructor(
+        private emrService: EmrService,
+        private spinner: NgxSpinnerService,
+        private toast: ToastrService,
+        private modalService: ModalPopupService,
+        private nurseService: NurseService
+    ) {}
+
+    ngOnInit(): void {}
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+
+    public onPatientSelected(patient: NurseWaitingPayload) {
+        if (patient?.patientId) {
+            this.spinner.show().then();
+            this.subscription.add(
+                this.emrService.onFindPatientById(patient.patientId).subscribe(
+                    (res) => {
+                        this.spinner.hide().then();
+                        if (res.body) {
+                            this.payload.patient = res.body;
+                        }
+                    },
+                    (error) => {
+                        this.spinner.hide().then();
+                        this.toast.error(
+                            'Something Went Wrong, Refresh And Try Again',
+                            HmisConstants.ERR_TITLE
+                        );
+                    }
+                )
+            );
+        }
+    }
+
+    public onPatientSearchSelected(patient: PatientPayload) {
+        if (patient && patient.patientId) {
+            if (patient.isOnAdmission !== true) {
+                this.toast.error('Patient is not on admission', HmisConstants.ERR_TITLE);
+                return;
+            }
+            this.payload.patient = patient;
+        }
+    }
+
+    public onChangeActiveView(viewType: 'waiting' | 'attended') {
+        if (viewType) {
+            this.activeView = viewType;
+        }
+    }
+
+    public onUpdateCount = (value: number) => {
+        setTimeout(() => {
+            this.waitingCount = value;
+        }, 0);
+    };
+
+    public onUpdateAttendedCount = (value: number) => {
+        setTimeout(() => {
+            this.attendedCount = value;
+        }, 0);
+    };
+
+    public onOpenViewPatientEFolder() {
+        if (this.hasPatient() === true) {
+            this.modalService.openModalWithComponent(
+                ClerkPatientFolderComponent,
+                {
+                    data: { patientPayload: this.payload.patient },
+                    title: 'Preview Patient E-Folder',
+                },
+                ModalSizeEnum.large
+            );
+        }
+    }
+
+    public onOpenViewVitalModal() {
+        if (this.hasPatient() === true) {
+            this.modalService.openModalWithComponent(
+                ViewTakeVitalsComponent,
+                {
+                    data: {
+                        vitalTabData: {
+                            isTakeVital: false,
+                            patientId: this.payload.patient.patientId,
+                        },
+                    },
+                    title: 'View Patient Vital',
+                },
+                ModalSizeEnum.large
+            );
+        }
+    }
+
+    public onOpenTakeVitalSignModal() {
+        if (this.hasPatient() === true) {
+            this.modalService.openModalWithComponent(
+                ViewTakeVitalsComponent,
+                {
+                    data: {
+                        vitalTabData: {
+                            isTakeVital: true,
+                            patientId: this.payload.patient.patientId,
+                        },
+                    },
+                    title: 'Take Patient Vital Sign',
+                },
+                ModalSizeEnum.large
+            );
+        }
+    }
+
+    public onLabModal() {
+        if (this.hasPatient() === true) {
+            this.modalService.openModalWithComponent(
+                ClerkLabRequestComponent,
+                {
+                    data: { patientPayload: this.payload.patient, process: true },
+                    title: 'Lab Request',
+                },
+                ModalSizeEnum.large
+            );
+        }
+    }
+
+    public onRadiologyModal() {
+        if (this.hasPatient() === true) {
+            this.modalService.openModalWithComponent(
+                ClerkXrayRequestComponent,
+                {
+                    data: { patientPayload: this.payload.patient, process: true },
+                    title: 'X-RAY REQUEST',
+                },
+                ModalSizeEnum.large
+            );
+        }
+    }
+
+    public onViewDrugPrescription() {
+        if (this.hasPatient()) {
+            this.modalService.openModalWithComponent(
+                ClerkDrugRequestComponent,
+                {
+                    data: { patientPayload: this.payload.patient, process: true },
+                    title: 'Drug Request',
+                },
+                ModalSizeEnum.large
+            );
+        }
+    }
+
+    public onOpenWardTransferModal() {
+        if (this.hasPatient() === true) {
+            this.modalService.openModalWithComponent(
+                SharedWardTransferComponent,
+                {
+                    data: { patientPayload: this.payload.patient },
+                    title: 'Ward Transfer',
+                },
+                ModalSizeEnum.large
+            );
+        }
+    }
+
+    public onOpenFluidBalanceModal() {
+        if (this.hasPatient() === true) {
+            this.modalService.openModalWithComponent(
+                PatientFluidBalanceCaptureComponent,
+                { data: { patientPayload: this.payload.patient }, title: 'FLUID BALANCE' },
+                ModalSizeEnum.large
+            );
+        }
+    }
+
+    public onOpenNurseNoteModal() {
+        if (this.hasPatient() === true) {
+            this.modalService.openModalWithComponent(
+                SharedNurseNoteComponent,
+                {
+                    data: { patientPayload: this.payload.patient },
+                    title: 'DOCTOR\'S NOTE',
+                },
+                ModalSizeEnum.large
+            );
+        }
+    }
+
+    public onGetPrevFluidBalance() {
+        if (this.hasPatient() === false) {
+            return;
+        }
+        this.spinner.show().then();
+        this.subscription.add(
+            this.nurseService.onGetPatientPrevFluidBalance(this.payload.patient).subscribe(
+                (res) => {
+                    this.spinner.hide().then();
+                    const file = new Blob([res.body], { type: 'application/pdf' });
+                    saveAs(file, ReportFileNameEnum.CLERK_E_FOLDER);
+                },
+                (error) => {
+                    this.spinner.hide().then();
+                    console.log(error);
+                }
+            )
+        );
+    }
+
+    private hasPatient(): boolean {
+        if (this.payload?.patient?.patientId) {
+            return true;
+        } else {
+            this.toast.error('Select Patient First', HmisConstants.VALIDATION_ERR);
+            return false;
+        }
+    }
+}

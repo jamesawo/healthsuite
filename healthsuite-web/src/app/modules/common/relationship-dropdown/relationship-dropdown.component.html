@@ -1,0 +1,13 @@
+<ng-select
+        (change)="onSelected($event)"
+        placeholder="Select Relationship.."
+        [(ngModel)]="default"
+        [ngModelOptions]="{ standalone: true }"
+        [items]="relationships"
+        bindLabel="name"
+>
+
+    <ng-template ng-option-tmp let-item="item">
+        {{ item.name }}
+    </ng-template>
+</ng-select>

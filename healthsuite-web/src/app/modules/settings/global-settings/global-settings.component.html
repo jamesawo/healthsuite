@@ -1,0 +1,898 @@
+<form [formGroup]="globalSettingForm" (ngSubmit)="saveSettings()">
+    <!--General Settings-->
+    <fieldset class="border p-2 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">General Config</legend>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="text-right col-lg-6">
+                            <label>Hospital Name:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input
+                                type="text"
+                                class="form-control"
+                                [formControlName]="'genHospitalName'"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="text-right col-lg-6">
+                            <label>Patient No. Prefix:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input
+                                type="text"
+                                class="form-control"
+                                [formControlName]="'genPatientNumberPrefix'"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Disable Billing Invoice Pops?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    [formControlName]="'genDisableBillingInvoicePops'"
+                                    type="radio"
+                                    value="yes"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    [formControlName]="'genDisableBillingInvoicePops'"
+                                    value="no"
+                                    type="radio"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Generate Hospital Number for Old Patients?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    [formControlName]="'generateHospitalNumberForOldPatient'"
+                                    value="yes"
+                                    type="radio"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    [formControlName]="'generateHospitalNumberForOldPatient'"
+                                    value="no"
+                                    type="radio"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Enforce Re-Visit Before Billing Actions?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    [formControlName]="'enforceRevisitBeforeBillingActions'"
+                                    value="yes"
+                                    type="radio"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    [formControlName]="'enforceRevisitBeforeBillingActions'"
+                                    value="no"
+                                    type="radio"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Enable Auto Revisit?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    [formControlName]="'genEnableAutoRevisit'"
+                                    value="yes"
+                                    type="radio"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    [formControlName]="'genEnableAutoRevisit'"
+                                    value="no"
+                                    type="radio"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!--  Finance/Account-->
+    <fieldset class="border p-2 rounded bg-gray-100 mg-t-20">
+        <legend class="w-auto tx-16 tx-bold">Finance Config</legend>
+        <div class="row">
+            <div class="col-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Enable OutPatient Deposit?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    [formControlName]="'accEnableOutPatientDeposit'"
+                                    value="yes"
+                                    type="radio"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    [formControlName]="'accEnableOutPatientDeposit'"
+                                    value="no"
+                                    type="radio"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Enable Registration/Revisit Validation?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    [formControlName]="'accEnableRegistrationValidation'"
+                                    value="yes"
+                                    type="radio"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    [formControlName]="'accEnableRegistrationValidation'"
+                                    value="no"
+                                    type="radio"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Include PayNow Bills to Bills Details?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'accAlwaysIncludePayNowBills'"
+                                    value="yes"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'accAlwaysIncludePayNowBills'"
+                                    value="no"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Hide Bills Details From Receipt?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'accHideBillDetailsFromReceipt'"
+                                    value="yes"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'accHideBillDetailsFromReceipt'"
+                                    value="no"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Allow Price Edit for Walk-in Patients?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'accAllowPriceEditForWalkP'"
+                                    value="yes"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'accAllowPriceEditForWalkP'"
+                                    value="no"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Director of Finance & Accounts?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input
+                                type="text"
+                                class="form-control"
+                                [formControlName]="'accDirectorOfFinance'"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Sales Receipt Count:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input
+                                type="number"
+                                class="form-control"
+                                [formControlName]="'accSalesReceiptCopyCount'"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Deposit Receipt Copy Count:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input
+                                type="number"
+                                class="form-control"
+                                [formControlName]="'accDepositReceiptCount'"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Deposit Account:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <ng-select [formControlName]="'accDepositAccount'">
+                                <ng-option value="account1">Default Account</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- Pharmacy Settings-->
+    <fieldset class="border p-2 rounded bg-gray-100 mg-t-20">
+        <legend class="w-auto tx-16 tx-bold">Pharmacy Config</legend>
+        <div class="row">
+            <div class="col-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Activate Stock & Inventory?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'phActivateStockInventory'"
+                                    value="yes"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'phActivateStockInventory'"
+                                    value="no"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Update Selling After Receiving Goods?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'phAutoUpdateSellingAfterReceiveGoods'"
+                                    value="yes"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'phAutoUpdateSellingAfterReceiveGoods'"
+                                    value="no"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Enforce Pharmacy Patient Category on Billing?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'phEnforcePharmacyPatientCatOnBill'"
+                                    value="yes"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'phEnforcePharmacyPatientCatOnBill'"
+                                    value="no"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!--Clerking Settings-->
+    <fieldset class="border p-2 rounded bg-gray-100 mg-t-20">
+        <legend class="w-auto tx-16 tx-bold">Clerking Config</legend>
+        <div class="row">
+            <div class="col-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Activate Clerking?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'clerkActivateClerking'"
+                                    value="yes"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'clerkActivateClerking'"
+                                    value="no"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Consultation Fee Expiry Duration (Default: 24 hrs) :</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input
+                                type="number"
+                                class="form-control"
+                                [formControlName]="'clerkConsultationFeeExpiration'"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Consultation Edit Window (Default: 1 Day) :</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input
+                                type="number"
+                                class="form-control"
+                                [formControlName]="'clerkConsultantEditWindow'"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- NHIS Settings -->
+    <fieldset class="border p-2 rounded bg-gray-100 mg-t-20">
+        <legend class="w-auto tx-16 tx-bold">NHIS Config</legend>
+        <div class="row">
+            <div class="col-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Auto Apply Approval Code?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'nhisAutoApplyApprovalCode'"
+                                    value="yes"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    type="radio"
+                                    [formControlName]="'nhisAutoApplyApprovalCode'"
+                                    value="no"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Enable NHIS Service Price:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                        type="radio"
+                                        [formControlName]="'enableNhisServicePrice'"
+                                        value="yes"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                        type="radio"
+                                        [formControlName]="'enableNhisServicePrice'"
+                                        value="no"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- Lab Settings -->
+    <fieldset class="border p-2 rounded bg-gray-100 mg-t-20">
+        <legend class="w-auto tx-16 tx-bold">Laboratory Config</legend>
+        <div class="row">
+            <div class="col-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Enforce Specimen Acknowledgement?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    [formControlName]="'labEnforceSpecimenAck'"
+                                    value="yes"
+                                    type="radio"
+                                    (click)="onEnforceSpecimenAckChange('yes')"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    [formControlName]="'labEnforceSpecimenAck'"
+                                    value="no"
+                                    type="radio"
+                                    (click)="onEnforceSpecimenAckChange('no')"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group row">
+                    <div class="col-lg-6 text-right">
+                        <label>Enable Specimen Ack. During Collection:</label>
+                    </div>
+                    <div class="col-lg-6">
+                        <fieldset [disabled]=disableSpecimenAck>
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                        [formControlName]="'labEnableSpecimenAckDuringCollection'"
+                                        value="yes"
+                                        type="radio"
+                                        [checked]="!disableSpecimenAck"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                        [formControlName]="'labEnableSpecimenAckDuringCollection'"
+                                        value="no"
+                                        type="radio"
+                                        [checked]="disableSpecimenAck"
+                                />
+                                <span>No</span>
+                            </label>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- Config Settings -->
+    <fieldset class="border p-2 rounded bg-gray-100 mg-t-20">
+        <legend class="w-auto tx-16 tx-bold">App Config</legend>
+        <div class="row">
+            <!-- left -->
+            <div class="col-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Enforce System Location:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    [formControlName]="'confEnforceSystemLocation'"
+                                    value="yes"
+                                    type="radio"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    [formControlName]="'confEnforceSystemLocation'"
+                                    value="no"
+                                    type="radio"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Add Ward Code To Bed Code:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    [formControlName]="'confAddWardCodeToBedCode'"
+                                    value="yes"
+                                    type="radio"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    [formControlName]="'confAddWardCodeToBedCode'"
+                                    value="no"
+                                    type="radio"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Bed Code Prefix?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                [formControlName]="'confBedCodePrefix'"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Revenue Department Code?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                [formControlName]="'confRevenueDepartmentCode'"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- right -->
+            <div class="col-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Department Code Prefix?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                [formControlName]="'confDepartmentCodePrefix'"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Ward Code Prefix?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                [formControlName]="'confWardCodePrefix'"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Speciality Unit Code?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                [formControlName]="'confSpecialityUnitCode'"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6"></div>
+        </div>
+    </fieldset>
+
+    <!-- Config Settings -->
+    <fieldset class="border p-2 rounded bg-gray-100 mg-t-20">
+        <legend class="w-auto tx-16 tx-bold">Notification Config</legend>
+        <div class="row">
+            <!-- left -->
+            <div class="col-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Enable Notifications Core:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    [formControlName]="'notEnableNotificationCore'"
+                                    value="yes"
+                                    type="radio"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    [formControlName]="'notEnableNotificationCore'"
+                                    value="no"
+                                    type="radio"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Enable Email Notifications:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    [formControlName]="'notEnableEmailNotification'"
+                                    value="yes"
+                                    type="radio"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    [formControlName]="'notEnableEmailNotification'"
+                                    value="no"
+                                    type="radio"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Enable Sms Notifications:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    [formControlName]="'notEnableSmsNotification'"
+                                    value="yes"
+                                    type="radio"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    [formControlName]="'notEnableSmsNotification'"
+                                    value="no"
+                                    type="radio"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Enable Web Notifications:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="rdiobox rdiobox-inline">
+                                <input
+                                    [formControlName]="'notEnableWebNotification'"
+                                    value="yes"
+                                    type="radio"
+                                />
+                                <span>Yes</span>
+                            </label>
+                            <label class="rdiobox rdiobox-inline mg-l-10">
+                                <input
+                                    [formControlName]="'notEnableWebNotification'"
+                                    value="no"
+                                    type="radio"
+                                />
+                                <span>No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- right -->
+            <div class="col-6">
+                <div class="col-lg-12">
+                    <div class="form-group row">
+                        <div class="col-lg-6 text-right">
+                            <label>Notification Access Level?:</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <ng-select [formControlName]="'notNotificationAccessLevel'">
+                                <ng-option value="Global">Global Level</ng-option>
+                                <ng-option value="Module">Module Level</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6"></div>
+        </div>
+    </fieldset>
+
+    <div class="text-center mg-t-20">
+        <button type="submit" class="btn btn-primary mg-l-10">
+            <!--      <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>-->
+            &nbsp; Save Settings
+        </button>
+    </div>
+
+</form>

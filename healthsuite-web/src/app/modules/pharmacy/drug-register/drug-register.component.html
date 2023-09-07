@@ -1,0 +1,652 @@
+<div class="content-wrapper">
+    <div class="service-search-wrapper">
+        <div class="input-wrapper row">
+            <div class="col-2">
+                <label>SEARCH BY </label>
+                <ng-select
+                    (change)="onSearchByDropDownChange($event)"
+                    [markFirst]="true"
+                    [closeOnSelect]="true"
+                    [clearable]="false"
+                    [searchable]="false"
+                    [(ngModel)]="selectedFilter"
+                    name="filter"
+                    [title]="'filterTitle'"
+                >
+                    <ng-option [value]="filter" *ngFor="let filter of filters">{{
+                        filter.name
+                    }}</ng-option>
+                </ng-select>
+            </div>
+            <div class="col-7">
+                <div class="form-group">
+                    <label></label>
+                    <input type="text" class="form-control mg-t-7" placeholder="Enter Name and Click Search Button"  [(ngModel)]="searchTerm.searchValue">
+                </div>
+            </div>
+            <div class="col-3 mg-t-15">
+                <button
+                    class="btn btn-secondary btn-sm mg-t-10"
+                    (click)="onBtnSearchClicked('search')"
+                >
+                    Search
+                </button>
+                <button
+                    class="btn btn-primary btn-sm mg-l-2 mg-t-10"
+                    (click)="onBtnSearchClicked('create')"
+                >
+                    Create
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngIf="activeView == 'search'; else createView">
+        <!--filter-->
+        <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+            <legend class="w-auto tx-16 tx-bold">
+                Filter Options
+            </legend>
+            <form autocomplete="off" class="form-padding" novalidate>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group w-100">
+                            <label>Drug Classification</label>
+                            <app-drug-classification
+                                (selected)="onSelectDrugClassification($event)"
+                            ></app-drug-classification>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group w-100">
+                            <label>Drug Formulation</label>
+                            <app-drug-formulation
+                                (selected)="onSelectDrugFormulation($event)"
+                            ></app-drug-formulation>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group w-100 mg-t-15">
+                            <button class="btn btn-secondary btn-sm mg-t-10">
+                                View All
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+
+        <div class="services-table-wrapper">
+            <div class="table-responsive mg-t-20">
+                <table class="table table-bordered table-striped mg-b-0">
+                    <thead>
+                        <tr>
+                            <th class="wd-3">
+                                <label>
+                                    <input type="checkbox" />
+                                </label>
+                            </th>
+                            <th>Generic</th>
+                            <th>Brand</th>
+                            <th>Strength</th>
+                            <th>Cost Price</th>
+                            <th>Unit of Issue</th>
+                            <th>Pks Per Packing Unit</th>
+                            <th>Unit Cost</th>
+                            <th>General MarkUp</th>
+                            <th>Regular Selling Price</th>
+                            <th>Nhis Selling Price</th>
+                            <th>Drug Classification</th>
+                            <th>Drug Formulation</th>
+                            <th>Drug Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="
+                                let item of collection
+                                    | paginate: { itemsPerPage: 10, currentPage: p }
+                            "
+                        >
+                            <td>
+                                <label>
+                                    <input type="checkbox" />
+                                </label>
+                            </td>
+                            <td>
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id && editing?.column == generic;
+                                        else genericText
+                                    "
+                                >
+                                    <app-input-field
+                                        (changed)="onColumnChanged($event)"
+                                        [props]="{
+                                            columnType: drugColumnType,
+                                            inputType: 'text',
+                                            columnName: generic,
+                                            value: item.genericName,
+                                            id: item.id
+                                        }"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #genericText>
+                                    <span (click)="onColumnClicked(item.id, generic)">{{
+                                        item.genericName
+                                    }}</span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id && editing?.column == brand;
+                                        else brandText
+                                    "
+                                >
+                                    <app-input-field
+                                        (changed)="onColumnChanged($event)"
+                                        [props]="{
+                                            columnType: drugColumnType,
+                                            inputType: 'text',
+                                            columnName: brand,
+                                            value: item.brandName,
+                                            id: item.id
+                                        }"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #brandText>
+                                    <span (click)="onColumnClicked(item.id, brand)">{{
+                                        item.brandName
+                                    }}</span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id && editing?.column == strength;
+                                        else strengthText
+                                    "
+                                >
+                                    <app-input-field
+                                        (changed)="onColumnChanged($event)"
+                                        [props]="{
+                                            columnType: drugColumnType,
+                                            inputType: 'text',
+                                            columnName: strength,
+                                            value: item.strength,
+                                            id: item.id
+                                        }"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #strengthText>
+                                    <span (click)="onColumnClicked(item.id, strength)">{{
+                                        item.strength
+                                    }}</span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id && editing?.column == costPrice;
+                                        else costPriceNumber
+                                    "
+                                >
+                                    <app-input-field
+                                        (changed)="onColumnChanged($event)"
+                                        [props]="{
+                                            columnType: drugColumnType,
+                                            inputType: 'number',
+                                            columnName: costPrice,
+                                            value: item.costPrice,
+                                            id: item.id
+                                        }"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #costPriceNumber>
+                                    <span (click)="onColumnClicked(item.id, costPrice)">{{
+                                        item.costPrice
+                                    }}</span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id && editing?.column == unitOfIssue;
+                                        else unitOfIssueNumber
+                                    "
+                                >
+                                    <app-input-field
+                                        (changed)="onColumnChanged($event)"
+                                        [props]="{
+                                            columnType: drugColumnType,
+                                            inputType: 'number',
+                                            columnName: unitOfIssue,
+                                            value: item.unitOfIssue,
+                                            id: item.id
+                                        }"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #unitOfIssueNumber>
+                                    <span (click)="onColumnClicked(item.id, unitOfIssue)">{{
+                                        item.unitOfIssue
+                                    }}</span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id &&
+                                            editing?.column == packsPerPackingUnit;
+                                        else packsNumber
+                                    "
+                                >
+                                    <app-input-field
+                                        (changed)="onColumnChanged($event)"
+                                        [props]="{
+                                            columnType: drugColumnType,
+                                            inputType: 'number',
+                                            columnName: packsPerPackingUnit,
+                                            value: item.packsPerPackingUnit,
+                                            id: item.id
+                                        }"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #packsNumber>
+                                    <span (click)="onColumnClicked(item.id, packsPerPackingUnit)">{{
+                                        item.packsPerPackingUnit
+                                    }}</span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id && editing?.column == unitCostPrice;
+                                        else unitCostNumber
+                                    "
+                                >
+                                    <app-input-field
+                                        (changed)="onColumnChanged($event)"
+                                        [props]="{
+                                            columnType: drugColumnType,
+                                            inputType: 'number',
+                                            columnName: unitCostPrice,
+                                            value: item.unitCostPrice,
+                                            id: item.id
+                                        }"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #unitCostNumber>
+                                    <span (click)="onColumnClicked(item.id, unitCostPrice)">{{
+                                        item.unitCostPrice
+                                    }}</span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id && editing?.column == generalMarkUp;
+                                        else generalMarkUpNumber
+                                    "
+                                >
+                                    <app-input-field
+                                        (changed)="onColumnChanged($event)"
+                                        [props]="{
+                                            columnType: drugColumnType,
+                                            inputType: 'number',
+                                            columnName: generalMarkUp,
+                                            value: item.generalMarkUp,
+                                            id: item.id
+                                        }"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #generalMarkUpNumber>
+                                    <span (click)="onColumnClicked(item.id, generalMarkUp)">{{
+                                        item.generalMarkUp
+                                    }}</span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id &&
+                                            editing?.column == regularSellingPrice;
+                                        else regularSellNumber
+                                    "
+                                >
+                                    <app-input-field
+                                        (changed)="onColumnChanged($event)"
+                                        [props]="{
+                                            columnType: drugColumnType,
+                                            inputType: 'number',
+                                            columnName: regularSellingPrice,
+                                            value: item.regularSellingPrice,
+                                            id: item.id
+                                        }"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #regularSellNumber>
+                                    <span (click)="onColumnClicked(item.id, regularSellingPrice)">{{
+                                        item.regularSellingPrice
+                                    }}</span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id &&
+                                            editing?.column == nhisSellingPrice;
+                                        else nhisSellNumber
+                                    "
+                                >
+                                    <app-input-field
+                                        (changed)="onColumnChanged($event)"
+                                        [props]="{
+                                            columnType: drugColumnType,
+                                            inputType: 'number',
+                                            columnName: nhisSellingPrice,
+                                            value: item.nhisSellingPrice,
+                                            id: item.id
+                                        }"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #nhisSellNumber>
+                                    <span (click)="onColumnClicked(item.id, nhisSellingPrice)">{{
+                                        item.nhisSellingPrice
+                                    }}</span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <app-drug-classification
+                                    (columnChanged)="onColumnChanged($event)"
+                                    [columnValue]="{
+                                        inputType: '',
+                                        columnName: classification,
+                                        value: item.classificationId,
+                                        id: item.id,
+                                        columnType: drugColumnType
+                                    }"
+                                ></app-drug-classification>
+                            </td>
+                            <td>
+                                <app-drug-formulation
+                                    (columnChanged)="onColumnChanged($event)"
+                                    [columnValue]="{
+                                        inputType: '',
+                                        columnName: formulation,
+                                        value: item.formulationId,
+                                        id: item.id,
+                                        columnType: drugColumnType
+                                    }"
+                                ></app-drug-formulation>
+                            </td>
+                            <td>{{ item.code }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation" class="mg-t-15" *ngIf="collection?.length">
+                    <ul class="pagination justify-content-end">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-template #createView>
+        <div class="create-service-wrapper az-content-body mg-t-15">
+            <div class="card">
+                <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+                    <div class="row">
+                        <div class="col-auto">
+                            <label class="rdiobox" for="billItem">
+                                <input
+                                    id="billItem"
+                                    name="billItemType"
+                                    type="radio"
+                                    [checked]="isCreate"
+                                    (change)="onCreateViewType('create')"
+                                />
+                                <span>Add</span>
+                            </label>
+                        </div>
+
+                        <div class="col-auto mg-t-20 mg-lg-t-0">
+                            <label class="rdiobox" for="edit">
+                                <input
+                                    name="billItemType"
+                                    id="edit"
+                                    type="radio"
+                                    [checked]=""
+                                    (change)="onCreateViewType('edit')"
+                                />
+                                <span>Edit</span>
+                            </label>
+                        </div>
+
+                        <div class="col-auto mg-t-20 mg-lg-t-0" style="left: 70%;">
+                            <span
+                                class="align-self-end pd-5 pointer"
+                                (click)="onBtnSearchClicked('search')"
+                            >
+                                <i class="fa fa-window-close"></i>
+                                close
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <app-drug-search #drugSearchComponent
+                                    [props]="{ searchTerm: searchByGenericOrBrandName }"
+                                    *ngIf="!isCreate"
+                                    (selected)="onSearchDrugSelected($event, 'edit')"
+                                ></app-drug-search>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group text-left">
+                                <label>Formulation</label>
+                                <app-drug-formulation #drugFormulationComponent
+                                    [defaultValue]="payload?.formulationId"
+                                    (selected)="onSelectDrugFormulation($event)"
+                                ></app-drug-formulation>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group text-left">
+                                <label>Classification</label>
+                                <app-drug-classification #drugClassificationComponent
+                                    [defaultValue]="payload?.classificationId"
+                                    (selected)="onSelectDrugClassification($event)"
+                                ></app-drug-classification>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group text-left">
+                                <label>Revenue Department</label>
+                                <app-revenue-department-dropdown #revenueDepartmentDropdownComponent
+                                    [selectedId]="payload?.revenueDepartmentId"
+                                    (select)="onRevenueDepartmentSelected($event)"
+                                ></app-revenue-department-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 form-group">
+                            <label>Generic Name</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="genericName"
+                                [(ngModel)]="payload.genericName"
+                            />
+                        </div>
+
+                        <div class="col-4 form-group">
+                            <label>Brand Name</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="brandName"
+                                [(ngModel)]="payload.brandName"
+                            />
+                        </div>
+
+                        <div class="col-4 form-group">
+                            <label>Strength</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="strength"
+                                [(ngModel)]="payload.strength"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4 form-group">
+                            <label>Unit of Issue </label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="unitOfIssue"
+                                [(ngModel)]="payload.unitOfIssue"
+                                min="0"
+                            />
+                        </div>
+
+                        <div class="col-4 form-group">
+                            <label> Pks per Packing Unit</label>
+                            <input
+                                type="number"
+                                min="0"
+                                class="form-control"
+                                name="packsPerPackingUnit"
+                                [(ngModel)]="payload.packsPerPackingUnit"
+                            />
+                        </div>
+
+                        <div class="col-4 form-group">
+                            <label>Cost Price </label>
+                            <input
+                                type="number"
+                                min="0"
+                                class="form-control"
+                                name="costPrice"
+                                [(ngModel)]="payload.costPrice"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4 form-group">
+                            <label>Unit Cost Price </label>
+                            <input
+                                type="number"
+                                min="0"
+                                class="form-control"
+                                name="unitCostPrice"
+                                [(ngModel)]="payload.unitCostPrice"
+                            />
+                        </div>
+
+                        <div class="col-4 form-group">
+                            <label> Nhis Mark Up</label>
+                            <input
+                                type="number"
+                                min="0"
+                                class="form-control"
+                                name="nhisMarkUp"
+                                [(ngModel)]="payload.nhisMarkUp"
+                            />
+                        </div>
+
+                        <div class="col-4 form-group">
+                            <label>General Mark Up </label>
+                            <input
+                                type="number"
+                                min="0"
+                                class="form-control"
+                                name="generalMarkUp"
+                                [(ngModel)]="payload.generalMarkUp"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4 form-group">
+                            <label>Regular Selling Price </label>
+                            <input
+                                type="number"
+                                min="0"
+                                class="form-control"
+                                name="regularSellingPrice"
+                                [(ngModel)]="payload.regularSellingPrice"
+                            />
+                        </div>
+
+                        <div class="col-4 form-group">
+                            <label> Nhis Selling Price</label>
+                            <input
+                                type="number"
+                                min="0"
+                                class="form-control"
+                                name="nhisSellingPrice"
+                                [(ngModel)]="payload.nhisSellingPrice"
+                            />
+                        </div>
+
+                        <div class="col-4 form-group">
+                            <label> ReOrder Level</label>
+                            <input
+                                type="number"
+                                min="0"
+                                class="form-control"
+                                value="0"
+                                name="reOrderLevel"
+                                [(ngModel)]="payload.reorderLevel"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <ng-container *ngIf="isCreate; else btnUpdateDrug">
+                                <button
+                                    class="btn btn-md btn-az-primary"
+                                    [disabled]="isSubmit"
+                                    (click)="onRegisterDrug()"
+                                >
+                                    <span class="mg-r-5">Register Drug</span>
+                                    <i *ngIf="isSubmit" class="fa fa-spinner fa-spin"></i>
+                                </button>
+                            </ng-container>
+
+                            <ng-template #btnUpdateDrug>
+                                <button class="btn btn-md btn-az-primary" (click)="onUpdateDrug()">
+                                    <span class="mg-r-5">Edit Drug</span>
+                                </button>
+                            </ng-template>
+                        </div>
+                        <div class="col-6 text-right">
+                            <button
+                                class="mg-l-4 btn btn-md btn-az-primary"
+                                (click)="onDownloadTemplate()"
+                            >
+                                Download Template
+                            </button>
+                            <button (click)="openModal()" class="mg-l-4 btn btn-md btn-az-primary">
+                                Upload In Batch
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

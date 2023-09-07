@@ -1,0 +1,120 @@
+<div class="mg-b-20">
+<!--    <h3 class="az-content-title tx-18 mg-b-5 mg-b-lg-8">Seed Data Setup</h3>-->
+    <hr />
+</div>
+
+<fieldset class="border p-2 pd-20 rounded bg-gray-100 mg-b-20">
+    <legend class="w-auto tx-16 tx-bold">Select Data Category</legend>
+    <div class="form-group wd-50p">
+        <label class="form-label">Search </label>
+        <!--        <ng-select-->
+        <!--            [items]="items"-->
+        <!--            bindLabel="name"-->
+        <!--            [searchable]="true"-->
+        <!--            name="searchItems"-->
+        <!--            [(ngModel)]="model"-->
+        <!--            (change)="onItemSelect($event)"-->
+        <!--            placeholder="Enter Category Name.."-->
+        <!--        ></ng-select>-->
+        <ng-select [(ngModel)]="model">
+            <ng-option *ngFor="let data of items" [value]="data.id">{{ data.name }}</ng-option>
+        </ng-select>
+    </div>
+</fieldset>
+
+<div [ngSwitch]="model">
+    <ng-container *ngSwitchCase="0">
+        <app-seed-gender [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-gender
+    ></ng-container>
+    <ng-container *ngSwitchCase="1">
+        <app-seed-marital-status [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-marital-status
+    ></ng-container>
+    <ng-container *ngSwitchCase="2">
+        <app-seed-relationship [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-relationship
+    ></ng-container>
+    <ng-container *ngSwitchCase="3">
+        <app-seed-religion [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-religion
+    ></ng-container>
+    <ng-container *ngSwitchCase="4">
+        <app-seed-surgery [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-surgery
+    ></ng-container>
+    <ng-container *ngSwitchCase="5">
+        <app-seed-roles [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-roles
+    ></ng-container>
+    <ng-container *ngSwitchCase="6">
+        <app-seed-scheme [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-scheme
+    ></ng-container>
+    <ng-container *ngSwitchCase="7">
+        <app-seed-drug-classification
+            [@fadeInOnEnter]
+            [@fadeOutOnLeave]
+        ></app-seed-drug-classification>
+    </ng-container>
+    <ng-container *ngSwitchCase="8">
+        <app-seed-drug-formulation [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-drug-formulation>
+    </ng-container>
+    <ng-container *ngSwitchCase="9">
+        <app-seed-mark-up [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-mark-up
+    ></ng-container>
+    <ng-container *ngSwitchCase="10">
+        <app-seed-department [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-department
+    ></ng-container>
+    <ng-container *ngSwitchCase="11">
+        <app-seed-bed [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-bed
+    ></ng-container>
+    <ng-container *ngSwitchCase="12">
+        <app-seed-revenue-department
+            [@fadeInOnEnter]
+            [@fadeOutOnLeave]
+        ></app-seed-revenue-department>
+    </ng-container>
+    <ng-container *ngSwitchCase="13">
+        <app-seed-speciality-unit [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-speciality-unit>
+    </ng-container>
+    <!--<app-seed-services *ngIf="model?.id === 14"></a [@fadeInOnEnter] [@fadeOutOnLeave]pp-seed-services>-->
+    <ng-container *ngSwitchCase="15">
+        <app-seed-pharmacy-patient-category
+            [@fadeInOnEnter]
+            [@fadeOutOnLeave]
+        ></app-seed-pharmacy-patient-category
+    ></ng-container>
+    <ng-container *ngSwitchCase="16">
+        <app-seed-pharmacy-supplier-category
+            [@fadeInOnEnter]
+            [@fadeOutOnLeave]
+        ></app-seed-pharmacy-supplier-category
+    ></ng-container>
+    <ng-container *ngSwitchCase="17">
+        <app-seed-nursing-note-label
+            [@fadeInOnEnter]
+            [@fadeOutOnLeave]
+        ></app-seed-nursing-note-label
+    ></ng-container>
+    <ng-container *ngSwitchCase="18">
+        <app-seed-lab-specimen [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-lab-specimen
+    ></ng-container>
+    <ng-container *ngSwitchCase="19">
+        <app-seed-organism [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-organism
+    ></ng-container>
+    <ng-container *ngSwitchCase="20">
+        <app-seed-antibiotics [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-antibiotics
+    ></ng-container>
+    <ng-container *ngSwitchCase="21">
+        <app-seed-bill-waiver-category
+            [@fadeInOnEnter]
+            [@fadeOutOnLeave]
+        ></app-seed-bill-waiver-category
+    ></ng-container>
+    <ng-container *ngSwitchCase="22">
+        <app-seed-ethnic-group [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-ethnic-group
+    ></ng-container>
+    <ng-container *ngSwitchCase="23">
+        <app-seed-nationality [@fadeInOnEnter] [@fadeOutOnLeave]></app-seed-nationality
+    ></ng-container>
+    <ng-container *ngSwitchCase="24">
+        <app-seed-means-of-identification
+            [@fadeInOnEnter]
+            [@fadeOutOnLeave]
+        ></app-seed-means-of-identification
+    ></ng-container>
+</div>

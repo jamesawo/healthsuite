@@ -1,0 +1,168 @@
+<p class="mg-b-5">
+    Use the form to register a new patient and obtain a <code>Patient Number </code>
+    <i
+            class="fa fa-info-circle fa-sm"
+            [ngbPopover]="
+                        'Fill the form below to register a patient and obtain a unique patient number'
+                    "
+            placement="right"
+            triggers="mouseenter:mouseleave"
+            container="body"
+            aria-hidden="true"
+    ></i>
+</p>
+<!-- az-content-header -->
+
+<div class="az-content-body">
+    <div class="card card-dashboard-seven">
+        <div id="stepper1" class="bs-stepper">
+            <div class="card-header">
+                <div class="row row-sm">
+                    <div class="col-3 col-md-3 col-lg-2 border-right align-items-center">
+                        <h2 class="az-content-title tx-14 mg-b-lg-8 text-center mg-t-30">
+                            Facial Capture
+                            <i
+                                    class="fa fa-info-circle tx-12"
+                                    [ngbPopover]="
+                                    'Use the system`s web cam device to capture patient passport photograph for patient folder. Click the camera icon below.'
+                                "
+                                    placement="right"
+                                    triggers="mouseenter:mouseleave"
+                                    container="body"
+                                    aria-hidden="true"
+                            ></i>
+                        </h2>
+                    </div>
+                    <div class="col-9 col-md-9 col-lg-10">
+                        <div class="bs-stepper-header tx-10">
+                            <div class="step" data-target="#test-l-1">
+                                <button class="step-trigger">
+                                    <span class="bs-stepper-circle">1</span>
+                                    <span class="bs-stepper-label">Primary Details</span>
+                                </button>
+                            </div>
+
+                            <ng-container #stepperGroup>
+                                <div class="line s-none"></div>
+                                <div
+                                        class="step s-none"
+                                        [@fadeInOnEnter]
+                                        [@fadeOutOnLeave]
+                                        data-target="#test-l-2"
+                                >
+                                    <button
+                                            class="step-trigger"
+                                            [disabled]="patient?.patientCategoryEnum != scheme"
+                                    >
+                                        <span class="bs-stepper-circle">2</span>
+                                        <span class="bs-stepper-label"
+                                        >Medical Insurance Details</span
+                                        >
+                                    </button>
+                                </div>
+                                <div class="line s-none"></div>
+                                <div class="step s-none" data-target="#test-l-3">
+                                    <button class="step-trigger">
+                                        <span class="bs-stepper-circle">3</span>
+                                        <span class="bs-stepper-label">Referral Details</span>
+                                    </button>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- card-header -->
+            <div class="card-body">
+                <div class="row row-sm">
+                    <div class="col-2 col-md-2 col-lg-2">
+                        <app-patient-facial-capture #captureComponent
+                                (pictureTaken)="handleImage($event)"
+                        ></app-patient-facial-capture>
+                    </div>
+
+                    <div class="col-10 col-md-10 col-lg-10">
+                        <form>
+                            <div class="bs-stepper-content">
+                                <div id="test-l-1" class="content">
+                                    <!-- Basic Information -->
+                                    <ng-container>
+                                        <app-patient-basic-details #basicDetailsComponent></app-patient-basic-details>
+                                    </ng-container>
+
+                                    <!-- Means of identification -->
+                                    <ng-container>
+                                        <app-patient-means-of-identification #meansOfIdentificationComponent></app-patient-means-of-identification>
+                                    </ng-container>
+
+                                    <!-- Contact Details -->
+                                    <ng-container>
+                                        <app-patient-contact-details #contactDetailsComponent></app-patient-contact-details>
+                                    </ng-container>
+
+                                    <!-- NOK Details -->
+                                    <ng-container>
+                                        <app-patient-nok-details #nokDetailsComponent></app-patient-nok-details>
+                                    </ng-container>
+
+                                    <ng-container>
+                                        <div class="text-center">
+                                            <button (click)="next()" class="btn btn-primary">
+                                                Next
+                                            </button>
+                                        </div>
+                                    </ng-container>
+                                </div>
+
+                                <div id="test-l-2" class="content">
+                                    <!--  Card holder information-->
+                                    <ng-container>
+                                        <app-patient-card-holder-details #cardHolderDetailsComponent></app-patient-card-holder-details>
+                                    </ng-container>
+
+                                    <!-- Insurance Details -->
+                                    <ng-container>
+                                        <app-patient-insurance-details #insuranceDetailsComponent></app-patient-insurance-details>
+                                    </ng-container>
+
+                                    <div class="text-center">
+                                        <button (click)="previous()" class="btn btn-primary">
+                                            Previous
+                                        </button>
+                                        <button (click)="next()" class="btn btn-primary mg-l-10">
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="test-l-3" class="content">
+                                <!-- Referral Details -->
+                                <ng-container>
+                                    <app-patient-transfer-details #transferDetailsComponent></app-patient-transfer-details>
+                                </ng-container>
+
+                                <div class="text-center">
+                                    <ng-container>
+                                        <button (click)="previous()" class="btn btn-primary">
+                                            Previous
+                                        </button>
+                                        <button
+                                                type="submit"
+                                                class="btn btn-primary mg-l-10"
+                                                (click)="onRegisterPatient()"
+                                        >
+                                            Register Patient
+                                        </button>
+                                    </ng-container>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

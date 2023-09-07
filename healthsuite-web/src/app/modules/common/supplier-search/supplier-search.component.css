@@ -1,0 +1,15 @@
+.input-wrapper {
+}
+.input-wrapper label {
+    font-weight: 400;
+}
+
+.search-tab {
+    display: flex;
+}
+.search-title {
+    align-self: flex-end;
+}
+.search-input {
+    flex-grow: 2;
+}

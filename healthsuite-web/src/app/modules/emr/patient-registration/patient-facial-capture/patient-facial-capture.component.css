@@ -1,0 +1,28 @@
+.div-webcam {
+    z-index: 999999;
+    padding: 10px 0;
+}
+
+.snapshot {
+    margin: 70px 10px 0 0;
+    text-align: center;
+}
+
+.snapshot img {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.image-case {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    height: 10em;
+    justify-content: center;
+    align-items: center;
+    background: #f4f5f8;
+}
+
+.webcam-wrapper {
+    margin-top: 35px;
+}

@@ -1,0 +1,97 @@
+<fieldset class="border p-2 rounded mg-t-20 bg-gray-100">
+    <legend class="w-auto tx-16">Contact Details</legend>
+    <form #f="ngForm" class="form-padding" autocomplete="off">
+        <!-- Phone Number -->
+        <div class="row form-group">
+            <div class="col-12">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Phone Number:</label>
+                    <div class="col-10">
+                        <input
+                            class="form-control form-control-sm"
+                            type="text"
+                            placeholder="Enter phone number"
+                            name="contactPhone"
+                            [(ngModel)]="patientPayload.patientContactDetail.phoneNumber"
+                            autocomplete="disabled"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Email  -->
+        <div class="row form-group">
+            <div class="col-12">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Email:</label>
+                    <div class="col-10">
+                        <input
+                            class="form-control form-control-sm"
+                            type="email"
+                            placeholder="Enter Email"
+                            [(ngModel)]="patientPayload.patientContactDetail.email"
+                            name="contactEmail"
+                            autocomplete="disabled"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Resident Address  -->
+        <div class="row form-group">
+            <div class="col-12">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Residential Address:</label>
+                    <div class="col-10">
+                        <textarea
+                            name="residentialAddress"
+                            class="form-control form-control-sm"
+                            cols="10"
+                            rows="3"
+                            [(ngModel)]="patientPayload.patientContactDetail.residentialAddress"
+                            autocomplete="disabled"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Nationality & State of Origin-->
+        <div class="row form-group">
+            <!-- Nationality -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Nationality : </label>
+                    <div class="col-sm-8">
+                        <ng-select #nationalityDropDown
+                            placeholder="Select Nationality.."
+                            (change)="onSelectParent($event)"
+                            name="nationalityId" [(ngModel)]="defaultSelected.id"
+                        >
+                            <ng-option *ngFor="let data of parents" [value]="data.id">{{
+                                data.name
+                            }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+            <!-- State of Origin -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">State Of Origin:</label>
+                    <div class="col-sm-8">
+                        <ng-select
+                                #stateOfOriginDropDownComponent
+                            [(ngModel)]="patientPayload.patientContactDetail.nationalityId"
+                            placeholder="Select.."
+                            name="stateOfOrigin"
+                        >
+                            <ng-option *ngFor="let data of children" [value]="data.id">{{
+                                data.name
+                            }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>

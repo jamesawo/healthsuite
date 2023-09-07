@@ -1,0 +1,95 @@
+<div class="content-wrapper">
+    <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="row mg-t-0">
+            <div class="col-md-6 form-group">
+                <label class="">Issuing Outlet:</label>
+                <div class="">
+                    <app-pharmacy-location-search
+                        #locationSearchComponent
+                        (selected)="onIssueOutletSelect($event)"
+                    ></app-pharmacy-location-search>
+                </div>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label class="">Receiving Outlet:</label>
+                <div class="">
+                    <input
+                        type="text"
+                        [value]="currentLocationName"
+                        class="form-control bg-white"
+                        readonly
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="row mg-t-0">
+            <div class="row col-12 mg-l-5">
+                <label class="w-15 align-self-center mg-t-20">Search Drug / Item:</label>
+                <div class="w-75 mg-l-10">
+                    <app-drug-search
+                        #drugSearchComponent
+                        [props]="{
+                            searchTerm: drugSearchTerm,
+                            showLabel: false,
+                            loadAvaStock: true,
+                            loadIssOutletStockCount: true,
+                            issuingOutletId: issueOutlet,
+                            showIssOutletStockCount: true
+                        }"
+                        (selected)="onSelectDrug($event)"
+                    ></app-drug-search>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            <input type="checkbox" />
+                        </th>
+                        <th class="text-center">Drug Item</th>
+                        <th class="pointer text-center">Formulation</th>
+                        <th class="pointer text-center">Qty</th>
+                        <th class="text-center">Unit of Issue</th>
+                        <th class="text-center">Issuer Bal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of payload.requisitionItems">
+                        <td class="text-center"><input type="checkbox" /></td>
+                        <td class="text-center">{{ data.drugRegister.description }}</td>
+                        <td class="text-center">{{ data.drugRegister.formulation.name }}</td>
+                        <td class="text-center">
+                            <input
+                                type="number"
+                                class="wd-75"
+                                (keyup)="onQtyChange($event, data)"
+                                (change)="onQtyChange($event, data)"
+                                (keypress)="numberMatch($event)"
+                                [(ngModel)]="data.requestingQuantity"
+                                min="0"
+                            />
+                        </td>
+                        <td class="text-center">{{ data.drugRegister.unitOfIssue }}</td>
+                        <td class="text-center">{{ data.drugRegister.issuingOutletBal }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+        <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+            <button class="btn btn-danger mg-l-5" (click)="onReset()">Reset Form</button>
+        </div>
+    </div>
+</div>

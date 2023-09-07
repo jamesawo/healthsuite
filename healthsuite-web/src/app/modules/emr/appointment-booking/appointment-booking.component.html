@@ -1,0 +1,161 @@
+<div class="az-content-label mg-b-5">Book Patient Appointment</div>
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-10-f">
+        <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="create">
+                        <input
+                            id="create"
+                            name="scheme"
+                            type="radio"
+                            checked
+                            [value]="newAppointment"
+                            (change)="onAppointmentTypeChange(newAppointment)"
+                        />
+                        <span>New Appointment</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="edit">
+                        <input
+                            name="scheme"
+                            id="edit"
+                            type="radio"
+                            [value]="editAppointment"
+                            (change)="onAppointmentTypeChange(editAppointment)"
+                        />
+                        <span>Edit Appointment</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mg-t-20">
+            <app-patient-search
+                    #patientSearchComponent
+                [props]="{
+                    showLabel: false,
+                    checkAdmission: false,
+                    loadAdmission: false,
+                    loadRevisit: false
+                }"
+                (selected)="onPatientSelect($event)"
+            ></app-patient-search>
+        </div>
+
+        <app-patient-bio-card [selectedPatient]="patientPayload"></app-patient-bio-card>
+        <div class="mg-t-15 pd-10 pd-sm-15 wd-xl-100p bg-gray-200">
+            <ng-container *ngIf="isFetchingAppointments == true; else tableRef">
+                <div class="text-center table-responsive">
+                    <span>
+                        Loading Patient Appointments . . . <i class="fa fa-spinner fa-spin"></i>
+                    </span>
+                </div>
+            </ng-container>
+            <ng-template #tableRef>
+                <div class="table-responsive" *ngIf="patientAppointments">
+                    <table class="table table-bordered table-light">
+                        <thead>
+                            <tr>
+                                <th scope="col">Clinic</th>
+                                <th scope="col">Doctor</th>
+                                <th scope="col">Speciality</th>
+                                <th scope="col">Date</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of patientAppointments">
+                                <td>{{ data.clinic.name }}</td>
+                                <td>
+                                    {{ data.consultant.lastName }}
+                                    {{ data.consultant.firstName }}
+                                    <br />
+                                    <small>{{ data.consultant.email }}</small>
+                                </td>
+                                <td>{{ data.specialityUnit.name }}</td>
+                                <td>
+                                    {{ onTransformDate(data.dateTime) | date }} <br />
+                                    <small>({{ data.dateTime | momentDate }})</small>
+                                </td>
+                                <td>
+                                    <button
+                                        class="btn btn-sm btn-danger"
+                                        [ngbPopover]="'Click to Cancel'"
+                                        placement="top"
+                                        triggers="mouseenter:mouseleave"
+                                        container="body"
+                                        aria-hidden="true"
+                                        (click)="onCancelAppointment(data.id)"
+                                    >
+                                        <i class="fa fa-times-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </ng-template>
+
+            <ng-template #isNotData>
+                <div class="text-center" *ngIf="patientAppointments.length < 0">
+                    <span>
+                        No Open Patient Appointments Found.
+                    </span>
+                </div>
+            </ng-template>
+        </div>
+
+        <ng-container *ngIf="selectedType == newAppointment">
+            <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                <legend class="w-auto tx-16 tx-bold">
+                    Appointment Details
+                </legend>
+                <form
+                    #appointmentForm="ngForm"
+                    autocomplete="off"
+                    class="form-padding"
+                    (ngSubmit)="onCreateAppointment()"
+                    novalidate
+                >
+                    <div class="form-group">
+                        <label>Select Doctor</label>
+                        <app-user-search #userSearchComponent
+                            [props]="{ showLabel: false, isConsultant: true }"
+                            (selected)="onConsultantSelected($event)"
+                        ></app-user-search>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Speciality</label>
+                        <app-speciality-search #specialitySearchComponent
+                            (selected)="onSpecialitySelect($event)"
+                        ></app-speciality-search>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Clinic</label>
+                        <app-clinic-dropdown #clinicDropdownComponent
+                            (selected)="onClinicSelect($event)"
+                        ></app-clinic-dropdown>
+                    </div>
+
+                    <div class="form-group mg-t-20">
+                        <label>Select Date</label>
+                        <app-shared-date #dateComponent
+                            [props]="{ showTime: true }"
+                            (selected)="onDateTimeSelected($event)"
+                        ></app-shared-date>
+
+                    </div>
+
+                    <div class="form-group mg-t-20">
+                        <button class="btn btn-primary btn-md">Submit</button>
+                    </div>
+                </form>
+            </fieldset>
+        </ng-container>
+    </div>
+</div>

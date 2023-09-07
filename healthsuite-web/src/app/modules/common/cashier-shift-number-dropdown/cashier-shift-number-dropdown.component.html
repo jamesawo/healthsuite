@@ -1,0 +1,22 @@
+<ng-select #selectComponent
+           [items]="collection"
+           bindLabel="shiftNumber"
+           (change)="onSelect($event)"
+           [clearable]="true"
+           placeholder="Select Shift Number">
+    <ng-template ng-option-tmp let-item="item">
+        <strong> {{ item.shiftNumber }} -
+            <i class="text-{{item.isActive === true?'success':'danger'}}">
+                {{item.isActive === true ? 'OPEN' : 'CLOSED'}}
+            </i>
+        </strong>
+        <br/>
+        <small>
+            <i>Full Name: {{ item.cashier.label }}</i> <br>
+            <i>Username: {{ item.cashier.userName }}</i> <br>
+            <i>Open Date: {{ item.openDate }} |
+                <span *ngIf="item.closeDate">Closed Date: {{item.closeDate}}</span>
+            </i>
+        </small>
+    </ng-template>
+</ng-select>

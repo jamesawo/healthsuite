@@ -1,0 +1,386 @@
+<div class="content-wrapper">
+    <div class="service-search-wrapper">
+        <div class="input-wrapper row">
+            <div class="col-2">
+                <label>Search By </label>
+                <ng-select
+                    (change)="onFilterChange($event)"
+                    [markFirst]="true"
+                    [closeOnSelect]="true"
+                    [clearable]="false"
+                    [searchable]="false"
+                    [(ngModel)]="filterDefaultSelected"
+                    name="filter"
+                    [title]="filterTitle"
+                >
+                    <ng-option [value]="filter" *ngFor="let filter of filters">{{
+                        filter.name
+                    }}</ng-option>
+                </ng-select>
+            </div>
+            <div class="col-7">
+                <app-revenue-department-search
+                    (selected)="onValueSelected($event)"
+                    *ngIf="filterDefaultSelected.value == 'REVENUE_DEPARTMENT'"
+                ></app-revenue-department-search>
+
+                <app-service-department-search
+                    (selected)="onValueSelected($event)"
+                    *ngIf="filterDefaultSelected.value == 'SERVICE_DEPARTMENT'"
+                ></app-service-department-search>
+
+                <app-service-name-search
+                    (selected)="onValueSelected($event)"
+                    *ngIf="filterDefaultSelected.value == 'SERVICE_NAME'"
+                ></app-service-name-search>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-secondary btn-sm" (click)="onSearchProductService()">
+                    Search
+                </button>
+                <button class="btn btn-primary btn-sm mg-l-2" (click)="onChangeView()">
+                    Create
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngIf="props.activeView == 'search'; else createView">
+        <div class="services-table-wrapper">
+            <div class="table-responsive mg-t-20">
+                <table class="table table-bordered table-striped mg-b-0">
+                    <thead>
+                        <tr>
+                            <th class="wd-3">
+                                <label>
+                                    <input type="checkbox" />
+                                </label>
+                            </th>
+                            <th>Service Name</th>
+                            <th>Service Department</th>
+                            <th>Revenue Department</th>
+                            <th>General Price</th>
+                            <th>NHIS Price</th>
+                            <th>Cost Price</th>
+                            <th>Unit Price</th>
+                            <th>Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="
+                                let item of collection | paginate: { itemsPerPage: 10, currentPage: p }
+                            "
+                        >
+                            <td>
+                                <label>
+                                    <input type="checkbox" />
+                                </label>
+                            </td>
+                            <td>
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id && editing?.column == serviceName;
+                                        else serviceNameText
+                                    "
+                                >
+                                    <app-input-field
+                                        (changed)="onColumnChanged($event)"
+                                        [props]="{
+                                            columnType: serviceType,
+                                            inputType: 'text',
+                                            columnName: serviceName,
+                                            value: item.name,
+                                            id: item.id
+                                        }"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #serviceNameText>
+                                    <span (click)="onColumnClicked(item.id, serviceName)">{{
+                                        item.name
+                                    }}</span>
+                                    <br />
+                                    <small
+                                        ><i>{{ item.code }}</i></small
+                                    >
+                                </ng-template>
+                            </td>
+                            <td>
+                                <app-service-department-dropdown
+                                    [selected]="{
+                                        inputType: '',
+                                        columnName: serviceDepartment,
+                                        value: item.departmentId,
+                                        id: item.id,
+                                        columnType: serviceType
+                                    }"
+                                    (changed)="onColumnChanged($event)"
+                                ></app-service-department-dropdown>
+                            </td>
+                            <td>
+                                <div class="revenue-department used-for">
+                                    <app-revenue-department-dropdown
+                                        [selected]="{
+                                            inputType: '',
+                                            columnName: revenueDepartment,
+                                            value: item.revenueDepartmentId,
+                                            id: item.id,
+                                            columnType: serviceType
+                                        }"
+                                        (changed)="onColumnChanged($event)"
+                                    ></app-revenue-department-dropdown>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id && editing?.column == generalPrice;
+                                        else regularSellingPriceText
+                                    "
+                                >
+                                    <app-input-field
+                                        [props]="{
+                                            columnType: serviceType,
+                                            inputType: 'number',
+                                            columnName: generalPrice,
+                                            value: item.regularSellingPrice,
+                                            id: item.id
+                                        }"
+                                        (changed)="onColumnChanged($event)"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #regularSellingPriceText>
+                                    <span (click)="onColumnClicked(item.id, generalPrice)">
+                                        {{ item.regularSellingPrice | currency: ' ' }}</span
+                                    >
+                                </ng-template>
+                            </td>
+                            <td class="text-center">
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id && editing?.column == nhisPrice;
+                                        else nhisSellingPriceText
+                                    "
+                                >
+                                    <app-input-field
+                                        [props]="{
+                                            columnType: serviceType,
+                                            inputType: 'number',
+                                            columnName: nhisPrice,
+                                            value: item.nhisSellingPrice,
+                                            id: item.id
+                                        }"
+                                        (changed)="onColumnChanged($event)"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #nhisSellingPriceText>
+                                    <span (click)="onColumnClicked(item.id, nhisPrice)">
+                                        {{ item.nhisSellingPrice | currency: ' ' }}
+                                    </span>
+                                </ng-template>
+                            </td>
+                            <td class="text-center">
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id && editing?.column == costPrice;
+                                        else costPriceText
+                                    "
+                                >
+                                    <app-input-field
+                                        [props]="{
+                                            columnType: serviceType,
+                                            inputType: 'number',
+                                            columnName: costPrice,
+                                            value: item.costPrice,
+                                            id: item.id
+                                        }"
+                                        (changed)="onColumnChanged($event)"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #costPriceText>
+                                    <span (click)="onColumnClicked(item.id, costPrice)">
+                                        {{ item.costPrice | currency: ' ' }}
+                                    </span>
+                                </ng-template>
+                            </td>
+                            <td class="text-center">
+                                <ng-container
+                                    *ngIf="
+                                        editing?.id == item.id && editing?.column == unitPrice;
+                                        else unitCostText
+                                    "
+                                >
+                                    <app-input-field
+                                        [props]="{
+                                            columnType: serviceType,
+                                            inputType: 'number',
+                                            columnName: unitPrice,
+                                            value: item.unitCost,
+                                            id: item.id
+                                        }"
+                                        (changed)="onColumnChanged($event)"
+                                    ></app-input-field>
+                                </ng-container>
+                                <ng-template #unitCostText>
+                                    <span (click)="onColumnClicked(item.id, unitPrice)">
+                                        {{ item.unitCost | currency: ' ' }}
+                                    </span>
+                                </ng-template>
+                            </td>
+                            <td>
+                                <div class="used-for">
+                                    <app-service-usage-dropdown
+                                        [selected]="{
+                                            inputType: '',
+                                            columnName: usage,
+                                            value: item.usedFor,
+                                            id: item.id,
+                                            columnType: serviceType
+                                        }"
+                                        (changed)="onColumnChanged($event)"
+                                    >
+                                    </app-service-usage-dropdown>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation" class="mg-t-15" *ngIf="collection?.length">
+                    <ul class="pagination justify-content-end">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-template #createView>
+        <div class="create-service-wrapper az-content-body mt-10">
+            <div class="card">
+                <span class="align-self-end pd-5 pointer" (click)="onSearchProductService()">
+                    <i class="fa fa-window-close"></i>
+                    close
+                </span>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group text-left">
+                                <label>Revenue Department</label>
+                                <app-revenue-department-dropdown #revenueDepartmentDropdownComponent
+                                    (changed)="onDropdownSelected($event.value, revenueDepartment)"
+                                ></app-revenue-department-dropdown>
+                            </div>
+                            <div class="form-group">
+                                <label>Service Title</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="title"
+                                    [(ngModel)]="payload.name"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group text-left">
+                                <label>Service Department</label>
+                                <app-service-department-dropdown #serviceDepartmentDropdownComponent
+                                    (changed)="onDropdownSelected($event.value, serviceDepartment)"
+                                ></app-service-department-dropdown>
+                            </div>
+                            <div class="form-group">
+                                <label>Cost Price</label>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    name="costPrice"
+                                    [(ngModel)]="payload.costPrice"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 form-group">
+                            <label>Unit Cost Price</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="unitPrice"
+                                [(ngModel)]="payload.unitCost"
+                            />
+                        </div>
+
+                        <div class="col-4 form-group">
+                            <label>Regular Selling Price</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="regularSellingPrice"
+                                [(ngModel)]="payload.regularSellingPrice"
+                            />
+                        </div>
+
+                        <div class="col-4 form-group">
+                            <label>NHIS Selling Price</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="nhisSellingPrice"
+                                [(ngModel)]="payload.nhisSellingPrice"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4 form-group">
+                            <label>Discount (%) </label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="discount"
+                                [(ngModel)]="payload.discount"
+                            />
+                        </div>
+
+                        <div class="col-4 form-group">
+                            <label>Usage ? </label>
+                            <app-service-usage-dropdown #serviceUsageDropDownComponent
+                                (changed)="onDropdownSelected($event.value, usage)"
+                            ></app-service-usage-dropdown>
+                        </div>
+
+                        <div class="col-4 form-inline d-none">
+                            <label (click)="onApplyDiscount($event)">
+                                <input disabled
+                                    type="checkbox"
+                                    class="form-check"
+                                    name="applyDiscount"
+                                    [(ngModel)]="payload.applyDiscount"
+                                />
+                                &nbsp; Apply Discount ?
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="btn btn-md btn-az-primary" (click)="onCreateService()">
+                                <span>Add Single Service</span>
+                            </button>
+                        </div>
+                        <div class="col-6 text-right">
+                            <button
+                                class="mg-l-4 btn btn-md btn-az-primary"
+                                (click)="onDownloadTemplate()"
+                            >
+                                Download Template
+                            </button>
+                            <button (click)="openModal()" class="mg-l-4 btn btn-md btn-az-primary">
+                                Upload In Batch
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,158 @@
+<fieldset>
+    <legend>Abdomen</legend>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Moves With Respiration: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.movesWithRespiration">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="yes">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Visible Peripheral Vein <small>(caput medusae)</small>: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..."
+                               [(ngModel)]="props.data.visiblePeripheralVein">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="yes">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Scarification Marks: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.scarificationMarks">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="yes">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Palpation <small>(Liver Enlargement)</small> : </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..."
+                               [(ngModel)]="props.data.palpationLiverEnlargement">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="yes">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Palpation <small>(Spleen Enlargement)</small>: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..."
+                               [(ngModel)]="props.data.palpationSpleenEnlargement">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="yes">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Ascitis: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.ascitis">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="yes">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Distended: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.distended">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="yes">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Shape: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.shape">
+                        <ng-option value="Full"> Full</ng-option>
+                        <ng-option value="Scaphoid">Scaphoid</ng-option>
+                        <ng-option value="Distended">Distended</ng-option>
+                        <ng-option value="Flat">Flat</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Hanial Orifices Intact: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.hanialOrificesIntact">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="yes">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Palpation <small>(Kidney Enlargement)</small>: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..."
+                               [(ngModel)]="props.data.palpationKidneyEnlargement">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="yes">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Palpation <small>(Other Masses)</small>: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.palpationOtherMasses">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="yes">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Ascultations <small>(Bruits)</small>: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.ascultations">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="yes">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

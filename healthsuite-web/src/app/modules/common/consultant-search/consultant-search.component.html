@@ -1,0 +1,15 @@
+<div class="input-wrapper">
+    <label *ngIf="props?.showLabel">Type Name</label>
+    <ng-select
+        [items]="collection"
+        bindLabel="label"
+        [trackByFn]="trackByFn"
+        [minTermLength]="minLengthTerm"
+        typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+        (change)="onSelect($event)"
+        [clearable]="true"
+        [searchFn]="customSearchFn"
+        placeholder="Start typing.."
+    >
+    </ng-select>
+</div>

@@ -1,0 +1,67 @@
+<fieldset class="border p-2 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+        Seed Surgery
+        <i
+            class="fa fa-info-circle fa-sm tx-12"
+            [ngbPopover]="
+                'To seed new surgery data, enter the surgery name and provide the code then click on `Save Button`.'
+            "
+            placement="right"
+            triggers="mouseenter:mouseleave"
+            container="body"
+            aria-hidden="true"
+        ></i>
+    </legend>
+    <div class="form-group">
+        <form [formGroup]="surgeryForm" (ngSubmit)="createSurgery()">
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Surgery Name"
+                        [formControlName]="'name'"
+                        [ngClass]="{ 'is-invalid': isSubmitted && form.name.errors }"
+                    />
+                </div>
+                <div class="col-md-6">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Code"
+                        [formControlName]="'code'"
+                        [ngClass]="{ 'is-invalid': isSubmitted && form.code.errors }"
+                    />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+
+        <div class="table-responsive mg-t-20">
+            <table class="table table-bordered mg-b-0">
+                <thead>
+                    <tr>
+                        <th class="wd-3">
+                            <label>
+                                <input type="checkbox" />
+                            </label>
+                        </th>
+                        <th>Name</th>
+                        <th>Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let surgery of surgeryList">
+                        <th scope="row">
+                            <label>
+                                <input type="checkbox" />
+                            </label>
+                        </th>
+                        <td>{{ surgery.name }}</td>
+                        <td>{{ surgery.code }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</fieldset>

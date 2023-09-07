@@ -1,0 +1,9 @@
+<ng-select #ngSelectComponent
+    (change)="onSelectDrugClassification($event)"
+    [(ngModel)]="defaultSelected"
+    [placeholder]="'Choose Classification'"
+>
+    <ng-option [value]="classification" *ngFor="let classification of drugClassifications">{{
+        classification.name
+    }}</ng-option>
+</ng-select>

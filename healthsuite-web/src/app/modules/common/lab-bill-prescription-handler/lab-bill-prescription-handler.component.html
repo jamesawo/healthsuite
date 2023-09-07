@@ -1,0 +1,54 @@
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+        Doctor's Prescription Handler
+    </legend>
+    <form autocomplete="off" class="form-padding" novalidate>
+        <div class="row mg-l-10">
+            <div class="col-md-4">
+                <div class="form-group w-100">
+                    <label>Start Date</label>
+                    <app-shared-date (selected)="onDateSelected($event, 'start')"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group w-100">
+                    <label>End Date</label>
+                    <app-shared-date (selected)="onDateSelected($event, 'end')" [props]=""></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group w-100">
+                    <button class="btn btn-primary btn-sm mg-t-30" (click)="onSearchByDateRange()"
+                            title="Search By Date Range">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="table table-responsive mg-t-10">
+        <table class="table table-sm table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th class=" text-center">Request Date</th>
+                <th class=" text-center">Request Physician</th>
+                <th class=" text-center">Prescription Count</th>
+                <th class=" text-center">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of props.labRequestList; let i = index">
+                <td class=" text-center"> {{item.date | date }} </td>
+                <td class=" text-center"> {{ item.physician.firstName }} {{item.physician.lastName}} @ {{item.physician.userName}} </td>
+                <td class="w-10 text-center"> {{ item.labItems.length }} </td>
+                <td class=" text-center">
+                    <button class="btn btn-sm btn-primary btn-buy" title="View Prescription" (click)="onViewSelectedItem(item, i)">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>

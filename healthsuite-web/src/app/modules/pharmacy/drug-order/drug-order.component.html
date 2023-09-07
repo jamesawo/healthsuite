@@ -1,0 +1,189 @@
+<div class="content-wrapper">
+    <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="row">
+            <div class="col-auto">
+                <label class="rdiobox">
+                    <input
+                        name="orderView"
+                        type="radio"
+                        [checked]="viewType == 'new'"
+                        (change)="onViewTypeChange('new')"
+                    />
+                    <span>New Order</span>
+                </label>
+            </div>
+
+            <div class="col-auto mg-t-20 mg-lg-t-0">
+                <label class="rdiobox">
+                    <input
+                        name="orderView"
+                        [checked]="viewType == 'edit'"
+                        type="radio"
+                        (change)="onViewTypeChange('edit')"
+                    />
+                    <span>Edit Order</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="viewType == 'edit'">
+        <div class="pd-5 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row mg-t-10">
+                <div class="row col-12 mg-l-5">
+                    <label class="w-15 align-self-center mg-t-10">Search Drug Order :</label>
+                    <div class="w-75 mg-l-10">
+                        <app-drug-order-search
+                            (selected)="onSelectDrugOrder($event)"
+                        ></app-drug-order-search>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <div class="pd-5 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="row mg-t-10">
+            <div class="row col-12 mg-l-5">
+                <label class="w-15 align-self-center mg-t-10">Search Product/Drug :</label>
+                <div class="w-75 mg-l-10">
+                    <app-drug-search
+                        #drugSearchComponent
+                        (selected)="onDrugSelected($event)"
+                        [props]="{
+                            searchTerm: drugSearchTerm,
+                            showLabel: false
+                        }"
+                    ></app-drug-search>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="form-check form-check-inline">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    [checked]="isAllCheckBoxChecked()"
+                                    (change)="checkAllCheckBox($event)"
+                                />
+                                <label class="form-check-label">
+                                    <i
+                                        (click)="onRemoveAllCheckedItems()"
+                                        class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                    ></i>
+                                </label>
+                            </div>
+                        </th>
+                        <th class="text-center">Brand Name</th>
+                        <th class="text-center">Generic Name</th>
+                        <th class="text-center">Strength</th>
+                        <th class="text-center">Formulation</th>
+                        <th class="text-center">Unit of Issue</th>
+                        <th class="text-center">Qty</th>
+                        <th class="text-center">Rate</th>
+                        <th class="text-center">Total Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of payload?.drugOrderItems">
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    [(ngModel)]="item.checked"
+                                />
+                                <label class="form-check-label">
+                                    <i
+                                        (click)="onRemoveItem(item)"
+                                        class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                    ></i>
+                                </label>
+                            </div>
+                        </td>
+                        <td class="text-center">{{ item.drugRegister.brandName }}</td>
+                        <td class="text-center">{{ item.drugRegister.genericName }}</td>
+                        <td class="text-center">{{ item.drugRegister.strength }}</td>
+                        <td class="text-center">{{ item.drugRegister.formulation.name }}</td>
+                        <td class="text-center">{{ item.drugRegister.unitOfIssue }}</td>
+                        <td class="text-center">
+                            <input
+                                type="number"
+                                class="wd-50"
+                                [value]="item.quantity"
+                                (keyup)="onItemQtyChange($event, item, 'qty')"
+                                (change)="onItemQtyChange($event, item, 'qty')"
+                                (keypress)="numberMatch($event)"
+                                min="0"
+                            />
+                        </td>
+                        <td class="text-center">
+                            <input
+                                type="number"
+                                class="wd-50"
+                                [value]="item.rate"
+                                (keyup)="onItemQtyChange($event, item, 'rate')"
+                                (change)="onItemQtyChange($event, item, 'rate')"
+                                (keypress)="numberMatch($event)"
+                                min="0"
+                            />
+                        </td>
+                        <td class="text-center">{{ item.totalAmount | currency: ' ' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <fieldset>
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-md-4">
+                    Order Total:
+                    <input
+                        type="text"
+                        [value]="payload?.sumTotalAmount | currency: currencySign"
+                        readonly
+                        class="form-control bg-white"
+                    />
+                </div>
+                <div class="col-md-4">
+                    Choose Supplier:
+                    <app-supplier-search
+                        [props]="{ showLabel: false, defaultSelected: orderVendor }"
+                        (selected)="onVendorSelected($event)"
+                    ></app-supplier-search>
+                </div>
+                <div class="col-md-4">
+                    Supplier Category:
+                    <ng-select
+                        (change)="onSupplyCategorySelected($event)"
+                        placeholder="Choose Supplier Category"
+                        [(ngModel)]="payload.supplyCategory"
+                    >
+                        <ng-option [value]="cat.value" *ngFor="let cat of supplierCategories">{{
+                            cat.name
+                        }}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+        <div class="form-group text-center">
+            <ng-container *ngIf="viewType == 'new'; else updateButtonRef">
+                <button class="btn btn-primary" (click)="onSubmitOrder()">SUBMIT</button>
+            </ng-container>
+            <ng-template #updateButtonRef>
+                <button class="btn btn-primary" (click)="onUpdateDrugOrder()">UPDATE</button>
+            </ng-template>
+            <button class="btn btn-danger mg-l-10" (click)="onResetForm()">RESET</button>
+        </div>
+    </div>
+</div>

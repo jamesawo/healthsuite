@@ -1,0 +1,95 @@
+<div class="main-wrapper az-content-body">
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-14 tx-bold"></legend>
+
+        <div class="flex-column">
+            <div class="row align-items-center mg-b-20 mg-t-5">
+                <div class="row col-12 mg-l-5">
+                    <label class="w-15 align-self-center">Lab Test:</label>
+                    <div class="wd-90p mg-l-10">
+                        <app-service-name-search #serviceNameSearchComponent
+                                                 [props]="{showLabel: false, viewType: viewType}"
+                                                 (selected)="onLabTestSelected($event)"
+                        ></app-service-name-search>
+                    </div>
+                </div>
+
+                <div class="row col-6 mg-l-5 mg-t-20">
+                    <label class="w-15 align-self-center">Specimen:</label>
+                    <div class="w-75 mg-l-10">
+                        <app-specimen-search-dropdown [default]="payload.specimen" (selected)="onSpecimenSelected($event)"></app-specimen-search-dropdown>
+                    </div>
+                </div>
+
+                <div class="row col-6 mg-l-5 mg-t-20">
+                    <label class="w-15 align-self-center">Specimen Colour:</label>
+                    <div class="w-75 mg-l-10">
+                        <app-specimen-color-dropdown [default]="payload.specimenColor" (selected)="onLabSpecimenColorSelected($event)"></app-specimen-color-dropdown>
+                    </div>
+                </div>
+
+                <div class="row col-4 mg-l-0 mg-t-20">
+                    <label class=" mg-l-10">
+                        Requires Pathologist?:
+                        &nbsp;
+                        <input type="checkbox" class="collection-status-checkbox" [(ngModel)]="payload.isRequirePathologist">
+                    </label>
+                </div>
+
+                <!-- Chemical  -->
+                <ng-container *ngIf="labView === chemical">
+                    <div class="row col-4 mg-l-5 mg-t-20">
+                        <label class="mg-l-15">
+                            Is Special Test?:
+                            &nbsp;
+                            <input type="checkbox" class="collection-status-checkbox" [(ngModel)]="payload.isSpecialTest">
+                        </label>
+                    </div>
+
+                    <div class="row col-4 mg-l-5 mg-t-20">
+                        <label class="mg-l-15">
+                            Is Immuno Test?:
+                            &nbsp;
+                            <input type="checkbox" class="collection-status-checkbox" [(ngModel)]="payload.isImmunoTest">
+                        </label>
+                    </div>
+                </ng-container>
+
+                <!-- Anatomical  -->
+                <ng-container *ngIf="labView === anatomical">
+                    <div class="row col-4 mg-l-5 mg-t-20">
+                        <label class="mg-l-15">
+                            Is Histopathology SFA Test?:
+                            &nbsp;
+                            <input type="checkbox" class="collection-status-checkbox" [(ngModel)]="payload.isHistopathologySFA">
+                        </label>
+                    </div>
+                </ng-container>
+
+                <!-- haematology  -->
+                <ng-container *ngIf="labView === haematology">
+                    <div class="row col-4 mg-l-5 mg-t-20">
+                        <label class="mg-l-15">
+                            Is Bone Marrow Test?:
+                            &nbsp;
+                            <input type="checkbox" class="collection-status-checkbox" [(ngModel)]="payload.isBoneMarrowTest">
+                        </label>
+                    </div>
+                </ng-container>
+
+                <!-- microbiology  -->
+                <ng-container *ngIf="labView === microbiology">
+                    <div class="row col-4 mg-l-5 mg-t-20">
+                        <label class="mg-l-15">
+                            Is Parasitology Test?:
+                            &nbsp;
+                            <input type="checkbox" class="collection-status-checkbox" [(ngModel)]="payload.isParasitologTest">
+                        </label>
+
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+    </fieldset>
+</div>

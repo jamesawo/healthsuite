@@ -1,0 +1,28 @@
+<div class="input-wrapper">
+    <label *ngIf="props?.showLabel">Type Ward Name</label>
+    <ng-select
+            #ngSelectComponent
+        [items]="responsePayload | async"
+        bindLabel="title"
+        [trackByFn]="trackByFn"
+        [minTermLength]="minLengthTerm"
+        [loading]="isLoading"
+        typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+        [typeahead]="searchInput$"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="selectedPayload"
+        (change)="onSelect($event)"
+        [clearable]="true"
+        placeholder="Enter ward name or code"
+    >
+        <ng-template ng-option-tmp let-item="item">
+            <strong>
+                {{ item.title }}
+            </strong>
+            <br />
+            <small>
+                <i>Code: {{ item.code }}</i>
+            </small>
+        </ng-template>
+    </ng-select>
+</div>

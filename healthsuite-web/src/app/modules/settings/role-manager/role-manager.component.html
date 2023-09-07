@@ -1,0 +1,80 @@
+<div class="mg-b-20">
+<!--    <h3 class="az-content-title tx-18 mg-b-5 mg-b-lg-8">Role Manager</h3>-->
+    <hr />
+    <fieldset class="border p-2 rounded bg-gray-100 mg-t-10">
+        <legend class="w-auto tx-16 tx-bold">
+            System Role
+            <ng-template #statusTemplate>
+                To <code>add modules </code> to a role, follow the below steps;<br />
+                1. Select the role <br />
+                2. Select the modules or permissions to allocate <br />
+                3. Verify the modules selected <br />
+                4. Click on Update button.<br />
+                <small>
+                    <code>For Technical Support, Contact A System Administrator</code>
+                </small>
+            </ng-template>
+            <i
+                class="fa fa-info-circle fa-sm tx-12"
+                [ngbPopover]="statusTemplate"
+                placement="right"
+                triggers="mouseenter:mouseleave"
+                container="body"
+                aria-hidden="true"
+            ></i>
+        </legend>
+        <div class="row form-group">
+            <div class="col-md-4">
+                <ng-multiselect-dropdown
+                    class=""
+                    [placeholder]="'Search Role..'"
+                    [settings]="dropDownSettings"
+                    [data]="roles"
+                    (onSelect)="onSelectRole($event)"
+                    (onDeSelect)="onDeSelectRole()"
+                    name="role"
+                    [(ngModel)]="role"
+                >
+                </ng-multiselect-dropdown>
+            </div>
+            <div class="col-md-6">
+                <ng-multiselect-dropdown
+                    [placeholder]="'Search Module..'"
+                    [settings]="dropDownSettings2"
+                    [data]="modules"
+                    name="permission"
+                    [(ngModel)]="permission"
+                >
+                </ng-multiselect-dropdown>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="table-responsive mg-t-20 table-wrap role-tbl" >
+        <table class="table table-bordered mg-b-0">
+            <thead>
+                <tr>
+                    <th class="wd-3">
+                        <input type="checkbox" />
+                    </th>
+                    <th>Selected Modules</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of permission">
+                    <th scope="row">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <td>{{ data.description }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group mg-t-10">
+        <button class="btn btn-primary" type="submit" (click)="onUpdateRole()">
+            Update Role
+        </button>
+    </div>
+</div>

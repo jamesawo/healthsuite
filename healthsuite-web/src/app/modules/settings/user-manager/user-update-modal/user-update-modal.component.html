@@ -1,0 +1,48 @@
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="row pd-l-10 pd-r-10">
+        <div class="col-md-12 row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">Last Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.user.otherNames">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">Other Names</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.user.lastName">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">Phone Number</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.user.phone">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">Account Expiry Date</label>
+                    <app-shared-date [defaultDate]="data.user.expiryDate" [props]="{hideCurrentDate: true}" (selected)="onDateSelected($event)"></app-shared-date>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">Department</label>
+                    <app-service-department-dropdown [defaultSelected]="data.user.department" [selected]="null" (valueSelected)="onDepartmentSelected($event)"></app-service-department-dropdown>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 text-center">
+            <button class="btn btn-sm btn-primary" (click)="onUpdateUserDetail()">UPDATE</button>
+            <button class="btn btn-sm btn-dark mg-l-5" (click)="onCloseModal()">CLOSE</button>
+        </div>
+
+    </div>
+</fieldset>

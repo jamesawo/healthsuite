@@ -1,0 +1,133 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-t-0">
+        <div class="row">
+            <div class="col-md-12 row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Bill Type: </label>
+                        <label class="form-control bg-gray-200">{{payload.billType?.toUpperCase()}}</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Payment Status: </label>
+                        <label class="form-control bg-gray-200">{{payload.paymentStatus?.toUpperCase()}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Specimen Collected </label>
+                        <label class="form-control bg-gray-200">{{payload.isSpecimenCollected===true?'YES':'NO'}}</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Specimen Collected By </label>
+                        <label class="form-control bg-gray-200">{{payload.specimenCollectedByUser?.toUpperCase()}}</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Date Collected </label>
+                        <label class="form-control bg-gray-200">{{payload.specimenCollectedDate | date }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Specimen Acknowledgement: </label>
+                        <label class="form-control bg-gray-200">{{payload.specimenAckStatus}}</label>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Specimen Acknowledgement By: </label>
+                        <label class="form-control bg-gray-200">{{payload.specimenAckByUser?.toUpperCase()}}</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Date Acknowledgement: </label>
+                        <label class="form-control bg-gray-200">{{payload.specimenAckDate | date}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Prepared By: </label>
+                        <label class="form-control bg-gray-200">{{payload.specimenPrepByUser?.toUpperCase()}}</label>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Date </label>
+                        <label class="form-control bg-gray-200">{{payload.specimenPrepDate | date}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Verified ?</label>
+                        <label class="form-control bg-gray-200">{{payload.isLabTestVerified===true?'YES': 'NO'}}</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Verified By </label>
+                        <label class="form-control bg-gray-200">{{payload.testVerifiedByUser?.toUpperCase()}}</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Date </label>
+                        <label class="form-control bg-gray-200">{{payload.testVerifiedDate | date}}</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Approved? </label>
+                        <label class="form-control bg-gray-200">{{payload.testVerifiedApproved }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Verified By Pathologist?</label>
+                        <label class="form-control bg-gray-200">{{payload.isPathologistVerified===true?'YES':'NO'}}</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Verified By </label>
+                        <label class="form-control bg-gray-200">{{payload.testVerifiedByPathologistUser?.toUpperCase()}}</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Date </label>
+                        <label class="form-control bg-gray-200">{{payload.testVerifiedByPathologistDate | date}}</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Approved? </label>
+                        <label class="form-control bg-gray-200">{{payload.testVerifiedByPathologistApproved}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

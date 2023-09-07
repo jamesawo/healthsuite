@@ -1,0 +1,27 @@
+<div class="main-wrapper az-content-body">
+    <fieldset class="border p-2 mg-t-0 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+
+        <div class="row col-12 mg-l-5">
+            <label class="w-15 align-self-center">Patient Search:</label>
+            <div class="w-75 mg-l-10">
+                <app-patient-search #patientSearchComponent (selected)="onPatientSelected($event)" [props]="{
+                        showLabel: false,
+                        checkAdmission: true,
+                        loadAdmission: false,
+                        loadDrugRequest: true}"
+                ></app-patient-search>
+            </div>
+        </div>
+        <div class="mg-t-10">
+            <app-patient-bio-card
+                    [selectedPatient]="payload.patient"
+            ></app-patient-bio-card>
+        </div>
+
+    </fieldset>
+
+   <app-shared-patient-drug-administration [items]="drugRequest" [payload]="payload"></app-shared-patient-drug-administration>
+
+</div>

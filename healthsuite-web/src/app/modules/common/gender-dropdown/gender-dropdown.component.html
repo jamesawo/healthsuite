@@ -1,0 +1,8 @@
+<ng-select #ngSelectComponent
+        (change)="onGenderSelected($event)"
+        placeholder="Select Gender.."
+>
+    <ng-option *ngFor="let data of genders" [value]="data">{{
+        data.name
+        }}</ng-option>
+</ng-select>

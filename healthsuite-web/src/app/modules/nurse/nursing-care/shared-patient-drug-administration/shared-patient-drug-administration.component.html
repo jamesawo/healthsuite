@@ -1,0 +1,49 @@
+<fieldset class="border p-2 mg-t-0 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="table table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th class="wd-5p text-left">S/N</th>
+                <th class="wd-30p text-left">DRUG NAME</th>
+                <th class="wd-5p text-center">QTY</th>
+                <th class="wd-5p text-center">UNIT</th>
+                <th class="wd-10p text-center">INSTRUCTION</th>
+                <th class="wd-5p text-center">TOTAL</th>
+                <th class="wd-10p text-center"> DATE</th>
+                <th class="wd-15p text-center"><!-- view history --></th>
+                <th class="wd-10p text-center"><!-- administer --></th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let item of drugRequest let i= index">
+                <tr *ngFor="let request of item.drugItems">
+                    <td>{{i + 1}}</td>
+                    <td>{{request.drugRegister.genericName}} {{request.drugRegister.brandName}}</td>
+                    <td>{{'-'}}</td>
+                    <td>{{'-'}}</td>
+                    <td>{{request.dosage}}  to be taken {{request.frequency}}
+                        for {{request.days}} {{request.days > 1 ? 'days' : 'day'}}</td>
+                    <td>{{'-'}}</td>
+                    <td>{{item.date | date}}</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-sm btn-primary">VIEW HISTORY</button>
+                    </td>
+                    <td class="text-center">
+                        <ng-container *ngIf="!request.isAdministered; else templateRef">
+                            <button type="button" class="btn btn-sm btn-primary" (click)="onAdministerDrug(request)">
+                                ADMINISTER
+                            </button>
+                        </ng-container>
+                        <ng-template #templateRef>
+                            <span class="btn btn-sm btn-danger">TAKEN</span>
+                        </ng-template>
+                    </td>
+                </tr>
+            </ng-container>
+            </tbody>
+        </table>
+
+    </div>
+</fieldset>

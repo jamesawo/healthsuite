@@ -1,0 +1,171 @@
+<div class="az-content-label mg-b-5">Vendor Management</div>
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-10-f">
+        <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="create">
+                        <input
+                            id="create"
+                            name="scheme"
+                            type="radio"
+                            checked
+                            [value]="registerNewVendor"
+                            (change)="onViewTypeChange(registerNewVendor)"
+                        />
+                        <span> New Vendor</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="edit">
+                        <input
+                            name="scheme"
+                            id="edit"
+                            type="radio"
+                            [value]="editVendor"
+                            (change)="onViewTypeChange(editVendor)"
+                        />
+                        <span>Edit Vendor</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-200 mg-t-20 mg-b-5 pd-20" *ngIf="payload?.viewType == editVendor">
+            <app-supplier-search
+                [props]="{ showLabel: true }"
+                (selected)="onSupplierChange($event)"
+            ></app-supplier-search>
+        </div>
+
+        <ng-container>
+            <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                <legend class="w-auto tx-16 tx-bold">
+                    Vendor Information
+                </legend>
+                <form autocomplete="off" class="form-padding">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Supplier Name</label>
+                                <input
+                                    autocomplete="disable"
+                                    type="text"
+                                    class="form-control"
+                                    name="supplierName"
+                                    [(ngModel)]="payload.supplierName"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input
+                                    autocomplete="disable"
+                                    type="text"
+                                    class="form-control"
+                                    name="supplierTelephone"
+                                    [(ngModel)]="payload.phoneNumber"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Office Address</label>
+                                <input
+                                    autocomplete="disable"
+                                    type="text"
+                                    class="form-control"
+                                    name="supplierOfficeAddress"
+                                    [(ngModel)]="payload.officeAddress"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Postal Address</label>
+                                <input
+                                    autocomplete="disable"
+                                    type="text"
+                                    class="form-control"
+                                    name="supplierPostalAddress"
+                                    [(ngModel)]="payload.postalAddress"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input
+                                    autocomplete="disable"
+                                    type="email"
+                                    class="form-control"
+                                    name="supplierEmailAddress"
+                                    [(ngModel)]="payload.emailAddress"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Website Url</label>
+                                <input
+                                    autocomplete="disable"
+                                    type="url"
+                                    class="form-control"
+                                    name="supplierWebsiteUrl"
+                                    [(ngModel)]="payload.websiteUrl"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Registration Number:</label>
+                                <input
+                                    autocomplete="disable"
+                                    type="text"
+                                    class="form-control"
+                                    name="supplierRegistrationNumber"
+                                    [(ngModel)]="payload.companyRegistration"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Fax Number</label>
+                                <input
+                                    autocomplete="disable"
+                                    type="text"
+                                    class="form-control"
+                                    name="faxNumber"
+                                    [(ngModel)]="payload.faxNumber"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        name="isPVendor"
+                                        [(ngModel)]="payload.isPharmacyVendor"
+                                    />
+                                    Is Pharmacy Vendor?</label
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <ng-container
+                        *ngIf="payload?.viewType == registerNewVendor; else editVendorButton"
+                    >
+                        <div class="form-group mg-t-20">
+                            <button class="btn btn-primary btn-md" (click)="onRegisterVendor()">
+                                Register
+                            </button>
+                        </div>
+                    </ng-container>
+                    <ng-template #editVendorButton>
+                        <div class="form-group mg-t-20">
+                            <button class="btn btn-primary btn-md" (click)="onEditVendor()">
+                                Edit Vendor
+                            </button>
+                        </div>
+                    </ng-template>
+                </form>
+            </fieldset>
+        </ng-container>
+    </div>
+</div>

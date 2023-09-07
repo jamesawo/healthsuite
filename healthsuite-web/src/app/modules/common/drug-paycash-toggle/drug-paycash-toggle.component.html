@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-auto">
+        <label class="rdiobox">
+            <input name="payCashToggle" type="radio" checked (change)="onValueChange(true)" />
+            <span>Pay Cash</span>
+        </label>
+    </div>
+    <div class="col-auto mg-t-20 mg-lg-t-0">
+        <label class="rdiobox">
+            <input name="payCashToggle" type="radio" (change)="onValueChange(false)" />
+            <span>Bill On Credit</span>
+        </label>
+    </div>
+</div>

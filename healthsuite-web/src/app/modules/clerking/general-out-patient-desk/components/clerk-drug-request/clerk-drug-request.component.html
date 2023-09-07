@@ -1,0 +1,135 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-t-0">
+        <div class="row">
+            <div class="col-md-12">
+                <label>
+                    <input type="checkbox" (change)="onToggleUseDepartmentFilter($event)"
+                           [checked]="payload.useDepartmentFilter"> User Department Filter?
+                </label>
+
+                <label class="mg-l-20" *ngIf="payload.useDepartmentFilter" [@fadeInOnEnter] [@fadeOutOnLeave]>
+                    <input type="checkbox" (change)="onToggleExcludeZeroItems($event)"
+                           [checked]="drugSearchProp.excludeZeroItems"> Exclude Zero Quantity?
+                </label>
+            </div>
+
+            <div class="col-md-12 row bg-gray-200 mg-l-0 pd-10 mg-b-20">
+                <div class="col-md-12 mg-b-10 mg-t-10 row">
+                    <div class="col-md-6" *ngIf="payload.useDepartmentFilter">
+                        <app-service-department-search (selected)="onDepartmentSelected($event)"
+                                                       [props]="departmentSearchProps"></app-service-department-search>
+                    </div>
+                    <ng-container *ngIf="!payload.useDepartmentFilter; else depFilterSearch">
+                        <div class="col-md-{{payload.useDepartmentFilter ? '6' : '12'}}">
+                            <app-drug-search #drugSearchComponent (selected)="onDrugSelected($event)"
+                                             [props]="drugSearchProp"></app-drug-search>
+                        </div>
+                    </ng-container>
+
+                    <ng-template #depFilterSearch>
+                        <div class="col-md-6">
+                            <app-drug-search-by-department #drugSearchByDepartmentComponent
+                                                           (selected)="onDrugSelected($event)"
+                                                           [props]="{ outletId: payload.outlet, excludeZeroQuantity: payload.excludeZeroQty}">
+                            </app-drug-search-by-department>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped w-100">
+                        <thead>
+                        <tr>
+                            <th class="wd-5p">
+                                <div class="form-check form-check-inline">
+                                    <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            [checked]="isAllCheckBoxChecked()"
+                                            (change)="checkAllCheckBox($event)"
+                                    />
+                                    <label class="form-check-label">
+                                        <i (click)="onRemoveAllCheckedBillItems()"
+                                           class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                        ></i>
+                                    </label>
+                                </div>
+                            </th>
+                            <th class="wd-30p">NAME</th>
+                            <th class="wd-5p text-center">PRICE</th>
+                            <th class="wd-15p text-center">DOSAGE</th>
+                            <th class="wd-15p text-center">FREQUENCY</th>
+                            <th class="wd-10p text-center">DAYS</th>
+                            <th class="wd-20p text-center">ADMIN.ROUTE</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let bill of payload.drugItems; let i = index">
+                            <td>
+                                <div class="form-check form-check-inline">
+                                    <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            [checked]="bill.checked"
+                                            [value]="bill.id"
+                                            (change)="onToggleBillItemCheck($event, bill)"
+                                    />
+                                </div>
+                            </td>
+                            <td>{{bill.drugRegister.description}}</td>
+                            <td>{{bill.drugRegister.regularSellingPrice}}</td>
+                            <td>
+                                <input
+                                        type="number"
+                                        class="wd-50 faded-input"
+                                        [(ngModel)]="bill.dosage"
+                                        (keypress)="numberMatch($event)"
+                                        min="0"
+                                />
+                            </td>
+                            <td>
+                                <app-drug-frequency-dropdown
+                                        class="wd-40"
+                                        (selected)="onDrugFrequencySelected($event, bill)"
+                                ></app-drug-frequency-dropdown>
+                            </td>
+                            <td>
+                                <input
+                                        type="number"
+                                        class="wd-50 faded-input"
+                                        [(ngModel)]="bill.days"
+                                        (keypress)="numberMatch($event)"
+                                        min="0"
+                                />
+                            </td>
+                            <td>
+                                <app-drug-administration-route
+                                        (selected)="onDrugAdminRouteSelected($event, bill)"></app-drug-administration-route>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-12 row mg-t-50">
+                <div class="col-md-12 row">
+                    <div class="form-group col-md-3">
+                        <label>Other Information</label>
+                    </div>
+                    <div class="form-group col-md-9">
+                        <input type="text" class="form-control" [(ngModel)]="payload.otherInformation">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-12">
+                <button class="btn btn-az-primary btn-md" (click)="onSaveDrugRequestState()">Save & Close</button>
+                <button class="btn btn-danger mg-l-15 btn-md" (click)="onCloseModal()">Close Only</button>
+            </div>
+        </div>
+    </div>
+</div>

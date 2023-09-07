@@ -1,0 +1,79 @@
+<div class="main-wrapper az-content-body">
+    <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="row">
+            <div class="col-auto">
+                <label class="rdiobox" for="create">
+                    <input
+                            id="create"
+                            name="scheme"
+                            type="radio"
+                            [checked]="selectedView === searchView"
+                            (change)="onViewChange(searchView)"
+                    />
+                    <span>SEARCH</span>
+                </label>
+            </div>
+
+            <div class="col-auto mg-t-20 mg-lg-t-0">
+                <label class="rdiobox" for="edit">
+                    <input
+                            name="scheme"
+                            id="edit"
+                            type="radio"
+                            [checked]="selectedView === enterView"
+                            (change)="onViewChange(enterView)"
+                    />
+                    <span>VIEW RESULT</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="selectedView === searchView;">
+
+        <app-lab-test-request-shared [payload]="payload" ></app-lab-test-request-shared>
+
+        <!-- table -->
+        <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+            <legend class="w-auto tx-16 tx-bold">
+            </legend>
+
+            <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-light">
+                        <tr>
+                            <th class="text-center">S/N</th>
+                            <th class="text-center">PATIENT NUMBER</th>
+                            <th class="text-center">PATIENT NAME</th>
+                            <th class="text-center">PHONE NUMBER</th>
+                            <th class="text-center">LAB NUMBER</th>
+                            <th class="text-center">TEST</th>
+                            <th class="text-center">SAMPLE COLLECTED DATE</th>
+                            <th class="text-center"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <ng-container *ngIf="payload.labBillTestRequest.testItems">
+                            <tr *ngFor="let item of payload.labBillTestRequest.testItems; let idx = index">
+                                <td class="text-center">{{ idx + 1 }}</td>
+                                <td class="text-center">{{payload.patient.patientNumber}}</td>
+                                <td class="text-center">{{payload.patient.patientFullName}}</td>
+                                <td class="text-center">{{payload?.patient?.patientContactDetail?.phoneNumber}}</td>
+                                <td class="text-center">{{item.requestNumber}}</td>
+                                <td class="text-center">{{item.testName}}</td>
+                                <td class="text-center">{{payload.labBillTestRequest.date | date}}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-sm btn-primary" (click)="onViewResult(item)">View Result</button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+
+    </ng-container>
+
+    <ng-template appLabResult></ng-template>
+</div>

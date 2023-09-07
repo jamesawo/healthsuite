@@ -1,0 +1,20 @@
+<ng-select #selectComponent
+           [items]="collection"
+           bindLabel="admissionNumber"
+           (change)="onSelect($event)"
+           [clearable]="true"
+           placeholder="Select Shift Number">
+    <ng-template ng-option-tmp let-item="item">
+        <strong> {{ item.admissionNumber}} -
+            <i class="text-{{item.isOnAdmission === true?'success':'danger'}}">
+                {{item.isOnAdmission === true ? 'ON ADMISSION' : 'DISCHARGED'}}
+            </i>
+        </strong>
+        <br/>
+        <small>
+            <i>Admitted Date: {{ item.admittedDate  }}</i> <br>
+            <i>Ward: {{ item.ward.department.name }}</i> <br>
+            <i>Discharged Date: {{ item.dischargedDate }}</i>
+        </small>
+    </ng-template>
+</ng-select>

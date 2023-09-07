@@ -1,0 +1,154 @@
+<div class="az-content az-content-contacts">
+    <div class="nurse-waiting-wrapper">
+        <!-- waiting list -->
+        <div class="az-content-left az-content-left-contacts">
+            <nav class="nav az-nav-line az-nav-line-chat">
+                <a
+                        class="pointer nav-link {{ activeView == 'waiting' ? 'active' : '' }}"
+                        (click)="onChangeActiveView('waiting')"
+                >Waiting
+                    <span class="badge badge-dark">{{waitingCount}}</span>
+                </a
+                >
+                <a
+                        class="pointer nav-link {{ activeView == 'attended' ? 'active' : '' }}"
+                        (click)="onChangeActiveView('attended')"
+                >
+                    Attended <span class="badge badge-dark">{{attendedCount}}</span></a
+                >
+
+            </nav>
+
+            <ng-container *ngIf="activeView == 'waiting'; else attendedRef">
+                <app-patient-waiting-list [props]="{viewType: nurse}" [updateCount]="onUpdateCount"
+                                          #listComponent
+                                          (selected)="onPatientSelected($event)"
+                ></app-patient-waiting-list>
+            </ng-container>
+
+            <ng-template #attendedRef>
+                <app-patient-attended-list [props]="{viewType: nurse}"
+                                           [updateCount]="onUpdateAttendedCount"
+                                           (selected)="onPatientSelected($event)"
+                                           #attendedListComponent
+                ></app-patient-attended-list>
+            </ng-template>
+
+            <!-- az-contacts-list -->
+        </div>
+        <!-- currently attending  -->
+        <div class="az-content-body az-content-body-contacts">
+            <div class="flex-column mg-l-10 mg-t-0">
+                <app-patient-bio-card [selectedPatient]="patient"></app-patient-bio-card>
+
+                <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                    <legend class="w-auto tx-14 tx-bold"> FAR
+                    </legend>
+                    <div class="row row-xs align-items-center mg-b-20">
+                        <div class="row col-md-12 mg-t-0">
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row">
+                                    <label class="w-25 tx-12 mg-r-10 text-right">Unaided:</label>
+                                    <div class="w-75">
+                                        <input type="text" class="input-control" placeholder="Right" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row">
+                                    <label class="w-25 tx-12 mg-r-10 text-right"></label>
+                                    <div class="w-75">
+                                        <input type="text" class="input-control" placeholder="Left" >
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-12 mg-t-10">
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row">
+                                    <label class="w-25 tx-12 mg-r-10 text-right">Pinhole:</label>
+                                    <div class="w-75">
+                                        <input type="text" class="input-control" placeholder="Right" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row">
+                                    <label class="w-25 tx-12 mg-r-10 text-right"></label>
+                                    <div class="w-75">
+                                        <input type="text" class="input-control" placeholder="Left" >
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-12 mg-t-10">
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row">
+                                    <label class="w-25 tx-12 mg-r-10 text-right">Aided:</label>
+                                    <div class="w-75">
+                                        <input type="text" class="input-control" placeholder="Right" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row">
+                                    <label class="w-25 tx-12 mg-r-10 text-right"></label>
+                                    <div class="w-75">
+                                        <input type="text" class="input-control" placeholder="Left" >
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                    <legend class="w-auto tx-14 tx-bold"> NEAR
+                    </legend>
+                    <div class="row row-xs align-items-center mg-b-20">
+                        <div class="row col-md-12 mg-t-0">
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row">
+                                    <label class="w-25 tx-12 mg-r-10 text-right">Unaided:</label>
+                                    <div class="w-75">
+                                        <input type="text" class="input-control" placeholder="Right" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row">
+                                    <label class="w-25 tx-12 mg-r-10 text-right"></label>
+                                    <div class="w-75">
+                                        <input type="text" class="input-control" placeholder="Left" >
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-12 mg-t-10">
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row">
+                                    <label class="w-25 tx-12 mg-r-10 text-right">Aided:</label>
+                                    <div class="w-75">
+                                        <input type="text" class="input-control" placeholder="Right" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row">
+                                    <label class="w-25 tx-12 mg-r-10 text-right"></label>
+                                    <div class="w-75">
+                                        <input type="text" class="input-control" placeholder="Left" >
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

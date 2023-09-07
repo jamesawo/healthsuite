@@ -1,0 +1,11 @@
+.active .bs-stepper-circle {
+    background-color: #5b47fb;
+}
+
+.txt-18{
+    font-size: 18px;
+}
+
+.input-control .in-valid{
+    border-color: #dc3545;
+}

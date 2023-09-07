@@ -1,0 +1,66 @@
+<div class="main-wrapper az-content-body">
+    <fieldset class="border p-2 mg-t-0 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+
+        <div class="row col-12 mg-l-5">
+            <label class="w-15 align-self-center">Patient Search:</label>
+            <div class="w-75 mg-l-10">
+                <app-patient-search #patientSearchComponent  (selected)="onPatientSelected($event)" [props]="{
+                        showLabel: false,
+                        checkAdmission: true,
+                        loadAdmission: false}"
+                ></app-patient-search>
+            </div>
+        </div>
+        <div class="mg-t-10">
+            <app-patient-bio-card
+                    [selectedPatient]="patient"
+            ></app-patient-bio-card>
+        </div>
+
+    </fieldset>
+
+    <fieldset class="border p-2 mg-t-0 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+    <div class=" wd-xl-100p">
+        <div class="row row-xs align-items-center">
+            <div class="col-md-4 text-right ">
+                <label class="pd-r-25">Note / Comment:
+                </label>
+            </div>
+            <div class="col-md-8 mg-t-5 mg-md-t-0">
+                <textarea class="form-control" cols="2" rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="wd-xl-100p mg-t-10">
+        <div class="row row-xs align-items-center">
+            <div class="col-md-4 text-right ">
+                <label class="pd-r-25">Date:
+                </label>
+            </div>
+            <div class="col-md-8  mg-md-t-0">
+                <app-shared-date></app-shared-date>
+            </div>
+        </div>
+    </div>
+    <div class="wd-xl-100p mg-t-10">
+        <div class="row row-xs align-items-center">
+            <div class="col-md-4 text-right ">
+                <label class="pd-r-25">File:
+                </label>
+            </div>
+            <div class="col-md-8  mg-md-t-0">
+               <input type="file" class="form-control">
+            </div>
+        </div>
+    </div>
+    </fieldset>
+
+    <div class="text-center mg-t-10">
+        <button class="btn btn-dark pd-x-30 mg-r-10" >UPLOAD
+        </button>
+    </div>
+</div>

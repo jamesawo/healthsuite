@@ -1,0 +1,21 @@
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="row  align-items-center mg-b-20">
+        <div class="row col-md-12 mg-t-0">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="w-25 tx-12 mg-r-2 text-left"> Reason For Bounce Back:</label>
+                    <div class="">
+                        <textarea class="form-control" rows="2" cols="10" [(ngModel)]="reasonForBounce"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+                <div class="form-group text-center">
+                    <button class="btn btn-primary" (click)="onSubmit()">SUBMIT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

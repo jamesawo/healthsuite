@@ -1,0 +1,62 @@
+<div class="input-wrapper">
+    <label *ngIf="props.showLabel !== false">
+        <span> ENTER {{ props?.searchTerm }} </span>
+    </label>
+    <ng-select
+        #selectComponent
+        [items]="responsePayload | async"
+        bindLabel="searchTitle"
+        [trackByFn]="trackByFn"
+        [minTermLength]="minLengthTerm"
+        [loading]="isLoading"
+        typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+        [typeahead]="searchInput$"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="selectedPayload"
+        (change)="onSelect($event)"
+        [clearable]="true"
+        placeholder="Enter drug/item name..."
+    >
+        <ng-template ng-option-tmp let-item="item">
+            <div *ngIf="props.searchTerm == genericName">
+                <strong> {{ item.genericName }} </strong>
+                <br />
+                <small>
+                    <i>Brand Name: {{ item.brandName }}</i>
+                    <i>Code: {{ item.code }}</i>
+                </small>
+            </div>
+            <div *ngIf="props.searchTerm == branName">
+                <strong> {{ item.brandName }} </strong>
+                <br />
+                <small>
+                    <i>Generic Name: {{ item.genericName }} </i>
+                    <i> Code: {{ item.code }}</i>
+                </small>
+            </div>
+            <div *ngIf="props.searchTerm == genericOrBrandName">
+                <strong> {{ item.searchTitle }} </strong>
+                <br />
+                <small
+                    >| <i>Code: {{ item.code }}</i> |
+                    <i
+                        *ngIf="useStock"
+                        class="mg-l-10  {{
+                            item.availableQty > 20 ? 'text-success' : 'text-danger'
+                        }}"
+                        >Ava Qty: {{ item.availableQty ? item.availableQty : 0 }}</i>
+                </small>
+                <small *ngIf="props?.showIssOutletStockCount">
+                    |
+                    <i
+                        class="mg-l-10  {{
+                            item.issuingOutletBal > 50 ? 'text-success' : 'text-danger'
+                        }}"
+                    >
+                        Issuer Qty: {{ item.issuingOutletBal ? item.issuingOutletBal : 0 }}</i
+                    >
+                </small>
+            </div>
+        </ng-template>
+    </ng-select>
+</div>

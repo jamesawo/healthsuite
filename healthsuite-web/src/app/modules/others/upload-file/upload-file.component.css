@@ -1,0 +1,9 @@
+.drop-area {
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    font-size: 19px;
+}

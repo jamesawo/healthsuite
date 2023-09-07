@@ -1,0 +1,140 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column">
+        <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="create">
+                        <input
+                                id="create"
+                                name="scheme"
+                                type="radio"
+                                checked
+                                (change)="onTypeChange(revenueDepartment)"
+                        />
+                        <span>Revenue Department</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="edit">
+                        <input
+                                name="scheme"
+                                id="edit"
+                                type="radio"
+                                (change)="onTypeChange(serviceDepartment)"
+                        />
+                        <span>Service Department</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="both">
+                        <input
+                                name="scheme"
+                                id="both"
+                                type="radio"
+                                (change)="onTypeChange(serviceOrDrug)"
+                        />
+                        <span>Service / Drug</span>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+
+            <div class="col-md-12 mg-b-20" [ngSwitch]="switchValue">
+                <ng-container *ngSwitchCase="revenueDepartment">
+                    <div class="form-group mg-b-10">
+                        <label class="tx-16 txt-black">Revenue Department</label>
+                        <app-revenue-department-dropdown
+                                (select)="onDepartmentSelected($event)"
+                        ></app-revenue-department-dropdown>
+
+                    </div>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="serviceDepartment">
+                    <div class="form-group mg-b-10">
+                        <label class="tx-16 txt-black">Service Department</label>
+                        <app-service-department-dropdown
+                                (valueSelected)="onServiceDepartmentSelected($event)"></app-service-department-dropdown>
+
+                    </div>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="serviceOrDrug">
+                    <div class="flex-column">
+                        <div class="pd-10 pd-sm-15 mg-b-10 wd-xl-100p">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <label class="rdiobox">
+                                        <input
+                                                name="serviceOrDrug"
+                                                type="radio"
+                                                checked
+                                                (change)="payload.type = service"
+
+                                        />
+                                        <span>Service</span>
+                                    </label>
+                                </div>
+                                <div class="col-auto mg-t-20 mg-lg-t-0">
+                                    <label class="rdiobox">
+                                        <input
+                                                name="serviceOrDrug"
+                                                type="radio"
+                                                (change)="payload.type = drug"
+                                        />
+                                        <span>Drug</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ng-container *ngIf="payload.type === service">
+                        <div class="form-group mg-b-10">
+                            <label class="tx-16 txt-black">Search Service</label>
+                            <app-service-name-search (selected)="onServiceSelected($event)"></app-service-name-search>
+                        </div>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="payload.type === drug">
+                        <div class="form-group mg-b-10">
+                            <label class="tx-16 txt-black">Search Drug</label>
+                            <app-drug-search (selected)="onDrugSelected($event)" [props]="{searchTerm: drugSearchTerm,showLabel: false}"></app-drug-search>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">Start Date</label>
+                    <app-shared-date (selected)="onDateSelected($event, start)"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">End Date</label>
+                    <app-shared-date (selected)="onDateSelected($event, end)"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="text-right mg-b-10">
+                    <button class="btn-primary btn btn-sm" (click)="onDownloadFile()">
+                        <i class="fa fa-file-pdf"></i> Download
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+</div>

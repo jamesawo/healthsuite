@@ -1,0 +1,38 @@
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group ">
+                <label>Ward Name</label>
+                <app-ward-search #wardSearchComponent (selected)="onWardSelected($event)"></app-ward-search>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="d-block mg-t-10">
+                <label>Bed</label>
+                <ng-select
+                        [items]="bedsList"
+                        bindLabel="code"
+                        bindValue="id"
+                        placeholder="Select Bed.."
+                        [(ngModel)]="payload.bedId"
+                        name="bed"
+                ></ng-select>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="d-block mg-t-10 mg-b-10">
+                <label>Admission Date</label>
+                <app-shared-date #dateComponent (selected)="onDateSelected($event)"></app-shared-date>
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-md mg-t-15 w-25" (click)="onAdmitPatient()">
+        Admit Patient
+    </button>
+</fieldset>

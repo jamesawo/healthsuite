@@ -1,0 +1,99 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-20-f">
+        <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <app-patient-search
+                #patientSearchComponent
+                [props]="{
+                    showLabel: true,
+                    checkAdmission: true,
+                    loadAdmission: false,
+                    loadRevisit: true
+                }"
+                (selected)="onPatientSelected($event)"
+            ></app-patient-search>
+        </div>
+
+        <app-patient-bio-card [selectedPatient]="payload.patient"></app-patient-bio-card>
+
+        <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+            <legend class="w-auto tx-16 tx-bold"></legend>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group w-100">
+                        <label>Current Ward</label>
+                        <label class="form-control form-control-sm" readonly> {{admission?.ward?.department?.name}} </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group w-100">
+                        <label>Current Bed</label>
+                        <label class="form-control form-control-sm" readonly> {{admission?.bed}} </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group w-100">
+                        <label>Admission Date</label>
+                        <label class="form-control form-control-sm" readonly> {{admission?.admittedDate}} </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group w-100">
+                        <label>Net Bill Amount</label>
+                        <label class="form-control form-control-sm" readonly> {{admission?.netAmount | currency: currency}} </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+            <legend class="w-auto tx-16 tx-bold"></legend>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group w-100">
+                        <label>Discharged Date:</label>
+                        <app-shared-date (selected)="onDateSelected($event)" ></app-shared-date>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group w-100">
+                        <label>Discharge Status</label>
+                        <app-discharge-status-dropdown (selected)="onDischargeStatusSelected($event)" #dischargeStatusDropdownComponent></app-discharge-status-dropdown>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group w-100">
+                        <label>Consultant</label>
+                        <app-user-search #userSearchComponent
+                                         (selected)="onConsultantSelect($event)"
+                                         [props]="{
+                                    showLabel: false,
+                                    isConsultant: true,
+                                    showDisabledUser: false
+                                }"
+                        ></app-user-search>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group w-100">
+                        <label>Final Diagnosis</label>
+                        <textarea class="form-control" rows="1" cols="10" [(ngModel)]="payload.finalDiagnosis"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group w-100">
+                        <label>Other comment</label>
+                        <textarea class="form-control" rows="1" cols="10" [(ngModel)]="payload.otherComment"></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            <button type="submit" (click)="onDischargePatient()" class="btn btn-primary btn-md mg-t-15 mg-l-15 w-25">
+                Discharge Patient
+            </button>
+        </div>
+    </div>
+</div>

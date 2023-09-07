@@ -1,0 +1,26 @@
+<ngx-spinner [fullScreen]="true" type="ball-clip-rotate" size="medium"></ngx-spinner>
+<ngx-snackbar [position]="'bottom-right'" [max]="1" [timeout]="5000"></ngx-snackbar>
+
+<div class="az-iconbar cm-scrollbar z-index-200">
+    <app-icon-nav (openMenu)="toggleMenuDisplay($event)"></app-icon-nav>
+</div>
+
+<ng-container *ngIf="displayMenu">
+    <div class="az-iconbar-aside show z-index-100" [@slideInLeftOnEnter] [@slideOutLeftOnLeave]>
+        <app-menu (onClickCollapseMenu)="toggleMenuDisplay($event)"></app-menu>
+    </div>
+</ng-container>
+
+<ng-template>
+    <div class="az-iconbar-aside" [@slideInLeftOnEnter] [@slideOutLeftOnLeave]>
+        <app-menu (onClickCollapseMenu)="toggleMenuDisplay($event)"></app-menu>
+    </div>
+</ng-template>
+
+<div class="az-content az-content-dashboard-six">
+    <app-header></app-header>
+    <div class="az-content-body az-content-body-dashboard-six">
+        <app-main-content></app-main-content>
+    </div>
+    <app-footer></app-footer>
+</div>

@@ -1,0 +1,22 @@
+<div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+    <div class="row mg-t-10">
+        <div class="row col-4 mg-l-5">
+            <label class="w-25 align-self-center">Search By:</label>
+            <div class="w-75">
+                <ng-select
+                    [markFirst]="true"
+                    [closeOnSelect]="true"
+                    [clearable]="false"
+                    [searchable]="false"
+                    [multiple]="false"
+                >
+                    <ng-option selected value="NewBill">New Bill</ng-option>
+                    <ng-option value="DoctorsRequest">Doctors's Request</ng-option>
+                </ng-select>
+            </div>
+        </div>
+        <div class="col-8 mg-t-20 mg-lg-t-0">
+            <app-patient-search></app-patient-search>
+        </div>
+    </div>
+</div>

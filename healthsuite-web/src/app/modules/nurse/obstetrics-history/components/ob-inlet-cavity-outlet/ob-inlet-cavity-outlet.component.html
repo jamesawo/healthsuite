@@ -1,0 +1,310 @@
+<fieldset class="border p-2 mg-t-0 rounded">
+    <legend class="w-auto tx-16 tx-bold">INLET
+    </legend>
+    <div class="row mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25"> PROMONTORY:
+            </label>
+        </div>
+        <div class="row col-md-8 mg-t-5 mg-md-t-0">
+            <div class="col-md-12 row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="notReached">
+                        <input
+                                id="notReached"
+                                name="promontory"
+                                type="radio"
+                                value="Not Reached"
+                                [(ngModel)]="props.payload.promontory"
+                                checked />
+                        <span>NOT REACHED</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="rdiobox" for="reached">
+                        <input
+                                id="reached"
+                                name="promontory"
+                                type="radio"
+                                value="Reached At"
+                                [(ngModel)]="props.payload.promontory"
+                        />
+                        <span>REACHED AT</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="rdiobox" for="unspecified">
+                        <input
+                                id="unspecified"
+                                name="promontory"
+                                type="radio"
+                                value="Unspecified"
+                                [(ngModel)]="props.payload.promontory"
+                        />
+                        <span>UNSPECIFIED</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset class="border p-2 mg-t-20 rounded">
+    <legend class="w-auto tx-16 tx-bold">CAVITY
+    </legend>
+    <div class="row mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25"> SACRUM:
+            </label>
+        </div>
+        <div class="row col-md-8 mg-t-5 mg-md-t-0">
+            <div class="col-md-12 row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="Straight">
+                        <input
+                                id="Straight"
+                                name="sacrum"
+                                type="radio"
+                                value="Straight"
+                                [(ngModel)]="props.payload.sacrum"
+                                checked />
+                        <span>STRAIGHT</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="rdiobox" for="Normal">
+                        <input
+                                id="Normal"
+                                name="sacrum"
+                                type="radio"
+                                value="Normal"
+                                [(ngModel)]="props.payload.sacrum"
+                        />
+                        <span>NORMAL</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="rdiobox" for="unspecified1">
+                        <input
+                                id="unspecified1"
+                                name="sacrum"
+                                type="radio"
+                                value="Unspecified"
+                                [(ngModel)]="props.payload.sacrum"
+                        />
+                        <span>UNSPECIFIED</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25"> SIDEWALLS:
+            </label>
+        </div>
+        <div class="row col-md-8 mg-t-5 mg-md-t-0">
+            <div class="col-md-12 row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="Convergent">
+                        <input
+                                id="Convergent"
+                                name="sidewalls"
+                                type="radio"
+                                value="Straight"
+                                [(ngModel)]="props.payload.sidewalls"
+                                checked />
+                        <span>STRAIGHT</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="rdiobox" for="Normal2">
+                        <input
+                                id="Normal2"
+                                name="sidewalls"
+                                type="radio"
+                                value="Normal"
+                                [(ngModel)]="props.payload.sidewalls"
+                        />
+                        <span>NORMAL</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="rdiobox" for="unspecified2">
+                        <input
+                                id="unspecified2"
+                                name="sidewalls"
+                                type="radio"
+                                value="Unspecified"
+                                [(ngModel)]="props.payload.sidewalls"
+                        />
+                        <span>UNSPECIFIED</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25"> I-Schial SP:
+            </label>
+        </div>
+        <div class="row col-md-8 mg-t-5 mg-md-t-0">
+            <div class="col-md-12 row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="Prominent">
+                        <input
+                                id="Prominent"
+                                name="i_schial_sp"
+                                type="radio"
+                                value="Prominent"
+                                [(ngModel)]="props.payload.iSchialSp"
+                                checked />
+                        <span>PROMINENT</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="rdiobox" for="Normal3">
+                        <input
+                                id="Normal3"
+                                name="i_schial_sp"
+                                type="radio"
+                                value="Normal"
+                                [(ngModel)]="props.payload.iSchialSp"
+                        />
+                        <span>NORMAL</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="rdiobox" for="unspecified3">
+                        <input
+                                id="unspecified3"
+                                name="sidewalls"
+                                type="radio"
+                                value="Unspecified"
+                                [(ngModel)]="props.payload.iSchialSp"
+                        />
+                        <span>UNSPECIFIED</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset class="border p-2 mg-t-20 rounded">
+    <legend class="w-auto tx-16 tx-bold">OUTLET
+    </legend>
+    <div class="row mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25"> SUB-PUB:
+            </label>
+        </div>
+        <div class="row col-md-8 mg-t-5 mg-md-t-0">
+            <div class="col-md-12 row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="Narrow">
+                        <input
+                                id="Narrow"
+                                name="sub-pub"
+                                type="radio"
+                                value="Narrow"
+                                [(ngModel)]="props.payload.subPub"
+                                checked />
+                        <span>NARROW</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="rdiobox" for="Normal4">
+                        <input
+                                id="Normal4"
+                                name="sub-pub"
+                                type="radio"
+                                value="Normal"
+                                [(ngModel)]="props.payload.subPub"
+                        />
+                        <span>NORMAL</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="rdiobox" for="unspecified4">
+                        <input
+                                id="unspecified4"
+                                name="sub-pub"
+                                type="radio"
+                                value="Unspecified"
+                                [(ngModel)]="props.payload.subPub"
+                        />
+                        <span>UNSPECIFIED</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25"> COCCYX:
+            </label>
+        </div>
+        <div class="row col-md-8 mg-t-5 mg-md-t-0">
+            <div class="col-md-12 row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="Fixed">
+                        <input
+                                id="Fixed"
+                                name="coccyx"
+                                type="radio"
+                                value="Fixed"
+                                [(ngModel)]="props.payload.coccyx"
+                                checked />
+                        <span>FIXED</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="rdiobox" for="Normal5">
+                        <input
+                                id="Normal5"
+                                name="coccyx"
+                                type="radio"
+                                value="Normal"
+                                [(ngModel)]="props.payload.coccyx"
+                        />
+                        <span>NORMAL</span>
+                    </label>
+                </div>
+                <div class="col-auto">
+                    <label class="rdiobox" for="unspecified5">
+                        <input
+                                id="unspecified5"
+                                name="coccyx"
+                                type="radio"
+                                value="Unspecified"
+                                [(ngModel)]="props.payload.coccyx"
+                        />
+                        <span>UNSPECIFIED</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset class="border p-2 mg-t-20 rounded">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="row row-xs align-items-center mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25"> Comments:
+            </label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <textarea class="form-control" cols="2" rows="2" [(ngModel)]="props.payload.comments"></textarea>
+        </div>
+    </div>
+    <div class="row row-xs align-items-center mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25"> Special Instructions Regarding Delivery:
+            </label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <textarea class="form-control" cols="2" rows="2" [(ngModel)]="props.payload.deliveryInstructions"></textarea>
+        </div>
+    </div>
+</fieldset>

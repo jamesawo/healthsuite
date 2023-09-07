@@ -1,0 +1,28 @@
+<div class="search-tab">
+    <div class="mg-l-5 search-title">
+        <label *ngIf="this.props?.showLabel" class="text-right align-self-end mg-r-5"
+            >Search Supplier:</label
+        >
+    </div>
+    <div class="search-input">
+        <ng-select
+            [items]="responsePayload | async"
+            bindLabel="supplierName"
+            [trackByFn]="trackByFn"
+            [minTermLength]="minLengthTerm"
+            [loading]="isLoading"
+            typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+            [typeahead]="searchInput$"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="selectedPayload"
+            (change)="onSelect($event)"
+            [clearable]="true"
+            placeholder="Enter Supplier Name or Phone"
+        >
+            <ng-template ng-option-tmp let-item="item">
+                <strong> {{ item.supplierName }} </strong> <br />
+                <small> code: {{ item.phoneNumber }} </small>
+            </ng-template>
+        </ng-select>
+    </div>
+</div>

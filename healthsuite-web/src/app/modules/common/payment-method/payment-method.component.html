@@ -1,0 +1,22 @@
+<ng-select
+    #ngSelectComponent
+    (change)="onOptionChange($event, ngSelectComponent)"
+    placeholder="Select Payment Method"
+    [closeOnSelect]="true"
+    [clearable]="true"
+    [searchable]="false"
+    [items]="paymentMethodCollection"
+    [bindValue]="'id'"
+    [bindLabel]="'name'"
+    [markFirst]="true"
+    [multiple]="false"
+    [ngStyle]="
+        validate.showError
+            ? {
+                  border: '1px solid orangered',
+                  'border-radius': '5px'
+              }
+            : {}
+    "
+>
+</ng-select>

@@ -1,0 +1,11 @@
+<ng-select
+        [(ngModel)]="defaultSelected"
+        name="role"
+        required
+        #role="ngModel"
+        (change)="onRoleSelected($event)"
+        [ngClass]="{'is-invalid': role.invalid && (role.touched || role.dirty)}">
+    <ng-option *ngFor="let role of roles" [value]="role">
+        {{ role.name | uppercase }}
+    </ng-option>
+</ng-select>

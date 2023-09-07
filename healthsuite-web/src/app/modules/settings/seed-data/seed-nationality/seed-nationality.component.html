@@ -1,0 +1,85 @@
+<fieldset class="border p-2 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">Seed Nationality</legend>
+    <form [formGroup]="nationalityForm" (ngSubmit)="onSave()">
+        <div class="form-group">
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Country Title"
+                [formControlName]="'name'"
+                [ngClass]="{ 'is-invalid': isSubmitted && form.name.errors }"
+            />
+        </div>
+        <div class="table-responsive mg-t-20">
+            <table class="table table-bordered mg-b-0 table-striped">
+                <thead>
+                    <tr class="text-center">
+                        <th scope="row">
+                            <input type="checkbox" />
+                        </th>
+                        <th>State Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        <th scope="row">
+                            <input type="checkbox" />
+                        </th>
+                        <td>
+                            <input
+                                type="text"
+                                [(ngModel)]="state.name"
+                                [ngModelOptions]="{ standalone: true }"
+                                class="form-control mg-l-3"
+                            />
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" (click)="onAfterSave()">
+                                <i class="fa fa-plus-circle text-white"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let item of statesCount; let i = index" class="text-center">
+                        <th scope="row">
+                            <input type="checkbox" />
+                        </th>
+                        <td>{{ item.name | uppercase }}</td>
+
+                        <td>
+                            <a class="btn btn-sm btn-danger" (click)="onRemoveState(i)">
+                                <i class="fa fa-trash point text-white"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mg-t-10">
+            <button type="submit" class="btn btn-primary" [disabled]="statesCount.length < 1">
+                Create
+            </button>
+            <br />
+            <code *ngIf="statesCount.length < 1">Enter at least one state</code>
+        </div>
+    </form>
+
+    <div class="table-responsive mg-t-20">
+        <table class="table table-bordered mg-b-0">
+            <thead>
+                <tr>
+                    <th class="wd-3"><input type="checkbox" /></th>
+                    <th>Nationality</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of nationalityList">
+                    <th scope="row">
+                        <input type="checkbox" />
+                    </th>
+                    <td>{{ item.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>

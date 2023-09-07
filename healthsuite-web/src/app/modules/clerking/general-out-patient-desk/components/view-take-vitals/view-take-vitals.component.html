@@ -1,0 +1,126 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-l-50-f pd-r-50 pd-t-0">
+        <div class="row">
+            <div class="col-md-12 row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Weight <small>(kg)</small></label>
+                        <input type="text" (keypress)="onNumberKey($event)"
+                               class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.weight"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Height <small>(m)</small></label>
+                        <input type="text" (keypress)="onNumberKey($event)" class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.height"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Body Mass Index</label>
+                        <input type="text" (keypress)="onNumberKey($event)" class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.bodyMassIndex"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Body Surface Area</label>
+                        <input type="text" (keypress)="onNumberKey($event)" class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.bodySurfaceArea"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Temperature </label>
+                        <input type="text"
+                               class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.temperature"/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Respiratory Rate </label>
+                        <input type="text" class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.respiratoryRate"/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Pulse Rate </label>
+                        <input type="text" class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.pulseRate"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Oxygen Saturation </label>
+                        <input type="text"
+                               class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.oxygenSaturation"/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Pain Score </label>
+                        <input type="text" class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.painScore"/>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Urinalysis </label>
+                        <input type="text" class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.urineAnalysis"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Systoic B.P. </label>
+                        <input type="text"
+                               class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.systolicBp"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Diastoic B.P </label>
+                        <input type="text" class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.diastolicBp"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Random Blood Sugar </label>
+                        <input type="text"
+                               class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.randomBloodSugar"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Fast Blood Sugar </label>
+                        <input type="text" class="form-control form-control-sm" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.fastBloodSugar"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Comment </label>
+                        <textarea class="form-control" cols="3" rows="3" [readonly]="!isTakeVitalView()" [(ngModel)]="vitalPayload.commentRemark"></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row" *ngIf="isTakeVitalView()">
+            <div class="col-md-12">
+                <button class="btn btn-az-primary btn-md" (click)="onTakeVital()">SAVE & CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>

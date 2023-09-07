@@ -1,0 +1,24 @@
+<div class="input-wrapper">
+    <ng-select
+        [items]="responsePayload | async"
+        bindLabel="invoiceNumber"
+        [trackByFn]="trackByFn"
+        [minTermLength]="minLengthTerm"
+        [clearable]="true"
+        [loading]="isLoading"
+        typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+        [typeahead]="searchInput$"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="selectedPayload"
+        (change)="onSelectServiceBill($event)"
+        placeholder="Enter Bill Number To Search.."
+    >
+        <ng-template ng-option-tmp let-item="item">
+            Invoice Number: <strong>{{ item.invoiceNumber }} </strong>
+            <br />
+            <small
+                >Patient Number: <strong> {{ item.patientDetailDto.patientNumber }} </strong>
+            </small>
+        </ng-template>
+    </ng-select>
+</div>

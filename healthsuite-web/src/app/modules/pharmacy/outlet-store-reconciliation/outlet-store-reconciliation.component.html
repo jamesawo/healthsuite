@@ -1,0 +1,100 @@
+<div class="content-wrapper">
+    <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p outlet-wrapper">
+        <label class="mg-r-20">OUTLET: </label>
+        <input type="text" [value]="locationName" class="form-control w-100 bg-white" disabled />
+    </div>
+
+    <fieldset class="border p-2 mg-t-10 rounded">
+        <legend class="w-auto tx-16 tx-bold"></legend>
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p outlet-wrapper">
+            <label class="mg-r-20">Search With: </label>
+            <input
+                type="text"
+                [(ngModel)]="searchTerm"
+                class="form-control w-75"
+                placeholder="Enter Search Term"
+            />
+            <button
+                type="submit"
+                (click)="onSearchMatchingDrugItems()"
+                class="btn btn-primary btn-md mg-t-15 mg-l-15"
+            >
+                Display
+            </button>
+        </div>
+    </fieldset>
+
+    <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <input
+                                type="checkbox"
+                                [checked]="isAllItemCheckboxChecked()"
+                                (change)="checkAllItems($event)"
+                            />
+                            <span class="pointer" (click)="onRemoveMany()">
+                                <i
+                                    class="mg-l-3 text-sm-right fa fa-trash text-danger"
+                                    style="font-size: 12px;"
+                                ></i>
+                            </span>
+                        </th>
+                        <th>Brand Name</th>
+                        <th>Generic Name</th>
+                        <th>Strength</th>
+                        <th class="pointer">Formulation</th>
+                        <th class="text-center">Unit of Issue</th>
+                        <th class="text-center">Current Balance</th>
+                        <th class="text-center">Qty to Reconcile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="
+                            let data of payload?.items
+                                | paginate: { itemsPerPage: 10, currentPage: p };
+                            let i = index
+                        "
+                    >
+                        <td>
+                            <input type="checkbox" [(ngModel)]="data.isChecked" />
+                            <span class="pointer" (click)="onRemoveOne(i)">
+                                <i
+                                    style="font-size: 12px;"
+                                    class="mg-l-3 text-sm-right fa fa-trash text-danger"
+                                ></i>
+                            </span>
+                        </td>
+                        <td>{{ data?.drug?.brandName }}</td>
+                        <td>{{ data?.drug?.genericName }}</td>
+                        <td>{{ data?.drug?.strength }}</td>
+                        <td>{{ data?.drug?.formulation?.name }}</td>
+                        <td class="text-center">{{ data?.drug?.unitOfIssue }}</td>
+                        <td class="text-center">
+                            {{ data?.currentBalance }}
+                        </td>
+                        <td class="text-center">
+                            <input
+                                type="number"
+                                [(ngModel)]="data.quantityToReconcile"
+                                class="faded-input wd-60 pd-l-2 pd-r-2"
+                                [value]="data?.quantityToReconcile"
+                                (keypress)="numberMatch($event)"
+                                min="0"
+                            />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+        <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="onSubmit()">SUBMIT</button>
+        </div>
+    </div>
+</div>

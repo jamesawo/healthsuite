@@ -1,0 +1,112 @@
+<!-- log info -->
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="row pd-l-40 pd-r-40">
+        <div class="col-md-3">
+            <div class="form-group ">
+                <label class="tx-16 txt-black">Request Number</label>
+                <label class="form-control" readonly="">{{payload.requestNumber}}</label>
+
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group mg-b-10">
+                <label class="tx-16 txt-black">SPECIMEN</label>
+                <label class="form-control" readonly="">{{payload.specimen}}</label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="tx-16 txt-black">REQUEST DATE</label>
+                <label class="form-control" readonly="">{{payload.requestDate | date}}</label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="tx-16 txt-black">REQUESTING PHYSICIAN</label>
+                <label class="form-control" readonly="">{{payload.requestingDoctor}}</label>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<!--add result table -->
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th class="text-center">TEST</th>
+                    <th class="text-center wd-20">FILM REPORT</th>
+                    <th class="text-center wd-80p">PARAMETERS</th>
+                    <th class="text-center wd-20">COMMENT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngIf="payload.testParameterList.length">
+                    <tr *ngFor="let item of payload.testParameterList; let i=index">
+                        <td class="text-center">{{item.testParamName}}</td>
+                        <td class="text-center"><input class="line-input" type="text" [(ngModel)]="item.filmReport"></td>
+                        <td class="text-center">
+                            <div class="table-responsive txt-sm">
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center"></th>
+                                        <th class="text-center">TEST</th>
+                                        <th class="text-center">VALUE</th>
+                                        <th class="text-center">UNIT</th>
+                                        <th class="text-center">RANGE</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ng-container *ngIf="item.testRangeParamList.length">
+                                            <tr *ngFor="let range of item.testRangeParamList">
+                                                <td>
+
+                                                </td>
+                                                <td>{{range.name}}</td>
+                                                <td>
+                                                    <input class="line-input wd-50 text-center"
+                                                           [(ngModel)]="range.value"
+                                                           [ngClass]="{'input-er': range.hasError}"
+                                                           type="number" (change)="onRangeValue($event, range)"
+                                                           >
+                                                </td>
+                                                <td>{{range.unit}}</td>
+                                                <td><span class="txt-12">{{range.name}} {{range.lowerLimit}} -- {{range.upperLimit}}</span></td>
+                                            </tr>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="text-center"><input class="line-input" type="text" [(ngModel)]="item.comment"></td>
+                    </tr>
+                </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="row">
+            <div class="col-md-10 form-group">
+                <label >Enter Lab Note</label>
+                <textarea rows="2" cols="10" name="nurseNote" class="w-100 form-control" [(ngModel)]="payload.labNote"></textarea>
+            </div>
+            <div class="col-md-12 form-group text-center">
+                <button type="submit" class="btn btn-sm btn-primary" (click)="onSubmitResultPrep()"> SUBMIT
+                </button>
+            </div>
+        </div>
+    </div>
+</fieldset>

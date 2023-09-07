@@ -1,0 +1,257 @@
+<div class="az-content az-content-contacts">
+    <div class="nurse-waiting-wrapper">
+        <!-- waiting list -->
+        <div class="az-content-left az-content-left-contacts">
+            <nav class="nav az-nav-line az-nav-line-chat">
+                <a
+                        class="pointer nav-link {{ activeView == 'waiting' ? 'active' : '' }}"
+                        (click)="onChangeActiveView('waiting')"
+                >Waiting
+                    <span class="badge badge-dark">{{waitingCount}}</span>
+                </a
+                >
+                <a
+                        class="pointer nav-link {{ activeView == 'attended' ? 'active' : '' }}"
+                        (click)="onChangeActiveView('attended')"
+                >
+                    Attended <span class="badge badge-dark">{{attendedCount}}</span></a
+                >
+                
+            </nav>
+
+            <ng-container *ngIf="activeView == 'waiting'; else attendedRef">
+                <app-patient-waiting-list [props]="{viewType: nurse}" [updateCount]="onUpdateCount"
+                                          #listComponent
+                                          (selected)="onPatientSelected($event)"
+                ></app-patient-waiting-list>
+            </ng-container>
+
+            <ng-template #attendedRef>
+                <app-patient-attended-list [props]="{viewType: nurse}"
+                                           [updateCount]="onUpdateAttendedCount"
+                                           (selected)="onPatientSelected($event)"
+                                           #attendedListComponent
+                ></app-patient-attended-list>
+            </ng-template>
+
+            <!-- az-contacts-list -->
+        </div>
+        <!-- currently attending  -->
+        <div class="az-content-body az-content-body-contacts">
+            <div class="flex-column mg-l-10">
+                <app-patient-search [props]="{
+                    showLabel: false,
+                    checkAdmission: false,
+                    loadAdmission: false,
+                    loadRevisit: false,
+                    loadSchemeDiscount: false,
+                    loadDeposit: false,
+                    loadDrugRequest: false,
+                    loadLabRequest: false,
+                    loadRadiologyRequest: false
+                }" (selected)="onPatientSearchSelected($event)"></app-patient-search>
+                <app-patient-bio-card [selectedPatient]="payload.patient"></app-patient-bio-card>
+
+                <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                    <legend class="w-auto tx-14 tx-bold">
+                        Vitals
+                    </legend>
+
+                    <div class="row pd-20-f">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Weight (Kg):</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalWeight"
+                                        [(ngModel)]="payload.weight"
+                                        (change)="onCalculateBmi()"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Body Mass Index (Kg):</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalBmi"
+                                        [(ngModel)]="payload.bodyMassIndex"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Body Surface Area:</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalBsa"
+                                        [(ngModel)]="payload.bodySurfaceArea"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Respiratory Rate:</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalRespRate"
+                                        [(ngModel)]="payload.respiratoryRate"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Systolic BP:</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalSystolicBp"
+                                        [(ngModel)]="payload.systolicBp"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Random Blood Sugar:</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalRandomBloodSugar"
+                                        [(ngModel)]="payload.randomBloodSugar"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Oxygen Saturation:</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalOxygenSaturation"
+                                        [(ngModel)]="payload.oxygenSaturation"
+                                />
+                            </div>
+                        </div>
+                        <!-- -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Height (m)</label>
+                                <input
+                                        (change)="onCalculateBmi()"
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalHeight"
+                                        [(ngModel)]="payload.height"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Temperature:</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalTemperature"
+                                        [(ngModel)]="payload.temperature"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Pulse Rate:</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalPulseRate"
+                                        [(ngModel)]="payload.pulseRate"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Diastolic BP:</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalDiastolicBp"
+                                        [(ngModel)]="payload.diastolicBp"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Fast Blood Sugar:</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalFastBloodSugar"
+                                        [(ngModel)]="payload.fastBloodSugar"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Pain Score:</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalPainScore"
+                                        [(ngModel)]="payload.painScore"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Urinalysis:</label>
+                                <input
+                                        type="number"
+                                        class="form-control"
+                                        name="vitalUrinalysis"
+                                        [(ngModel)]="payload.urineAnalysis"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Comments/Remarks:</label>
+                                <textarea
+                                        class="form-control"
+                                        cols="5"
+                                        rows="2"
+                                        name="vitalComment"
+                                        [(ngModel)]="payload.commentRemark"
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label>Assign To:</label>
+                            <app-user-search
+                                #userSearchComponent
+                                (selected)="onConsultantSelected($event)"
+                                [props]="{
+                                    showLabel: false,
+                                    isConsultant: true,
+                                    showDisabledUser: false
+                                }"
+                            ></app-user-search>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <div class="d-block mg-t-10">
+                            <button
+                                    type="submit"
+                                    class="btn btn-primary btn-md text-uppercase"
+                                    (click)="onSubmitVitalSign()"
+                            >
+                                Submit
+                            </button>
+
+                            <button
+                                    type="submit"
+                                    class="mg-l-15 btn btn-danger btn-md text-uppercase"
+                                    (click)="onResetForm()"
+                            >
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

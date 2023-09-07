@@ -1,0 +1,10 @@
+<ng-select
+        (change)="onSelected($event)"
+        placeholder="choose.."
+        appendTo="body"
+        [(ngModel)]="default"
+>
+    <ng-option *ngFor="let data of specimenList" [value]="data">
+        {{data.name}}
+    </ng-option>
+</ng-select>

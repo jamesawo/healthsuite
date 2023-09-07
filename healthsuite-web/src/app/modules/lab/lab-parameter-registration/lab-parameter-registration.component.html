@@ -1,0 +1,71 @@
+<div class="main-wrapper az-content-body">
+    <!-- log info -->
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-14 tx-bold">
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+            <div class="col-md-4">
+                <div class="form-group text-right">
+                    <label class="tx-16 txt-black" >Parameter Name</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mg-b-10">
+                    <input type="text" class="form-control" [(ngModel)]="title">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <button class="btn btn-primary" (click)="onAddParameter(title)">
+                        <i class="fa fa-plus-square"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- table -->
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-left wd-5">
+                                <div class="form-check form-check-inline">
+                                    <input
+                                            class="form-check-input scale-check-3"
+                                            type="checkbox"
+                                            (change)="onToggleCheckAllItems($event)"
+
+                                    />
+                                    <label class="form-check-label" >
+                                        <i
+                                                (click)="onRemoveAllCheckedItems()"
+                                                class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                        ></i>
+                                    </label>
+                                </div>
+                            </th>
+                            <th class="text-left">Parameter Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of paramList  | paginate: { itemsPerPage: 10, currentPage: p }; let i=index">
+                            <td><input type="checkbox" class="scale-check-3" (change)="onParamCheckChange($event, data )"></td>
+                            <td>{{data.title}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation" class="mg-t-15" *ngIf="paramList?.length">
+                    <ul class="pagination justify-content-end">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </fieldset>
+
+</div>

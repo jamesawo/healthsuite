@@ -1,0 +1,52 @@
+<fieldset class="border p-2 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+        Seed Relationship Data
+        <i
+            class="fa fa-info-circle fa-sm tx-12"
+            [ngbPopover]="'Enter Relationship Name'"
+            placement="right"
+            triggers="mouseenter:mouseleave"
+            container="body"
+            aria-hidden="true"
+        ></i>
+    </legend>
+    <div class="form-group">
+        <form [formGroup]="relationshipForm" (ngSubmit)="saveRelationship()">
+            <div class="form-group">
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Relationship"
+                    [formControlName]="'name'"
+                    [ngClass]="{ 'is-invalid': isSubmitted && form.name.errors }"
+                />
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+
+        <div class="table-responsive mg-t-20">
+            <table class="table table-bordered mg-b-0">
+                <thead>
+                    <tr>
+                        <th class="wd-3">
+                            <label>
+                                <input type="checkbox" />
+                            </label>
+                        </th>
+                        <th>Relationship Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let relationship of relationships">
+                        <th scope="row">
+                            <label>
+                                <input type="checkbox" />
+                            </label>
+                        </th>
+                        <td>{{ relationship.name }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</fieldset>

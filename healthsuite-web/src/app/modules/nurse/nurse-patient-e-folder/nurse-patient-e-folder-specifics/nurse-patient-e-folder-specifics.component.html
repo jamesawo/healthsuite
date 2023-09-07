@@ -1,0 +1,18 @@
+<fieldset class="border p-2 mg-t-10 mg-b-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold"> RECORDS TO INCLUDE
+    </legend>
+    <div class="row pd-l-10 pd-r-10">
+        <div class="col-md-12 row">
+            <ng-container *ngFor="let item of typeList">
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <label class="form-check-label p-0">
+                            <input class="form-check-input" type="checkbox" (change)="onSpecificTypeCheck(item, $event)" [value]="item" >
+                            <span [innerHTML]="formatItemName(item)"></span>
+                        </label>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</fieldset>

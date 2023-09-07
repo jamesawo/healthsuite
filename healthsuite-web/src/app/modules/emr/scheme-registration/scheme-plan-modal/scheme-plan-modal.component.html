@@ -1,0 +1,38 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-t-0">
+        <div class="row">
+
+            <div class="col-md-12 row bg-gray-200 mg-l-0  mg-b-20">
+                <div class="col-md-12 mg-b-10 mg-t-10 row">
+                    <div class="col-md-12 form-group">
+                        <label>Plan Name</label>
+                        <input type="text" [autofocus]="true" class="form-control" [(ngModel)]="schemePlan.planType">
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label>Discount Markup <small>(%)</small></label>
+                        <input type="text" class="form-control" [(ngModel)]="schemePlan.discount">
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label>Service Percent (%)</label>
+                        <input type="text" class="form-control" [(ngModel)]="schemePlan.percentService">
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label>Drug Percent (%)</label>
+                        <input type="text" class="form-control" [(ngModel)]="schemePlan.percentDrug">
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row text-center">
+            <div class="col-md-12">
+                <a class="btn btn-az-primary btn-md text-white" (click)="onSave()">Add Plan</a>
+            </div>
+        </div>
+    </div>
+</div>

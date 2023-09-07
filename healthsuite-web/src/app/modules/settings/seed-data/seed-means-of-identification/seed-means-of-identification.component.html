@@ -1,0 +1,36 @@
+<fieldset class="border p-2 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">Seed Means Of Identification</legend>
+    <form [formGroup]="meansOfIdForm" (ngSubmit)="onSave()">
+        <div class="form-group">
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Title"
+                [formControlName]="'name'"
+                [ngClass]="{ 'is-invalid': isSubmitted && form.name.errors }"
+            />
+        </div>
+
+        <div class="mg-t-10">
+            <button type="submit" class="btn btn-primary">
+                Create
+            </button>
+            <br />
+        </div>
+    </form>
+
+    <div class="table-responsive mg-t-20">
+        <table class="table table-bordered mg-b-0">
+            <thead>
+                <tr>
+                    <th>Means of Identification</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of meansOfIdentificationList">
+                    <td>{{ item.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>

@@ -1,0 +1,98 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-l-50-f pd-r-50 pd-t-0">
+        <ng-container>
+            <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+                <app-patient-search
+                    #patientSearchComponent
+                    [props]="{
+                        showLabel: false,
+                        checkAdmission: true,
+                        loadAdmission: true,
+                        loadRevisit: true
+                    }"
+                    (selected)="onPatientSelected($event)"
+                ></app-patient-search>
+            </div>
+
+            <app-patient-bio-card
+                    [selectedPatient]="revisitPayload?.patientDetail"
+            ></app-patient-bio-card>
+        </ng-container>
+
+        <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+            <legend class="w-auto tx-16 tx-bold">
+                Account Summary Details
+            </legend>
+            <form autocomplete="off" class="form-padding" novalidate>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group w-100">
+                            <label>Total UnPaid Bills</label>
+                            <input type="text" class="form-control form-control-sm" [value]="accountSummary.totalUnPaidBills | currency: currencyCode" readonly/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group w-100">
+                            <label>Total UnUsed Deposit</label>
+                            <input type="text" class="form-control form-control-sm" [value]="accountSummary.totalUnusedDeposit | currency: currencyCode" readonly/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group w-100">
+                            <label>Net Bill Amount</label>
+                            <input type="text" class="form-control form-control-sm" [value]="accountSummary.netBillAmount | currency: currencyCode" readonly/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+
+        <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+            <legend></legend>
+            <form #revisitForm="ngForm" autocomplete="off" class="form-padding" novalidate>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group w-100">
+                            <label>Folder Number</label>
+                            <input
+                                    type="text"
+                                    class="form-control form-control-sm"
+                                    name="folderNumber"
+                                    [(ngModel)]="revisitPayload.patientDetail.folderNumber"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group w-100">
+                            <label>Card Number</label>
+                            <input
+                                    type="text"
+                                    class="form-control form-control-sm"
+                                    name="cardNumber"
+                                    [(ngModel)]="revisitPayload.patientDetail.cardNumber"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group w-100">
+                            <label>Clinic</label>
+                            <app-clinic-dropdown
+                                #clinicDropdownComponent
+                                (selected)="onClinicSelected($event)"
+                            ></app-clinic-dropdown>
+                        </div>
+                    </div>
+                </div>
+
+                <button
+                        type="submit"
+                        class="btn btn-primary btn-md mg-t-15 w-25"
+                        [disabled]="!revisitPayload.clinic.id"
+                        (click)="onRevisitPatient()"
+                >
+                    Revisit Patient
+                </button>
+            </form>
+        </fieldset>
+    </div>
+</div>

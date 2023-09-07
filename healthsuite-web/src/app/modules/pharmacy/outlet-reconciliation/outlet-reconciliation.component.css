@@ -1,0 +1,8 @@
+.outlet-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding: 20px;
+    align-items: flex-end;
+}

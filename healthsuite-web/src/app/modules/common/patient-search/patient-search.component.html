@@ -1,0 +1,33 @@
+<div class="search-tab">
+    <div class="mg-l-5 search-title">
+        <label *ngIf="this.props?.showLabel" class="text-right align-self-end mg-r-5"
+        >Search Patient:</label
+        >
+    </div>
+    <div class="search-input">
+        <ng-select
+            #searchComponent
+            [items]="responsePayload | async"
+            bindLabel="patientNameAndNumber"
+            [trackByFn]="trackByFn"
+            [minTermLength]="minLengthTerm"
+            [loading]="isLoading"
+            typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+            [typeahead]="searchInput$"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="selectedPayload"
+            (change)="onSelectPatient($event)"
+            placeholder="Type Patient Number or Name Here"
+            [clearable]="true"
+            [editableSearchTerm]="true"
+        >
+            <ng-template ng-option-tmp let-item="item">
+                {{ item.patientFullName }} <br/>
+                <small>
+                    <strong>{{ item.patientNumber }}</strong> -
+                    <i>{{ item.patientCategoryEnum }}</i>
+                </small>
+            </ng-template>
+        </ng-select>
+    </div>
+</div>

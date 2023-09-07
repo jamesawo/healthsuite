@@ -1,0 +1,139 @@
+<fieldset class="border p-2 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+        Seed Department Data
+        <ng-template #statusTemplate>
+            To <code>create</code> a single department follow the below steps:
+            <br />
+            1. Select department category <br />
+            2. Enter department name <br />
+            3. Click save button.
+            <br />
+            <br />
+            To <code>Upload </code>multiple department from excel file: <br />
+            1. Drag or Click Choose file , <br />
+            2. Click Upload File Button. <br />
+            <small><code>Note: Only excel files are allowed.</code></small>
+        </ng-template>
+        <i
+            class="fa fa-info-circle fa-sm tx-12"
+            [ngbPopover]="statusTemplate"
+            placement="right"
+            triggers="mouseenter:mouseleave"
+            container="body"
+            aria-hidden="true"
+        ></i>
+    </legend>
+    <form (ngSubmit)="onCreateDepartment()" [formGroup]="departmentForm">
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label>Select Department Category </label>
+                <ng-select
+                    [formControlName]="'departmentCategory'"
+                    [ngClass]="{ 'is-invalid': isSubmitted && form.departmentCategory.errors }"
+                >
+                    <ng-option
+                        *ngFor="let departmentCategory of departmentCategories"
+                        [value]="departmentCategory.id"
+                    >
+                        {{ departmentCategory.name | uppercase }}
+                    </ng-option>
+                </ng-select>
+            </div>
+
+            <!-- col-4 -->
+            <div class="col-md-6">
+                <label for="departmentName">Enter Department Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="departmentName"
+                    [formControlName]="'departmentName'"
+                    [ngClass]="{ 'is-invalid': isSubmitted && form.departmentName.errors }"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+    </form>
+    <!-- Upload File    /-->
+    <div class="form-group mg-3">
+        <label>Import Excel File</label>
+        <div class="row row-sm">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <button class="btn btn-primary mg-r-10">
+                    <i class="fa fa-download mg-r-2"></i>
+                    Download Template
+                </button>
+
+                <button class="btn btn-primary">
+                    <i class="fa fa-upload mg-r-2"></i>
+                    Upload File
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive mg-t-20">
+        <table class="table table-striped table-bordered mg-b-0">
+            <thead>
+                <tr>
+                    <th class="wd-3">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <th>Department Name</th>
+                    <th>Department Code</th>
+                    <th>Department Category</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="
+                        let department of collection
+                            | paginate: { itemsPerPage: 10, currentPage: page }
+                    "
+                >
+                    <th scope="row">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <td>
+                        <span>
+                            {{ department.name }}
+                            &nbsp;
+                        </span>
+
+                    </td>
+                    <td>{{ department.code }}</td>
+                    <td>
+                        <label>
+                            <select>
+                                <option
+                                    *ngFor="let data of departmentCategories"
+                                    value="{{ data.id }}"
+                                    [selected]="data.id === department.departmentCategory.id"
+                                >
+                                    {{ data.name }}
+                                </option>
+                            </select>
+                        </label>
+                    </td>
+                    <td>
+                        <span class="pointer" (click)="onUpdateDepartment(department)">
+                            <i class="fa fa-pencil-alt tx-10"></i>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation" class="mg-t-15" *ngIf="collection?.length">
+            <ul class="pagination justify-content-end">
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+            </ul>
+        </nav>
+    </div>
+</fieldset>

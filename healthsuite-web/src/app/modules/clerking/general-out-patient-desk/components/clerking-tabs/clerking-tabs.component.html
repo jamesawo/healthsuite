@@ -1,0 +1,60 @@
+<div class="tabs-wrapper">
+    <div class="d-flex flex-row  mg-b-10">
+        <div class="pd-10 tabs-btn-wrapper">
+            <div class="btn-group" dropdown container="body">
+                <button id="button-animated" dropdownToggle type="button"
+                        class="btn tabs-btn btn-with-icon btn-block dropdown-toggle"
+                        aria-controls="dropdown-animated">
+                    <i class="typcn typcn-arrow-shuffle"></i>
+                    Vitals <span class="caret"></span>
+                </button>
+                <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu"
+                    role="menu" aria-labelledby="button-animated">
+                    <li role="menuitem"><a class="dropdown-item pointer" (click)="onViewVitalModal()">View Vital</a></li>
+                    <li role="menuitem"><a class="dropdown-item pointer" (click)="onTakeVitalModal()">Take Vital</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="pd-10 tabs-btn-wrapper">
+            <button class="btn tabs-btn btn-with-icon btn-block" (click)="onPharmacyModal()"><i
+                    class="typcn typcn-thermometer"></i> Pharmacy
+            </button>
+        </div>
+        <div class="pd-10 tabs-btn-wrapper">
+            <button class="btn tabs-btn btn-with-icon btn-block" (click)="onLabModal()"><i
+                    class="typcn typcn-beaker"></i> LAB
+            </button>
+        </div>
+        <div class="pd-10 tabs-btn-wrapper">
+            <button class="btn tabs-btn btn-with-icon btn-block" (click)="onRadiologyModal()"><i
+                    class="typcn typcn-radar"></i> Radiology
+            </button>
+        </div>
+        <div class="pd-10 tabs-btn-wrapper">
+            <button class="btn tabs-btn btn-with-icon btn-block" (click)="onProcedures()"><i
+                    class="typcn typcn-bookmark"></i> Procedures
+            </button>
+        </div>
+        <div class="pd-10 tabs-btn-wrapper">
+            <button class="btn tabs-btn btn-with-icon btn-block" (click)="onAdmissionModal()"><i
+                    class="typcn typcn-business-card"></i> Admission
+            </button>
+        </div>
+        <div class="pd-10 tabs-btn-wrapper">
+            <button class="btn tabs-btn btn-with-icon btn-block" (click)="onEFolderModal()"><i
+                    class="typcn typcn-folder"></i> Folder
+            </button>
+        </div>
+        <div class="pd-10 tabs-btn-wrapper">
+            <button class="btn tabs-btn btn-with-icon btn-block" (click)="onReferralNote()"><i
+                    class="typcn typcn-link-outline"></i> Referral
+            </button>
+        </div>
+        <div class="pd-10 tabs-btn-wrapper">
+            <button class="btn tabs-btn btn-with-icon btn-block" (click)="onAppointmentTab()"><i
+                    class="typcn typcn-bookmark"></i> Appointment
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+::ng-deep.dropdown-menu.show {
+    max-height: 1100% !important;
+    height: auto;
+    overflow-y: auto !important;
+    width: 66%;
+}
+
+::ng-deep.bg-popover-custom .popover-body {
+    background: #f5f5f5;
+}
+
+::ng-deep.btn-popover-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    border: none;
+    height: 23px;
+}
+
+::ng-deep.btn-popover-primary {
+    color: #fff;
+    background-color: #0040ff;
+    border-color: #003df2;
+    border: none;
+    height: 23px;
+}

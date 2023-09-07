@@ -1,0 +1,107 @@
+<fieldset class="border p-2 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+        Seed Revenue Department Data
+        <ng-template #statusTemplate>
+            To <code>create</code> a revenue department follow the below steps:
+            <br />
+            1. Select Revenue Department Type <br />
+            2. Enter the Revenue Department Name <br />
+            3. Click on save button.
+            <br />
+        </ng-template>
+        <i
+            class="fa fa-info-circle fa-sm tx-12"
+            [ngbPopover]="statusTemplate"
+            placement="right"
+            triggers="mouseenter:mouseleave"
+            container="body"
+            aria-hidden="true"
+        ></i>
+    </legend>
+    <form (ngSubmit)="onCreateRevenueDepartment()" [formGroup]="revenueDepartmentForm">
+        <div class="row form-group">
+            <div class="col-md-4">
+                <label>Select Revenue Department Type </label>
+                <ng-select
+                    [formControlName]="'revDepartmentType'"
+                    [ngClass]="{ 'is-invalid': isSubmitted && form.revenueDepartmentForm.errors }"
+                >
+                    <ng-option *ngFor="let data of revenueDepartmentTypes" value="{{ data.id }}">
+                        {{ data.name | uppercase }}
+                    </ng-option>
+                </ng-select>
+            </div>
+
+            <!-- col-4 -->
+            <div class="col-md-4">
+                <label for="revDepartmentName">Enter Revenue Department Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="revDepartmentName"
+                    [formControlName]="'revDepartmentName'"
+                    [ngClass]="{ 'is-invalid': isSubmitted && form.revDepartmentName.errors }"
+                />
+            </div>
+
+            <div class="col-md-4">
+                <label>Attach To Deposit?</label> <br />
+                <input
+                    type="checkbox"
+                    name="isAttached"
+                    [(ngModel)]="revenueDepartment.isAttachedToDeposit"
+                    [ngModelOptions]="{ standalone: true }"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+    </form>
+
+    <div class="table-responsive mg-t-20">
+        <table class="table table-bordered mg-b-0">
+            <thead>
+                <tr>
+                    <th class="wd-3">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of revenueDepartmentList">
+                    <th scope="row">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.code }}</td>
+                    <td>
+                        <label>
+                            <select>
+                                <option
+                                    *ngFor="let type of revenueDepartmentTypes"
+                                    value="{{ type.id }}"
+                                    [selected]="data.revenueDepartmentTypeDto.id === type.id"
+                                >
+                                    {{ type.name }}
+                                </option>
+                            </select>
+                        </label>
+
+                        <span class="mg-l-15" *ngIf="data.isAttachedToDeposit === true">
+                            <i class="fa fa-check-circle"></i>
+                        </span>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>

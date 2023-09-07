@@ -1,0 +1,31 @@
+<div class="">
+    <div class="input-group">
+        <div class="input-group-prepend pointer">
+            <div class="input-group-text" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen">
+                <i class="text-primary typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+            </div>
+        </div>
+        <input
+            type="text"
+            class="form-control"
+            [placeholder]="placeHolder"
+            name="admissionDate"
+            autocomplete="off"
+            [bsValue]="currentDate"
+            (bsValueChange)="onValueChange($event)"
+            #dp="bsDatepicker"
+            bsDatepicker
+            [bsConfig]="bsConfig"
+            required
+            [minDate]="props?.minDate"
+        />
+    </div>
+
+    <ng-container *ngIf="props?.showTime">
+        <div class="form-group mg-t-20">
+            <label>Select Time</label> <br>
+            <small>Note: Click on <code>AM/PM</code> to toggle</small>
+            <timepicker [showSpinners]="true" [arrowkeys]="true" (ngModelChange)="setTime($event)" [(ngModel)]="mytime"></timepicker>
+        </div>
+    </ng-container>
+</div>

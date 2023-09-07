@@ -1,0 +1,181 @@
+<div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="flex-column">
+            <div class="pd-10 pd-sm-15 wd-xl-100p">
+                <div class="row">
+                    <div class="col-auto">
+                        <label class="rdiobox" for="create">
+                            <input
+                                    id="create"
+                                    name="scheme"
+                                    type="radio"
+                                    checked
+                                    (change)="onReportTypeChange(uncompiled)"
+                            />
+                            <span>UNCOMPILED LIST</span>
+                        </label>
+                    </div>
+                    <div class="col-auto">
+                        <label class="rdiobox" for="edit">
+                            <input
+                                    name="scheme"
+                                    id="edit"
+                                    type="radio"
+                                    (change)="onReportTypeChange(compiled)"
+                            />
+                            <span>COMPILED LIST</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- search by -->
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row mg-t-10">
+            <div class="row col-4 mg-l-5 mg-b-15">
+                <label class="w-25 align-self-center">Search By:</label>
+                <div class="w-75">
+                    <app-search-by-dropdown
+                        #searchByDropdownComponent
+                        (selected)="onSearchByChanged($event)"
+                        [collection]="searchByCollection"
+                    ></app-search-by-dropdown>
+                </div>
+            </div>
+            <div class="col-8 mg-t-20 mg-lg-t-0">
+                <ng-container *ngIf="searchPayload.searchBy === shiftNumber; else cashierNameRef">
+                    <app-cashier-shift-number-search
+                            [props]="{showLabel: false, hideClosedShift: false}"
+                            (selected)="onShiftSelected($event)"></app-cashier-shift-number-search>
+                </ng-container>
+                <ng-template #cashierNameRef>
+                    <app-user-search
+                            (selected)="onCashierSelected($event)"
+                            [props]="{showLabel: false,isConsultant: false,showDisabledUser: false}">
+                    </app-user-search>
+                </ng-template>
+            </div>
+        </div>
+    </fieldset>
+
+    <!--  date filter -->
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">Start Date</label>
+                    <app-shared-date #startDateComponent (selected)="onDateSelected($event, start)"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">End Date</label>
+                    <app-shared-date #endDateComponent (selected)="onDateSelected($event, end)"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mg-t-30">
+                    <button class="btn btn-sm btn-primary" (click)="onSearchRecord()">VIEW</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- table -->
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="text-left">
+                <div class="row mg-b-10">
+                    <div class="col-md-6 row mg-t-10">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-right">
+                            <button class="btn-primary btn btn-sm mg-l-2" (click)="onCompileShift()"><i class="far fa-eye"></i>COMPILE SHIFT
+                            </button>
+
+                            <button class="btn-danger btn btn-sm mg-l-2" (click)="onClearCollection()">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-left"></th>
+                        <th class="text-left">Cashier Username</th>
+                        <th class="text-left">Location</th>
+                        <th class="text-left">Shift Number</th>
+                        <th class="text-left">Shift Date</th>
+                        <th class="text-left">Cash</th>
+                        <th class="text-left">Cheque</th>
+                        <th class="text-left">POS</th>
+                        <th class="text-left">Mobile Money</th>
+                        <th class="text-left">ETF</th>
+                        <th class="text-left">Total</th>
+                        <th class="text-left">Receipt Count</th>
+                        <th class="text-left">Status</th>
+                        <th class="text-left">Shift Closed By</th>
+                        <th class="text-left">Reconciled</th>
+                        <th class="text-left">Reconciled By</th>
+                        <th class="text-left">Reconciliation Date</th>
+                        <th class="text-left">Compiled</th>
+                        <th class="text-left">Compiled By</th>
+                        <th class="text-left">Compiled Date</th>
+                        <th class="text-left">Compilation #</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of collection; let i = index" class="tx-13">
+                        <td class="text-left">
+                            <input type="checkbox" [checked]="item.checked === true"
+                                   (click)="onShiftItemChecked(item, $event)">
+                        </td>
+                        <td class="text-left">{{item?.cashier?.label}}</td>
+                        <td class="text-left">{{item?.department?.name}}</td>
+                        <td class="text-left">{{item?.shiftNumber}}</td>
+                        <td class="text-left" style="width: 200px">{{item?.openDate | date}}</td>
+                        <td class="text-left">{{item?.cash | currency: ' '}}</td>
+                        <td class="text-left">{{item?.cheque | currency: ' '}}</td>
+                        <td class="text-left">{{item?.pos | currency: ' '}}</td>
+                        <td class="text-left">{{item?.mobileMoney | currency: ' '}}</td>
+                        <td class="text-left">{{item?.etf | currency: ' '}}</td>
+                        <td class="text-left">{{item?.total | currency: ' '}}</td>
+                        <td class="text-left">{{item?.receiptCount}}</td>
+                        <td class="text-left">
+                            <span class="badge badge-{{item?.isActive?'success': 'danger'}}"> {{item?.isActive ? 'Active' : 'Closed'}}  </span>
+                        </td>
+                        <td class="text-left">{{item?.closedByUser?.label}}</td>
+                        <td class="text-left">
+                            <span class="badge badge-{{item?.isFundReceived?'success': 'danger'}}"> {{item?.isFundReceived ? 'Yes' : 'No'}}  </span>
+                        </td>
+                        <td class="text-left">{{item?.fundReception?.receivedBy?.label}}</td>
+                        <td class="text-left">{{item?.fundReception?.date | date}}</td>
+                        <td class="text-left">
+                            <span class="badge badge-{{item?.isShitCompiled?'success': 'danger'}}"> {{item?.isShitCompiled ? 'Yes' : 'No'}}  </span>
+                        </td>
+                        <td class="text-left">{{item?.compiledShift?.compiledBy?.userName}}</td>
+                        <td class="text-left">{{item?.compiledShift?.compiledDate | date}}</td>
+                        <td class="text-left">{{item?.compiledShift?.code}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </fieldset>
+
+</div>

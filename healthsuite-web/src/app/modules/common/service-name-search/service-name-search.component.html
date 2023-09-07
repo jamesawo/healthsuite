@@ -1,0 +1,30 @@
+<div class="input-wrapper">
+    <label *ngIf="props?.showLabel">Type Service Name</label>
+    <ng-select
+        #searchService
+        [items]="responsePayload | async"
+        bindLabel="name"
+        [trackByFn]="trackByFn"
+        [minTermLength]="minLengthTerm"
+        [loading]="isLoading"
+        typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+        [typeahead]="searchInput$"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="selectedPayload"
+        (change)="onSelect($event)"
+        [clearable]="true"
+        [clearOnBackspace]="true"
+        [editableSearchTerm]="true"
+        placeholder="Search.."
+    >
+        <ng-template ng-option-tmp let-item="item">
+            <strong>
+                {{ item.name }}
+            </strong>
+            <br />
+            <small>
+                <i>Code: {{ item.code }}</i>
+            </small>
+        </ng-template>
+    </ng-select>
+</div>

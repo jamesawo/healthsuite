@@ -1,0 +1,28 @@
+<div class="input-wrapper">
+    <label *ngIf="props?.showLabel">Pharmacy Location Name</label>
+    <ng-select
+        #selectComponent
+        [items]="responsePayload | async"
+        bindLabel="name"
+        [trackByFn]="trackByFn"
+        [minTermLength]="minLengthTerm"
+        [loading]="isLoading"
+        typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+        [typeahead]="searchInput$"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="selectedPayload"
+        (change)="onSelect($event)"
+        [clearable]="true"
+        placeholder="Start Typing..."
+    >
+        <ng-template ng-option-tmp let-item="item">
+            <strong>
+                {{ item.name }}
+            </strong>
+            <br />
+            <small>
+                <i>Code: [ {{ item.code }} ]</i>
+            </small>
+        </ng-template>
+    </ng-select>
+</div>

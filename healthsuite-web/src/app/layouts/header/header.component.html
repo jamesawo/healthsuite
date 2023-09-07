@@ -1,0 +1,101 @@
+<div class="az-header az-header-dashboard-six">
+    <div class="container-fluid">
+        <div class="az-header-left">
+            <h3 class="text-uppercase az-page-label" style="color: #000000">
+                <strong>{{pageTitle}} </strong>
+            </h3>
+
+        </div>
+        <div class="az-header-center">
+            <input type="search" class="d-none form-control" placeholder="Search for anything..."/>
+            <button class="btn d-none"><i class="fas fa-search"></i></button>
+        </div>
+
+        <ng-container *ngIf="showNotification">
+            <div
+                    class="dropdown az-header-notification"
+                    (click)="toggleNotification = !toggleNotification"
+                    [class.show]="toggleNotification"
+            >
+                <a class="new pointer"><i class="typcn typcn-bell"></i></a>
+                <div class="dropdown-menu">
+                    <div class="az-dropdown-header mg-b-20 d-sm-none">
+                        <a class="az-header-arrow pointer"
+                        ><i class="icon ion-md-arrow-back"></i
+                        ></a>
+                    </div>
+                    <h6 class="az-notification-title">Notifications</h6>
+                    <p class="az-notification-text">
+                        You have {{ notifications.length }} notification
+                    </p>
+                    <div class="az-notification-list">
+                        <div class="media new" *ngFor="let data of notifications | slice: 0:4">
+                            <div class="az-img-user">
+                                <img src="assets/img/bell.png" alt=""/>
+                            </div>
+                            <div class="media-body">
+                                <p>
+                                    <span class="text-uppercase"> {{ data.title }} </span>
+                                    <small>{{ data.content }} </small>
+                                </p>
+                                <span> {{ getDate(data.dateTime) | amTimeAgo }}</span>
+                            </div>
+                            <!-- media-body -->
+                        </div>
+                    </div>
+                    <!-- az-notification-list -->
+                    <div class="dropdown-footer"><a class="pointer">View All Notifications</a></div>
+                </div>
+                <!-- dropdown-menu -->
+            </div>
+        </ng-container
+        >
+
+        <div class="az-content-label tx-13 mg-l-20 mg-b-0">
+            <span><i class="typcn typcn-location"></i></span>
+            {{ location?.name }}
+        </div>
+
+        <div class="az-header-right">
+            <div
+                    class="dropdown az-profile-menu"
+                    (click)="showUserProfile = !showUserProfile"
+                    [class.show]="showUserProfile"
+            >
+                <a class="az-img-user"><img [src]="imageAvatar" alt=""/></a>
+                <div class="dropdown-menu" (mouseleave)="showUserProfile = false">
+                    <div class="az-dropdown-header d-sm-none">
+                        <a class="az-header-arrow"><i class="icon ion-md-arrow-back"></i></a>
+                    </div>
+
+                    <a class="dropdown-item">
+                        <i class="typcn typcn-user-outline"></i>
+                        {{ userDetails.username.toUpperCase() }}
+                    </a>
+
+                    <ng-container *ngIf="userDetails?.shiftNumber">
+                        <a class="dropdown-item" >
+                            <i class="typcn typcn-calendar-outline"></i>
+                            {{ userDetails.shiftNumber }}
+                        </a>
+
+                        <a class="dropdown-item" (click)="onCloseCashierShift()">
+                            <i class="typcn typcn-battery-charge"></i>
+                            CLOSE SHIFT
+                        </a>
+                    </ng-container>
+
+
+                    <a class="dropdown-item" (click)="onChangePassword()">
+                        <i class="typcn typcn-lock-closed-outline"></i>
+                        CHANGE PASSWORD
+                    </a>
+
+                    <a class="dropdown-item" (click)="onLogout()"
+                    ><i class="typcn typcn-power-outline"></i> LOG OUT</a
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

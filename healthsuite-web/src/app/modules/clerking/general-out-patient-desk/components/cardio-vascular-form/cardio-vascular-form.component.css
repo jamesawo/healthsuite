@@ -1,0 +1,4 @@
+.heart-sounds {
+    display: flex;
+    justify-content: space-between;
+}

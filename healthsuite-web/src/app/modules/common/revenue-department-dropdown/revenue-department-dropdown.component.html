@@ -1,0 +1,11 @@
+<ng-select #ngSelectComponent
+    (change)="onSelect($event)"
+    [closeOnSelect]="true"
+    [clearable]="false"
+    [searchable]="false"
+    [title]="default?.name"
+    [(ngModel)]="default"
+    placeholder="Select One.."
+>
+    <ng-option *ngFor="let item of data" [value]="item">{{ item.name }}</ng-option>
+</ng-select>

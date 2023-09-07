@@ -1,0 +1,19 @@
+.dv-deposit {
+    margin-top: 20px;
+    padding: 20px 10px 5px 10px;
+}
+
+.totals {
+    display: flex;
+    justify-content: space-around;
+}
+
+.available-deposit-row {
+    display: flex;
+    align-items: center;
+}
+
+.available-deposit-d {
+    display: flex;
+    flex-direction: column;
+}

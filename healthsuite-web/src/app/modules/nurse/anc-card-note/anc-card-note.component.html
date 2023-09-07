@@ -1,0 +1,25 @@
+<div class="main-wrapper az-content-body">
+
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row pd-l-10 pd-r-10">
+            <div class="col-md-12">
+                <div class="form-group d-inline">
+                    <label class="tx-16 txt-black">Patient Search</label>
+                    <app-patient-search #patientSearchComponent  (selected)="onPatientSelected($event)" [props]="{
+                        showLabel: false,
+                        checkAdmission: true,
+                        loadAdmission: false}"
+                    ></app-patient-search>
+                </div>
+            </div>
+        </div>
+
+        <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+            <div class="form-group text-left">
+                <button class="btn btn-primary" (click)="onPreviewCardNote()">Preview Card Note</button>
+            </div>
+        </div>
+    </fieldset>
+</div>

@@ -1,0 +1,84 @@
+<div class="main-wrapper az-content-body">
+    <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class=" mg-t-10">
+            <div class="row  mg-l-5">
+                <div class="col-md-4">
+                    <label class="">Search By:</label>
+                    <app-lab-search-by (selected)="onSearchByChange($event)"></app-lab-search-by>
+                </div>
+                <div class="col-md-8">
+                    <label class="">Enter Search Term:</label>
+                    <ng-select></ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- log info -->
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-14 tx-bold">
+            Search Filter
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+            <div class="col-md-4">
+                <div class="form-group ">
+                    <label class="tx-16 txt-black">Start Date</label>
+                    <app-shared-date (selected)="onDateSelected($event, 'start')"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mg-b-10">
+                    <label class="tx-16 txt-black">End Date</label>
+                    <app-shared-date (selected)="onDateSelected($event, 'end')"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <button class="btn btn-primary mg-t-30" (click)="onSearchRequest()">VIEW</button>
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+
+    <!-- table -->
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>
+                            <div class="form-check form-check-inline">
+                                <input
+                                        class="form-check-input scale-check-3"
+                                        type="checkbox"
+
+                                />
+                                <label class="form-check-label" >
+                                    <i
+                                            class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                    ></i>
+                                </label>
+                            </div>
+                        </th>
+                        <th class="text-center">S/N</th>
+                        <th class="text-center">LAB TEST</th>
+                        <th class="text-center">CODE NUMBER</th>
+                        <th class="text-center">LAB NUMBER </th>
+                        <th class="text-center">PATIENT NAME</th>
+                        <th class="text-center">PATIENT NUMBER</th>
+                        <th class="text-center">SPECIMEN DATE</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </fieldset>
+
+
+</div>

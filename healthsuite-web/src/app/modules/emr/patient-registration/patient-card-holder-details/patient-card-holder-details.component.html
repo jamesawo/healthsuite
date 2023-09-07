@@ -1,0 +1,131 @@
+<div class="row tx-12">
+    <div class="col-md-6 offset-md-3">
+        <div class="row mg-b-10">
+            <!-- Card Holder -->
+            <div class="col">
+                <label class="rdiobox">
+                    <input
+                        name="rdio"
+                        type="radio"
+                        [value]="holder"
+                        [(ngModel)]="patientPayload.patientCardHolder.cardHolderType"
+                        [checked]="patientPayload.patientCardHolder.cardHolderType == holder"
+                    />
+                    <span>Card Holder?</span>
+                </label>
+            </div>
+            <!-- Dependant -->
+            <div class="col mg-t-20 mg-lg-t-0">
+                <label class="rdiobox">
+                    <input
+                        name="rdio"
+                        type="radio"
+                        [value]="dependant"
+                        [(ngModel)]="patientPayload.patientCardHolder.cardHolderType"
+                        [checked]="patientPayload.patientCardHolder.cardHolderType == dependant"
+                    />
+                    <span>Dependant?</span>
+                </label>
+            </div>
+        </div>
+        <!-- row -->
+    </div>
+</div>
+<!-- Card Holder Information -->
+<fieldset class="border p-2 rounded mg-t-20">
+    <legend class="w-auto tx-16">
+        Card Holder Information
+    </legend>
+    <form class="form-padding" autocomplete="off">
+        <!-- Holder Name -->
+        <div class="row form-group">
+            <div class="col-12">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Holder Name:</label>
+                    <div class="col-10">
+                        <input
+                            class="form-control form-control-sm"
+                            type="text"
+                            placeholder="Enter Card Holder Name"
+                            name="holderName"
+                            [(ngModel)]="patientPayload.patientCardHolder.name"
+                            autocomplete="disabled"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Holder Insurance Number & Card Expiry-->
+        <div class="row form-group">
+            <!-- Holder Insurance Number -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Place of Work: </label>
+                    <div class="col-sm-8">
+                        <input
+                            class="form-control form-control-sm"
+                            type="text"
+                            placeholder="Enter Place of Work"
+                            name="insuranceNumber"
+                            [(ngModel)]="patientPayload.patientCardHolder.placeOfWork"
+                            autocomplete="disabled"
+                        />
+                    </div>
+                </div>
+            </div>
+            <!-- Card Expiry -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Department</label>
+                    <div class="col-sm-8">
+                        <input
+                            class="form-control form-control-sm"
+                            placeholder="Enter Department"
+                            name="department"
+                            [(ngModel)]="patientPayload.patientCardHolder.department"
+                            autocomplete="disabled"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>
+
+<!--Dependant Information -->
+<ng-container *ngIf="patientPayload.patientCardHolder.cardHolderType === dependant">
+    <fieldset class="border p-2 rounded mg-t-20">
+        <legend class="w-auto tx-16">
+            Beneficiary Details
+        </legend>
+        <form class="form-padding" autocomplete="off">
+            <!-- Beneficiary Name -->
+            <div class="row form-group">
+                <div class="col-6">
+                    <div class="form-group row tx-12">
+                        <label class="col col-form-label">Beneficiary Name:</label>
+                        <div class="col-10">
+                            <input
+                                    class="form-control form-control-sm"
+                                    type="text"
+                                    placeholder="Enter Name"
+                                    name="beneficiaryName"
+                                    [(ngModel)]="patientPayload.patientCardHolder.beneficiaryName"
+                                    autocomplete="disabled"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group row tx-12">
+                        <label class="col col-form-label">Relationship with Card Holder:</label>
+                        <div class="col-10">
+                            <app-relationship-dropdown (selected)="onRelationshipSelected($event)" [default]="patientPayload.patientCardHolder.relationShipWithCardHolder"></app-relationship-dropdown>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+</ng-container>

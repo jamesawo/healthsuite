@@ -1,0 +1,109 @@
+<div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+    <div class=" mg-t-10">
+        <div class="row mg-l-5 ">
+            <div class="row col-4 mg-l-5">
+                <label class="w-25 align-self-center">Search By:</label>
+                <div class="w-75">
+                    <app-lab-search-by [default]="payload.searchByEnum"
+                                       (selected)="onSearchByChange($event)"></app-lab-search-by>
+                </div>
+            </div>
+            <div class="col-8 mg-t-20 mg-lg-t-0">
+                <ng-container [ngSwitch]="payload.searchByEnum">
+                    <!-- search using invoice number -->
+                    <ng-container *ngSwitchCase="invoiceNumber">
+                        <app-bill-data-search
+                            #billDataSearchComponent
+                            [props]="{ loadDeposit: false }"
+                            (selected)="onSearchByBillNumberSelected($event)"
+                        ></app-bill-data-search>
+                    </ng-container>
+                    <!-- search using lab number -->
+                    <ng-container *ngSwitchCase="labNumber">
+                        <ng-select placeholder="Enter Lab Number .."></ng-select>
+                    </ng-container>
+                    <!-- search using patient number -->
+                    <ng-container *ngSwitchCase="patient">
+                        <app-patient-search
+                                [props]="{
+                                    showLabel: false,
+                                    checkAdmission: false,
+                                    loadAdmission: false,
+                                    loadRevisit: false,
+                                    loadSchemeDiscount: false,
+                                    loadDeposit: false
+                                }"
+                                (selected)="onPatientSelected($event)"
+                        ></app-patient-search>
+                    </ng-container>
+                    <!-- search using receipt -->
+                    <ng-container *ngSwitchCase="salesReceipt">
+                        <app-payment-receipt-search
+                                [props]="{
+                                    showLabel: false,
+                                    searchBy: searchBySelected,
+                                    loadPatientDetail: true,
+                                    loadPatientBill: true,
+                                    filterFor: serviceReceipt
+                                }"
+                                (selected)="onReceiptSelected($event)"
+                        ></app-payment-receipt-search>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-patient-bio-card [selectedPatient]="payload.patient"></app-patient-bio-card>
+
+<!-- log info -->
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="row pd-l-40 pd-r-40">
+        <div class="col-md-12" *ngIf="payload.searchByEnum === patient">
+            <div class="form-group ">
+                <label class="tx-16 txt-black">Select Lab Bill</label>
+                <ng-select (change)="onPatientTestSelected($event)" placeholder="Select Test..">
+                    <ng-option [value]="test" *ngFor="let test of testRequestList; let i = index">
+                        {{test.code}} - {{ 1 + i}}
+                    </ng-option>
+                </ng-select>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+</fieldset>
+
+<!-- log info -->
+<ng-template>
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-14 tx-bold">
+            Search Filter
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+            <div class="col-md-4">
+                <div class="form-group ">
+                    <label class="tx-16 txt-black">Start Date</label>
+                    <app-shared-date (selected)="onDateSelected($event, 'start')"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mg-b-10">
+                    <label class="tx-16 txt-black">End Date</label>
+                    <app-shared-date (selected)="onDateSelected($event, 'end')"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <button class="btn btn-primary mg-t-30" (click)="onSearchRequest()">VIEW</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</ng-template>

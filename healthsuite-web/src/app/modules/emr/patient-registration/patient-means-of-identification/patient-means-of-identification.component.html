@@ -1,0 +1,65 @@
+<fieldset class="border p-2 rounded mg-t-20 bg-gray-100">
+    <legend class="w-auto tx-16">
+        Means of Identification
+    </legend>
+    <form class="form-padding" autocomplete="off">
+        <!-- ID Type -->
+        <div class="row form-group">
+            <!-- patient clinic -->
+            <div class="col-12">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">ID Type:</label>
+                    <div class="col-10">
+                        <ng-select
+                            name="idType"
+                            [(ngModel)]="
+                                patientPayload.patientMeansOfIdentification.identificationType
+                            "
+                            placeholder="Select Id Types.."
+                        >
+                            <ng-option *ngFor="let data of idTypes" [value]="data.id">{{
+                                data.name
+                            }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <!-- ID Number -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">ID Number: </label>
+                    <div class="col-sm-8">
+                        <input
+                            class="form-control form-control-sm"
+                            type="text"
+                            placeholder="Enter Id Number"
+                            [(ngModel)]="
+                                patientPayload.patientMeansOfIdentification.identificationNumber
+                            "
+                            name="identificationNumber"
+                            autocomplete="disabled"
+                        />
+                    </div>
+                </div>
+            </div>
+            <!-- Expiry Date -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Expiry Date:</label>
+                    <div class="col-md-8">
+                        <app-shared-date #dateComponent
+                            [props]="{
+                                hideCurrentDate: true,
+                                setDate: patientPayload?.patientMeansOfIdentification.expiryDate,
+                                minDate: minDate
+                            }"
+                            (selected)="onDateSelected($event)"
+                        ></app-shared-date>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>

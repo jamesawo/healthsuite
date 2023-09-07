@@ -1,0 +1,29 @@
+<div class="main-wrapper az-content-body">
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-14 tx-bold"></legend>
+
+        <div class="flex-column">
+            <div class="row align-items-center mg-b-20 mg-t-5">
+                <div class="row col-12 mg-l-5">
+                    <label class="w-15 align-self-center">Lab Test:</label>
+                    <div class="wd-90p mg-l-10">
+                        <app-service-name-search #serviceNameSearchComponent
+                                                 [props]="{showLabel: false, viewType: viewType}"
+                                                 (selected)="onLabTestSelected($event)"
+                        ></app-service-name-search>
+                    </div>
+                </div>
+
+                <div class="row col-6 mg-l-5 mg-t-20">
+                    <label class="w-15 align-self-center">Parameter:</label>
+                    <div class="w-75 mg-l-10">
+                        <ng-select placeholder="Select Parameter" (change)="onParameterSelected($event)">
+                            <ng-option [value]="item" *ngFor="let item of paramPayload.parameterSetupItems">{{item.parameter.title}}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+</div>

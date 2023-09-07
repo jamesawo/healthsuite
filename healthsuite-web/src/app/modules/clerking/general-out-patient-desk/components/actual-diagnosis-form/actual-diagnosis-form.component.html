@@ -1,0 +1,70 @@
+<fieldset>
+    <legend>Actual Diagnosis</legend>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-4">
+                    <label>Add Diagnosis: </label>
+                </div>
+                <div class="col-md-8 mg-t-5 mg-md-t-0">
+                    <app-search-diseases (selected)="onDiseaseSelected($event)"></app-search-diseases>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-4"></div>
+                <div class="col-md-8 table-responsive">
+                    <div class="table-responsive">
+                        <table class="table table-bordered mg-b-0">
+                            <thead>
+                            <tr>
+                                <th class="wd-15">
+                                    <div class="form-check form-check-inline wd-15">
+                                        <input
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                [checked]="isAllCheckBoxChecked()"
+                                                (change)="checkAllCheckBox($event)"
+                                        />
+                                        <label class="form-check-label">
+                                            <i
+                                                    (click)="onRemoveAllCheckedBillItems()"
+                                                    class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                            ></i>
+                                        </label>
+                                    </div>
+                                </th>
+                                <th>Name</th>
+                                <th>Code</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let data of props.data.diseasesArray">
+                                <th class="wd-10"><input type="checkbox"></th>
+                                <td>{{data.name}}</td>
+                                <td>{{data.code}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div><!-- table-responsive -->
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-4 ">
+                    <label>Other Diagnosis: </label>
+                </div>
+                <div class="col-md-8 mg-t-5 mg-md-t-0 heart-sounds">
+                    <textarea class="input-control" cols="10" placeholder="Enter Other Diagnosis" rows="2" [(ngModel)]="props.data.otherDiagnosis"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

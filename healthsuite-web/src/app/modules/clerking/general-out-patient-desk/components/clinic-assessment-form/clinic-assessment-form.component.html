@@ -1,0 +1,57 @@
+<div class="pd-30 pd-sm-40 wd-xl-100p az-form-group">
+
+    <div class="row row-xs align-items-center mg-b-20">
+        <div class="col-md-4">
+            <label>Clinic Assessment:
+            </label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <textarea  cols="10" rows="2" class="input-control" placeholder="Enter Clinic Assessment" [(ngModel)]="props.data.clinicalAssessment"></textarea>
+        </div>
+    </div>
+
+    <div class="row row-xs align-items-center mg-b-20">
+        <div class="col-md-4">
+            <label>Provisional Diagnosis:
+            </label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <textarea  cols="10" rows="2" class="input-control" placeholder="Provisional Diagnosis" [(ngModel)]="props.data.provisionalDiagnosis"></textarea>
+        </div>
+    </div>
+
+    <div class="row row-xs align-items-center mg-b-20">
+        <div class="col-md-4">
+            <label> Treatment Plan:
+            </label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <textarea  cols="10" rows="2" class="input-control" placeholder="Enter Treatment Plan" [(ngModel)]="props.data.treatmentPlan"></textarea>
+
+        </div>
+    </div>
+
+    <div class="row row-xs align-items-center mg-b-20">
+        <div class="col-md-4">
+            <label>Record Investigation Results:
+            </label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <textarea  cols="10" rows="2" class="input-control" placeholder="Enter Record Investigation Results" [(ngModel)]="props.data.recordInvestigationResults"></textarea>
+
+        </div>
+    </div>
+
+    <div class="row row-xs align-items-center mg-b-20">
+        <div class="col-md-4">
+            <label>
+                Follow Up Note  <input type="checkbox" [checked]="props.data.hasFollowUpNote" (change)="onToggleFollowUpNote($event)"> :
+            </label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <textarea  cols="10" rows="2" class="input-control" placeholder="Enter Follow Up Note" [(ngModel)]="props.data.followUpNote" [disabled]="!props.data.hasFollowUpNote"></textarea>
+
+        </div>
+    </div>
+
+</div>

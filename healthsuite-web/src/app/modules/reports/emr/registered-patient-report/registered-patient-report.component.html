@@ -1,0 +1,144 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column">
+        <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="create">
+                        <input
+                                id="create"
+                                name="scheme"
+                                type="radio"
+                                [checked]="payload.type === new"
+                                (change)="onTypeChange(new)"
+                        />
+                        <span>New</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="edit">
+                        <input
+                                name="scheme"
+                                id="edit"
+                                type="radio"
+                                (change)="onTypeChange(old)"
+                        />
+                        <span>Old</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="both">
+                        <input
+                                name="scheme"
+                                id="both"
+                                type="radio"
+                                (change)="onTypeChange(both)"
+                        />
+                        <span>Both</span>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+            <div class="col-md-6">
+                <div class="form-group ">
+                    <label class="tx-16 txt-black">Gender</label>
+                    <app-gender-dropdown #genderDropdownComponent (selected)="onSelectGender($event)"></app-gender-dropdown>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mg-b-10">
+                    <label class="tx-16 txt-black">Ward / Clinic</label>
+
+                    <app-clinic-dropdown #clinicDropdownComponent
+                            (selected)="onWardSelected($event)"
+                    ></app-clinic-dropdown>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">Start Date</label>
+                    <app-shared-date #startDateComponent (selected)="onDateSelected($event, start)"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">End Date</label>
+                    <app-shared-date #endDateComponent (selected)="onDateSelected($event, end)"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <button class="btn btn-sm btn-primary" (click)="onSearchRecord()">Search</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- table -->
+        <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+            <legend class="w-auto tx-16 tx-bold">
+            </legend>
+            <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+                <div class="text-right mg-b-10">
+                    <button class="btn-primary btn btn-sm" (click)="onDownloadFile()">
+                        <i class="fa fa-file-pdf"></i> Download
+                    </button>
+
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th class="text-center">S/N</th>
+                            <th class="text-center">Patient Name</th>
+                            <th class="text-center">Patient Number</th>
+                            <th class="text-center">Date of Birth</th>
+                            <th class="text-center">Gender</th>
+                            <th class="text-center w-10">Residential Address</th>
+                            <th class="text-center">State Of Origin</th>
+                            <th class="text-center">Phone Number</th>
+                            <th class="text-center">NOK</th>
+                            <th class="text-center">Folder Number</th>
+                            <th class="text-center">Ward</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of data.result | paginate: {
+                        itemsPerPage: data.page.pageSize, currentPage: data.page.pageNumber,
+                        totalItems: data.page.totalElements }; let i =index;"
+                        >
+                            <td class="text-center">{{i + 1}}</td>
+                            <td class="text-center">{{ item.patientFullName}}</td>
+                            <td class="text-center">{{item.patientNumber}}</td>
+                            <td class="text-center">
+                                <span [innerHTML]="dateTransform(item.patientDateOfBirth) | date"></span>
+                            </td>
+                            <td class="text-center">{{item?.genderDto?.name}}</td>
+                            <td class="text-center">{{item?.patientContactDetail?.residentialAddress}}</td>
+                            <td class="text-center">{{item?.patientContactDetail?.nationality?.name}}</td>
+                            <td class="text-center">{{item?.patientContactDetail?.phoneNumber}}</td>
+                            <td class="text-center">{{item?.patientNokDetail?.name}}</td>
+                            <td class="text-center">{{item?.folderNumber}}</td>
+                            <td class="text-center">{{item?.department?.name}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation" class="mg-t-15" *ngIf="data.result?.length">
+                        <ul class="pagination justify-content-end">
+                            <pagination-controls (pageChange)="pageChanged($event)"
+                                                 screenReaderCurrentLabel="You're on page"
+                            ></pagination-controls>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </fieldset>
+    </fieldset>
+</div>

@@ -1,0 +1,22 @@
+<div class="az-content-body az-content-body-contacts">
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="flex-column mg-l-10">
+            <label class="mg-l-2">Search For Patient:</label>
+            <app-patient-search #patientSearchComponent [props]="{
+                    showLabel: false,
+                    checkAdmission: true,
+                    loadAdmission: true,
+                    loadRevisit: false,
+                    loadSchemeDiscount: false,
+                    loadDeposit: false
+                    }" (selected)="onPatientSearchSelected($event)"></app-patient-search>
+
+            <app-patient-bio-card [selectedPatient]="payload.patient"></app-patient-bio-card>
+        </div>
+    </fieldset>
+
+    <app-shared-ward-transfer (submitted)="onResetPayload($event)" [payload]="payload"></app-shared-ward-transfer>
+
+</div>

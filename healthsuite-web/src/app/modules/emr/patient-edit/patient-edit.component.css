@@ -1,0 +1,38 @@
+.main-wrapper {
+    display: flex;
+    box-shadow: 0 0 10px rgb(28 39 60 / 6%);
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.image-wrapper {
+    height: 100vh;
+    border-right: 1px dotted #cdd4e0;
+    margin: 20px 0;
+    padding: 20px;
+    flex-grow: 0; /* do not grow   - initial value: 0 */
+    flex-shrink: 0; /* do not shrink - initial value: 1 */
+    flex-basis: 15em; /* width/height  - initial value: auto */
+}
+
+.image-wrapper .image-case {
+    display: flex;
+    padding-top: 10px;
+    height: 10em;
+    justify-content: center;
+    align-items: center;
+    background: #f4f5f8;
+}
+
+.form-wrapper {
+    flex-grow: 4;
+    padding-top: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 20px 0;
+}
+
+.patient-detail-wrapper {
+    margin-top: 2em;
+}

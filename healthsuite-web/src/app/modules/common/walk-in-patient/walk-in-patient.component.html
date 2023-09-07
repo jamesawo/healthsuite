@@ -1,0 +1,93 @@
+<fieldset class="border p-2 rounded mg-t-20 pd-20-f bg-gray-100">
+    <legend class="w-auto tx-16">Patient Details</legend>
+<!--    <form autocomplete="off">-->
+<!--        -->
+<!--    </form>-->
+    <div class="row align-items-sm-center">
+        <div class="col-md-12 row">
+            <div class="form-group col-md-4">
+                <label>First Name</label>
+                <input
+                        autocomplete="disable"
+                        name="walkInPatientFirstName"
+                        type="text"
+                        class="form-control"
+                        placeholder="Provide First Name"
+                        [(ngModel)]="payload.firstName"
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label>Last Name</label>
+                <input
+                        autocomplete="disable"
+                        name="walkInPatientLastName"
+                        type="text"
+                        class="form-control"
+                        placeholder="Provide Last Name"
+                        [(ngModel)]="payload.lastName"
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label>Other Name</label>
+                <input
+                        autocomplete="disable"
+                        name="walkInPatientOtherName"
+                        type="text"
+                        class="form-control"
+                        placeholder="Provide Other Name"
+                        [(ngModel)]="payload.otherName"
+                />
+            </div>
+        </div>
+        <div class="col-md-12 row">
+            <div class="form-group col-md-4">
+                <label>Age</label>
+                <input
+                        autocomplete="disable"
+                        type="number"
+                        name="walkInPatientAge"
+                        [(ngModel)]="payload.age"
+                        class="form-control"
+                        placeholder="Provide Age"
+                />
+            </div>
+            <div class="form-group col-md-4">
+                <label>Gender</label>
+                <ng-select
+                        name="genderId"
+                        [(ngModel)]="payload.genderId"
+                        placeholder="Select Gender.."
+                        #selGender="ngModel"
+                >
+                    <ng-option *ngFor="let data of gender" [value]="data.id">{{
+                        data.name
+                        }}</ng-option>
+                </ng-select>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Phone</label>
+                <input
+                        autocomplete="disable"
+                        name="walkInPatientPhone"
+                        type="text"
+                        class="form-control"
+                        placeholder="Provide Phone"
+                        [(ngModel)]="payload.phone"
+                />
+            </div>
+        </div>
+        <div class="col-md-12 row">
+            <div class="form-group col-md-6">
+                <label>Address</label>
+                <textarea
+                        [(ngModel)]="payload.address"
+                        name="address"
+                        class="form-control"
+                        cols="4"
+                        rows="4"
+                        autocomplete="disable"
+                ></textarea>
+            </div>
+        </div>
+    </div>
+</fieldset>

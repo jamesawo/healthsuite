@@ -1,0 +1,1098 @@
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100" [disabled]="prepOrVerifyEnum === resultVerify">
+    <legend class="w-auto tx-16 tx-bold">MICROSCOPY</legend>
+    <div class="main-wrapper az-content-body">
+        <div class="row mg-l-5">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="tx-16">
+                        <input type="radio" name="microscopyType" [value]="microscopyTypeEnumNa"
+                               [(ngModel)]="microscopy.type" class="mg-r-1"/>
+                        N/A
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="tx-16">
+                        <input type="radio" name="microscopyType" [value]="microscopyTypeEnumWetAmount"
+                               [(ngModel)]="microscopy.type" class="mg-r-1"/>
+                        WET MOUNT
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="tx-16">
+                        <input type="radio" name="microscopyType" [value]="microscopyTypeEnumSmear"
+                               [(ngModel)]="microscopy.type" class="mg-r-1"/>
+                        SMEAR
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="tx-16">
+                        <input type="radio" name="microscopyType" [value]="microscopyTypeEnumSfa"
+                               [(ngModel)]="microscopy.type" class="mg-r-1"/>
+                        SFA
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="tx-16">
+                        <input type="radio" name="microscopyType" [value]="microscopyTypeEnumUrinalysis"
+                               [(ngModel)]="microscopy.type" class="mg-r-1"/>
+                        URINALYSIS
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div [ngSwitch]="microscopy.type">
+        <!-- WET AMOUNT  -->
+        <ng-container *ngSwitchCase="microscopyTypeEnumWetAmount">
+            <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                <legend class="w-auto tx-16 tx-bold"></legend>
+                <div class="main-wrapper az-content-body">
+                    <div class="row text-center mg-l-10 mg-r-10 bg-gray-200">
+                        <div class="col-md-6">
+                            <div class="form-group mg-b-0">
+                                <label class="tx-16 text-uppercase">
+                                    <input type="radio" name="microscopy" [value]="weAmountTypeStainned"
+                                           [(ngModel)]="microscopy.wetAmount.type" class="mg-r-1"/>
+                                    Stained
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <div class="form-group mg-b-0">
+                                <label class="tx-16 text-uppercase">
+                                    <input type="radio" name="microscopy" [value]="weAmountTypeUnstained"
+                                           [(ngModel)]="microscopy.wetAmount.type" class="mg-r-1"/>
+                                    Unstained
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mg-t-10">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Morphology:</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.morphology"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Reaction: </label>
+                                <ng-select placeholder="select.."
+                                           [(ngModel)]="microscopy.wetAmount.reaction"
+                                           [disabled]="prepOrVerifyEnum === resultVerify"
+                                >
+                                    <ng-option value="POSITIVE">POSITIVE</ng-option>
+                                    <ng-option value="NEGATIVE">NEGATIVE</ng-option>
+                                    <ng-option value="VARIABLE">VARIABLE</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Parasite:</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.parasite"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Stage:</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.stage"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mg-t-10">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Quantification/Count:</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.count"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>WBC: </label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.wbc"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>RBC:</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.rbc"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Cast:</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.cast"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mg-t-10">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>WHIFF:</label>
+                                <ng-select placeholder="select.." [(ngModel)]="microscopy.wetAmount.whiff"
+                                           [disabled]="prepOrVerifyEnum === resultVerify">
+                                    <ng-option value="POSITIVE">POSITIVE</ng-option>
+                                    <ng-option value="NEGATIVE">NEGATIVE</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Epithelials: </label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.epithelials"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Fungi:</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.fungi"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Bacteria:</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.bacteria"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mg-t-10">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Pus Cell:</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.pusCell"/>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Crystal: </label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.crystal"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Yeast:</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.yeast"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>P.Vaginalis:</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.pVaginalis"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Others:</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       [(ngModel)]="microscopy.wetAmount.others"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </ng-container>
+
+        <!--  SMEAR  -->
+        <ng-container *ngSwitchCase="microscopyTypeEnumSmear">
+            <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                <legend class="w-auto tx-16 tx-bold"></legend>
+                <div class="main-wrapper az-content-body">
+                    <div class="row text-center mg-l-10 mg-r-10 bg-gray-200">
+                        <div class="col-md-3 ">
+                            <div class="form-group mg-b-0">
+                                <label class="tx-16 text-uppercase">
+                                    <input type="radio" name="microscopySmearType" [value]="smearTypeGram"
+                                           [(ngModel)]="microscopy.smear.type" class="mg-r-1"/>
+                                    Gram
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <div class="form-group mg-b-0">
+                                <label class="tx-16 text-uppercase">
+                                    <input type="radio" name="microscopySmearType" [value]="smearTypeGiemsa"
+                                           [(ngModel)]="microscopy.smear.type" class="mg-r-1"/>
+                                    Giemsa
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <div class="form-group mg-b-0">
+                                <label class="tx-16 text-uppercase">
+                                    <input type="radio" name="microscopySmearType" [value]="smearTypeZeihlNeelsen"
+                                           [(ngModel)]="microscopy.smear.type" class="mg-r-1"/>
+                                    Zeihl-Neelsen
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <div class="form-group mg-b-0">
+                                <label class="tx-16 text-uppercase">
+                                    <input type="radio" name="microscopySmearType" [value]="smearTypeOthers"
+                                           [(ngModel)]="microscopy.smear.type" class="mg-r-1"/>
+                                    Others
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div [ngSwitch]="microscopy.smear.type">
+                        <!-- Gram  -->
+                        <ng-container *ngSwitchCase="smearTypeGram">
+                            <div class="row mg-t-10">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Morphology:</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.gram.morphology"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Reaction: </label>
+                                        <ng-select placeholder="select.."
+                                                   [(ngModel)]="microscopy.smear.gram.reaction"
+                                                   [disabled]="prepOrVerifyEnum === resultVerify"
+                                        >
+                                            <ng-option value="POSITIVE">POSITIVE</ng-option>
+                                            <ng-option value="NEGATIVE">NEGATIVE</ng-option>
+                                            <ng-option value="VARIABLE">VARIABLE</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Result:</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.gram.result"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <!-- Giemsa  -->
+                        <ng-container *ngSwitchCase="smearTypeGiemsa">
+                            <div class="row mg-t-10">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Morphology:</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.giemsa.morphology"/>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Reaction: </label>
+                                        <ng-select placeholder="select.." [(ngModel)]="microscopy.smear.giemsa.reaction"
+                                                   [disabled]="resultVerify === prepOrVerifyEnum">
+                                            <ng-option value="POSITIVE">POSITIVE</ng-option>
+                                            <ng-option value="NEGATIVE">NEGATIVE</ng-option>
+                                            <ng-option value="VARIABLE">VARIABLE</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Parasite:</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.giemsa.parasite"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Stage:</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.giemsa.stage"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mg-t-10">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Count:</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.giemsa.count"/>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>WBC: </label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.giemsa.wbc"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>RBC:</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.giemsa.rbc"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Cast:</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.giemsa.cast"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mg-t-10">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>WHIFF:</label>
+                                        <ng-select [(ngModel)]="microscopy.smear.giemsa.whiff">
+                                            <ng-option value="POSITIVE">POSITIVE</ng-option>
+                                            <ng-option value="NEGATIVE">NEGATIVE</ng-option>
+                                        </ng-select>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Epithelials: </label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.giemsa.epithelials"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Fungi:</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.giemsa.fungi"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Bacteria:</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.giemsa.bacteria"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Pus Cell:</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.giemsa.pusCell"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <!-- Zeihl-Neelsen -->
+                        <ng-container *ngSwitchCase="smearTypeZeihlNeelsen">
+                            <div class="row mg-t-10">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Morphology:</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                               [(ngModel)]="microscopy.smear.zeihlNeelsen.morphology"/>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Reaction: </label>
+                                        <ng-select placeholder="select.."
+                                                   [(ngModel)]="microscopy.smear.zeihlNeelsen.reaction"
+                                                   [disabled]="resultVerify === prepOrVerifyEnum">
+                                            <ng-option value="POSITIVE">POSITIVE</ng-option>
+                                            <ng-option value="NEGATIVE">NEGATIVE</ng-option>
+                                            <ng-option value="VARIABLE">VARIABLE</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Parasite:</label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.zeihlNeelsen.parasite"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Stage:</label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.zeihlNeelsen.stage"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Count:</label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.zeihlNeelsen.count"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <!-- Others -->
+                        <ng-container *ngSwitchCase="smearTypeOthers">
+                            <div class="row mg-t-10">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Result:</label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.others.result"/>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Morphology:</label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.others.morphology"/>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Reaction: </label>
+                                        <ng-select placeholder="select..">
+                                            <ng-option value="POSITIVE">POSITIVE</ng-option>
+                                            <ng-option value="NEGATIVE">NEGATIVE</ng-option>
+                                            <ng-option value="VARIABLE">VARIABLE</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Parasite:</label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.others.parasite"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Stage:</label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.others.stage"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mg-t-10">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Count:</label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.others.count"/>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>WBC: </label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.others.wbc"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>RBC:</label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.others.rbc"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Cast:</label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.others.cast"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mg-t-10">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>WHIFF:</label>
+                                        <ng-select>
+                                            <ng-option value="POSITIVE">POSITIVE</ng-option>
+                                            <ng-option value="NEGATIVE">NEGATIVE</ng-option>
+                                        </ng-select>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Epithelials: </label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.others.epithelials"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Fungi:</label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.others.fungi"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Bacteria:</label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.others.bacteria"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Pus Cell:</label>
+                                        <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.smear.others.pusCell"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </fieldset>
+        </ng-container>
+
+        <!-- SFA -->
+        <ng-container *ngSwitchCase="microscopyTypeEnumSfa">
+            <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                <legend class="w-auto tx-16 tx-bold"></legend>
+                <div class="main-wrapper az-content-body">
+                    <div class="row text-center mg-l-10 mg-r-10 bg-gray-200">
+                        <div class="col-md-3 ">
+                            <div class="form-group mg-b-0">
+                                <label class="tx-16 text-uppercase">
+                                    <input type="radio" name="microscopy" [(ngModel)]="microscopy.sfa.sfaType"
+                                           [value]="sfaTypeMachine" class="mg-r-1"/>
+                                    Machine Count
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <div class="form-group mg-b-0">
+                                <label class="tx-16 text-uppercase">
+                                    <input type="radio" name="microscopy" [(ngModel)]="microscopy.sfa.sfaType"
+                                           [value]="sfaTypeManual" class="mg-r-1"/>
+                                    Manual Count
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TOP  -->
+                    <ng-container>
+                        <div class="row mg-t-10">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Morphology:</label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.morphology"/>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Reaction: </label>
+                                    <ng-select placeholder="select.." [(ngModel)]="microscopy.sfa.reaction" [disabled]="resultVerify === prepOrVerifyEnum">
+                                        <ng-option value="POSITIVE">POSITIVE</ng-option>
+                                        <ng-option value="NEGATIVE">NEGATIVE</ng-option>
+                                        <ng-option value="VARIABLE">VARIABLE</ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Abstinence:</label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.abstinence"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Col. To Test: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.toTest"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Volume: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.volume"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Liquefaction:</label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.liquefaction"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Viscosity: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.viscosity"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>PH: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.ph"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>WBC:</label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.wbc"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>RBC: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.rbc"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Immature Cells: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.immatureCells"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>AntiSperm AB:</label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.antiSpermAb"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Vitality: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.vitality"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Odour: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.odour"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Appearance:</label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.appearance"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>WBC Cone: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.wbcCone"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Agglutination: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.aggultination"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Aggregation:</label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.aggregation"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Acrosome T: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.acrosomeT"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Time of Production: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.timeOfProduction"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Time Received:</label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.timeReceived"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Time of Examination: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.timeOfExamination"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Mode of production: </label>
+                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.modeOfProduction"/>
+                                </div>
+                            </div>
+                        </div>
+<!--                        <div class="row mg-t-10">-->
+<!--                            <div class="col-md-3">-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Normal Morphology:</label>-->
+<!--                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.morphology"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-3">-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Abnormal Morphology: </label>-->
+<!--                                    <input type="text" class="form-control form-control-sm" [(ngModel)]="microscopy.sfa.acrosomeT"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </ng-container>
+
+                    <div [ngSwitch]="microscopy.sfa.sfaType">
+                        <!-- Machine count  -->
+                        <ng-container *ngSwitchCase="sfaTypeMachine">
+                            <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                                <legend class="w-auto tx-14 tx-bold">MACHINE</legend>
+                                <div class="row mg-t-10">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Motility (%):</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.machine.motility"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Total All Sperm (M): </label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.machine.totalAllSperm"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mg-t-10">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Immotility (%):</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.machine.immotility"/>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Total Mot. Sperm (M): </label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.machine.totalMotSperm"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mg-t-10">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Norm.Morph (%):</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.machine.normMorph"/>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Total Func Sperm (M): </label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.machine.totalFuncSperm"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mg-t-10">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>TSC (M/ml):</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.machine.tsc"/>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>FSC (M/ml): </label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.machine.fsc"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mg-t-10">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>SMI (Mic/s):</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.machine.smi"/>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>MSC (M/ml): </label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.machine.msc"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </ng-container>
+
+                        <!-- Manual Count -->
+                        <ng-container *ngSwitchCase="sfaTypeManual">
+                            <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                                <legend class="w-auto tx-14 tx-bold">MANUAL</legend>
+                                <div class="row mg-t-10">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Actively Motile Sperm Count:</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.manual.activelyMotileSpermCount"/>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Non Motile Sperm Count:</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.manual.nonMotileSpermCount"/>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row mg-t-10">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Sluggishly Motile Sperm Count:</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.manual.sluggishlyMotileSpermCount"/>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Total Sperm Count:</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                   [(ngModel)]="microscopy.sfa.manual.totalSpermCount"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </fieldset>
+        </ng-container>
+
+        <!-- URINALYSIS -->
+        <ng-container *ngSwitchCase="microscopyTypeEnumUrinalysis">
+            <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                <legend class="w-auto tx-16 tx-bold"></legend>
+                <div class="main-wrapper az-content-body">
+                    <ng-container>
+                        <div class="row mg-t-10">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Morphology:</label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.morphology"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Reaction: </label>
+                                    <ng-select placeholder="select.." [(ngModel)]="microscopy.urinalysis.reaction" [disabled]="prepOrVerifyEnum === resultVerify">
+                                        <ng-option value="POSITIVE">POSITIVE</ng-option>
+                                        <ng-option value="NEGATIVE">NEGATIVE</ng-option>
+                                        <ng-option value="VARIABLE">VARIABLE</ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>WBC:</label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.wbc"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>RBC: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.rbc"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Cast: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.cast"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Epithelials:</label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.epithelials"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>PH: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.ph"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Appearance: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.appearance"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Ketone:</label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.ketone"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Urobilinogen: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.urobilinogen"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Nitrite: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.nitrite"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Trichomonas Vaginalis:</label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.trichomonasVaginalis"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Blood: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.blood"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Glucose: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.glucose"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Specific Gravity::</label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.specificGravity"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Crystal: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.crystal"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Bilirubin: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.bilirubin"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Ascrobic Acid:</label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.ascrobicAcid"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Bacteria: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.bacteria"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Protein: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.protein"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mg-t-10">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Yeast:</label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.yeast"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Leucocyte: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.leucocyte"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Other: </label>
+                                    <input type="text" class="form-control form-control-sm"
+                                           [(ngModel)]="microscopy.urinalysis.other"/>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </fieldset>
+        </ng-container>
+    </div>
+
+</fieldset>

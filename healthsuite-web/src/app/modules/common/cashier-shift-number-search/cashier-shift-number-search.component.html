@@ -1,0 +1,31 @@
+<div class="input-wrapper">
+    <label *ngIf="props?.showLabel"></label>
+    <ng-select
+        #selectComponent
+        [items]="responsePayload | async"
+        bindLabel="shiftNumber"
+        [trackByFn]="trackByFn"
+        [minTermLength]="minLengthTerm"
+        [loading]="isLoading"
+        typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+        [typeahead]="searchInput$"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="selectedPayload"
+        (change)="onSelect($event)"
+        [clearable]="true"
+        placeholder="Enter Shift Number"
+        [editableSearchTerm]="true"
+    >
+        <ng-template ng-option-tmp let-item="item">
+            <strong> {{ item.shiftNumber }} -
+                <i class="text-{{item.status === true?'success':'danger'}}">{{item.status === true?'OPEN':'CLOSED'}}</i>
+            </strong>
+            <br />
+            <small>
+                <i>Full Name: {{ item.fullName }}</i> <br>
+                <i>Username: {{ item.username }}</i> <br>
+                <i>Open Date: {{ item.openDate }} | <span *ngIf="item.closeDate">Closed Date: {{item.closeDate}}</span></i>
+            </small>
+        </ng-template>
+    </ng-select>
+</div>

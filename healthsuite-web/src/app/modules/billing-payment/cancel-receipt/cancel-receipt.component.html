@@ -1,0 +1,121 @@
+<div class="main-wrapper az-content-body">
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold"></legend>
+        <div class="flex-column pd-10-f">
+            <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+                <div class="row mg-t-10">
+                    <div class="col-2 mg-l-5 text-right">
+                        <label class="">Receipt Number:</label>
+                    </div>
+                    <div class="col-8 mg-t-20 mg-lg-t-0">
+                        <app-payment-receipt-search
+                            #receiptSearchComponent
+                            [props]="{showLabel: false,
+                            searchBy: searchReceiptBy,
+                            loadPatientDetail: true,
+                            loadPatientBill: true,
+                            filterFor: filterReceiptFor}"
+                            (selected)="onReceiptSelected($event)"></app-payment-receipt-search>
+                    </div>
+                </div>
+            </div>
+
+            <app-patient-bio-card
+                    [selectedPatient]="payload.patient"
+            ></app-patient-bio-card>
+        </div>
+    </fieldset>
+
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold"></legend>
+        <div class="table-responsive table">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th class="wd-30p text-left">ITEM</th>
+                    <th class="wd-5p text-center">QTY</th>
+                    <th class="wd-5p text-center">PRICE</th>
+                    <th class="wd-10p text-center">GORSS AMOUNT</th>
+                    <th class="wd-10p text-center">NHIS</th>
+                    <th class="wd-10p text-center">WAIVED AMOUNT</th>
+                    <th class="wd-10p text-center">NET AMOUNT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of selectedReceiptsItems">
+                    <td class="text-left">{{ item.description }}</td>
+                    <td class="text-center">{{ item.quantity }}</td>
+                    <td class="wd-5p text-center">{{item.price}}</td>
+                    <td class="text-center">{{ item.grossAmount }}</td>
+                    <td class="text-center">{{ item.nhisAmount ? item.nhisAmount: 0 }}</td>
+                    <td class="text-center">{{ item.waivedAmount ? item.waivedAmount : 0  }}</td>
+                    <td class="text-center">{{ item.netAmount }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+
+    <!-- bill total summary-->
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="flex-column pd-10-f">
+            <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="text-center totals">
+                <div class="">
+                    Gross Bill Amount: <br/>
+                    <span class="tx-16 tx-semibold tx-inverse">{{
+                        payload?.patientBill?.billTotal?.grossTotal | currency: currencySym
+                        }}</span>
+                </div>
+                <div class="">
+                    Discounted Amount: <br/>
+                    <span class="tx-16 tx-semibold tx-inverse">{{
+                        payload?.patientBill?.billTotal?.discountTotal | currency: currencySym
+                        }}</span>
+                </div>
+                <div class="">
+                    Waived Amount: <br/>
+                    <span class="tx-16 tx-semibold tx-inverse">{{
+                        payload.patientBill?.billTotal?.billWaivedAmount | currency: currencySym
+                        }}</span>
+                </div>
+                <div class="">
+                    Net Amount: <br/>
+                    <span class="tx-16 tx-semibold tx-inverse">{{
+                        payload?.patientBill?.billTotal?.netTotal | currency: currencySym
+                        }}</span>
+                </div>
+            </div>
+        </div>
+        </div>
+    </fieldset>
+
+    <!-- action buttons -->
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="form-group">
+                    <label>Comment</label>
+                    <textarea class="form-control" cols="10" rows="2"
+                              [(ngModel)]="payload.comment"></textarea>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+        <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+            <div class="form-group text-center">
+                <button class="btn btn-primary" (click)="onSubmit()">SUBMIT</button>
+                <button class="btn btn-primary mg-l-10" (click)="onClearForm()">
+                    CLEAR FORM
+                </button>
+            </div>
+        </div>
+    </fieldset>
+
+</div>

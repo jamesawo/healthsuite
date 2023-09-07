@@ -1,0 +1,5 @@
+<select class="" (change)="onSelected()" [(ngModel)]="selDefault">
+    <option *ngFor="let item of collection" [title]="item.value" [value]="item.value">{{
+        item.name
+    }}</option>
+</select>

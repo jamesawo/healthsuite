@@ -1,0 +1,129 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column">
+        <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="create">
+                        <input
+                                id="create"
+                                name="scheme"
+                                type="radio"
+                                [value]="summaryType"
+                                [checked]="payload.reportType == summaryType"
+                                [(ngModel)]="payload.reportType"
+                        />
+                        <span>SUMMARY</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="edit">
+                        <input
+                                name="scheme"
+                                id="edit"
+                                type="radio"
+                                [value]="detailedType"
+                                [checked]="payload.reportType == detailedType"
+                                [(ngModel)]="payload.reportType"
+                                [disabled]="true"
+                        />
+                        <span>DETAILED</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-wrapper az-content-body">
+        <div class=" pd-t-0  pd-r-0-f  pd-l-0-f">
+            <fieldset class="flex-column border p-2 mg-t-0 rounded bg-gray-100">
+                <legend class="w-auto tx-14 tx-bold">
+                </legend>
+
+                <div class="search-form d-flex">
+                    <span class="mg-t-10">Search By:</span>
+                    <div class="wd-30p mg-l-15 mg-r-15">
+                        <ng-select placeholder="Please select ..." (change)="onSearchByChange($event)" [(ngModel)]="payload.searchBy">
+                            <ng-option [value]="hmo">HMO</ng-option>
+                            <ng-option [value]="patient">PATIENT</ng-option>
+                            <ng-option [value]="serviceDepartment">SERVICE DEPARTMENT</ng-option>
+                            <ng-option [value]="revenueDepartment">REVENUE DEPARTMENT</ng-option>
+                        </ng-select>
+                    </div>
+
+                    <div class="wd-50p mg-l-15 mg-r-15" [ngSwitch]="payload.searchBy">
+
+                        <ng-container *ngSwitchCase="hmo">
+                            <app-scheme-search (selected)="onSchemeSelected($event)"></app-scheme-search>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="patient">
+                            <app-patient-search (selected)="onPatientSelected($event)"></app-patient-search>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="serviceDepartment">
+                            <app-service-department-search [props]="{showLabel: false}" (selected)="onServiceDepartmentSelected($event)"></app-service-department-search>
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="revenueDepartment">
+                            <app-revenue-department-search (selected)="onRevenueDepartmentSelected($event)"
+                                                           [props]="{showLabel: false}"
+                            ></app-revenue-department-search>
+                        </ng-container>
+
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+            <ng-template>
+                <div class="col-md-6">
+                    <div class="form-group ">
+                        <label class="tx-16 txt-black">Treatment Type </label>
+                        <ng-select placeholder="Select.." [(ngModel)]="payload.treatmentType">
+                            <ng-option value="ALL">ALL</ng-option>
+                            <ng-option value="PRIMARY">PRIMARY</ng-option>
+                            <ng-option value="SECONDARY">SECONDARY</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mg-b-10">
+                        <label class="tx-16 txt-black">Patient Type</label>
+                        <ng-select  placeholder="Select.." [(ngModel)]="payload.treatmentType">
+                            <ng-option value="IN_PATIENT">IN-PATIENT</ng-option>
+                            <ng-option value="OUT_PATIENT">OUT-PATIENT</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </ng-template>
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">Start Date</label>
+                    <app-shared-date #startDateComponent  (selected)="onDateSelected($event, 'start')"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">End Date</label>
+                    <app-shared-date #endDateComponent (selected)="onDateSelected($event, 'end')" ></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <button class="btn btn-sm btn-primary" (click)="onSearchResult()">Search</button>
+                </div>
+            </div>
+        </div>
+
+
+    </fieldset>
+</div>

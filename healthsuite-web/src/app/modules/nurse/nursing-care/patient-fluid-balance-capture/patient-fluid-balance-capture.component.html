@@ -1,0 +1,199 @@
+<div class="main-wrapper az-content-body">
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-14 tx-bold">
+        </legend>
+
+        <div class="row pd-20-f">
+
+            <div class="col-md-12 row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Total Intake:</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                name="totalIntakes"
+                                [(ngModel)]="payload.totalIntake" readonly
+                        />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Balance:</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                name="balances"
+                                [(ngModel)]="payload.balance" readonly
+                        />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Total Output:</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                name="totalOutputs"
+                                [(ngModel)]="payload.totalOutput" readonly
+                        />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+
+                <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                    <legend class="w-auto tx-14 tx-bold"> INTAKE
+                    </legend>
+
+                    <div class="form-group">
+                        <label>TYPE:</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                name="intakeType"
+                                [(ngModel)]="payload.inputType"
+                                (change)="onCalculateIntakeTotal($event)"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label>BLOOD:</label>
+                        <input
+                                type="number"
+                                class="form-control"
+                                name="blood"
+                                [(ngModel)]="payload.blood"
+                                (change)="onCalculateIntakeTotal($event)"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label>TUBE:</label>
+                        <input
+                                type="number"
+                                class="form-control"
+                                name="tube"
+                                [(ngModel)]="payload.tube"
+                                (change)="onCalculateIntakeTotal($event)"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label>ORAL:</label>
+                        <input
+                                type="number"
+                                class="form-control"
+                                name="oral"
+                                [(ngModel)]="payload.oral"
+                                (change)="onCalculateIntakeTotal($event)"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label>IV:</label>
+                        <input
+                                type="number"
+                                class="form-control"
+                                name="iv"
+                                [(ngModel)]="payload.iv"
+                                (change)="onCalculateIntakeTotal($event)"
+                        />
+                    </div>
+                </fieldset>
+
+
+            </div>
+            <!-- -->
+            <div class="col-md-6">
+
+                <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                    <legend class="w-auto tx-14 tx-bold"> OUTPUT
+                    </legend>
+
+                    <div class="form-group">
+                        <label>TYPE:</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                name="outputType"
+                                [(ngModel)]="payload.outputType"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label>URINE:</label>
+                        <input
+                                type="number"
+                                class="form-control"
+                                name="urine"
+                                [(ngModel)]="payload.urine"
+                                (change)="onCalculateOutputTotal($event)"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label>TUBE / VOMIT:</label>
+                        <input
+                                type="number"
+                                class="form-control"
+                                name="tubeVomit"
+                                [(ngModel)]="payload.tubeVomit"
+                                (change)="onCalculateOutputTotal($event)"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label>DRAIN / FAECES:</label>
+                        <input
+                                type="number"
+                                class="form-control"
+                                name="drain"
+                                [(ngModel)]="payload.drainFaeces"
+                                (change)="onCalculateOutputTotal($event)"
+                        />
+                    </div>
+
+                </fieldset>
+
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Additional Information:</label>
+                    <textarea
+                            class="form-control"
+                            cols="5"
+                            rows="2"
+                            name="additionalInformation"
+                            [(ngModel)]="payload.additionalInformation"
+                    ></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-12 text-center">
+            <div class="d-block mg-t-10">
+                <button
+                        type="submit"
+                        class="btn btn-primary btn-md text-uppercase"
+                        (click)="onSubmit()"
+                >
+                    Submit
+                </button>
+
+
+                <button
+                        type="submit"
+                        class="mg-l-15 btn btn-danger btn-md text-uppercase"
+                        (click)="onCloseModal()"
+                >
+                    Close
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</div>

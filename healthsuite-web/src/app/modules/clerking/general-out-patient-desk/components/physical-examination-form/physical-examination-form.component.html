@@ -1,0 +1,95 @@
+<fieldset>
+    <legend>Physical Examination</legend>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Level Of Consciousness: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select placeholder="Select Level Of Consciousness"
+                               [(ngModel)]="props.data.levelOfConsciousness">
+                        <ng-option value="Conscious">Conscious</ng-option>
+                        <ng-option value="Unconscious">Unconscious</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Pallor: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select [editableSearchTerm]="false"
+                               searchable="false" placeholder="Select..." [(ngModel)]="props.data.pallor">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="no">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Cyanosis: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.cyanosis">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="no">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Patient Type: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false"
+                               placeholder="Select ... " [(ngModel)]="props.data.patientType">
+                        <ng-option value="Ambulant"> Ambulant</ng-option>
+                        <ng-option value="Carried">Carried</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Dehydration: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.dehydration">
+                        <ng-option value="Grading-Mild"> Grading-Mild</ng-option>
+                        <ng-option value="Grading-Moderate">Grading-Moderate</ng-option>
+                        <ng-option value="Grading-Severe">Grading-Severe</ng-option>
+                        <ng-option value="No Dehydration">No Dehydration</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Jaundice: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.jaundice">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="no">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-3 text-right">
+                    <label>Febril: </label>
+                </div>
+                <div class="col-md-9 mg-t-5 mg-md-t-0 mg-l-0">
+                    <ng-select placeholder="Select ..." [(ngModel)]="props.data.febril">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="no">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

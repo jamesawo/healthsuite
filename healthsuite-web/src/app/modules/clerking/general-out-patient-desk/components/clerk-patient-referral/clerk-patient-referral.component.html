@@ -1,0 +1,50 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-l-50-f pd-r-50 pd-t-0">
+        <div class="row">
+            <div class="col-md-12 row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Doctor: </label>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                      <app-user-search (selected)="onDoctorSelected($event)" [props]="{showLabel: false, isConsultant: true}"></app-user-search>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Clinic </label>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                       <app-clinic-dropdown (selected)="onClinicSelected($event)"></app-clinic-dropdown>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Referral Notes: </label>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <textarea class="form-control" cols="3" rows="3" [(ngModel)]="payload.referralNotes"></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-az-primary btn-md" (click)="onSubmit()">SAVE & CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>

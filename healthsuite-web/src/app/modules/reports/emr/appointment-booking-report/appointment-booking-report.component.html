@@ -1,0 +1,63 @@
+<div class="main-wrapper az-content-body">
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-14 tx-bold">
+        </legend>
+        <div class="pd-l-40 pd-r-40">
+            <div class="row">
+                <div class="col-md-12 row mg-b-20">
+                    <div class="col-md-2 text-right">Select Doctor</div>
+                    <div class="col-md-10">
+                        <ng-select></ng-select>
+                    </div>
+
+                </div>
+                <div class="col-md-12 row mg-b-20">
+                    <div class="col-md-2 text-right">Select Clinic</div>
+                    <div class="col-md-10">
+                        <ng-select></ng-select>
+                    </div>
+
+                </div>
+                <div class="col-md-12 row mg-b-20">
+                    <div class="col-md-2 text-right">Select Patient</div>
+                    <div class="col-md-10">
+                        <app-patient-search (selected)="onPatientSelected($event)" [props]="{
+                        showLabel: false,
+                        checkAdmission: false,
+                        loadAdmission: false}"
+                        ></app-patient-search>
+                    </div>
+
+                </div>
+                <div class="col-md-12 row mg-b-20">
+                    <div class="col-md-6 row mg-b-20">
+                        <div class="col-4 text-right">Start Date</div>
+                        <div class="col-4 mg-l-10">
+                            <app-shared-date (selected)="onDateSelected($event, start)"></app-shared-date>
+                        </div>
+                    </div>
+<!--                    <div class="col-md-6 text-right">-->
+<!--                        <div class="col-4">End Date</div>-->
+<!--                        <div class="col-4">-->
+<!--                            <app-shared-date (selected)="onDateSelected($event, end)"></app-shared-date>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+
+                </div>
+                <div class="col-md-12 row mg-b-20">
+                    <div class="col-md-2 text-right">Patient Category</div>
+                    <div class="col-md-10">
+                        <ng-select></ng-select>
+                    </div>
+
+                </div>
+            </div>
+            <div class="mg-t-15 pd-sm-15 wd-xl-100p">
+                <div class="form-group text-left">
+                    <button class="btn btn-primary" (click)="onSearchReport()">Preview Report</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>

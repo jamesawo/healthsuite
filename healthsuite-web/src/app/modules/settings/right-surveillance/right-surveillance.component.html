@@ -1,0 +1,79 @@
+<div class="mg-b-20">
+    <div class="form-group">
+        <form autocomplete="off">
+            <div class="form-row">
+                <div class="col text-right">
+                    <label class="" >Search User: </label>
+                </div>
+                <div class="col-7">
+                    <app-user-search [props]="{
+                        showLabel: false, isConsultant: false, showDisabledUser: true}"
+                    (selected)="onUserSelected($event)"></app-user-search>
+                </div>
+
+                <div class="col-3">
+                    <button class="btn btn-primary text-uppercase" (click)="onViewRights()">
+                        View Rights
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="table-responsive mg-t-20 " style="overflow: visible">
+        <table class="table table-bordered table-striped mg-b-0">
+            <thead>
+                <tr>
+                    <th class="wd-3">
+                        <label>
+                            <input type="checkbox"/>
+                        </label>
+                    </th>
+                    <th>Role</th>
+                    <th>Module</th>
+                    <th>Full Name</th>
+                    <th>User Name</th>
+                    <th>Department</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="user.id">
+                    <th scope="row">
+                        <label>
+                            <input type="checkbox"/>
+                        </label>
+                    </th>
+                    <td class="wd-20p">
+
+                        <ng-select [(ngModel)]="selectedRoleId" (change)="onRoleSelected($event, user)">
+                            <ng-option *ngFor="let role of roles; let i = index" [value]="role.id">{{role?.name}}</ng-option>
+                        </ng-select>
+                    </td>
+                    <td class="wd-30p">
+                        <ng-multiselect-dropdown class="overflow-auto"
+                                [placeholder]="'Modules'"
+                                [settings]="dropDownSettings"
+                                [data]="permissions"
+                                name="role"
+                                [(ngModel)]="permission"
+                        >
+                        </ng-multiselect-dropdown>
+                    </td>
+                    <td>
+                        {{user.firstName}} {{user.lastName}} <br>
+                        <small>{{user.email}}</small>
+                    </td>
+                    <td>{{user.userName}}</td>
+                    <td>{{user.department.name}}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" (click)="onUpdateUserRole(user)">
+                            <i class="fa fa-pencil-alt" title="Update User Role"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

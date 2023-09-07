@@ -1,0 +1,91 @@
+<div class="main-wrapper az-content-body">
+    <fieldset class="border p-2 mg-t-0 rounded bg-gray-100">
+        <legend class="w-auto tx-14 tx-bold">
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="create">
+                        <input
+                                id="create"
+                                name="scheme"
+                                type="radio"
+                                checked
+                                (change)="onRecordTypeChange(allType)"
+                        />
+                        <span>ALL RECORD TYPE</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="edit">
+                        <input
+                                name="scheme"
+                                id="edit"
+                                type="radio"
+                                (change)="onRecordTypeChange(specific)"
+                        />
+                        <span>SPECIFIC RECORD TYPE</span>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100" *ngIf="!patientPayload?.patientId">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row pd-l-10 pd-r-10">
+            <div class="col-md-12">
+                <div class="form-group row">
+                    <div class="col-2 text-right">
+                        <label class="tx-16 txt-black">Patient Search</label>
+                    </div>
+                    <div class="col-10">
+                        <app-patient-search (selected)="onPatientSelected($event)" [props]="{
+                        showLabel: false,
+                        checkAdmission: true,
+                        loadAdmission: false}"
+                        ></app-patient-search>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row pd-l-10 pd-r-10">
+            <div class="col-md-12 row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="tx-16 txt-black">Start Date</label>
+                        <app-shared-date (selected)="onDateSelected($event, start)"></app-shared-date>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="tx-16 txt-black">End Date</label>
+                        <app-shared-date (selected)="onDateSelected($event, end)"></app-shared-date>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <ng-container *ngIf="payload.recordType === specific">
+        <app-nurse-patient-e-folder-specifics #eFolderSpecificsComponent></app-nurse-patient-e-folder-specifics>
+    </ng-container>
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row pd-l-10 pd-r-10">
+            <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+                <div class="form-group text-center">
+                    <button class="btn btn-primary" (click)="onPreviewCardNote()">Preview Report</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>

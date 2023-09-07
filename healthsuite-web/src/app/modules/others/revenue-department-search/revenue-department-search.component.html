@@ -1,0 +1,29 @@
+<div class="input-wrapper">
+    <ng-container *ngIf="props?.showLabel != false">
+        <label>Type Revenue Department Name</label>
+    </ng-container>
+
+    <ng-select
+        [items]="responsePayload | async"
+        bindLabel="nameAndCode"
+        [trackByFn]="trackByFn"
+        [minTermLength]="minLengthTerm"
+        [loading]="isLoading"
+        typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+        [typeahead]="searchInput$"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="selectedPayload"
+        (change)="onSelect($event)"
+        placeholder="Search revenue department"
+    >
+        <ng-template ng-option-tmp let-item="item">
+            <strong>
+                {{ item.name }}
+            </strong>
+            <br />
+            <small>
+                <i>Code: {{ item.code }}</i>
+            </small>
+        </ng-template>
+    </ng-select>
+</div>

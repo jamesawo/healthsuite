@@ -1,0 +1,7 @@
+<ng-select  (change)="onSelected($event)" placeholder="Select.." [(ngModel)]="invoice">
+    <ng-option [value]="patient"> PATIENT </ng-option>
+    <ng-option [value]="invoice"> INVOICE NUMBER </ng-option>
+    <ng-option [value]="receipt"> SALES RECEIPT </ng-option>
+    <ng-option [value]="labNumber"> LAB NUMBER </ng-option>
+</ng-select>
+

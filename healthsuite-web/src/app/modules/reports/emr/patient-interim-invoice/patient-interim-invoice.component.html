@@ -1,0 +1,91 @@
+<div class="main-wrapper az-content-body">
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-14 tx-bold">
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="create">
+                        <input
+                                id="create"
+                                name="scheme"
+                                type="radio"
+                                checked
+                                (change)="onTypeChange(currentVisitType)"
+                        />
+                        <span>Current Visit</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="edit">
+                        <input
+                                name="scheme"
+                                id="edit"
+                                type="radio"
+                                (change)="onTypeChange(previousVisitType)"
+                        />
+                        <span>Previous Visit</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="both">
+                        <input
+                                name="scheme"
+                                id="both"
+                                type="radio"
+                                (change)="onTypeChange(allVisitType)"
+                        />
+                        <span>All Visit Record</span>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row pd-l-10 pd-r-10">
+            <div class="col-md-6">
+                <div class="form-group ">
+                    <label class="tx-16 txt-black">Patient Search</label>
+                    <app-patient-search (selected)="onPatientSelected($event)" [props]="{
+                        showLabel: false,
+                        checkAdmission: true,
+                        loadAdmission: false}"
+                    ></app-patient-search>
+                </div>
+            </div>
+            <ng-container *ngIf="searchPayload.visitType != currentVisitType">
+                <div class="col-md-3">
+                    <div class="form-group mg-b-10">
+                        <label class="tx-16 txt-black">Start Date</label>
+                        <app-shared-date (selected)="onDateSelected($event, start)"></app-shared-date>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="tx-16 txt-black">End Date</label>
+                        <app-shared-date (selected)="onDateSelected($event, end)"></app-shared-date>
+                    </div>
+                </div>
+                <div class="col-md-12" *ngIf="searchPayload.visitType === previousVisitType">
+                    <div class="form-group">
+                        <label class="tx-16 txt-black">Select Session</label>
+                        <app-admission-session-dropdown [collection]="admissionSessions" (selected)="onAdmissionSessionSelected($event)"></app-admission-session-dropdown>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+
+        <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+            <div class="form-group text-left">
+                <button class="btn btn-primary" (click)="onSearchReport()">Preview Report</button>
+            </div>
+        </div>
+    </fieldset>
+</div>

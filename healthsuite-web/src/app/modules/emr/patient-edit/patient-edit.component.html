@@ -1,0 +1,62 @@
+<div class="az-content-header d-block d-md-flex">
+    <div class="row">
+        <div class="col-auto">
+            <!--            <h2 class="az-content-title tx-24 mg-b-5 mg-b-lg-8">Edit Patient Details</h2>-->
+            <p class="mg-b-0">
+                Use the patient number to call up the patient details and edit it.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="main-wrapper az-content-body">
+    <div class="image-wrapper">
+        <app-patient-facial-capture #captureComponent
+                (pictureTaken)="handleImage($event)"
+        ></app-patient-facial-capture>
+    </div>
+    <div class="form-wrapper">
+        <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <app-patient-search #patientSearchComponent
+                    [props]="{ showLabel: false, checkAdmission: false, loadAdmission: false }"
+                    (selected)="onSearchPatientSelected($event)"
+            ></app-patient-search>
+        </div>
+
+        <div class="patient-detail-wrapper">
+            <!-- Basic Information -->
+            <ng-container>
+                <app-patient-basic-details
+                        [props]="{ isRegister: false }"
+                ></app-patient-basic-details>
+            </ng-container>
+
+            <!-- Means of identification -->
+            <ng-container>
+                <app-patient-means-of-identification></app-patient-means-of-identification>
+            </ng-container>
+
+            <!-- Contact Details -->
+            <ng-container>
+                <app-patient-contact-details [childrenLga]="defaultChildrenLga" [defaultSelected]="defaultNationality" #contactDetailsComponent></app-patient-contact-details>
+            </ng-container>
+
+            <!-- NOK Details -->
+            <ng-container>
+                <app-patient-nok-details></app-patient-nok-details>
+            </ng-container>
+
+            <div class="text-center">
+                <ng-container>
+                    <button
+                            type="submit"
+                            class="btn btn-primary mg-l-10"
+                            (click)="onEditPatientDetails()"
+                    >
+                        Submit
+                    </button>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

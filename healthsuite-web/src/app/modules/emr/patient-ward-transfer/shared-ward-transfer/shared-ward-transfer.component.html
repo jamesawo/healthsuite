@@ -1,0 +1,102 @@
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="row  align-items-center mg-b-20">
+        <div class="col-md-4">
+            <div class="form-group w-100 mg-t-20">
+                <label>Date of Admission:</label> <br>
+                <span class="mg-l-5 tx-16">{{getCurrentAdmissionDate() | date}}</span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group w-100 mg-t-20">
+                <label>Current Ward:</label> <br>
+                <span class="mg-l-5 tx-16">
+                        {{payload?.currentAdmission?.ward?.title}} -
+                        ({{payload?.currentAdmission?.ward?.code}})
+                    </span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group w-100 mg-t-20">
+                <label>Current Bed:</label>
+                <span class="mg-l-5 tx-16">
+                    {{payload?.currentAdmission?.bed?.code}}
+                    </span>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <div class="row  align-items-center mg-b-20">
+        <div class="row col-md-12 mg-t-0">
+            <div class="col-md-6">
+                <div class="d-flex flex-row">
+                    <label class="w-25 tx-12 mg-r-2 text-left"> Transfer Date:</label>
+                    <div class="w-75">
+                        <app-shared-date #dateComponent (selected)="onDateSelected($event)"></app-shared-date>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex flex-row">
+                    <label class="w-25 tx-12 mg-r-2 text-left"> Consultant (optional):</label>
+                    <div class="w-75">
+                        <app-user-search #userSearchComponent [props]="{isConsultant: true}"
+                                         (selected)="onConsultantSelected($event)"></app-user-search>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6 mg-t-10">
+                <div class="d-flex flex-row">
+                    <label class="w-25 tx-12 mg-r-2 text-left"> New Ward:</label>
+                    <div class="w-75">
+                        <app-ward-search #wardSearchComponent (selected)="onWardSelected($event)"></app-ward-search>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex flex-row">
+                    <label class="w-25 tx-12 mg-r-2 text-left"> Select Bed:</label>
+                    <div class="w-75">
+                        <ng-select #bedDropDownComponent
+                                   [items]="bedsList"
+                                   bindLabel="code"
+                                   bindValue="id"
+                                   placeholder="Select Bed.."
+                                   name="bed"
+                                   (change)="onBedSelected($event)"
+                        >
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mg-t-10">
+                <div class="d-flex flex-row">
+                    <label class="w-25 tx-12 mg-r-2 text-left"> Transfer Note:</label>
+                    <div class="w-75">
+                            <textarea name="" class="form-control" [(ngModel)]="payload.transferNote" cols="2"
+                                      rows="2"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+    </legend>
+    <!-- submit buttons -->
+    <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+        <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="onSubmit()">SUBMIT</button>
+            <button class="mg-l-5 btn btn-danger" (click)="onClearForm()">CLEAR</button>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,20 @@
+:host ::ng-deep .multiselect-dropdown .dropdown-btn {
+    border: none;
+    padding: 0;
+}
+
+/*.table-wrap {*/
+/*    height: 100%;*/
+/*    max-height: 500px;*/
+/*    overflow-y: auto;*/
+/*}*/
+
+tbody {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.role-tbl {
+    max-height: 500px;
+    overflow: scroll;
+}

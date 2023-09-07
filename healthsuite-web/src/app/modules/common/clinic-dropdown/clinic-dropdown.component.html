@@ -1,0 +1,3 @@
+<ng-select placeholder="Select Clinic.." (change)="onSelect($event)" #selectComponent>
+    <ng-option *ngFor="let data of clinic" [value]="data">{{ data.name }}</ng-option>
+</ng-select>

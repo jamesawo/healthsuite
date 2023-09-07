@@ -1,0 +1,164 @@
+<fieldset class="border p-2 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+        Seed Bed Data
+        <ng-template #statusTemplate>
+            To <code>create</code> bed follow these steps;
+            <br />
+            1. Create or select Ward <code> important !</code> <br />
+            2. Enter the number of beds to create <br />
+            3. Click on the Save Button. <br />
+            <small>Note that beds are allocated to a selected <strong>Ward</strong>.</small>
+        </ng-template>
+        <i
+            class="fa fa-info-circle fa-sm tx-12"
+            [ngbPopover]="statusTemplate"
+            placement="right"
+            triggers="mouseenter:mouseleave"
+            container="body"
+            aria-hidden="true"
+        ></i>
+    </legend>
+    <!-- Using template driven forms -->
+    <form #f="ngForm" (ngSubmit)="onCreateBed()">
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label>Select Ward </label>
+                <ng-select
+                    [items]="wardDropDownList"
+                    bindLabel="name"
+                    bindValue="id"
+                    [searchable]="true"
+                    [(ngModel)]="wardFormPayload.departmentId"
+                    name="searchWard"
+                    placeholder="Enter Ward Name.."
+                    #searchWard="ngModel"
+                    [required]="true"
+                ></ng-select>
+            </div>
+
+            <!-- col-4 -->
+            <div class="col-md-6">
+                <label for="bedCount">Number of Beds </label>
+                <input
+                    max="100"
+                    type="number"
+                    [(ngModel)]="wardFormPayload.totalBedCount"
+                    name="numberOfBedsToCreate"
+                    class="form-control"
+                    id="bedCount"
+                    required
+                    #numberOfBedsToCreate="ngModel"
+                    [ngClass]="{
+                        'is-invalid':
+                            (isSubmitted &&
+                                (numberOfBedsToCreate?.invalid ||
+                                    numberOfBedsToCreate?.value < 1)) ||
+                            (numberOfBedsToCreate?.value > 100 &&
+                                (numberOfBedsToCreate.dirty || numberOfBedsToCreate.touched))
+                    }"
+                />
+                <div class="invalid-feedback">
+                    <label>Min: 1, Max: 100</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit" [disabled]="f.invalid">
+                Save
+            </button>
+        </div>
+    </form>
+    <!-- Upload File    /-->
+
+    <div class="table-responsive mg-t-20">
+        <table class="table table-bordered mg-b-0">
+            <thead>
+                <tr>
+                    <th class="wd-3 text-center">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <th class="text-center">Ward</th>
+                    <th class="text-center">Ward Code</th>
+                    <th class="text-center">Bed Count</th>
+                    <th class="text-center">Usage (%)</th>
+                    <th class="text-center">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ward of wardTableList">
+                    <th scope="row" class="text-center">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <td class="text-center">
+                        {{ ward.department?.name }}
+                    </td>
+                    <td class="text-center">
+                        {{ ward.code }}
+                    </td>
+                    <td class="text-center">{{ ward.totalBedCount }}</td>
+                    <td class="text-center">{{ ward.percentageCount | percent }}</td>
+                    <td class="text-center">
+                        <!-- add bed to ward -->
+                        <button
+                            class="btn btn-sm btn-primary"
+                            [popover]="popContent"
+                            [outsideClick]="true"
+                            #popAdd="bs-popover"
+                            [popoverContext]="{ ward: ward.id, type: add, pop: popAdd }"
+                            placement="left"
+                            container="body"
+                            containerClass="bg-popover-custom"
+                            (click)="onToggleShake()"
+                        >
+                            <i class="fa fa-plus-circle"></i> Beds
+                        </button>
+
+                        <!-- remove bed to ward -->
+                        <button
+                            class="btn btn-sm btn-danger mg-l-2"
+                            #popRemove="bs-popover"
+                            [popover]="popContent"
+                            [outsideClick]="true"
+                            [popoverContext]="{ ward: ward.id, type: remove, pop: popRemove }"
+                            placement="left"
+                            container="body"
+                            containerClass="bg-popover-custom"
+                            (click)="onToggleShake()"
+                        >
+                            <i class="fa fa-minus-circle"></i> Beds
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>
+
+<!--update ward bed count pop over template-->
+<ng-template #popContent let-ward="ward" let-type="type" let-pop="pop">
+    <div class="mg-l-10 flex-row">
+        <label>Enter number of beds to {{ type == add ? 'Add' : 'Remove' }}</label>
+        <input
+            name="numberOfBeds"
+            [@shake]="shakeBox"
+            type="number"
+            class="wd-65p"
+            placeholder="Enter number of beds"
+            [(ngModel)]="numberOfBedsToUpdate"
+            [autofocus]="true"
+        />
+        <button
+            class="mg-l-5"
+            [ngClass]="{ 'btn-popover-primary': type == add, 'btn-popover-danger': type == remove }"
+            (click)="onUpdateNumberOfBeds(ward, pop, type)"
+        >
+            {{ type == add ? 'Add' : 'Rem.' }}. Beds
+        </button>
+    </div>
+</ng-template>

@@ -1,0 +1,73 @@
+<fieldset>
+    <legend>Cardiovascular</legend>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Pulse Rate: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <input type="text" class="input-control" [(ngModel)]="props.data.pulseRate">
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Jugular Venous Pressure: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..."
+                               [(ngModel)]="props.data.jugularVenousPressure">
+                        <ng-option value="Raised">Raised</ng-option>
+                        <ng-option value="Normal">Normal</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Blood Pressure: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <input type="text" class="input-control" [(ngModel)]="props.data.bloodPressure"/>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Apex Beat: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.apexBeat">
+                        <ng-option value="Normal"> Normal</ng-option>
+                        <ng-option value="Displaced"> Displaced</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-4 text-right">
+                    <label>Heart Sounds: </label>
+                </div>
+                <div class="col-md-8 mg-t-5 mg-md-t-0 heart-sounds">
+                    <label>
+                        <input type="checkbox" [checked]="props?.data?.heartSound[0] === 'S1'" (change)="onHeartSoundsCheck($event, 'S1')"> S1
+                    </label>
+                    <label>
+                        <input type="checkbox" [checked]="props?.data?.heartSound[1] === 'S2'" (change)="onHeartSoundsCheck($event, 'S2')"> S2
+                    </label>
+                    <label>
+                        <input type="checkbox" [checked]="props?.data?.heartSound[2] === 'S3'" (change)="onHeartSoundsCheck($event, 'S3')"> S3
+                    </label>
+                    <label>
+                        <input type="checkbox" [checked]="props?.data?.heartSound[3] === 'S4'" (change)="onHeartSoundsCheck($event, 'S4')"> S4
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</fieldset>

@@ -1,0 +1,326 @@
+<div class="row patient-type-main" *ngIf="props.isRegister">
+    <div class="row mg-b-10 patient-type">
+        <div class="col">
+            <label class="rdiobox">
+                <input
+                    name="registerType"
+                    type="radio"
+                    [value]="new"
+                    [checked]="patientPayload.patientTypeEnum === new"
+                    [(ngModel)]="patientPayload.patientTypeEnum"
+                />
+                <span>
+                    New Patient Registration
+                    <i
+                        class="fa fa-info-circle tx-12"
+                        [ngbPopover]="'Register a new patient to obtain a patient number'"
+                        placement="right"
+                        triggers="mouseenter:mouseleave"
+                        container="body"
+                        aria-hidden="true"
+                    ></i>
+                </span>
+            </label>
+        </div>
+        <div class="col">
+            <label class="rdiobox">
+                <input
+                    name="registerType"
+                    type="radio"
+                    [value]="old"
+                    [(ngModel)]="patientPayload.patientTypeEnum"
+                />
+                <span>
+                    Old Patient Registration
+                    <i
+                        class="fa fa-info-circle tx-12"
+                        [ngbPopover]="
+                            'Register an already existing patient and assign a patient number'
+                        "
+                        placement="right"
+                        triggers="mouseenter:mouseleave"
+                        container="body"
+                        aria-hidden="true"
+                    ></i>
+                </span>
+            </label>
+        </div>
+    </div>
+</div>
+<fieldset class="border p-2 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+        Basic Information
+    </legend>
+    <form #f="ngForm" (ngSubmit)="onSubmit()" autocomplete="off" class="form-padding">
+        <div class="row form-group" *ngIf="props.isRegister">
+            <ng-container *ngIf="globalSetting.enableRegistrationValidation === yes">
+                <div class="col-12">
+                    <div class="form-group row tx-12">
+                        <label class="col col-form-label">Receipt Number:</label>
+                        <div class="col-10">
+                            <app-payment-receipt-search
+                                    [props]="{
+                                    showLabel: false,
+                                    searchBy: searchBySelected,
+                                    loadPatientDetail: true,
+                                    loadPatientBill: true,
+                                    filterFor: serviceReceipt
+                                }"
+                                    (selected)="onReceiptSelected($event)"
+                            ></app-payment-receipt-search>
+
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <!-- patient category -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Patient Category: </label>
+                    <div class="col-sm-8">
+                        <ng-select #ngPatientCategoryDropdown
+                            placeholder="Select Patient Category.."
+                            (change)="onSelectPatientCategory($event)"
+                        >
+                            <ng-option
+                                *ngFor="let data of patientCategoryEnumList"
+                                [value]="data.name"
+                            >
+                                <span [title]="data.name">{{ data.name }}</span>
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+            <!-- patient name -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label tx-bold">Patient Number:</label>
+                    <div class="col-sm-8">
+                        <ng-container
+                            *ngIf="
+                                globalSetting?.generateHospitalNumberForOldPatient == yes;
+                                else patientNumber
+                            "
+                        >
+                            <input
+                                class="form-control form-control-sm"
+                                type="text"
+                                [placeholder]="'Auto Generated'"
+                                readonly
+                            />
+                        </ng-container>
+
+                        <ng-template #patientNumber>
+                            <input
+                                class="form-control form-control-sm"
+                                type="text"
+                                [placeholder]="
+                                    patientPayload.patientTypeEnum === new
+                                        ? 'Auto Generated'
+                                        : 'Enter Old Patient Number'
+                                "
+                                [readonly]="patientPayload.patientTypeEnum === new"
+                                name="patientNumber"
+                                [(ngModel)]="patientPayload.patientNumber"
+                            />
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group" *ngIf="props.isRegister">
+            <!-- patient clinic -->
+            <div class="col-12">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Select Clinic:</label>
+                    <div class="col-10">
+                        <app-clinic-dropdown #clinicDropdownComponent
+                            (selected)="onClinicSelected($event)"
+                        ></app-clinic-dropdown>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group" *ngIf="!props.isRegister">
+            <div class="col-12">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Patient Number:</label>
+                    <div class="col-10">
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            placeholder=""
+                            name="patNumber"
+                            [(ngModel)]="patientPayload.patientNumber"
+                            readonly
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <!-- patient marital status -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Marital Status: </label>
+                    <div class="col-sm-8">
+                        <ng-select
+                            name="selMaritalStatus"
+                            [(ngModel)]="patientPayload.maritalStatusId"
+                            placeholder="Select Marital Status.."
+                            #selMaritalStatus="ngModel"
+                        >
+                            <ng-option *ngFor="let data of maritalStatus" [value]="data.id">{{
+                                data.name
+                            }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+            <!-- patient gender -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Gender:</label>
+                    <div class="col-sm-8">
+                        <ng-select
+                            name="selGender"
+                            [(ngModel)]="patientPayload.genderId"
+                            placeholder="Select Gender.."
+                            #selGender="ngModel"
+                        >
+                            <ng-option *ngFor="let data of gender" [value]="data.id">{{
+                                data.name
+                            }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <!-- patient religion -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Religion: </label>
+                    <div class="col-sm-8">
+                        <ng-select
+                            [(ngModel)]="patientPayload.religionId"
+                            placeholder="Select Religion.."
+                            name="selReligion"
+                            #selReligion="ngModel"
+                        >
+                            <ng-option *ngFor="let data of religion" [value]="data.id">{{
+                                data.name
+                            }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+            <!-- patient ethnic group -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Ethnic Group:</label>
+                    <div class="col-sm-8">
+                        <ng-select
+                            [(ngModel)]="patientPayload.ethnicGroupId"
+                            placeholder="Select Ethnic Group.."
+                            name="selEthnicGroup"
+                            #selEthnicGroup="ngModel"
+                        >
+                            <ng-option *ngFor="let data of ethnicGroup" [value]="data.id">{{
+                                data.name
+                            }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">First Name: </label>
+                    <div class="col-sm-8">
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            placeholder="Enter First Name"
+                            name="firstName"
+                            [(ngModel)]="patientPayload.patientFirstName"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Last Name:</label>
+                    <div class="col-sm-8">
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            placeholder="Enter Last Name"
+                            name="lastName"
+                            [(ngModel)]="patientPayload.patientLastName"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-12">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Other Name: </label>
+                    <div class="col-10">
+                        <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            placeholder="Enter Other Name"
+                            name="otherName"
+                            [(ngModel)]="patientPayload.patientOtherName"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <!-- patient date of birth -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Date of Birth: </label>
+                    <div class="input-group col-sm-8">
+                        <app-shared-date #dateOfBirthComponent
+                            [props]="{
+                                hideCurrentDate: true,
+                                setDate: patientPayload?.patientDateOfBirth
+                            }"
+                            (selected)="onDateSelected($event)"
+                        ></app-shared-date>
+                    </div>
+                </div>
+            </div>
+            <!-- patient age -->
+            <div class="col-6">
+                <div class="form-group row tx-12">
+                    <label class="col col-form-label">Age:</label>
+                    <div class="col-sm-8">
+                        <input
+                            class="form-control form-control-sm"
+                            type="text"
+                            placeholder="Auto Calculated"
+                            readonly
+                            [(ngModel)]="patientPayload.patientAge"
+                            name="age"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>

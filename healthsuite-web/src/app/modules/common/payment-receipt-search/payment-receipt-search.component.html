@@ -1,0 +1,28 @@
+<div class="search-tab">
+    <div class="mg-l-5 search-title">
+        <label *ngIf="this.props?.showLabel" class="text-right align-self-end mg-r-5"
+            >Search Payment Receipt:</label
+        >
+    </div>
+    <div class="search-input">
+        <ng-select
+            [items]="responsePayload | async"
+            bindLabel="receiptNumber"
+            [trackByFn]="trackByFn"
+            [minTermLength]="minLengthTerm"
+            [loading]="isLoading"
+            typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+            [typeahead]="searchInput$"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="selectedPayload"
+            (change)="onSelectReceipt($event)"
+            placeholder="Search Receipt..."
+        >
+            <ng-template ng-option-tmp let-item="item">
+                <span>{{ item.receiptNumber }}</span> <br>
+                <small>Patient Name: {{item.patientDetail.patientNameAndNumber}}</small> <br>
+                <small>Date: {{transformDate(item.transactionDate) | date}}</small>
+            </ng-template>
+        </ng-select>
+    </div>
+</div>

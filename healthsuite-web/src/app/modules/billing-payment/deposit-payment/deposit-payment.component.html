@@ -1,0 +1,130 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-20-f">
+        <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <app-patient-search
+                #patientSearchComponent
+                [props]="{
+                    showLabel: true,
+                    checkAdmission: true,
+                    loadAdmission: false,
+                    loadRevisit: true
+                }"
+                (selected)="onPatientSelected($event)"
+            ></app-patient-search>
+        </div>
+
+        <app-patient-bio-card [selectedPatient]="patientPayload"></app-patient-bio-card>
+
+        <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+            <legend class="w-auto tx-16 tx-bold"></legend>
+            <form
+                autocomplete="off"
+                class="form-padding"
+                novalidate
+                #depositForm="ngForm"
+                (ngSubmit)="onSubmitDeposit()"
+            >
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group w-100">
+                            <label>Revenue Department</label>
+                            <ng-container *ngIf="!isDepositRevenueLoaded; else depositName">
+                                <br />
+                                <span class="fa fa-spinner fa-spin"></span>
+                            </ng-container>
+                            <ng-template #depositName>
+                                <input
+                                    type="text"
+                                    class="form-control form-control-sm"
+                                    [value]="depositRev"
+                                    readonly
+                                />
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group w-100">
+                            <label>Cash Point</label>
+                            <input
+                                type="text"
+                                [value]="locationName"
+                                class="form-control form-control-sm"
+                                readonly
+                            />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group w-100">
+                            <label>Payment Method</label>
+                            <app-payment-method
+                                #paymentMethodComponent
+                                (selected)="onPaymentMethodSelected($event)"
+                            ></app-payment-method>
+                        </div>
+                    </div>
+
+                    <div
+                        class="col-md-12"
+                        *ngIf="depositPayload?.paymentMethod?.name == posPaymentMethod"
+                    >
+                        <div class="form-group w-100">
+                            <label>Transaction Ref:</label>
+                            <input
+                                type="text"
+                                class="form-control form-control-sm"
+                                name="depositTransactionRef"
+                                #depositTransactionRef="ngModel"
+                                [(ngModel)]="depositPayload.transactionRefNumber"
+                                [ngClass]="{
+                                    'is-invalid':
+                                        depositForm.submitted &&
+                                        depositPayload.paymentMethod.name == posPaymentMethod &&
+                                        depositTransactionRef.invalid
+                                }"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group w-100">
+                            <label>Amount</label>
+                            <input
+                                name="depositAmount"
+                                #depositAmount="ngModel"
+                                type="number"
+                                class="form-control form-control-sm"
+                                (keypress)="numberMatcher($event)"
+                                [(ngModel)]="depositPayload.depositAmount"
+                                [ngClass]="{
+                                    'is-invalid': depositForm.submitted && depositAmount.invalid
+                                }"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group w-100">
+                            <label>Description</label>
+                            <input
+                                type="text"
+                                name="depositDescription"
+                                #depositDescription="ngModel"
+                                [(ngModel)]="depositPayload.description"
+                                class="form-control form-control-sm"
+                                [ngClass]="{
+                                    'is-invalid':
+                                        depositForm.submitted && depositDescription.invalid
+                                }"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-md mg-t-15 mg-l-15 w-25">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<fieldset>
+    <legend>Musculo Skeletal</legend>
+    <hr>
+    <div class="row">
+
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Muscle Bulk: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.muscleBulk">
+                        <ng-option value="Abnormal">Abnormal</ng-option>
+                        <ng-option value="Normal">Normal</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Spasticity: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <input type="text" class="input-control" [(ngModel)]="props.data.spasticity">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Tone</label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.tone">
+                        <ng-option value="Hyper">Hyper</ng-option>
+                        <ng-option value="Hypotonia">Hypotonia</ng-option>
+                        <ng-option value="Normal">Normal</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Rigidity:</label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.rigidity">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="yes">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-3 text-right">
+                    <label>Reflexes</label>
+                </div>
+                <div class="col-md-9 mg-t-5 mg-md-t-0">
+                    <input type="text" class="input-control" [(ngModel)]="props.data.reflexes">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</fieldset>

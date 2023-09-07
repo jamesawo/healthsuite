@@ -1,0 +1,31 @@
+<div class="pd-10 pd-sm-15 wd-xl-100p">
+    <div class="row">
+        <div class="col-auto">
+            <label class="rdiobox">
+                <input
+                    name="billPaymentType"
+                    type="radio"
+                    [value]="registeredPatient"
+                    checked
+                    (change)="onTypeChange(registeredPatient)"
+                    [checked]="props?.defaultSelected === registeredPatient"
+                />
+                <span>Registered Patient</span>
+            </label>
+        </div>
+
+        <div class="col-auto mg-t-20 mg-lg-t-0">
+            <label class="rdiobox">
+                <input
+                    name="billPaymentType"
+                    type="radio"
+                    [value]="walkInPatient"
+                    (change)="onTypeChange(walkInPatient)"
+                    [disabled]="props?.type == scheme"
+                    [checked]="props?.defaultSelected === walkInPatient"
+                />
+                <span>Walk-In Patient</span>
+            </label>
+        </div>
+    </div>
+</div>

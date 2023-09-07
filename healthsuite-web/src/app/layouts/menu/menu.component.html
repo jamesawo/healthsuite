@@ -1,0 +1,67 @@
+<div class="az-iconbar-header">
+    <a class="az-logo mg-l-10">
+        <span>{{ appName }}</span>
+    </a>
+
+    <a class="az-iconbar-toggle-menu ch" (click)="onClickCollapseMenu.emit(false)">
+        <i class="icon ion-md-arrow-back"></i>
+        <i class="icon ion-md-close"></i>
+    </a>
+</div>
+
+<div class="az-iconbar-body">
+    <div class="az-iconbar-pane show">
+        <h6 class="az-iconbar-title mg-l-10">{{ menuItem?.title }}</h6>
+        <ul class="nav">
+            <li
+                    *ngFor="let menu of menuItem?.permissions"
+                    class="nav-item"
+                    [class.show]="menu.show"
+                    (click)="menu.show = !menu.show"
+            >
+                <ng-container *ngIf="menu.hasChild; else singleMenuItem">
+                    <a class="txt-18 nav-link with-sub">
+                        {{ menu?.title }}
+                    </a>
+                    <ul class="nav-sub">
+                        <li
+                                *ngFor="let child of menu.children"
+                                class="nav-sub-item"
+                                routerLinkActive="active"
+                                (click)="menu.show = !menu.show"
+                        >
+                            <ng-container *ngIf="child.hasChild; else childRef">
+                                <a class="nav-link with-sub" (click)="child.show = !child.show">{{child.title}}</a>
+                                <ul class="nav-sub">
+                                    <ng-container *ngIf="child.show">
+                                        <li
+                                                *ngFor="let ch of child.children"
+                                                class="nav-sub-item"
+                                                routerLinkActive="active"
+                                        >
+                                            <a class="nav-link" [routerLink]="ch?.url">
+                                                {{ch?.title}}
+                                            </a>
+
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </ng-container>
+
+                            <ng-template #childRef>
+                                <a class="nav-link" [routerLink]="child?.url">
+                                    {{child?.title}}
+                                </a>
+                            </ng-template>
+                        </li>
+                    </ul>
+                </ng-container>
+                <ng-template #singleMenuItem>
+                    <a [routerLink]="menu?.url" class="nav-link">
+                        {{ menu?.title }}
+                    </a>
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+</div>

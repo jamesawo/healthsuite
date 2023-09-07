@@ -1,0 +1,106 @@
+<div class="wd-lg-100p mg-t-10 list-group-item">
+    <div class="row align-content-sm-center">
+        <div class="col-lg-3 col-md-3 col-sm-12 center_img align-self-center">
+            <img
+                [src]="renderPatientImage(selectedPatient?.passportBase64)"
+                class="wd-150 rounded-circle mg-r-15"
+                alt=""
+            />
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="d-block mg-b-15">
+                <h6 class="tx-20 tx-inverse tx-semibold mg-b-0">
+                    <span *ngIf="selectedPatient?.patientFirstName; else notAvailable">
+                        {{ selectedPatient?.patientFirstName }}
+                        {{ selectedPatient?.patientLastName }}
+                        {{ selectedPatient?.patientOtherName }}
+                    </span>
+                </h6>
+                <!--<span class="d-block tx-12 text-muted">.</span>-->
+            </div>
+
+            <div class="d-block mg-t-10">
+                <h6 class="tx-16 tx-inverse tx-semibold mg-b-0">Patient Number:</h6>
+                <span
+                    class="d-block tx-16 text-muted"
+                    *ngIf="selectedPatient?.patientNumber; else notAvailable"
+                    >{{ selectedPatient?.patientNumber }}
+                </span>
+            </div>
+
+            <div class="d-block mg-t-10">
+                <h6 class="tx-16 tx-inverse tx-semibold mg-b-0">Age:</h6>
+                <span
+                    class="d-block tx-16 text-muted"
+                    *ngIf="selectedPatient?.patientAge; else notAvailable"
+                    >{{ selectedPatient?.patientAge }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="d-block">
+                <h6 class="tx-16 tx-inverse tx-semibold mg-b-0">Category</h6>
+                <span
+                    class="d-block tx-16 text-muted"
+                    *ngIf="selectedPatient?.patientCategoryEnum; else notAvailable"
+                    >
+                    {{ selectedPatient?.patientCategoryEnum }}
+                </span
+                >
+            </div>
+
+            <div class="d-block mg-t-10">
+                <h6 class="tx-16 tx-inverse tx-semibold mg-b-0">Gender:</h6>
+                <span
+                    class="d-block tx-16 text-muted"
+                    *ngIf="selectedPatient?.genderDto; else notAvailable"
+                    >{{ selectedPatient?.genderDto?.name }}
+                </span>
+            </div>
+
+            <div class="d-block mg-t-10">
+                <h6 class="tx-16 tx-inverse tx-semibold mg-b-0">Phone:</h6>
+                <span
+                    class="d-block tx-16 text-muted"
+                    *ngIf="selectedPatient?.patientContactDetail?.phoneNumber; else notAvailable"
+                    >{{ selectedPatient?.patientContactDetail?.phoneNumber }}
+                </span>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="d-block">
+                <h6 class="tx-16 tx-inverse tx-semibold mg-b-0">Organization Name</h6>
+                <span
+                    class="d-block tx-16 text-muted"
+                    *ngIf="selectedPatient?.patientCategoryEnum === scheme; else notAvailable">
+                    {{selectedPatient?.patientInsurance?.scheme?.insuranceName}}
+                </span
+                >
+
+            </div>
+
+            <div class="d-block mg-t-10">
+                <h6 class="tx-16 tx-inverse tx-semibold mg-b-0">Marital Status:</h6>
+                <span
+                    class="d-block tx-16 text-muted"
+                    *ngIf="selectedPatient?.maritalStatusDto; else notAvailable"
+                    >{{ selectedPatient?.maritalStatusDto?.name }}
+                </span>
+            </div>
+
+            <div class="d-block mg-t-10">
+                <h6 class="tx-16 tx-inverse tx-semibold mg-b-0">Visit NO.:</h6>
+                <span
+                    class="d-block tx-16 text-muted"
+                    *ngIf="selectedPatient?.patientRevisitDto?.code; else notAvailable"
+                    >{{ selectedPatient?.patientRevisitDto?.code | uppercase }}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #notAvailable>
+    <span>N/A</span>
+</ng-template>

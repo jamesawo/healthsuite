@@ -1,0 +1,4 @@
+<ng-select (change)="onSelected($event)" placeholder="Select Status" [searchable]="false"  #ngSelectComponent>
+    <ng-option *ngFor="let item of collection" [value]="item.value"> {{item.name}} </ng-option>
+</ng-select>
+

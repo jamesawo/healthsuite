@@ -1,0 +1,249 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-l-50-f pd-r-50-f">
+        <div class="pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="create">
+                        <input
+                                id="create"
+                                name="scheme"
+                                type="radio"
+                                checked
+                                [value]="isCreate"
+                                (change)="onTypeChange(isCreate)"
+                        />
+                        <span>New Scheme</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="edit">
+                        <input
+                                name="scheme"
+                                id="edit"
+                                type="radio"
+                                [value]="isEdit"
+                                (change)="onTypeChange(isEdit)"
+                        />
+                        <span>Edit Scheme</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mg-t-15 pd-10 pd-sm-15 wd-xl-100p bg-gray-200" *ngIf="currentView == isEdit">
+            <app-scheme-search (selected)="onSchemeSelected($event)"></app-scheme-search>
+        </div>
+
+        <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+            <legend class="w-auto tx-16 tx-bold">
+                Scheme Details
+            </legend>
+            <form #registerForm="ngForm" autocomplete="off" class="form-padding" novalidate>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Insurance Name</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    [ngClass]="{
+                                    'is-invalid':
+                                        (name.touched || registerForm.submitted) &&
+                                        name.errors?.required
+                                }"
+                                    [(ngModel)]="payload.insuranceName"
+                                    name="name"
+                                    #name="ngModel"
+                                    required
+                            />
+                        </div>
+
+                        <div class="d-block mg-t-10">
+                            <label>Phone Number</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    [ngClass]="{
+                                    'is-invalid':
+                                        (phoneNumber.touched || registerForm.submitted) &&
+                                        phoneNumber.errors?.required
+                                }"
+                                    [(ngModel)]="payload.phoneNumber"
+                                    name="phoneNumber"
+                                    #phoneNumber="ngModel"
+                                    required
+                            />
+                        </div>
+
+                        <div class="d-block mg-t-10">
+                            <label>Postal Address</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    [ngClass]="{
+                                    'is-invalid':
+                                        (postalAddress.touched || registerForm.submitted) &&
+                                        postalAddress.errors?.required
+                                }"
+                                    [(ngModel)]="payload.postalAddress"
+                                    name="postalAddress"
+                                    #postalAddress="ngModel"
+                                    required
+                            />
+                        </div>
+
+                        <div class="d-block mg-t-10">
+                            <label>Address 1</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    [(ngModel)]="payload.address1"
+                                    name="address1"
+                            />
+                        </div>
+
+                        <div class="d-block mg-t-10">
+                            <label>Address 3</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    [(ngModel)]="payload.address3"
+                                    name="address3"
+                            />
+                        </div>
+
+                        <div class="d-block mg-t-10 mg-b-15">
+                            <label>Organization Type</label>
+                            <ng-select (change)="onOrganizationTypeSelected($event)"
+                                       [(ngModel)]="payload.organizationType"
+                                       placeholder="Please select" #selectComponent
+                                       name="OrganizationType"
+                            >
+                                <ng-option value="CORPORATE">CORPORATE</ng-option>
+                                <ng-option value="INDIVIDUAL">INDIVIDUAL</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Insurance Code</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    [ngClass]="{
+                                    'is-invalid':
+                                        (postalAddress.touched || registerForm.submitted) &&
+                                        postalAddress.errors?.required
+                                }"
+                                    [(ngModel)]="payload.insuranceCode"
+                                    name="insuranceCode"
+                                    #insuranceCode="ngModel"
+                                    required
+                            />
+                        </div>
+
+                        <div class="d-block mg-t-10">
+                            <label>Email Address</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    [(ngModel)]="payload.emailAddress"
+                                    name="postalAddress"
+                            />
+                        </div>
+
+                        <div class="d-block mg-t-10">
+                            <label>Address Line Title</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    [(ngModel)]="payload.addressLineTitle"
+                                    name="postalAddress"
+                            />
+                        </div>
+
+                        <div class="d-block mg-t-10">
+                            <label>Address 2</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    [(ngModel)]="payload.address2"
+                                    name="address2"
+                            />
+                        </div>
+
+                        <div class="d-block mg-t-10">
+                            <label>Address 4</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    [(ngModel)]="payload.address4"
+                                    name="address4"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mg-t-10 col-md-12">
+                    <div class="d-block mg-t-10">
+                        <a class="btn btn-primary btn-md text-white" (click)="onOpenPlanModal()">
+                            Add Scheme Plan
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped mg-b-0">
+                            <thead>
+                            <tr>
+                                <th class="wd-5"></th>
+                                <th class="wd-30p">Plan Name</th>
+                                <th class="">Discount Markup <small>(%)</small></th>
+                                <th class="">Percentage Service <small>(%)</small></th>
+                                <th class="">Percentage Drug <small>(%)</small></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let plan of payload.schemePlans; let i = index">
+                                <td>
+                                    <label class="form-check-label">
+                                        <i (click)="onRemoveItem(i)" class="pd-2 mg-l-1 fa fa-trash text-danger pointer"
+                                        ></i>
+                                    </label>
+                                </td>
+                                <td class="">
+                                    {{plan.planType}}
+                                </td>
+                                <td class="">
+                                    {{plan.discount}}
+                                </td>
+                                <td class="">
+                                    {{plan.percentService}}
+                                </td>
+                                <td class="">
+                                    {{plan.percentDrug}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="d-block mg-t-10">
+                        <button
+                                type="submit"
+                                class="btn btn-primary btn-md"
+                                (click)="onCreateScheme()"
+                        >
+                            Save Scheme
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+</div>

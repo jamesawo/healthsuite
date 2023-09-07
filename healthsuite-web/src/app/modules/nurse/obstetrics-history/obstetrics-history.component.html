@@ -1,0 +1,143 @@
+<div class="main-wrapper az-content-body">
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+
+        <div class="row col-12 mg-l-5">
+            <label class="w-15 align-self-center">Patient Search:</label>
+            <div class="w-75 mg-l-10">
+                <app-patient-search #patientSearchComponent (selected)="onPatientSelected($event)" [props]="{
+                        showLabel: false,
+                        checkAdmission: true,
+                        loadAdmission: false}"
+                ></app-patient-search>
+            </div>
+        </div>
+        <div class="mg-t-10">
+            <app-patient-bio-card
+                    [selectedPatient]="payload.patient"
+            ></app-patient-bio-card>
+        </div>
+    </fieldset>
+    <div class="az-content-body az-content-body-contacts">
+        <div class="flex-column mg-l-10">
+            <div class="mg-t-10">
+                <div class="card card-dashboard-seven">
+                    <div id="bsStepper1" class="bs-stepper">
+                        <div class="card-header">
+                            <div class="bs-stepper-header" role="tablist">
+                                <div class="step" data-target="#step-1">
+                                    <button type="button" class="step-trigger" role="tab" aria-controls="step-1"
+                                            id="step-1-trigger" (click)="stepPosition = 1">
+                                            <span class="bs-stepper-circle">
+                                                <span class="fas fa-check" aria-hidden="true"></span>
+                                            </span>
+                                        <span class="bs-stepper-label">Step 1</span>
+                                    </button>
+                                </div>
+                                <div class="line"></div>
+                                <div class="step" data-target="#step-2">
+                                    <button type="button" class="step-trigger" role="tab" aria-controls="step-2"
+                                            id="step-2-trigger" (click)="stepPosition = 2">
+                                            <span class="bs-stepper-circle">
+                                                <span class="fas fa-check" aria-hidden="true"></span>
+                                            </span>
+                                        <span class="bs-stepper-label">Step 2</span>
+                                    </button>
+                                </div>
+                                <div class="line"></div>
+                                <div class="step" data-target="#step-3">
+                                    <button type="button" class="step-trigger" role="tab" aria-controls="step-3"
+                                            id="step-3-trigger" (click)="stepPosition = 3">
+                                            <span class="bs-stepper-circle">
+                                                <span class="fas fa-check" aria-hidden="true"></span>
+                                            </span>
+
+                                        <span class="bs-stepper-label">Step 3</span>
+                                    </button>
+                                </div>
+                                <div class="line"></div>
+                                <div class="step" data-target="#step-4">
+                                    <button type="button" class="step-trigger" role="tab" aria-controls="step-4"
+                                            id="step-4-trigger" (click)="stepPosition = 4">
+                                            <span class="bs-stepper-circle">
+                                                <span class="fas fa-check" aria-hidden="true"></span>
+                                            </span>
+
+                                        <span class="bs-stepper-label">Step 4</span>
+                                    </button>
+                                </div>
+                                <div class="line"></div>
+                                <div class="step" data-target="#step-5">
+                                    <button type="button" class="step-trigger" role="tab" aria-controls="step-5"
+                                            id="step-5-trigger" (click)="stepPosition = 5">
+                                            <span class="bs-stepper-circle">
+                                                <span class="fas fa-check" aria-hidden="true"></span>
+                                            </span>
+                                        <span class="bs-stepper-label">Step 5</span>
+                                    </button>
+                                </div>
+                                <div class="line"></div>
+                                <div class="step" data-target="#step-6">
+                                    <button type="button" class="step-trigger" role="tab" aria-controls="step-6"
+                                            id="step-6-trigger" (click)="stepPosition = 6">
+                                            <span class="bs-stepper-circle">
+                                                <span class="fas fa-check" aria-hidden="true"></span>
+                                            </span>
+                                        <span class="bs-stepper-label">Step 6</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="bs-stepper-content" id="stepper-content">
+                                <div id="step-1" class="content" role="tabpanel" aria-labelledby="step-1-trigger">
+                                    <app-ob-general-form #obGeneralFormComponent [prop]="{payload: payload.generalForm}"></app-ob-general-form>
+                                </div>
+                                <div id="step-2" class="content" role="tabpanel" aria-labelledby="step-2-trigger">
+                                    <div class="pd-30 pd-sm-40 wd-xl-100p">
+                                        <app-ob-pre-medical-history [props]="{payload: payload.previousMedicalHistory}"></app-ob-pre-medical-history>
+                                        <app-ob-family-history [props]="{payload: payload.familyHistory}" ></app-ob-family-history>
+                                        <app-ob-pregnancy-histories [props]="{payload: payload.previousPregnancies}"></app-ob-pregnancy-histories>
+                                    </div>
+                                </div>
+                                <div id="step-3" class="content" role="tabpanel" aria-labelledby="step-3-trigger">
+                                   <app-ob-history-of-present-preg [props]="{payload: payload.historyOfPresentPregnancy}"></app-ob-history-of-present-preg>
+                                </div>
+                                <div id="step-4" class="content" role="tabpanel" aria-labelledby="step-4-trigger">
+                                   <app-ob-physical-examination [props]="{payload: payload.physicalExamination}"></app-ob-physical-examination>
+                                </div>
+                                <div id="step-5" class="content" role="tabpanel" aria-labelledby="step-5-trigger">
+                                    <app-ob-measurement [props]="{payload: payload.measurement}"></app-ob-measurement>
+                                </div>
+                                <div id="step-6" class="content" role="tabpanel" aria-labelledby="step-6-trigger">
+                                    <div class=" wd-xl-100p">
+                                       <app-ob-inlet-cavity-outlet [props]="{payload: payload.deliveryInstruction}"></app-ob-inlet-cavity-outlet>
+                                    </div>
+                                </div>
+                                <div class="text-center mg-t-10">
+                                    <button class="btn btn-dark pd-x-30 mg-r-10" (click)="onPrevious()"
+                                            [disabled]="stepPosition === 1">Previous
+                                    </button>
+                                    <ng-container *ngIf="stepPosition < 6; else submitButton">
+                                        <button class="btn btn-az-primary pd-x-30 mg-r-10"
+                                                (click)="onNext()">Next
+                                        </button>
+                                    </ng-container>
+                                    <ng-template #submitButton>
+                                        <button class="btn btn-az-primary pd-x-30 mg-r-10" (click)="onSubmit()">
+                                            Submit
+                                        </button>
+                                        <button class="btn btn-danger pd-x-30 mg-r-10" (click)="onReset()">
+                                            <i class="fa fa-trash-restore"></i>
+                                        </button>
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

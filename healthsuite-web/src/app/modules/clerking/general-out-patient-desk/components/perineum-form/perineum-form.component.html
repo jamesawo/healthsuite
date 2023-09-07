@@ -1,0 +1,57 @@
+<fieldset>
+    <legend>Perineum</legend>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-3 text-right">
+                    <label>Chaperone: </label>
+                </div>
+                <div class="col-md-9 mg-t-5 mg-md-t-0">
+                    <input type="text" class="input-control" [(ngModel)]="props.data.chaperone">
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>External Genitalia: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.externalGenitalia">
+                        <ng-option value="Abnormal">Abnormal</ng-option>
+                        <ng-option value="Normal">Normal</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Per Rectum Examination: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <input type="text" class="input-control" [(ngModel)]="props.data.perRectumExamination">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Any Other Lesion<small>(s)</small>: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <input type="text" class="input-control" [(ngModel)]="props.data.anyOtherLesions">
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Vaginal Examination: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <input type="text" class="input-control" [(ngModel)]="props.data.vaginalExamination">
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

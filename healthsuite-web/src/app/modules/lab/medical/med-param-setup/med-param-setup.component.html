@@ -1,0 +1,73 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column">
+        <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="create">
+                        <input
+                                id="create"
+                                name="scheme"
+                                type="radio"
+                                [checked]="payload.viewType === parameterSetup"
+                                (change)="onViewTypeChange(parameterSetup)"
+                        />
+                        <span>PARAMETER SETUP</span>
+                    </label>
+                </div>
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="edit">
+                        <input
+                                name="scheme"
+                                id="edit"
+                                type="radio"
+                                [checked]="payload.viewType === rangeSetup"
+                                (change)="onViewTypeChange(rangeSetup)"
+                        />
+                        <span>RANGE SETUP</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-14 tx-bold">
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+            <div class="col-md-10">
+                <div class="form-group text-left">
+                    <label class="tx-16 txt-black">Select Lab Department:</label>
+                    <ng-select (change)="onLabViewSelected($event)" placeholder="Select Lab Department ...">
+                        <ng-option [value]="general">{{'GENERAL'}}</ng-option>
+                        <ng-option [value]="chemicalLab">{{chemicalLab}}</ng-option>
+                        <ng-option [value]="haematology">{{haematology}}</ng-option>
+                        <ng-option [value]="anatomical">{{anatomical}}</ng-option>
+                        <ng-option [value]="microbiology">{{microbiology}}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <ng-container *ngIf="selectedLabView">
+
+        <ng-container *ngIf="payload.viewType === parameterSetup; else rangeRef">
+            <app-specimen-test-setup [labViewType]="selectedLabView" [payload]="payload" ></app-specimen-test-setup>
+            <app-param-rank-setup (onSave)="onSaveEntries($event)" ></app-param-rank-setup>
+        </ng-container>
+
+        <!-- range setup -->
+        <ng-template #rangeRef>
+            <app-range-test-param-setup [paramPayload]="rangePayload"></app-range-test-param-setup>
+
+            <app-range-value-setup (onSave)="onSaveRangeEntries($event)" [items]="rangePayload.rangeItems"
+                                   [onRemoveItem]="onRemoveRangeItem"
+                                   [paramPayload]="rangePayload"
+            >
+
+            </app-range-value-setup>
+        </ng-template>
+
+    </ng-container>
+
+</div>

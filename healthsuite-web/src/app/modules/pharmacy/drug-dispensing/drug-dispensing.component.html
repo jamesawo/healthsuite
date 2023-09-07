@@ -1,0 +1,166 @@
+
+<fieldset [disabled]="!isUseStockInventory">
+    <div class="main-wrapper az-content-body">
+        <div class="flex-column">
+            <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+                <div class="row mg-t-10">
+                    <div class="row col-4 mg-l-5">
+                        <label class="w-25 align-self-center">Search By:</label>
+                        <div class="w-75">
+                            <ng-select
+                                [clearable]="false"
+                                [searchable]="false"
+                                [multiple]="false"
+                                [(ngModel)]="searchBySelected"
+                                (change)="onSearchByChanged()"
+                            >
+                                <ng-option
+                                    [value]="data.value"
+                                    *ngFor="let data of searchByCollection"
+                                    >{{ data.name }}</ng-option
+                                >
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-8 mg-t-20 mg-lg-t-0">
+                        <ng-container
+                            *ngIf="searchBySelected == searchByReceipt; else patientSearchTemp"
+                        >
+                            <app-payment-receipt-search
+                                [props]="{
+                                    showLabel: false,
+                                    searchBy: searchBySelected,
+                                    loadPatientDetail: true,
+                                    loadPatientBill: true,
+                                    filterFor: drugReceipt
+                                }"
+                                (selected)="onReceiptSelected($event)"
+                            ></app-payment-receipt-search>
+                        </ng-container>
+                        <ng-template #patientSearchTemp>
+                            <app-patient-search
+                                [props]="{
+                                    showLabel: false,
+                                    checkAdmission: false,
+                                    loadAdmission: false,
+                                    loadRevisit: false,
+                                    loadSchemeDiscount: false,
+                                    loadDeposit: false
+                                }"
+                                (selected)="onPatientSelected($event)"
+                            ></app-patient-search>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+
+            <app-patient-bio-card
+                [selectedPatient]="payload?.patientDetailDto"
+            ></app-patient-bio-card>
+
+            <div
+                class="col-auto mg-t-20 mg-lg-t-0 bg-gray-200 dv-deposit"
+                *ngIf="searchBySelected == searchByPatient"
+            >
+                <div class="row pd-20">
+                    <div class="col-md-12">
+                        <div class="row col-12 mg-l-5">
+                            <label class="w-15 align-self-center">Choose Receipt:</label>
+                            <div class="w-50 mg-l-10">
+                                <ng-select
+                                    [items]="patientReceipts"
+                                    (change)="onReceiptSelected($event)"
+                                    bindLabel="receiptNumber"
+                                >
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <strong>{{ item.receiptNumber }} </strong>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" />
+                                </div>
+                            </th>
+                            <th class="wd-30p">Drug/Item</th>
+                            <th class="wd-5p text-center">Formulation</th>
+                            <th class="wd-10p text-center">Avl Qty</th>
+                            <th class="wd-10p text-center">Qty</th>
+                            <th class="wd-10p text-center">Dosage</th>
+                            <th class="wd-10p text-center">Freq</th>
+                            <th class="wd-10p text-center">Days</th>
+                            <th class="wd-10p text-center">Price</th>
+                            <th class="wd-10p text-center">Discount %</th>
+                            <th class="wd-10p text-center">Gross</th>
+                            <th class="wd-10p text-center">Net</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of patientBill?.pharmacyBillItems">
+                            <td>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" />
+                                </div>
+                            </td>
+                            <td class="text-center">{{ item.drugRegister.description }}</td>
+                            <td class="text-center">{{ item.drugRegister.formulation.name }}</td>
+                            <td class="text-center">{{ item.availableQuantity }}</td>
+                            <td class="text-center">{{ item.quantity }}</td>
+                            <td class="text-center">{{ item.dosage }}</td>
+                            <td class="text-center">{{ item.frequency }}</td>
+                            <td class="text-center">{{ item.days }}</td>
+                            <td class="text-center">{{ item.price | currency: ' ' }}</td>
+                            <td class="text-center">{{ item.discountAmount | currency: ' ' }}</td>
+                            <td class="text-center">{{ item.grossAmount | currency: ' ' }}</td>
+                            <td class="text-center">{{ item.netAmount | currency: ' ' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    Gross Bill Amount:
+                    <span class="tx-16 tx-semibold tx-inverse"
+                        >{{ currencySign }}
+                        {{ patientBill?.billTotal?.grossTotal | currency: ' ' }}</span
+                    >
+                </div>
+                <div class="col-md-4">
+                    Discounted Amount:
+                    <span class="tx-16 tx-semibold tx-inverse"
+                        >{{ currencySign }}
+                        {{ patientBill?.billTotal?.discountTotal | currency: ' ' }}</span
+                    >
+                </div>
+                <div class="col-md-4">
+                    Net Bill Amount:
+                    <span class="tx-16 tx-semibold tx-inverse"
+                        >{{ currencySign }}
+                        {{ patientBill?.billTotal?.netTotal | currency: ' ' }}</span
+                    >
+                </div>
+            </div>
+        </div>
+
+        <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+            <div class="form-group text-center">
+                <button class="btn btn-primary" (click)="onDispenseItems()">Submit</button>
+                <button class="btn btn-primary mg-l-10" (click)="onResetForm()">Clear</button>
+            </div>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,79 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column ">
+        <ng-container>
+            <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+                <app-patient-search #patientSearchComponent
+                    [props]="{
+                        showLabel: false,
+                        checkAdmission: true,
+                        loadAdmission: true
+                    }"
+                    (selected)="onPatientSelected($event)"
+                ></app-patient-search>
+            </div>
+
+            <app-patient-bio-card [selectedPatient]="selectedPatient"></app-patient-bio-card>
+        </ng-container>
+
+        <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+            <legend class="w-auto tx-16 tx-bold">
+                Admission Details
+            </legend>
+            <form
+                #admissionForm="ngForm"
+                autocomplete="off"
+                class="form-padding"
+                (ngSubmit)="onAdmitPatient()"
+                novalidate
+            >
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group ">
+                            <label>Ward Name</label>
+                            <app-ward-search #wardSearchComponent (selected)="onWardSelected($event)"></app-ward-search>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="d-block mg-t-10">
+                            <label>Bed</label>
+                            <ng-select
+                                [items]="bedsList"
+                                bindLabel="code"
+                                bindValue="id"
+                                placeholder="Select Bed.."
+                                [(ngModel)]="admissionFormPayload.bedId"
+                                name="bed"
+                            ></ng-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="d-block mg-t-10 mg-b-10">
+                            <label>Admission Date</label>
+                            <app-shared-date #dateComponent (selected)="onDateSelected($event)"></app-shared-date>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="d-block">
+                            <label>Search Consultant</label>
+                            <app-user-search #userSearchComponent
+                                (selected)="onConsultantSelect($event)"
+                                [props]="{
+                                    showLabel: false,
+                                    isConsultant: true,
+                                    showDisabledUser: false
+                                }"
+                            ></app-user-search>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-md mg-t-15 w-25">
+                    Admit Patient
+                </button>
+            </form>
+        </fieldset>
+    </div>
+</div>

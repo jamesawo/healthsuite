@@ -1,0 +1,43 @@
+<fieldset class="border p-2 mg-t-20 rounded">
+    <legend class="w-auto tx-16 tx-bold">PREVIOUS PREGNANCIES
+    </legend>
+    <div class="text-left">
+        <div class="row mg-b-10">
+            <div class="col-md-6">
+                <div class="text-left">
+                    <button class="btn-primary btn btn-sm mg-l-0"
+                            (click)="onAddPregHistory()"><i
+                            class="fa fa-plus"></i> ADD
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive align-items-center mg-b-20">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th class="text-left">Duration of pregnancy (weeks)</th>
+                <th class="text-left">Outcome</th>
+                <th class="text-left">Sex</th>
+                <th class="text-left">Date of Birth</th>
+                <th class="text-left">Birth Weight(Kg)</th>
+                <th class="text-left">Alive</th>
+                <th class="text-left">Comment</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of props.payload">
+                    <td>{{item?.durationOfPregnancy}}</td>
+                    <td>{{ onGetOutcome(item.outcome) }}</td>
+                    <td>{{item?.sex?.name}}</td>
+                    <td>{{item.dateOfBirth | date}}</td>
+<!--                    <td>{{getDateOfBirth(item.dateOfBirth) | date}}</td>-->
+                    <td>{{item?.birthWeight}}</td>
+                    <td>{{item?.alive}}</td>
+                    <td>{{item?.comment}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>

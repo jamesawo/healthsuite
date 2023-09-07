@@ -1,0 +1,212 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-l-10-f pd-r-10-f">
+        <div class="pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="currentDetails">
+                        <input
+                                id="currentDetails"
+                                name="viewType"
+                                type="radio"
+                                [checked]="payload.viewType === currentDetails"
+                                [value]="currentDetails"
+                                (change)="onViewTypeChange(currentDetails)"
+                        />
+                        <span>CURRENT SCHEME DETAILS</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="editSchemeDetails">
+                        <input
+                                name="viewType"
+                                id="editSchemeDetails"
+                                type="radio"
+                                [value]="editSchemeDetails"
+                                (change)="onViewTypeChange(editSchemeDetails)"
+                                [disabled]="payload.patient.patientCategoryEnum !== scheme"
+                                [checked]="payload.viewType === editSchemeDetails"
+
+                        />
+                        <span>EDIT SCHEME DETAILS</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="changeCategory">
+                        <input
+                                name="viewType"
+                                id="changeCategory"
+                                type="radio"
+                                [value]="changeCategory"
+                                (change)="onViewTypeChange(changeCategory)"
+                                [checked]="payload.viewType === changeCategory"
+
+                        />
+                        <span>CHANGE PATIENT CATEGORY </span>
+                    </label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flex-column mg-t-5 ">
+            <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+                <app-patient-search
+                    #patientSearchComponent
+                    [props]="{
+                    showLabel: true,
+                    checkAdmission: false,
+                    loadAdmission: false,
+                    loadRevisit: true
+                }"
+                    (selected)="onPatientSelected($event)"
+                ></app-patient-search>
+            </div>
+
+            <app-patient-bio-card [selectedPatient]="payload.patient"></app-patient-bio-card>
+        </div>
+
+        <div [ngSwitch]="payload.viewType" class="mg-t-10">
+            <div *ngSwitchCase="currentDetails">
+                <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                    <legend class="w-auto tx-16 tx-bold">
+                        Patient Category
+                    </legend>
+                    <div class="row" *ngIf="payload.patient.patientId">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Current Category:  <strong class="mg-l-15">{{payload?.patient.patientCategoryEnum}}</strong> </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset *ngIf="payload.patient.patientCategoryEnum === scheme"
+                          class="border p-2 mg-t-10 rounded bg-gray-100">
+                    <legend class="w-auto tx-16 tx-bold">
+                        Scheme Details
+                    </legend>
+                    <form autocomplete="off" class="form-padding" novalidate>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Scheme Name</label>
+                                    <label class="form-control">{{payload?.patient?.patientInsurance?.scheme?.insuranceName}}</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Scheme Type</label>
+                                    <label class="form-control">{{payload?.patient?.patientInsurance?.scheme?.organizationType}}</label>
+                                </div>
+                            </div>
+                            <!--<div class="col-md-6">
+                                <div class="form-group">
+                                    <label>ID Number</label>
+                                    <label class="form-control">MY CARE HEALTH INSURANCE</label>
+                                </div>
+                            </div>-->
+                            <!--<div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Member Type</label>
+                                    <label class="form-control">MY CARE HEALTH INSURANCE</label>
+                                </div>
+                            </div>-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Card Holder Name</label>
+                                    <label class="form-control">{{payload?.patient?.patientCardHolder?.name}}</label>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>Referral Number</label>
+                                     <label class="form-control">{{payload.patient.patientCardHolder.insuranceNumber}}</label>
+                                 </div>
+                             </div>-->
+                            <!-- <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>Referral Date</label>
+                                     <label class="form-control">{{''}}</label>
+                                 </div>
+                             </div>-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Primary Provider</label>
+                                    <label class="form-control">{{payload?.patient?.patientInsurance?.primaryProvider}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+
+            <ng-container *ngSwitchCase="editSchemeDetails">
+
+                <ng-container>
+                    <app-patient-card-holder-details [patient]="payload.patient"
+                                                     #cardHolderDetailsComponent></app-patient-card-holder-details>
+                </ng-container>
+
+                <!-- Insurance Details -->
+                <ng-container>
+                    <app-patient-insurance-details [patient]="payload.patient"
+                                                   #insuranceDetailsComponent></app-patient-insurance-details>
+                </ng-container>
+
+                <div class="text-center">
+                    <button (click)="onUpdatePatientSchemeData()" class="btn btn-primary">
+                        SAVE
+                    </button>
+                </div>
+
+            </ng-container>
+
+            <ng-container *ngSwitchCase="changeCategory">
+
+                <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                    <legend class="w-auto tx-16 tx-bold">
+                        Patient Category
+                    </legend>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Current Category</label>
+                                <label class="form-control">{{payload?.patient.patientCategoryEnum}}</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="mg-t-10">
+
+                                    <input type="checkbox" class="mg-r-10 collection-status-checkbox"
+                                           (change)="onCheckBoxClick($event)">
+                                    CHANGE CATEGORY
+                                    TO {{payload.patient.patientCategoryEnum === scheme ? 'GENERAL' : 'SCHEME'}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="mg-t-10" *ngIf="isUpdateToScheme === true">
+                    <app-patient-card-holder-details [patient]="payload.patient"
+                                                     #cardHolderDetailsComponent></app-patient-card-holder-details>
+                    <!-- Insurance Details -->
+                    <app-patient-insurance-details [patient]="payload.patient"
+                                                   #insuranceDetailsComponent></app-patient-insurance-details>
+                </div>
+
+                <div class="text-center">
+                    <button (click)="onChangePatientCategory()" class="btn btn-primary">
+                        SAVE
+                    </button>
+                </div>
+
+
+            </ng-container>
+
+        </div>
+
+    </div>
+</div>

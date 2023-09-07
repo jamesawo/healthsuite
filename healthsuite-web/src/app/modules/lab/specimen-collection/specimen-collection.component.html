@@ -1,0 +1,146 @@
+<div class="main-wrapper az-content-body">
+
+    <div class="flex-column">
+        <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="create">
+                        <input
+                                id="create"
+                                name="scheme"
+                                type="radio"
+                                [checked]="payload.newOrEditSampleEnum === newView"
+                                (change)="onTypeChange(newView)"
+
+                        />
+                        <span>New Sample</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="edit">
+                        <input
+                                name="scheme"
+                                id="edit"
+                                type="radio"
+                                (change)="onTypeChange(editView)"
+                        />
+                        <span>Edit Sample</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-lab-test-request-shared [payload]="payload" ></app-lab-test-request-shared>
+
+    <!-- log info -->
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+            <div class="col-md-4">
+                <div class="form-group ">
+                    <label class="tx-16 txt-black">Request Date</label>
+                    <label class="form-control" readonly="">{{payload?.labBillTestRequest?.date | date}}</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mg-b-10">
+                    <label class="tx-16 txt-black">Ward / Clinic</label>
+                    <label class="form-control" readonly="">{{
+                        payload.labBillTestRequest.isDoctorRequest?payload.labBillTestRequest.requestLab.departmentDto.name: ''
+                        }}</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">Requesting Physician</label>
+                    <label class="form-control" readonly="">{{
+                        payload.labBillTestRequest.isDoctorRequest?payload.labBillTestRequest.requestLab.physician.label: ''
+                        }}</label>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- table -->
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">REQUEST NUMBER</th>
+                        <th class="text-center">TEST REQUIRED</th>
+                        <th class="text-center">SPECIMEN </th>
+                        <th class="text-center">COLLECTION STATUS</th>
+                        <ng-container *ngIf="isEnableSpecimenAckDuringCollection">
+                            <th class="text-center">SPECIMEN ACK.</th>
+                        </ng-container>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="payload.labBillTestRequest.testItems; let i = index">
+                            <tr *ngFor="let item of payload.labBillTestRequest.testItems">
+                                <td class="text-center">{{item.requestNumber}}</td>
+                                <td class="text-center">{{item.testName}}</td>
+                                <td class="text-center">
+                                    <app-specimen-search-dropdown (selected)="onSpecimenSelected($event, item)"></app-specimen-search-dropdown>
+                                </td>
+                                <td class="text-center">
+                                    <input type="checkbox" [(ngModel)]="item.specimenStatus" (change)="onCollectionStatusChange($event, item)" class="collection-status-checkbox">
+                                </td>
+                                <td *ngIf="isEnableSpecimenAckDuringCollection">
+                                    <app-specimen-action (selected)="onSpecimenAckChange($event, item)"></app-specimen-action>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- extras -->
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-2 text-right">
+                    <label class="mg-t-5">Clinical Summary:</label>
+                </div>
+                <div class="col-10">
+                    <textarea class="form-control" cols="10" rows="2" [(ngModel)]="payload.clinicalSummary"></textarea>
+                </div>
+            </div>
+            <div class="row mg-t-10">
+                <div class="col-2 text-right">
+                    <label class="mg-t-5">Provisional Diagnosis:</label>
+                </div>
+                <div class="col-10">
+                    <textarea class="form-control" cols="10" rows="2" [(ngModel)]="payload.provisionalDiagnosis"></textarea>
+                </div>
+            </div>
+            <div class="row mg-t-10">
+                <div class="col-2 text-right">
+                    <label class="mg-t-5">Other Information:</label>
+                </div>
+                <div class="col-10">
+                    <textarea class="form-control" cols="10" rows="2" [(ngModel)]="payload.otherInformation"></textarea>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- action button -->
+    <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+        <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="onSubmitSampleCollection()">SUBMIT SAMPLE COLLECTION</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="center">
+    <ngx-file-drop
+        (onFileDrop)="dropped($event)"
+        (onFileOver)="fileOver($event)"
+        (onFileLeave)="fileLeave($event)"
+        [multiple]="false"
+        [directory]="false"
+        [accept]="'.xlsx'"
+    >
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+            <div
+                class="drop-area"
+                (click)="openFileSelector()"
+                *ngIf="!files.length; else fileAdded"
+            >
+                <label for="file" style="cursor: pointer;">
+                    <span>
+                        Drag n Drop OR Click Here
+                    </span>
+                </label>
+                <button id="file" type="button" style="display: none;"></button>
+            </div>
+            <ng-template #fileAdded>
+                <div class="drop-area">
+                    <span>
+                        {{ files.length }} {{ files.length > 1 ? 'Files' : 'File' }} Added
+                    </span>
+                </div>
+            </ng-template>
+        </ng-template>
+    </ngx-file-drop>
+</div>
+
+<div class="row mg-t-20 mg-l-10 flex-row">
+    <div class="flex-grow-1">
+        <div class="progress form-group" *ngIf="progress > 0">
+            <div
+                class="progress-bar progress-bar-striped bg-success progress-bar-animated"
+                role="progressbar"
+                aria-valuenow="0"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                [style.width.%]="progress"
+            ></div>
+        </div>
+        <div *ngIf="uploadRes">
+            <h4 class="text-success">
+                Uploaded: {{ (uploadRes?.data)['Uploaded'] }} &nbsp; Failed:
+                {{ (uploadRes?.data)['Duplicates'] }}
+            </h4>
+        </div>
+
+        <ng-container *ngIf="rawFile">
+            File Name: <span class="badge-primary badge-pill">{{ rawFile?.name }}</span>
+            <br />
+            File Size: <span class="badge-primary badge-pill">{{ rawFile?.size | fileSize }}</span>
+        </ng-container>
+        <!-- Progress Bar -->
+    </div>
+    <div class="flex-grow-0">
+        <div class="form-group col-sm-auto">
+            <button
+                class="btn btn-sm btn-primary mg-l-2"
+                [disabled]="!rawFile"
+                (click)="onUploadFile()"
+            >
+                Start Upload
+            </button>
+            <button class="btn btn-sm btn-danger mg-l-2" (click)="clearFiles()">
+                Reset
+            </button>
+        </div>
+    </div>
+</div>

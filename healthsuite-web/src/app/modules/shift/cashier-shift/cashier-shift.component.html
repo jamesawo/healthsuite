@@ -1,0 +1,88 @@
+<div class="main-wrapper az-content-body ">
+    <fieldset class="border p-2 mg-t-20 rounded">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="flex-column">
+            <div class="pd-10 pd-sm-15 wd-xl-100p">
+                <div class="row">
+                    <div class="col-auto">
+                        <label class="rdiobox" for="create">
+                            <input
+                                    id="create"
+                                    name="scheme"
+                                    type="radio"
+                                    checked
+                                    (change)="onReportDetailFormatChange(summaryType)"
+                            />
+                            <span>SUMMARY</span>
+                        </label>
+                    </div>
+                    <div class="col-auto">
+                        <label class="rdiobox" for="edit">
+                            <input
+                                    name="scheme"
+                                    id="edit"
+                                    type="radio"
+                                    (change)="onReportDetailFormatChange(detailedType)"
+                            />
+                            <span>DETAILED</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">Start Date</label>
+                    <app-shared-date #startDateComponent (selected)="onDateSelected($event, start)"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">End Date</label>
+                    <app-shared-date #endDateComponent (selected)="onDateSelected($event, end)"></app-shared-date>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label></label>
+                    <button class="btn btn-sm btn-primary mg-t-30" (click)="onSearchForShiftByDateRange()">
+                        <i class="fa fa-search"> </i> Search
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </fieldset>
+
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row mg-t-10">
+            <div class="row col-10 mg-l-5 mg-b-15">
+                <label class="wd-10p text-right mg-r-20">Shift Number:</label>
+                <div class="wd-65p">
+                    <app-cashier-shift-number-dropdown
+                            [collection]="shiftCollection"
+                            (selected)="onShiftSelected($event)"
+                    ></app-cashier-shift-number-dropdown>
+
+                </div>
+                <div class="form-group text-center">
+                    <button class="mg-l-10 btn btn-sm btn-primary" (click)="onDownloadShiftReport()">
+                        <i class="fa fa-file-pdf"></i>
+                        DOWNLOAD
+                    </button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>

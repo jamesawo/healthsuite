@@ -1,0 +1,201 @@
+<!--<div class="az-content-label mg-b-5 text-uppercase">RECEIVE GOODS FROM SUPPLIER ORDER</div>-->
+<div class="content-wrapper">
+    <div class="pd-5 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="row mg-t-10">
+            <div class="row col-12 mg-l-5">
+                <label class="w-15 align-self-center mg-t-10">Search Drug Order :</label>
+                <div class="w-75 mg-l-10">
+                    <app-drug-order-search
+                        (selected)="onSelectDrugOrder($event)"
+                    ></app-drug-order-search>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="row justify-content-center pd-l-40 pd-r-40">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>
+                        OUTLET:
+                    </label>
+                    <label class="form-control bg-gray-100">
+                        {{ payload?.outlet?.name }}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>SUPPLIER / VENDOR: </label>
+                    <input
+                        autocomplete="off"
+                        name="supplierName"
+                        type="text"
+                        class="form-control bg-white"
+                        [(ngModel)]="payload.drugOrder.vendor.supplierName"
+                        readonly
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <fieldset class="border pd-l-40 pd-r-40 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+            Order Details
+        </legend>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="mg-t-5 form-group">
+                    <label>
+                        Received By:
+                    </label>
+                    <label class="form-control bg-gray-100 text-uppercase" readonly>
+                        {{ payload?.user.label }}
+                    </label>
+                </div>
+                <div class="mg-t-5 form-group">
+                    <label>
+                        Invoice Number:
+                    </label>
+                    <input
+                        autocomplete="off"
+                        name="invoiceNumber"
+                        [(ngModel)]="payload.invoiceNumber"
+                        type="text"
+                        class="form-control bg-white text-uppercase"
+                    />
+                </div>
+                <div class="mg-t-5 form-group">
+                    <label>
+                        Purchase Order Code:
+                    </label>
+                    <input
+                        type="text"
+                        autocomplete="off"
+                        name="purchaseOrderNumber"
+                        [(ngModel)]="payload.purchaseOrderNumber"
+                        class="form-control bg-white text-uppercase"
+                    />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mg-t-5 form-group">
+                    <label>Delivered By: </label>
+                    <input
+                        name="deliveredBy"
+                        type="text"
+                        class="form-control bg-white"
+                        autocomplete="off"
+                        [(ngModel)]="payload.deliveredBy"
+                        placeholder="Enter Name of Delivery Personnel"
+                    />
+                </div>
+                <div class="mg-t-5 form-group">
+                    <label>Invoice Date: </label>
+                    <app-shared-date (selected)="onDateSelected($event)"></app-shared-date>
+                </div>
+                <div class="mg-t-5 form-group">
+                    <label>Delivery Note Number: </label>
+                    <input
+                        name="deliveryNoteNumber"
+                        type="text"
+                        class="form-control bg-white"
+                        autocomplete="off"
+                        [(ngModel)]="payload.deliveryNoteNumber"
+                        placeholder="Enter Note Number"
+                    />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Other Related Information</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="otherInformation"
+                        autocomplete="off"
+                        [(ngModel)]="payload.relatedInformation"
+                    />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" />
+                            </div>
+                        </th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Qty Ordered</th>
+                        <th class="text-center">Total Received</th>
+                        <th class="text-center">Qty Supplied</th>
+                        <th class="text-center">Rate</th>
+                        <th class="text-center">Unit of Issue</th>
+                        <th class="text-center">Total Cost</th>
+                        <th class="text-center">Batch Number</th>
+                        <th class="text-center">Expiry Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of payload?.receivedGoodsItemsList">
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" />
+                            </div>
+                        </td>
+                        <td class="text-center">{{ item.drugRegister.description }}</td>
+                        <td class="text-center">{{ item.quantityOrdered }}</td>
+                        <td class="text-center">
+                            <input
+                                [(ngModel)]="item.quantityReceived"
+                                type="number"
+                                (change)="onItemTotalReceivedChange($event, item)"
+                                class="w-100"
+                                (keypress)="numberMatch($event)"
+                            />
+                        </td>
+                        <td class="text-center">
+                            <input
+                                [(ngModel)]="item.quantitySupplied"
+                                type="number"
+                                class="w-100"
+                                (change)="onItemQtySuppliedChange($event, item)"
+                                (keypress)="numberMatch($event)"
+                            />
+                        </td>
+                        <td class="text-center">{{ item.rate }}</td>
+                        <td class="text-center">{{ item.drugRegister.unitOfIssue }}</td>
+                        <td class="text-center">{{ item.totalCost | currency: ' ' }}</td>
+                        <td class="text-center">
+                            <input
+                                [value]="item.batchNumber"
+                                type="text"
+                                (change)="onItemBatchNumberChange($event, item)"
+                                class="w-100"
+                            />
+                        </td>
+                        <td class="text-center">
+                            <app-shared-date
+                                (selected)="onDateSelected($event, item)"
+                            ></app-shared-date>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+        <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="onSubmit()">SUBMIT</button>
+            <button class="btn btn-danger mg-l-10" (click)="onResetForm()">RESET</button>
+        </div>
+    </div>
+</div>

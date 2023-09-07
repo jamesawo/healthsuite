@@ -1,0 +1,143 @@
+<div class="main-wrapper az-content-body" xmlns="http://www.w3.org/1999/html">
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold"></legend>
+        <div class="flex-column pd-10-f">
+            <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+                <div class="row mg-t-10">
+                    <div class="row col-4 mg-l-5">
+                        <label class="w-25 align-self-center">Search By:</label>
+                        <div class="w-75">
+                            <ng-select
+                                    name="searchBy"
+                                    [markFirst]="true"
+                                    [closeOnSelect]="true"
+                                    [clearable]="false"
+                                    [searchable]="false"
+                                    [multiple]="false"
+                                    [(ngModel)]="payload.billSearchedBy"
+                                    (change)="onSearchByDropdownChange($event)"
+                            >
+                                <ng-option
+                                        *ngFor="let data of billSearchByCollection"
+                                        [value]="data.value"
+                                >{{ data.name }}</ng-option
+                                >
+                            </ng-select>
+                        </div>
+                    </div>
+                    <ng-container
+                            *ngIf="
+                                payload.billSearchedBy == searchByPatient;
+                                else searchByBillNumber
+                            "
+                    >
+                        <div class="col-8 mg-t-20 mg-lg-t-0">
+                            <app-patient-search
+                                    #patientSearchComponent
+                                    (selected)="onPatientSelect($event)"
+                                    [props]="{
+                                        showLabel: false,
+                                        checkAdmission: true,
+                                        loadAdmission: false,
+                                        loadRevisit: true,
+                                        loadSchemeDiscount: false,
+                                        loadDeposit: false
+                                    }"
+                            ></app-patient-search>
+                        </div>
+                    </ng-container>
+                    <ng-template #searchByBillNumber>
+                        <div class="col-8 mg-t-20 mg-lg-t-0">
+                            <app-bill-data-search
+                                    #billDataSearchComponent
+                                    [props]="{ loadDeposit: false }"
+                                    (selected)="onSearchByBillNumberSelected($event)"
+                            ></app-bill-data-search>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+
+            <app-patient-bio-card
+                    [selectedPatient]="payload.patient"
+            ></app-patient-bio-card>
+        </div>
+    </fieldset>
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+
+        <div class="row col-12 mg-l-5">
+            <label class="w-15 align-self-center">Bill Number:</label>
+            <div class="w-75 mg-l-10">
+                <ng-select #billNumberSelectComponent
+                           [readonly]="payload.billSearchedBy !== searchByPatient"
+                           [searchable]="true"
+                           [items]="payload.patientBillList"
+                           [bindLabel]="'invoiceNumber'"
+                           [bindValue]="'id'"
+                           [placeholder]="'Select Bill..'"
+                           (change)="onSearchByPatientBillNumberSelect($event)"
+                ></ng-select>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+
+        <div class="table-responsive table">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th class="wd-30p text-left">PRODUCT / SERVICE</th>
+                    <th class="wd-5p text-center">OLD QTY</th>
+                    <th class="wd-5p text-center">NEW QTY</th>
+                    <th class="wd-10p text-center">PRICE</th>
+                    <th class="wd-10p text-center">NET</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of selectedBillItems">
+                    <td class="text-left">{{ item.description }}</td>
+                    <td class="text-center">{{ item.quantity }}</td>
+                    <td class="wd-5p text-center">
+                        <input
+                                type="number"
+                                class="wd-50"
+                                [value]="item.newQuantity"
+                                (keypress)="numberMatch($event)"
+                                (keyup)="onBillQuantityChange($event, item)"
+                                (change)="onBillQuantityChange($event, item)"
+                                min="0"
+                        />
+                    </td>
+
+                    <td class="text-center">{{ item.price }}</td>
+                    <td class="text-center">{{ item.netAmount }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="form-group">
+                    <label>Comment</label>
+                    <textarea class="form-control" cols="10" rows="2" [(ngModel)]="payload.patientBill.comment"></textarea>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+        <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+            <div class="form-group text-center">
+                <button class="btn btn-primary" (click)="onSaveBillAdjustment()">SUBMIT</button>
+                <button class="btn btn-primary mg-l-10" (click)="onResetForm()">
+                    CLEAR FORM
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</div>

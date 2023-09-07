@@ -1,0 +1,238 @@
+<!-- d-none will set display:none-->
+<div class="d-none">
+    <ng-container *ngIf="props?.viewType !== drugBillView; else title">
+        <div class="az-content-label mg-b-5 text-uppercase">{{ props?.type }} Patient Billing</div>
+    </ng-container>
+    <ng-template #title>
+        <div class="az-content-label mg-b-5 text-uppercase">Patient Billing</div>
+    </ng-template>
+</div>
+
+<div class="main-wrapper az-content-body">
+    <div class="flex-column">
+        <app-bill-patient-type
+                (valueChanged)="onBillPatientTypeChange($event)"
+                [props]="{ type: props?.type, defaultSelected: payload.billPatientType }"
+        ></app-bill-patient-type>
+
+        <ng-container
+                *ngIf="payload.billPatientType == registeredPatientType; else walkInPatientRef"
+        >
+            <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+                <div class="row mg-t-10">
+                    <div class="row col-4 mg-l-5">
+                        <label class="w-25 align-self-center">Search By:</label>
+                        <div class="w-75">
+                            <app-search-by-dropdown
+                                    #searchByDropdownComponent
+                                    (selected)="onSearchByChanged($event)"
+                                    [collection]="billSearchByCollection"
+                            ></app-search-by-dropdown>
+                        </div>
+                    </div>
+                    <div class="col-8 mg-t-20 mg-lg-t-0">
+                        <app-patient-search
+                                (selected)="onPatientSearchChange($event)"
+                                [props]="{
+                                showLabel: false,
+                                checkAdmission: true,
+                                loadAdmission: false,
+                                loadRevisit: true,
+                                loadSchemeDiscount: true,
+                                loadDrugRequest: isLoadDrugRequest,
+                                loadLabRequest: isLoadLabRequest,
+                                loadRadiologyRequest: isLoadRadiologyRequest
+                            }"
+                        ></app-patient-search>
+                    </div>
+                </div>
+            </div>
+            <app-patient-bio-card [selectedPatient]="billPatientTemp"></app-patient-bio-card>
+        </ng-container>
+
+        <ng-template #walkInPatientRef>
+            <app-walk-in-patient></app-walk-in-patient>
+        </ng-template>
+
+        <!-- service & drug  search -->
+        <div class="pd-0">
+            <!-- service search -->
+            <ng-container *ngIf="props?.viewType !== drugBillView; else searchDrugTemplate">
+                <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+                    <div class="row mg-t-10">
+                        <div class="row col-12 mg-l-5">
+                            <label class="w-15 align-self-center">Search Product / Service:</label>
+                            <div class="w-75 mg-l-10">
+                                <app-service-name-search #serviceNameSearchComponent
+                                                         [props]="{showLabel: false, viewType: props.viewType}"
+                                                         (selected)="onProductServiceSelected($event)"
+                                ></app-service-name-search>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+            <!-- drug search -->
+            <ng-template #searchDrugTemplate>
+                <div class="pd-10 pd-sm-15 wd-xl-100p">
+                    <app-drug-paycash-toggle
+                            (valueChange)="onCashOrCreditToggleChange($event)"
+                    ></app-drug-paycash-toggle>
+                </div>
+                <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+                    <div class="row mg-t-10">
+                        <div class="row col-12 mg-l-5">
+                            <label class="w-15 align-self-center">Search Product/Drug :</label>
+                            <div class="w-75 mg-l-10">
+                                <app-drug-search
+                                        #drugSearchComponent
+                                        (selected)="onDrugItemSelected($event)"
+                                        [props]="{
+                                        searchTerm: genericOrBrandName,
+                                        showLabel: false,
+                                        loadIssOutletStockCount: false,
+                                        issuingOutletId: 0
+                                    }"
+                                ></app-drug-search>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- lab prescription handler -->
+        <div class="mg-t-5  wd-xl-100p" *ngIf="canShowLabPrescriptionHandler ">
+            <app-lab-bill-prescription-handler
+                    (selected)="onLabPrescriptionSelected($event)" (isSearching)="onIsSearchingDoctorRequest($event)"
+                    [props]="{patient: payload.patientDetailDto, labRequestList: labRequest}"
+            ></app-lab-bill-prescription-handler>
+        </div>
+
+        <!-- drug prescription handler -->
+        <div class="mg-t-5  wd-xl-100p" *ngIf="canShowDrugPrescriptionHandler ">
+            <app-drug-prescription-handler (selected)="onDrugPrescriptionSelected($event)" (isSearching)="onIsSearchingDoctorRequest($event)"
+                                           [props]="{patient: payload.patientDetailDto, drugRequestList: drugRequest}"></app-drug-prescription-handler>
+        </div>
+
+        <!-- radiology prescription handler -->
+        <div class="mg-t-5  wd-xl-100p" *ngIf="canShowRadiologyPrescriptionHandler ">
+            <app-radiology-prescription-handler
+                    (selected)="onRadiologyPrescriptionSelected($event)" (isSearching)="onIsSearchingDoctorRequest($event)"
+                    [props]="{patient: payload.patientDetailDto, radiologyRequestList: radiologyRequest}"
+            ></app-radiology-prescription-handler>
+        </div>
+
+
+        <!-- bill data table -->
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <app-bill-table-data
+                #billTableDataComponent
+                [serviceBillItems]="billItems"
+                [pharmacyBillItems]="pharmacyBillItems"
+                [isSchemePatient]="isSchemedPatient"
+                [isEnforceCount]="isForceStockCount"
+                [props]="tableProps"
+                (totalChanged)="onBillTotalChanged($event)"
+                [onGetSchemePrice]="onGetSchemeDiscount"
+            ></app-bill-table-data>
+        </div>
+
+        <!-- radiology bill extras -->
+        <div class="mg-t-5  wd-xl-100p" *ngIf="canShowRadiologyPrescriptionHandler">
+            <app-radiology-bill-extras [props]="{radiologyRequest: selectedRadiologyRequest}"></app-radiology-bill-extras>
+        </div>
+
+        <!-- bill total -->
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    Gross Bill Amount:
+                    <span class="tx-16 tx-semibold tx-inverse">{{
+                        payload.billTotal.grossTotal | currency: currencySym
+                        }}</span>
+                </div>
+                <div class="col-md-4">
+                    Discounted Amount:
+                    <span class="tx-16 tx-semibold tx-inverse">
+                        {{payload.billTotal.discountTotal | currency: currencySym}}
+                    </span>
+                </div>
+                <div class="col-md-4">
+                    Net Bill Amount:
+                    <span class="tx-16 tx-semibold tx-inverse">{{
+                        payload.billTotal.netTotal | currency: currencySym
+                        }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- scheme patient extra fields -->
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p" *ngIf="props?.type == SCHEME">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Treatment Type:</label>
+<!--                        <app-scheme-treatment-type [default]="schemeDetails.treatmentType">-->
+<!--                        </app-scheme-treatment-type>-->
+
+                        <ng-select
+                                [name]="'treatmentType'"
+                                [(ngModel)]="schemeDetails.treatmentType"
+                                placeholder="Select Treatment Type...">
+                            <ng-option [value]=""></ng-option>
+                            <ng-option [value]="primary">{{primary}}</ng-option>
+                            <ng-option [value]="secondary">{{secondary}}</ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Approval Code:
+                        </label>
+                        <label class="form-control" >{{schemeDetails?.approvalCode}} </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Approval Code Start Date:
+                        </label>
+                        <app-shared-date [props]="{setDate: schemeDetails.approvalCodeStart}"></app-shared-date>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            NHIS ID Number:
+                        </label>
+                        <label class="form-control" >{{schemeDetails?.nhisNumber}} </label>
+
+
+<!--                        <input type="text" class="form-control" [value]="schemeDetails?.nhisNumber"/>-->
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Diagnosis:
+                        </label>
+                        <label class="form-control" >{{schemeDetails?.diagnosis}} </label>
+
+<!--                        <input type="text" class="form-control" [value]="schemeDetails?.diagnosis"/>-->
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Approval Code End Date:
+                        </label>
+                        <app-shared-date [props]="{setDate: schemeDetails.approvalCodeEnd}"></app-shared-date>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- submit buttons -->
+        <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+            <div class="form-group text-center">
+                <button class="btn btn-primary" (click)="onCreateBill()">Submit Bill</button>
+            </div>
+        </div>
+    </div>
+</div>

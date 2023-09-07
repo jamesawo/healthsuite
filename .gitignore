@@ -17,3 +17,10 @@ HELP.md
 **/Node
 **/node
 **/node-modules
+
+# logs
+**.log
+
+# angular
+**/dist
+**/node_modules

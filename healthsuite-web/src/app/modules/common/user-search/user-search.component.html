@@ -1,0 +1,26 @@
+<div class="input-wrapper">
+    <label *ngIf="props?.showLabel">Type User Name</label>
+    <ng-select
+        #selectComponent
+        [items]="responsePayload | async"
+        bindLabel="label"
+        [trackByFn]="trackByFn"
+        [minTermLength]="minLengthTerm"
+        [loading]="isLoading"
+        typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+        [typeahead]="searchInput$"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="selectedPayload"
+        (change)="onSelect($event)"
+        [clearable]="true"
+        placeholder="Enter username ..."
+    >
+        <ng-template ng-option-tmp let-item="item">
+            <strong> {{ item.firstName }} - {{ item.lastName }} </strong>
+            <br />
+            <small>
+                <i>Email: {{ item.email }}</i>
+            </small>
+        </ng-template>
+    </ng-select>
+</div>

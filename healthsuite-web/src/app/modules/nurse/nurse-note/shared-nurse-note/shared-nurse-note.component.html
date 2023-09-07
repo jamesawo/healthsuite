@@ -1,0 +1,53 @@
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold"></legend>
+    <form autocomplete="off" class="form-padding" novalidate>
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group w-100">
+                    <label>Select Label</label>
+                    <ng-select
+                        #ngSelectComponent
+                        (change)="onLabelSelected($event)"
+                        placeholder="Select Label"
+                    >
+                        <ng-option [value]="label" *ngFor="let label of labelList">
+                            {{ label.name }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group w-100 mg-t-25" >
+                    <ng-container *ngIf="isModal===false">
+                        <button class="btn btn-sm btn-primary" (click)="onOpenLabelModal()">
+                            <i class="fa fa-plus-circle"></i> New Label
+                        </button>
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 form-group">
+                <label>Enter Note</label>
+                <textarea
+                        class="w-100 form-control"
+                        rows="2" cols="2"
+                        name="nurseNote"
+                        [(ngModel)]="payload.note"
+                ></textarea>
+            </div>
+
+            <div class="col-md-12 form-group text-center">
+                <button
+                        type="submit"
+                        class="btn btn-sm btn-primary"
+                        [disabled]="isSubmitting"
+                        (click)="onSubmitNote()"
+                >
+                    Submit Note
+                </button>
+            </div>
+        </div>
+    </form>
+</fieldset>

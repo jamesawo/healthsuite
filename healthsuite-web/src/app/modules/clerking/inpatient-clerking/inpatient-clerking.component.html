@@ -1,0 +1,141 @@
+<div class="az-content az-content-contacts">
+    <div class="nurse-waiting-wrapper">
+        <!-- waiting list -->
+        <!--
+        <div class="az-content-left az-content-left-contacts">
+            <nav class="nav az-nav-line az-nav-line-chat">
+                <a
+                        class="pointer nav-link {{ activeView == 'waiting' ? 'active' : '' }}"
+                        (click)="onChangeActiveView('waiting')"
+                >Waiting
+                    <span class="badge badge-dark">{{waitingCount}}</span>
+                </a
+                >
+                <a
+                        class="pointer nav-link {{ activeView == 'attended' ? 'active' : '' }}"
+                        (click)="onChangeActiveView('attended')"
+                >
+                    Attended <span class="badge badge-dark">{{attendedCount}}</span></a
+                >
+
+            </nav>
+
+            <ng-container *ngIf="activeView == 'waiting'; else attendedRef">
+                <app-patient-waiting-list [props]="{viewType: nurse}" [updateCount]="onUpdateCount"
+                                          #listComponent
+                                          (selected)="onPatientSelected($event)"
+                ></app-patient-waiting-list>
+            </ng-container>
+
+            <ng-template #attendedRef>
+                <app-patient-attended-list [props]="{viewType: nurse}"
+                                           [updateCount]="onUpdateAttendedCount"
+                                           (selected)="onPatientSelected($event)"
+                                           #attendedListComponent
+                ></app-patient-attended-list>
+            </ng-template>
+
+        </div>
+        -->
+        <!-- currently attending  -->
+        <div class="az-content-body az-content-body-contacts">
+            <div class="flex-column mg-l-10 mg-t-0">
+                <app-patient-search [props]="{
+                    showLabel: false,
+                    checkAdmission: true,
+                    loadAdmission: true,
+                    loadRevisit: false,
+                    loadSchemeDiscount: false,
+                    loadDeposit: false,
+                    loadDrugRequest: true,
+                    loadLabRequest: false,
+                    loadRadiologyRequest: false
+                }" (selected)="onPatientSearchSelected($event)"></app-patient-search>
+
+                <app-patient-bio-card [selectedPatient]="payload.patient"></app-patient-bio-card>
+
+
+                <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+                    <legend class="w-auto tx-14 tx-bold">
+                    </legend>
+                    <div class="mg-t-0 row">
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title tx-14">DRUG PRESCRIPTION</h5>
+                                    <button type="button" class="btn-small-pr mg-l-10" (click)="onViewDrugPrescription()">NEW DRUG REQUEST</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title tx-14">PATIENT WARD TRANSFER</h5>
+                                    <button type="button" class="btn-small-pr" (click)="onOpenWardTransferModal()">TRANSFER</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title tx-14">LABORATORY REQUEST</h5>
+                                    <button type="button" class="btn-small-pr" (click)="onLabModal()">NEW LAB REQUEST</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mg-t-20 row">
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title tx-14">VIEW PATIENT E-FOLDER</h5>
+                                    <button type="button" class="btn-small-pr" (click)="onOpenViewPatientEFolder()">PREVIEW</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title tx-14">PATIENT VITALS SIGNS</h5>
+                                    <button class="btn-small-pr" (click)="onOpenTakeVitalSignModal()">TAKE VITAL</button>
+                                    <button class="btn-small-pr mg-l-10" (click)="onOpenViewVitalModal()">VIEW LAST</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title tx-14">RADIOLOGY REQUEST</h5>
+                                    <button type="button" class="btn-small-pr" (click)="onRadiologyModal()">NEW REQUEST</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mg-t-20 row">
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title tx-14">FLUID BALANCE CHART</h5>
+                                    <button type="button" class="btn-small-pr" (click)="onGetPrevFluidBalance()">PREV</button>
+                                    <button type="button" class="btn-small-pr mg-l-10" (click)="onOpenFluidBalanceModal()">NEW</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title tx-14">NEW NOTES</h5>
+                                    <button type="button" class="btn-small-pr" (click)="onOpenNurseNoteModal()">TAKE NOTE</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

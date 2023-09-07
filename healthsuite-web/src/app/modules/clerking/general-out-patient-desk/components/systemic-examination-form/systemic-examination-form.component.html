@@ -1,0 +1,98 @@
+<fieldset>
+    <legend>Systemic Examination</legend>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Dyspnoea: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select placeholder="Select .." [(ngModel)]="props.data.dyspnoea">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="no">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Paroxysmal Nocturnal Dyspnoea: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..."
+                               [(ngModel)]="props.data.paroxysmalNocturnalDyspnoea">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="no">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Position of Trachea: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.positionOfTrachea">
+                        <ng-option value="Midline">Midline</ng-option>
+                        <ng-option value="Displaced">Displaced</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Percussion Note: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.percussionNote">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="no">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Respiratory Rate: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <input type="text" class="input-control" [(ngModel)]="props.data.respiratoryNote"/>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Orthopnoea: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.orthepnoea">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="no">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Chest Movement: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.chestMovement">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="no">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                <div class="col-md-6 text-right">
+                    <label>Auscultation: </label>
+                </div>
+                <div class="col-md-6 mg-t-5 mg-md-t-0">
+                    <ng-select searchable="false" placeholder="Select..." [(ngModel)]="props.data.auscultation">
+                        <ng-option [value]="yes">Yes</ng-option>
+                        <ng-option [value]="no">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

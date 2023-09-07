@@ -1,0 +1,300 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-10-f">
+        <!-- bill option types -->
+        <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="billItem">
+                        <input
+                                id="billItem"
+                                name="billItemType"
+                                type="radio"
+                                [checked]="payload.billItemPaymentType == billedItemBillType"
+                                (change)="onBillItemTypeChange(billedItemBillType)"
+                        />
+                        <span>Billed Item</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="edit">
+                        <input
+                                name="billItemType"
+                                id="edit"
+                                type="radio"
+                                [checked]="payload.billItemPaymentType == unBilledItemBillType"
+                                (change)="onBillItemTypeChange(unBilledItemBillType)"
+                        />
+                        <span>UnBilled Item</span>
+                    </label>
+                </div>
+
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="walkIn">
+                        <input
+                                name="billItemType"
+                                id="walkIn"
+                                type="radio"
+                                [checked]="payload.billItemPaymentType == walkInBillType"
+                                (change)="onBillItemTypeChange(walkInBillType)"
+                        />
+                        <span>Walk-In </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- search by component   -->
+        <div class="">
+            <ng-container
+                    *ngIf="payload?.billItemPaymentType == walkInBillType; else billedPatientRef"
+            >
+                <app-walk-in-patient #walkInPatientComponent></app-walk-in-patient>
+            </ng-container>
+
+            <ng-template #billedPatientRef>
+                <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+                    <div class="row mg-t-10">
+                        <div class="row col-4 mg-l-5">
+                            <label class="w-25 align-self-center">Search By:</label>
+                            <div class="w-75">
+                                <ng-select
+                                        name="searchBy"
+                                        [markFirst]="true"
+                                        [closeOnSelect]="true"
+                                        [clearable]="false"
+                                        [searchable]="false"
+                                        [multiple]="false"
+                                        [(ngModel)]="payload.billSearchedBy"
+                                        (change)="onSearchByDropdownChange($event)"
+                                >
+                                    <ng-option
+                                            *ngFor="let data of billSearchByCollection"
+                                            [value]="data.value"
+                                    >{{ data.name }}</ng-option
+                                    >
+                                </ng-select>
+                            </div>
+                        </div>
+                        <ng-container
+                                *ngIf="
+                                payload.billSearchedBy == searchByPatient;
+                                else searchByBillNumber
+                            "
+                        >
+                            <div class="col-8 mg-t-20 mg-lg-t-0">
+                                <app-patient-search
+                                        (selected)="onPatientSelect($event)"
+                                        [props]="{
+                                        showLabel: false,
+                                        checkAdmission: true,
+                                        loadAdmission: false,
+                                        loadRevisit: true,
+                                        loadSchemeDiscount: true,
+                                        loadDeposit: true
+                                    }"
+                                ></app-patient-search>
+                            </div>
+                        </ng-container>
+                        <ng-template #searchByBillNumber>
+                            <div class="col-8 mg-t-20 mg-lg-t-0">
+                                <app-bill-data-search
+                                        [props]="{ loadDeposit: true }"
+                                        (selected)="onSearchByBillNumberSelected($event)"
+                                ></app-bill-data-search>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+
+                <app-patient-bio-card
+                        [selectedPatient]="payload.patientDetailPayload"
+                ></app-patient-bio-card>
+            </ng-template>
+        </div>
+        <!-- deposit -->
+        <div class="col-auto mg-t-20 mg-lg-t-0 bg-gray-200 dv-deposit">
+            <div class="row">
+                <!--                *ngIf="payload?.depositPayload?.totalAmount" -->
+                <div class="col-md-6">
+                    <div class="available-deposit-row">
+                        <div class="available-deposit-d">
+                            <label
+                            >Available Deposit:
+                                <span class="mg-l-5 font-weight-bold">{{
+                                    getDepositAmount() | currency: currencySym
+                                    }}</span>
+                            </label>
+                        </div>
+                        <div class="available-deposit-d">
+                            <label class="mg-l-20">
+                                <span class="mg-l-5">
+                                    <input [disabled]="!payload?.depositPayload?.totalAmount"
+                                           type="checkbox"
+                                           name="allocateDepositToAllBill"
+                                           [(ngModel)]="payload.isAllocateToAllBill"
+                                           [checked]="payload.isAllocateToAllBill"
+                                           (click)="onAllocateAllDepositChange($event)"/>
+                                </span>
+                                Allocate Deposit
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                        class="col-md-6"
+                        *ngIf="
+                        payload.billSearchedBy == searchByPatient &&
+                        payload.billItemPaymentType == billedItemBillType
+                    "
+                >
+                    <div class="row col-12 mg-l-5">
+                        <label class="w-15 align-self-center">Bill Number:</label>
+                        <div class="w-75 mg-l-10">
+                            <ng-select
+                                    [searchable]="true"
+                                    [items]="patientBillList"
+                                    [bindLabel]="'invoiceNumber'"
+                                    [bindValue]="'id'"
+                                    [placeholder]="'Select Bill..'"
+                                    (change)="onSearchByPatientBillNumberSelect($event)"
+                            ></ng-select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- search products & service -->
+        <div
+                class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p"
+                *ngIf="payload.billItemPaymentType !== billedItemBillType"
+        >
+            <div class="row mg-t-10">
+                <div class="row col-12 mg-l-5">
+                    <label class="w-15 align-self-center">Search Product / Service:</label>
+                    <div class="w-75 mg-l-10">
+                        <app-service-name-search
+                                (selected)="onProductServiceSelected($event)"
+                        ></app-service-name-search>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- bill table -->
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <app-bill-table-data
+                #billTableDataComponent
+                [serviceBillItems]="payload?.patientBill?.billItems"
+                [pharmacyBillItems]="payload?.patientBill?.pharmacyBillItems"
+                [props]="tableProps"
+                [hasDeposit]="canAllocateDeposit"
+                (totalChanged)="onBillTotalChanged($event)"
+                (allocateChanged)="onBillItemIsAllocated($event)"
+                [isSchemePatient]="isSchemedPatient"
+                (isRemoveAllBillItem)="isRemoveAllBillItem($event)"
+                (onItemIsTouchedOrChanged)="onResetItemDepositAllocation($event)"
+                [onGetSchemePrice]="onGetSchemeDiscount"
+
+            ></app-bill-table-data>
+        </div>
+        <!-- bill total summary-->
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="text-center totals">
+                <div class="">
+                    Gross Bill Amount: <br/>
+                    <span class="tx-16 tx-semibold tx-inverse">{{
+                        payload?.patientBill?.billTotal?.grossTotal | currency: currencySym
+                        }}</span>
+                </div>
+                <div class="">
+                    Discounted Amount: <br/>
+                    <span class="tx-16 tx-semibold tx-inverse">{{
+                        payload?.patientBill?.billTotal?.discountTotal | currency: currencySym
+                        }}</span>
+                </div>
+                <div class="">
+                    Waived Amount: <br/>
+                    <span class="tx-16 tx-semibold tx-inverse">{{
+                        payload.patientBill?.billTotal?.billWaivedAmount | currency: currencySym
+                        }}</span>
+                </div>
+                <div class="">
+                    Deposit Allocated: <br/>
+                    <span class="tx-16 tx-semibold tx-inverse">{{
+                        payload.patientBill.billTotal.allocatedAmount | currency: currencySym
+                        }}</span>
+                </div>
+                <div class="">
+                    Net Amount: <br/>
+                    <span class="tx-16 tx-semibold tx-inverse">{{
+                        payload?.patientBill?.billTotal?.netTotal | currency: currencySym
+                        }}</span>
+                </div>
+            </div>
+        </div>
+        <!-- payment method type -->
+        <div class="pd-10 mg-t-5 pd-sm-15 bg-gray-100 wd-xl-100p">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>
+                            TOTAL AMOUNT:
+                        </label>
+                        <label class="form-control" readonly>
+                            {{ payload?.patientBill?.billTotal.netTotal | currency: currencySym }}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>
+                            CASH POINT:
+                        </label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                [(ngModel)]="locationName"
+                                readonly
+                        />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>
+                            Payment Method:
+                        </label>
+                        <app-payment-method
+                            #paymentMethodComponent
+                            (selected)="onPaymentMethodSelected($event)"
+                        ></app-payment-method>
+                    </div>
+                </div>
+            </div>
+            <ng-template>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                POS TRANSACTION REF:
+                            </label>
+                            <input type="text" class="form-control" [(ngModel)]="posTransactionRef"/>
+                            <button class="btn btn-sm btn-dark mg-t-2">
+                                {{ 'Verify Transaction' | uppercase }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+
+        </div>
+        <!-- action buttons -->
+        <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+            <div class="form-group text-center">
+                <button class="btn btn-primary" (click)="onMakePayment()">SUBMIT</button>
+                <button class="btn btn-primary mg-l-10" (click)="onResetForm()">
+                    CLEAR FORM
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

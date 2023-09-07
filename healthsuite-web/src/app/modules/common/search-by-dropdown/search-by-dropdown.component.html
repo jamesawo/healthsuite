@@ -1,0 +1,11 @@
+<ng-select
+    [markFirst]="true"
+    [closeOnSelect]="true"
+    [clearable]="false"
+    [searchable]="false"
+    [multiple]="false"
+    (change)="onSearchByChanged($event)"
+    [(ngModel)]="defaultSelect"
+>
+    <ng-option *ngFor="let value of collection" [value]="value.value">{{ value.name }}</ng-option>
+</ng-select>

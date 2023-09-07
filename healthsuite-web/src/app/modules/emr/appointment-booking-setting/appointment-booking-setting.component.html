@@ -1,0 +1,64 @@
+<div class="pd-l-50-f">
+    <div class="az-content-label mg-b-5">Appointment Booking Setup</div>
+    <p class="mg-b-5">Enter Patient Search Details to Find Patient</p>
+</div>
+
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-50-f">
+        <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+            <legend class="w-auto tx-16 tx-bold">
+                Staff Booking Setup
+            </legend>
+            <form
+                #admissionForm="ngForm"
+                autocomplete="off"
+                class="form-padding"
+                (ngSubmit)="onSaveSetup()"
+                novalidate
+            >
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group w-75">
+                            <label>Staff:</label>
+                            <app-user-search
+                                [props]="{
+                                    showLabel: false,
+                                    isConsultant: false,
+                                    showDisabledUser: false
+                                }"
+                                (selected)="onSelectStaff($event)"
+                            ></app-user-search>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group w-75">
+                            <label>Specialty Unit</label>
+                            <app-speciality-search
+                                [props]="{ showLabel: false }"
+                                (selected)="onSpecialitySelected($event)"
+                            ></app-speciality-search>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group w-75">
+                            <label>Staff Limit / Threshold</label>
+                            <input
+                                name="staffLimit"
+                                type="number"
+                                class="form-control form-control-sm"
+                                [(ngModel)]="setUpPayload.staffLimit"
+                                min="1"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-md mg-t-15 w-25">
+                    Save Setup
+                </button>
+            </form>
+        </fieldset>
+    </div>
+</div>

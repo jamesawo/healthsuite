@@ -1,0 +1,8 @@
+.waiting-wrapper {
+    display: flex;
+}
+
+.active .bs-stepper-circle {
+    background-color: #5b47fb;
+}
+

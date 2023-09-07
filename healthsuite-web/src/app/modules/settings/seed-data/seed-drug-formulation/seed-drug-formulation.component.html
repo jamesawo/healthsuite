@@ -1,0 +1,57 @@
+<fieldset class="border p-2 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+        Seed Drug Formulation Data
+        <i
+            class="fa fa-info-circle fa-sm tx-12"
+            [ngbPopover]="
+                'To seed new drug classification data, enter the name then click on `Save Button`.'
+            "
+            placement="right"
+            triggers="mouseenter:mouseleave"
+            container="body"
+            aria-hidden="true"
+        ></i>
+    </legend>
+
+    <div class="form-group">
+        <form [formGroup]="drugFormulationForm" (ngSubmit)="createDrugFormulation()">
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Drug Formulation Name"
+                        [formControlName]="'name'"
+                        [ngClass]="{ 'is-invalid': isSubmitted && form.name.errors }"
+                    />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+
+        <div class="table-responsive mg-t-20">
+            <table class="table table-bordered mg-b-0">
+                <thead>
+                    <tr>
+                        <th class="wd-3">
+                            <label>
+                                <input type="checkbox" />
+                            </label>
+                        </th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let drugFormulation of drugFormulationList">
+                        <th scope="row">
+                            <label>
+                                <input type="checkbox" />
+                            </label>
+                        </th>
+                        <td>{{ drugFormulation.name }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</fieldset>

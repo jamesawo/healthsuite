@@ -1,0 +1,12 @@
+.patient-type {
+    width: 500px;
+    margin: 10px 130px 20px;
+}
+.date-of-birth {
+    width: 260px;
+    margin-right: 16px;
+}
+.patient-type-main {
+    display: flex;
+    justify-content: center;
+}

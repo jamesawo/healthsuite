@@ -1,0 +1,109 @@
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100" [disabled]="prepOrVerifyEnum === resultVerify">
+    <legend class="w-auto tx-16 tx-bold">CULTURE</legend>
+    <div class="main-wrapper az-content-body">
+        <div class="row mg-t-10">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Temperature:</label>
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="culture.temperature"/>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Duration: </label>
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="culture.duration"/>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Atmosphere: </label>
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="culture.atmosphere"/>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Plate:</label>
+                    <ng-select placeholder="select.." [(ngModel)]="culture.plate" [disabled]="prepOrVerifyEnum === resultVerify">
+                        <ng-option value="POSITIVE">POSITIVE</ng-option>
+                        <ng-option value="NEGATIVE">NEGATIVE</ng-option>
+                        <ng-option value="VARIABLE">VARIABLE</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Incubation: </label>
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="culture.incubation"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Line Organism:</label>
+                    <div class="d-flex">
+                        <ng-select
+                                [items]="lineData"
+                                [multiple]="true"
+                                bindLabel="organism"
+                                [closeOnSelect]="false"
+                                [(ngModel)]="culture.lineOrganism"
+                                [disabled]="prepOrVerifyEnum === resultVerify"
+                        >
+                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index" >
+                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.organism}}
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+            <legend class="w-auto tx-16 tx-bold"></legend>
+            <div class="table-responsive mg-t-10">
+                <table class="table table-sm table-striped">
+                    <thead>
+                    <tr>
+                        <th>ORGANISM</th>
+                        <th>ANTIBIOTICS</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <ng-container *ngIf="culture?.lineOrganism?.length">
+                        <tr *ngFor="let item of culture.lineOrganism">
+                            <td>{{item.organism}}</td>
+                            <td>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th class="wd-10p">Name</th>
+                                                <th class="text-center">Sensitive</th>
+                                                <th class="text-center">Intermediate</th>
+                                                <th class="text-center">Resistance</th>
+                                                <th>Degree</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <ng-container *ngIf="item?.antibiotics?.length">
+                                            <tr *ngFor="let data of item.antibiotics">
+                                                <td class="wd-10p">{{data.name}}</td>
+                                                <td class="text-center"><input type="radio" name="{{data.name}}-rad" [value]="'SENSITIVE'" [(ngModel)]="data.level"></td>
+                                                <td class="text-center"><input type="radio" name="{{data.name}}-rad" [value]="'INTERMEDIATE'" [(ngModel)]="data.level"></td>
+                                                <td class="text-center"><input type="radio" name="{{data.name}}-rad" [value]="'RESISTANCE'" [(ngModel)]="data.level"></td>
+                                                <td class=""><input type="text"  [(ngModel)]="data.degree" class="border border-primary rounded"></td>
+                                            </tr>
+                                        </ng-container>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+</fieldset>

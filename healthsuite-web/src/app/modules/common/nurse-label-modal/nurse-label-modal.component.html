@@ -1,0 +1,37 @@
+<form>
+    <div class="row form-group">
+        <div class="col-md-12">
+            <label>Enter Name</label>
+            <input
+                type="text"
+                class="form-control"
+                name="labelName"
+                [(ngModel)]="label"
+                [ngClass]="{ 'is-invalid': labelError }"
+            />
+        </div>
+    </div>
+    <div class="form-group">
+        <button
+            class="btn btn-primary"
+            type="submit"
+            (click)="onAddNewLabel()"
+            [disabled]="isSubmitting"
+        >
+            <i class="fa fa-spinner fa-spin mg-r-3" *ngIf="isSubmitting"></i>
+            Save
+        </button>
+    </div>
+
+    <hr />
+    <ng-container *ngIf="data?.nurseLabelList.length > 0">
+        <ng-container *ngFor="let label of data.nurseLabelList">
+            <div class="list-group-item">
+                <label class="">
+                    <input type="checkbox" class="mg-r-5" />
+                    {{ label.name }}
+                </label>
+            </div>
+        </ng-container>
+    </ng-container>
+</form>

@@ -1,0 +1,87 @@
+<div class="az-signin-wrapper" style="margin-top: 8em">
+    <div class="az-card-signin mg-t-20">
+        <h1 class="az-logo cap-heading">
+            Health &nbsp;<span>Suite </span>
+            <span class="tx-14">
+                <br> <code>{{version}}</code>
+            </span>
+        </h1>
+        <div class="az-signin-header">
+            <h2>Welcome back!</h2>
+            <h4>Please sign in to continue</h4>
+
+            <form  [formGroup]="loginForm" (ngSubmit)="onAuthLogin()" (keydown.enter)="onEnterKeyPressed(usernameInput.value, passwordInput.value)">
+                <div class="form-group">
+                    <label
+                    >Username
+                        <i
+                                class="fa fa-info-circle fa-sm"
+                                [ngbPopover]="'Enter your unique username in the field below. '"
+                                placement="right"
+                                triggers="mouseenter:mouseleave"
+                                container="body"
+                                aria-hidden="true"
+                        >
+                        </i>
+                    </label>
+                    <input
+                        #usernameInput
+                        type="text"
+                        class="form-control"
+                        [formControlName]="'username'"
+                        placeholder="Enter your username"
+                        [ngClass]="{ 'is-invalid': isSubmitted && lf.username.errors }"
+                        value=""
+                        name="username"
+                    />
+                </div>
+                <!-- form-group -->
+
+                <div class="form-group">
+                    <label
+                    >Password
+                        <i
+                                class="fa fa-info-circle fa-sm"
+                                [ngbPopover]="'Enter your password in the field below and click on Login'"
+                                placement="right"
+                                triggers="mouseenter:mouseleave"
+                                container="body"
+                                aria-hidden="true"
+                        >
+                        </i>
+                    </label>
+                    <input
+                        #passwordInput
+                        type="password"
+                        class="form-control"
+                        [formControlName]="'password'"
+                        placeholder="Enter your password"
+                        [ngClass]="{ 'is-invalid': isSubmitted && lf.password.errors }"
+                        value=""
+                        name="password"
+                    />
+                </div>
+                <!-- form-group -->
+
+                <button
+                        class="btn btn-primary btn-block login-btn"
+                        type="submit"
+                        [disabled]="isLoading"
+                >
+                <span
+                        *ngIf="isLoading"
+                        class="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                ></span>
+                    Login
+                </button>
+            </form>
+        </div>
+        <div class="az-signin-footer">
+            <p><a>Forgot password?</a></p>
+            <p>Don't have an account? <a>Contact Support</a></p>
+        </div>
+    </div>
+</div>
+

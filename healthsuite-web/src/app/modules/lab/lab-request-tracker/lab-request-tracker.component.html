@@ -1,0 +1,45 @@
+<div class="main-wrapper az-content-body">
+
+    <app-lab-test-request-shared [payload]="payload" ></app-lab-test-request-shared>
+
+    <!-- table -->
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">LAB TEST</th>
+                        <th class="text-center">PATIENT NUMBER</th>
+                        <th class="text-center">PATIENT NAME </th>
+                        <th class="text-center">INVOICE NUMBER</th>
+                        <th class="text-center">INVOICE DATE</th>
+                        <th class="text-center">LAB NUMBER</th>
+                        <th class="text-center"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <ng-container *ngIf="payload?.labBillTestRequest?.testItems?.length">
+                        <tr *ngFor="let test of payload.labBillTestRequest.testItems">
+                            <td class="text-center">{{test.testName}}</td>
+                            <td class="text-center">{{payload.patient.patientNumber}}</td>
+                            <td class="text-center">{{payload.patient.patientFullName}}</td>
+                            <td class="text-center">{{payload.labBillTestRequest.invoiceNumber}}</td>
+                            <td class="text-center">{{payload.labBillTestRequest.date | date}}</td>
+                            <td class="text-center">{{test.requestNumber}}</td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-primary" (click)="onViewLabStatus(null, test.id, payload.labBillTestRequest.id)">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </ng-container>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </fieldset>
+</div>

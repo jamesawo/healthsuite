@@ -1,0 +1,91 @@
+<fieldset class="border p-2 rounded bg-gray-100">
+    <legend class="w-auto tx-16 tx-bold">
+        Seed Pharmacy Patient Category Data
+        <ng-template #statusTemplate>
+            To <code>create</code> a new <strong> Pharmacy Patient Category </strong>, follow the
+            below steps:
+            <br />
+            1. Select Category Type<br />
+            2. Select Payment Method <br />
+            3. Enter the name <br />
+            4. Click save button.
+            <br />
+        </ng-template>
+        <i
+            class="fa fa-info-circle fa-sm tx-12"
+            [ngbPopover]="statusTemplate"
+            placement="right"
+            triggers="mouseenter:mouseleave"
+            container="body"
+            aria-hidden="true"
+        ></i>
+    </legend>
+    <form (ngSubmit)="onCreatePharmacyPatientCategory()" [formGroup]="categoryForm">
+        <div class="row form-group">
+            <div class="col-md-4">
+                <label>Select Category Type </label>
+                <ng-select
+                    [formControlName]="'categoryType'"
+                    [ngClass]="{ 'is-invalid': isSubmitted && form.categoryType.errors }"
+                >
+                    <ng-option *ngFor="let category of categoryTypesList" [value]="category.id">
+                        {{ category.name }}
+                    </ng-option>
+                </ng-select>
+            </div>
+            <div class="col-md-4">
+                <label>Select Payment Method </label>
+                <ng-select
+                    [formControlName]="'paymentMethod'"
+                    [ngClass]="{ 'is-invalid': isSubmitted && form.paymentMethod.errors }"
+                >
+                    <ng-option *ngFor="let payment of paymentMethodList" [value]="payment.id">
+                        {{ payment.name }}
+                    </ng-option>
+                </ng-select>
+            </div>
+            <div class="col-md-4">
+                <label for="name">Enter Name </label>
+                <input
+                    type="text"
+                    id="name"
+                    class="form-control"
+                    [formControlName]="'name'"
+                    [ngClass]="{ 'is-invalid': isSubmitted && form.name.errors }"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+    </form>
+
+    <div class="table-responsive mg-t-20">
+        <table class="table table-bordered mg-b-0">
+            <thead>
+                <tr>
+                    <th class="wd-3">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Payment Method</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of pharmacyPatientCategoryList">
+                    <th scope="row">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <td>{{ data.pharmacyPatientCategoryType.name }}</td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.paymentMethod.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>

@@ -1,0 +1,71 @@
+<div class="az-contacts-list nurse-waiting-list">
+    <div class="mg-b-5 mg-t-5">
+        <div class="d-flex">
+            <div class="form-group has-search w-100 mg-r-2">
+                <span class="fa fa-search form-control-feedback"></span>
+                <input
+                    #searchInput
+                    type="text"
+                    class="form-control"
+                    placeholder="Search"
+                    [(ngModel)]="searchTerm"
+                    (input)="search(searchInput.value)"
+                />
+            </div>
+            <button (click)="onRefreshList()" [disabled]="isLoading" class="btn tabs-btn btn-icon">
+                <i class="typcn typcn-refresh"></i>
+            </button>
+
+        </div>
+    </div>
+    <!--    <div class="az-contact-label">A</div>-->
+
+    <ng-container *ngIf="!isLoading; else loadingRef">
+        <ng-container *ngIf="collCopy.length > 0; else emptyRef">
+            <ng-container *ngFor="let data of collCopy; let i = index">
+                <div
+                        class="az-contact-item {{ selectedIndex == i ? 'selected border-l-4' : '' }} "
+                        (click)="onPatientSelected(data, i)"
+                >
+                    <div class="az-avatar bg-gray-600 online">{{ data.patientName[0] }}</div>
+                    <div class="az-contact-body">
+                        <h6 class="text-uppercase">{{ data.patientName }}</h6>
+                        <span>{{ data.patientNumber }} | {{ data.patientCategory }}</span>
+                    </div>
+                    <!-- az-contact-body -->
+                    <a class="az-contact-star">
+                        <i
+                                class="typcn typcn-star {{
+                                                        data.patientCategory == scheme ? 'text-primary' : ''
+                                                    }} "
+                        ></i>
+                        <!--                        <i-->
+                        <!--                                class="fa fa-spinner fa-spin"-->
+                        <!--                        ></i>-->
+
+                    </a>
+                </div>
+            </ng-container>
+        </ng-container>
+
+        <ng-template #emptyRef>
+            <div class="az-contact-item mg-t-10">
+                <div class="az-contact-body text-center">
+                    <h6 class="text-uppercase">
+                        No Patient Found
+                    </h6>
+                </div>
+            </div>
+        </ng-template>
+    </ng-container>
+
+    <ng-template #loadingRef>
+        <div class="az-contact-item mg-t-20">
+            <div class="az-contact-body text-center">
+                <h6 class="text-uppercase">
+                    <i class="fa fa-spinner fa-spin text-primary"></i>
+                </h6>
+            </div>
+        </div>
+    </ng-template>
+</div>

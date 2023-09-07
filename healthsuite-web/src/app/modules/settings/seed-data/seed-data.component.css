@@ -1,0 +1,8 @@
+
+::ng-deep.dropdown-menu.show {
+  max-height: 50% !important;
+  overflow-y: auto !important;
+  width: 50%;
+}
+
+

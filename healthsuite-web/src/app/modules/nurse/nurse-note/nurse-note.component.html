@@ -1,0 +1,20 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column pd-t-0  pd-r-50-f  pd-l-50-f">
+        <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <app-patient-search
+                #patientSearchComponent
+                [props]="{
+                    showLabel: true,
+                    checkAdmission: true,
+                    loadAdmission: false,
+                    loadRevisit: true
+                }"
+                (selected)="onPatientSelected($event)"
+            ></app-patient-search>
+        </div>
+
+        <app-patient-bio-card [selectedPatient]="payload?.patient"></app-patient-bio-card>
+
+        <app-shared-nurse-note [payload]="payload"  (submitted)="onResetPayload()"></app-shared-nurse-note>
+    </div>
+</div>

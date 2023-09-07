@@ -1,0 +1,53 @@
+.bs-stepper-label {
+    font-size: small;
+}
+
+.camera {
+    max-width: 178px;
+    max-height: 178px;
+}
+
+.vid {
+    max-width: 180px;
+    /*height: 400px;*/
+}
+
+.camera-display {
+    background-color: lightgrey;
+    padding: 30px;
+    height: 170px;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.box-camera {
+    margin: 0;
+    padding-top: 1em;
+}
+.hand {
+    cursor: pointer;
+}
+
+body::after {
+    content: none;
+}
+body::before {
+    content: none;
+}
+
+p::after {
+    content: none;
+}
+
+.col-form-label {
+    text-align: right;
+    font-weight: 700;
+}
+
+.patient-type {
+    width: 500px;
+    margin: 10px 130px 20px;
+}
+.rm-dot {
+    border-left: 0px;
+}

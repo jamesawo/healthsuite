@@ -1,0 +1,19 @@
+.cm-scrollbar {
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    height: 12px;
+    width: 4px;
+    background: #c2c8d4;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1b1143;
+    -webkit-border-radius: 1ex;
+
+}
+
+::-webkit-scrollbar-corner {
+    background: #ffff;
+}

@@ -1,0 +1,19 @@
+<ng-select
+    [items]="responsePayload | async"
+    bindLabel="code"
+    [trackByFn]="trackByFn"
+    [minTermLength]="minLengthTerm"
+    [loading]="isLoading"
+    typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+    [typeahead]="searchInput$"
+    [ngModelOptions]="{ standalone: true }"
+    [(ngModel)]="selectedPayload"
+    (change)="onSelectDrugOrder($event)"
+    [clearable]="true"
+    placeholder="Enter DrugOrder Code"
+>
+    <ng-template ng-option-tmp let-item="item">
+        <strong> {{ item.code }} </strong> <br />
+        <small> </small>
+    </ng-template>
+</ng-select>

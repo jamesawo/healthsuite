@@ -1,0 +1,18 @@
+<a class="az-iconbar-logo" (click)="onOpenMenu()">
+    <i class="typcn typcn-chart-bar-outline"></i>
+</a>
+
+<nav class="nav">
+    <a
+        class="nav-link"
+        *ngFor="let menu of menuItems"
+        placement="right"
+        [ngbTooltip]="menu.linkTitle"
+        (click)="onClickNavIcon(menu)"
+        container="body"
+        [ngClass]="{ active: menu.isSelected }"
+
+    >
+        <span class="span-nav-icons" [style]="canViewClerking(menu.title)?'':'color: gray'" [ngClass]="menu.icon" ></span>
+    </a>
+</nav>

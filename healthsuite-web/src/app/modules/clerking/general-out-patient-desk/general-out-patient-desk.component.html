@@ -1,0 +1,262 @@
+<div class="az-content az-content-contacts">
+    <div class="waiting-wrapper">
+        <div class="az-content-left az-content-left-contacts">
+            <nav class="nav az-nav-line az-nav-line-chat">
+                <a
+                        class="pointer nav-link {{ activeView == 'waiting' ? 'active' : '' }}"
+                        (click)="onChangeActiveView('waiting')"
+                >Waiting
+                    <span class="badge badge-dark">{{waitingCount}}</span></a
+                >
+                <a
+                        class="pointer nav-link {{ activeView == 'attended' ? 'active' : '' }}"
+                        (click)="onChangeActiveView('attended')"
+                >Attended
+                    <span class="badge badge-dark">{{attendedWaitingCount}}</span>
+                </a
+                >
+            </nav>
+
+            <ng-container *ngIf="activeView == 'waiting'; else attendedRef">
+                <app-patient-waiting-list [props]="{viewType: doctor}" [updateCount]="onUpdateCount"
+                                          (selected)="onPatientSelected($event)" #listComponent
+                ></app-patient-waiting-list>
+            </ng-container>
+
+            <ng-template #attendedRef>
+                <app-patient-attended-list
+                        [props]="{viewType: doctor}"
+                        [updateCount]="onUpdateAttendedWaitingCount"
+                        (selected)="onPatientSelected($event)"
+                        #attendedListComponent
+                ></app-patient-attended-list>
+            </ng-template>
+
+            <!-- az-contacts-list -->
+        </div>
+
+        <div class="az-content-body az-content-body-contacts">
+            <div class="flex-column mg-l-10">
+                <label class="mg-l-2">Search For Patient:</label>
+                <app-patient-search #patientSearchComponent [props]="{
+                showLabel: false,
+                checkAdmission: false,
+                loadAdmission: false,
+                loadRevisit: false,
+                loadSchemeDiscount: false,
+                loadDeposit: false
+                }" (selected)="onPatientSearchSelected($event)"></app-patient-search>
+
+                <app-patient-bio-card [selectedPatient]="payload.patient"></app-patient-bio-card>
+
+                <div class="mg-t-5">
+                    <app-clerking-tabs [props]="{patientPayload: payload.patient}"></app-clerking-tabs>
+                </div>
+
+                <div class="mg-t-10">
+                    <div class="card card-dashboard-seven">
+                        <div id="bsStepper" class="bs-stepper">
+                            <div class="card-header">
+                                <div class="bs-stepper-header" role="tablist">
+                                    <div class="step" data-target="#step-1">
+                                        <button type="button" class="step-trigger" role="tab" aria-controls="step-1"
+                                                id="step-1-trigger" (click)="stepPosition = 1">
+                                            <span class="bs-stepper-circle">
+                                                <span class="fas fa-check" aria-hidden="true"></span>
+                                            </span>
+                                            <span class="bs-stepper-label">Step 1</span>
+                                        </button>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div class="step" data-target="#step-2">
+                                        <button type="button" class="step-trigger" role="tab" aria-controls="step-2"
+                                                id="step-2-trigger" (click)="stepPosition = 2">
+                                            <span class="bs-stepper-circle">
+                                                <span class="fas fa-check" aria-hidden="true"></span>
+                                            </span>
+                                            <span class="bs-stepper-label">Step 2</span>
+                                        </button>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div class="step" data-target="#step-3">
+                                        <button type="button" class="step-trigger" role="tab" aria-controls="step-3"
+                                                id="step-3-trigger" (click)="stepPosition = 3">
+                                            <span class="bs-stepper-circle">
+                                                <span class="fas fa-check" aria-hidden="true"></span>
+                                            </span>
+
+                                            <span class="bs-stepper-label">Step 3</span>
+                                        </button>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div class="step" data-target="#step-4">
+                                        <button type="button" class="step-trigger" role="tab" aria-controls="step-4"
+                                                id="step-4-trigger" (click)="stepPosition = 4">
+                                            <span class="bs-stepper-circle">
+                                                <span class="fas fa-check" aria-hidden="true"></span>
+                                            </span>
+
+                                            <span class="bs-stepper-label">Step 4</span>
+                                        </button>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div class="step" data-target="#step-5">
+                                        <button type="button" class="step-trigger" role="tab" aria-controls="step-5"
+                                                id=" step-5-trigger" (click)="stepPosition = 5">
+                                            <span class="bs-stepper-circle">
+                                                <span class="fas fa-check" aria-hidden="true"></span>
+                                            </span>
+                                            <span class="bs-stepper-label">Step 5</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="bs-stepper-content" id="stepper-content">
+                                    <div id="step-1" class="content" role="tabpanel" aria-labelledby="step-1-trigger">
+                                        <div class="pd-30 pd-sm-40 wd-xl-100p az-form-group">
+
+                                            <div class="row row-xs align-items-center mg-b-20">
+                                                <div class="col-md-6">
+                                                    <label>Provide Informant Details ? &nbsp;
+                                                        <input type="checkbox" [checked]="payload.hasInformantDetails"
+                                                               (change)="onToggleHasInformantDetails($event)">
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <ng-container *ngIf="payload.hasInformantDetails">
+                                                <app-informant-details
+                                                        [props]="{data: payload.informantDetail}"></app-informant-details>
+                                            </ng-container>
+
+                                            <div class="row row-xs align-items-center mg-b-20 mg-t-20">
+                                                <div class="col-md-4">
+                                                    <label>Select Speciality Unit: </label>
+                                                </div>
+                                                <div class="col-md-8 mg-t-5 mg-md-t-0">
+                                                    <app-speciality-search (selected)="onSpecialitySelected($event)"
+                                                                           [props]="{showLabel: false}" #specialitySearchComponent></app-speciality-search>
+                                                </div>
+                                            </div>
+
+                                            <div class="row row-xs align-items-center mg-b-20">
+                                                <div class="col-md-4">
+                                                    <label>Use Saved Template ? &nbsp;
+                                                        <input type="checkbox"
+                                                               (change)="onToggleUseSavedTemplate($event)">
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-8 mg-t-5 mg-md-t-0 {{ isUseSavedTemplate ? '' : 'disabled' }}">
+                                                    <app-clerking-template-search #clerkingTemplateSearchComponent
+                                                            (selected)="onSavedTemplateSelected($event)"
+                                                            [props]=" { desk: outPatientDesk, doctor: payload.capturedBy.id }"></app-clerking-template-search>
+                                                </div>
+                                            </div>
+
+                                            <hr class="mg-y-30">
+
+                                            <app-patient-background-history-form
+                                                    [props]="{data: payload.backgroundHistory}"></app-patient-background-history-form>
+                                        </div>
+                                    </div>
+                                    <div id="step-2" class="content" role="tabpanel" aria-labelledby="step-2-trigger">
+                                        <div class="pd-30 pd-sm-40 wd-xl-100p az-form-group">
+                                            <app-physical-examination-form
+                                                    [props]="{data: payload.physicalExamination}"></app-physical-examination-form>
+
+                                            <app-systemic-examination-form
+                                                    [props]="{data: payload.systemicExamination}"></app-systemic-examination-form>
+                                        </div>
+                                    </div>
+                                    <div id="step-3" class="content" role="tabpanel" aria-labelledby="step-3-trigger">
+                                        <div class="pd-30 pd-sm-40 wd-xl-100p az-form-group">
+                                            <app-cardio-vascular-form
+                                                    [props]="{data: payload.cardioVascularForm}"></app-cardio-vascular-form>
+
+                                            <app-abdomen-form [props]="{data: payload.abdomenForm}"></app-abdomen-form>
+
+                                            <app-musculo-skeletal-form
+                                                    [props]="{data: payload.musculoSkeletalForm}"></app-musculo-skeletal-form>
+                                        </div>
+                                    </div>
+                                    <div id="step-4" class="content" role="tabpanel" aria-labelledby="step-4-trigger">
+                                        <app-perineum-form
+                                                [props]="{data: payload.perieneumForm}"></app-perineum-form>
+                                        <div class="mg-t-20">
+                                            <app-neurological-form
+                                                    [props]="{data: payload.neurologicalExamination}"></app-neurological-form>
+                                        </div>
+                                        <div class="mg-t-20">
+                                            <app-other-information-form
+                                                    [props]="{data: payload.otherInformation}"></app-other-information-form>
+                                        </div>
+
+                                    </div>
+                                    <div id="step-5" class="content" role="tabpanel" aria-labelledby="step-5-trigger">
+                                        <app-clinic-assessment-form #clinicAssessmentFormComponent
+                                                [props]="{data: payload.clinicalAssessment}"></app-clinic-assessment-form>
+
+                                        <div class="pd-30 pd-sm-40 wd-xl-100p az-form-group">
+
+                                            <div class="row row-xs align-items-center mg-b-20">
+                                                <div class="col-md-4">
+                                                    <label>
+                                                        Save As Template <input type="checkbox"
+                                                                                (change)="onToggleSaveAsTemplate($event)">
+                                                    </label>
+                                                </div>
+                                                <fieldset class="col-md-8 mg-t-5 mg-md-t-0 "
+                                                          [disabled]="!payload.isSaveAsTemplate">
+                                                    <div class="d-flex">
+                                                        <input type="text"
+                                                               (input)="onTypingTemplateName($event)"
+                                                               class="input-control"
+                                                               [ngStyle]="{'border-color': isInvalidTemplateName ? 'red': ''}"
+                                                               [@bounce]="isInvalidTemplateName"
+                                                               placeholder="Enter Template Name"
+                                                               [(ngModel)]="payload.templateName">
+                                                    </div>
+                                                </fieldset>
+
+                                            </div>
+
+                                            <div class="mg-t-20">
+                                                <app-actual-diagnosis-form
+                                                        [props]="{data: payload.actualDiagnosisForm}"></app-actual-diagnosis-form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center mg-t-10">
+                                        <button class="btn btn-dark pd-x-30 mg-r-10" (click)="onPrevious()"
+                                                [disabled]="stepPosition === 1">Previous
+                                        </button>
+                                        <ng-container *ngIf="stepPosition < 5; else submitButton">
+                                            <button class="btn btn-az-primary pd-x-30 mg-r-10"
+                                                    (click)="onNext()">Next
+                                            </button>
+                                        </ng-container>
+                                        <ng-template #submitButton>
+
+                                            <button class="btn btn-az-primary pd-x-30 mg-r-10" (click)="onSubmit()">
+                                                Submit
+                                            </button>
+
+                                            <button class="btn btn-danger pd-x-30 mg-r-10" (click)="onReset()">
+                                                <i class="fa fa-trash-restore"></i>
+                                            </button>
+
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

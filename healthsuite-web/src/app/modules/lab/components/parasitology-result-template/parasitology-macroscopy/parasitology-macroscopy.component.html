@@ -1,0 +1,53 @@
+<fieldset class="border p-2 mg-t-10 rounded bg-gray-100" [disabled]="prepOrVerifyEnum === resultVerify">
+    <legend class="w-auto tx-16 tx-bold">MACROSCOPY</legend>
+    <div class="main-wrapper az-content-body">
+        <div class="row pd-l-10 pd-r-10">
+            <div class="col-md-12 row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Appearance:</label>
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="macroscopy.appearance"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Colour: </label>
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="macroscopy.colour" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Volume/Size:</label>
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="macroscopy.size"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Consistency:</label>
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="macroscopy.consistency"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Platelet count:</label>
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="macroscopy.plateletCount"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Level of parasitemia: </label>
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="macroscopy.levelOfParasitemia"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Protein:</label>
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="macroscopy.protein"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

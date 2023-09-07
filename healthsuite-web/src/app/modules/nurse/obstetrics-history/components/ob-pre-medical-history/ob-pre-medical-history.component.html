@@ -1,0 +1,58 @@
+<fieldset class="border p-2 mg-t-0 rounded">
+    <legend class="w-auto tx-16 tx-bold">PREVIOUS MEDICAL HISTORY
+    </legend>
+    <div class="row row-xs align-items-center mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25"> Heart Disease:
+            </label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <textarea cols="10" class="input-control" rows="2" placeholder="Enter Heart Disease"
+                      [(ngModel)]="props.payload.heartDisease"></textarea>
+
+        </div>
+    </div>
+    <div class="row row-xs align-items-center mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25"> Chest Disease:
+            </label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <textarea cols="10" class="input-control" rows="2" placeholder="Enter Chest Disease"
+                      [(ngModel)]="props.payload.chestDisease"></textarea>
+
+        </div>
+    </div>
+    <div class="row row-xs align-items-center mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25"> Kidney Disease:
+            </label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <textarea cols="10" class="input-control" rows="2" placeholder="Enter Kidney Disease"
+                      [(ngModel)]="props.payload.kidneyDisease"></textarea>
+
+        </div>
+    </div>
+    <div class="row row-xs align-items-center mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25"> Blood Transfusion:
+            </label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <textarea cols="10" class="input-control" rows="2" placeholder="Enter Blood Transfusion"
+                      [(ngModel)]="props.payload.bloodTransfusion"></textarea>
+
+        </div>
+    </div>
+    <div class="row row-xs align-items-center mg-b-20">
+        <div class="col-md-4 text-right ">
+            <label class="pd-r-25"> Others (including operations):
+            </label>
+        </div>
+        <div class="col-md-8 mg-t-5 mg-md-t-0">
+            <textarea class="form-control" rows="2" cols="2" placeholder="Enter other info"
+                      [(ngModel)]="props.payload.others"></textarea>
+        </div>
+    </div>
+</fieldset>

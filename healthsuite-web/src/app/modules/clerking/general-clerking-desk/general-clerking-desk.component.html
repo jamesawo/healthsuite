@@ -1,0 +1,176 @@
+<div class="az-content az-content-contacts">
+    <div class="waiting-wrapper">
+        <div class="az-content-left az-content-left-contacts">
+            <nav class="nav az-nav-line az-nav-line-chat">
+                <a
+                        class="pointer nav-link {{ activeView == 'waiting' ? 'active' : '' }}"
+                        (click)="onChangeActiveView('waiting')"
+                >Waiting
+                    <span class="badge badge-dark">{{waitingCount}}</span></a
+                >
+                <a
+                        class="pointer nav-link {{ activeView == 'attended' ? 'active' : '' }}"
+                        (click)="onChangeActiveView('attended')"
+                >Attended
+                    <span class="badge badge-dark">{{attendedWaitingCount}}</span>
+                </a
+                >
+            </nav>
+
+            <ng-container *ngIf="activeView == 'waiting'; else attendedRef">
+                <app-patient-waiting-list [props]="{viewType: doctor}" [updateCount]="onUpdateCount"
+                                          (selected)="onPatientSelected($event)" #listComponent
+                ></app-patient-waiting-list>
+            </ng-container>
+
+            <ng-template #attendedRef>
+                <app-patient-attended-list
+                        [props]="{viewType: doctor}"
+                        [updateCount]="onUpdateAttendedWaitingCount"
+                        (selected)="onPatientSelected($event)"
+                        #attendedListComponent
+                ></app-patient-attended-list>
+            </ng-template>
+
+            <!-- az-contacts-list -->
+        </div>
+
+        <div class="az-content-body az-content-body-contacts">
+            <div class="flex-column mg-l-10">
+                <label class="mg-l-2">Search For Patient:</label>
+                <app-patient-search #patientSearchComponent [props]="{
+                showLabel: false,
+                checkAdmission: false,
+                loadAdmission: false,
+                loadRevisit: false,
+                loadSchemeDiscount: false,
+                loadDeposit: false
+                }" (selected)="onPatientSearchSelected($event)"></app-patient-search>
+
+                <app-patient-bio-card [selectedPatient]="payload.patient"></app-patient-bio-card>
+
+                <div class="mg-t-5">
+                    <app-clerking-tabs [props]="{patientPayload: payload.patient}"></app-clerking-tabs>
+                </div>
+
+                <div class="mg-t-10">
+                    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+                        <legend class="w-auto tx-16 tx-bold"></legend>
+                        <div class="flex-column pd-10-f bg-gray-200">
+                            <div class="row mg-t-10">
+                                <div class="row col-md-6 mg-l-5">
+                                    <label class="w-25 align-self-center">CONSULTANT:</label>
+                                    <div class="w-75">
+                                        <app-user-search #userSearchComponent (selected)="onConsultantSelected($event)"></app-user-search>
+                                    </div>
+                                </div>
+                                <div class="row col-md-6 mg-l-5">
+                                    <label class="w-25 align-self-center">SPECIALITY UNIT:</label>
+                                    <div class="w-75">
+                                        <app-speciality-search #specialitySearchComponent
+                                                (selected)="onSpecialitySelected($event)"></app-speciality-search>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="pd-30 pd-sm-40 wd-xl-100p ">
+
+                        <div class="row row-xs align-items-center mg-b-20">
+                            <div class="col-md-6">
+                                <label>Provide Informant Details ? &nbsp;
+                                    <input type="checkbox" [checked]="payload.hasInformantDetail"
+                                           (change)="onToggleHasInformantDetails($event)">
+                                </label>
+                            </div>
+                        </div>
+
+                        <ng-container *ngIf="payload.hasInformantDetail">
+                            <app-informant-details
+                                    [props]="{data: payload.informantDetails}"></app-informant-details>
+                        </ng-container>
+
+                        <div class="row row-xs align-items-center mg-b-20 mg-t-5">
+                            <div class="col-md-4">
+                                <label>Use Saved Template ? &nbsp;
+                                    <input type="checkbox"
+                                           [checked]="payload.isSaveAsTemplate"
+                                           (change)="onToggleUseSavedTemplate($event)">
+                                </label>
+                            </div>
+                            <div class="col-md-8 mg-t-5 mg-md-t-0 {{ isUseSavedTemplate ? '' : 'disabled' }}">
+                                <app-clerking-template-search #clerkingTemplateSearchComponent
+                                                              (selected)="onSavedTemplateSelected($event)"
+                                                              [props]=" { desk: generalDesk, doctor: payload.clerkedBy.id }"></app-clerking-template-search>
+                            </div>
+                        </div>
+
+                        <div class="row row-xs align-items-center mg-b-20 mg-t-5">
+                            <div class="col-md-4">
+                                <label>Follow Up Note ? &nbsp;
+                                    <input type="checkbox"
+                                           [checked]="payload.isUseFollowUpNote"
+                                           (change)="onToggleFollowUpNote($event)">
+                                </label>
+                            </div>
+                            <div class="col-md-8 mg-t-5 mg-md-t-0 {{ payload.isUseFollowUpNote ? '' : 'disabled' }}">
+                                <textarea rows="2" cols="10" class="input-control" placeholder="Enter Follow Up Note" [(ngModel)]="payload.followUpNote"></textarea>
+                            </div>
+                        </div>
+
+                        <hr class="mg-y-30">
+                        <app-patient-background-history-form
+                                [props]="{data: payload.backgroundHistory}"></app-patient-background-history-form>
+
+                        <div class="row row-xs align-items-center mg-b-20">
+                            <div class="col-md-4">
+                                <label>Provisional Diagnosis:
+                                </label>
+                            </div>
+                            <div class="col-md-8 mg-t-5 mg-md-t-0 form-group">
+                                <textarea class="form-control input-control" placeholder="Enter Provisional Diagnosis" cols="10" rows="2" [(ngModel)]="payload.provisionalDiagnosis"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+                        <legend class="w-auto tx-16 tx-bold"></legend>
+                        <div class="mg-t-20">
+                            <div class="row row-xs align-items-center mg-b-20 mg-t-5">
+                                <div class="col-md-4">
+                                    <label>Save As Template ? &nbsp;
+                                        <input type="checkbox"
+                                               [checked]="payload.isSaveAsTemplate"
+                                               (change)="onToggleSaveAsTemplate($event)">
+                                    </label>
+                                </div>
+                                <div class="col-md-8 mg-t-5 mg-md-t-0 {{ payload.isSaveAsTemplate ? '' : 'disabled' }}">
+                                    <input type="text" class="input-control" [(ngModel)]="payload.saveAsTemplateName">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+                        <legend class="w-auto tx-16 tx-bold"></legend>
+                        <div class="mg-t-20">
+                            <app-actual-diagnosis-form
+                                    [props]="{data: payload.actualDiagnosis}"></app-actual-diagnosis-form>
+                        </div>
+                    </fieldset>
+
+                    <div class="text-center mg-t-10">
+                        <button class="btn btn-az-primary pd-x-30 mg-r-10" (click)="onSubmit()">
+                            Submit
+                        </button>
+
+                        <button class="btn btn-danger pd-x-30 mg-r-10" (click)="onReset()">
+                            <i class="fa fa-trash-restore"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

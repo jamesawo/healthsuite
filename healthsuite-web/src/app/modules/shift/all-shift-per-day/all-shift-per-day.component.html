@@ -1,0 +1,152 @@
+<div class="pd-10 mg-t-5 pd-sm-15 bg-gray-200 wd-xl-100p">
+    <!--  date filter -->
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">Start Date</label>
+                    <app-shared-date #startDateComponent (selected)="onDateSelected($event, start)"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="tx-16 txt-black">End Date</label>
+                    <app-shared-date #endDateComponent (selected)="onDateSelected($event, end)"></app-shared-date>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mg-t-30">
+                    <button class="btn btn-sm btn-primary" (click)="onSearchRecord()">VIEW</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- table -->
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-left"></th>
+                        <th class="text-left">Cashier Username</th>
+                        <th class="text-left">Location</th>
+                        <th class="text-left">Shift Number</th>
+                        <th class="text-left">Shift Date</th>
+                        <th class="text-left">Cash</th>
+                        <th class="text-left">Cheque</th>
+                        <th class="text-left">POS</th>
+                        <th class="text-left">Mobile Money</th>
+                        <th class="text-left">ETF</th>
+                        <th class="text-left">Total</th>
+                        <th class="text-left">Receipt Count</th>
+                        <th class="text-left">Status</th>
+                        <th class="text-left">Shift Closed By</th>
+                        <th class="text-left">Reconciled</th>
+                        <th class="text-left">Reconciled By</th>
+                        <th class="text-left">Reconciliation Date</th>
+                        <th class="text-left">Compiled</th>
+                        <th class="text-left">Compiled By</th>
+                        <th class="text-left">Compiled Date</th>
+                        <th class="text-left">Compilation #</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of data.resultList; let i = index" class="tx-13">
+                        <td class="text-left">
+                            <input type="checkbox" >
+                        </td>
+                        <td class="text-left">{{item?.cashier?.label}}</td>
+                        <td class="text-left">{{item?.department?.name}}</td>
+                        <td class="text-left">{{item?.shiftNumber}}</td>
+                        <td class="text-left" style="width: 200px">{{item?.openDate | date}}</td>
+                        <td class="text-left">{{item?.cash | currency: ' '}}</td>
+                        <td class="text-left">{{item?.cheque | currency: ' '}}</td>
+                        <td class="text-left">{{item?.pos | currency: ' '}}</td>
+                        <td class="text-left">{{item?.mobileMoney | currency: ' '}}</td>
+                        <td class="text-left">{{item?.etf | currency: ' '}}</td>
+                        <td class="text-left">{{item?.total | currency: ' '}}</td>
+                        <td class="text-left">{{item?.receiptCount}}</td>
+                        <td class="text-left">
+                            <span class="badge badge-{{item?.isActive?'success': 'danger'}}"> {{item?.isActive? 'Active': 'Closed'}}  </span>
+                        </td>
+                        <td class="text-left">{{item?.closedByUser?.label}}</td>
+                        <td class="text-left">
+                            <span class="badge badge-{{item?.isFundReceived?'success': 'danger'}}"> {{item?.isFundReceived? 'Yes': 'No'}}  </span>
+                        </td>
+                        <td class="text-left">{{item?.fundReception?.receivedBy?.label}}</td>
+                        <td class="text-left">{{item?.fundReception?.date | date}}</td>
+                        <td class="text-left">
+                            <span class="badge badge-{{item?.isShitCompiled?'success': 'danger'}}"> {{item?.isShitCompiled? 'Yes': 'No'}}  </span>
+                        </td>
+                        <td class="text-left">{{item?.compiledShift?.compiledBy?.userName}}</td>
+                        <td class="text-left">{{item?.compiledShift?.compiledDate | date}}</td>
+                        <td class="text-left">{{item?.compiledShift?.code}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- amount summary -->
+    <fieldset class="border p-2 mg-t-20 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="row pd-l-40 pd-r-40">
+            <div class="col-md-12 row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="tx-16 txt-black">Cash</label>
+                        <input type="text" class="form-control" [value]="data?.cash | currency: currency"  readonly>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="tx-16 txt-black">Cheque</label>
+                        <input type="text" class="form-control"  [value]="data?.cheque | currency: currency" readonly>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="tx-16 txt-black">Pos</label>
+                        <input type="text" class="form-control"  [value]="data?.pos | currency: currency" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="tx-16 txt-black">Mobile Money</label>
+                        <input type="text" class="form-control"  [value]="data?.mobile | currency: currency" readonly>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="tx-16 txt-black">ETF</label>
+                        <input type="text" class="form-control"  [value]="data?.etf | currency: currency" readonly>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="tx-16 txt-black"><strong>Total</strong></label>
+                        <input type="text" class="form-control"  [value]="data?.total | currency: currency" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="form-group mg-t-20 text-center">
+        <button class="btn btn-sm btn-primary" (click)="onDownloadAsPdfClick()">
+            <i class="fa fa-file-download"></i>
+            DOWNLOAD AS PDF
+        </button>
+    </div>
+</div>

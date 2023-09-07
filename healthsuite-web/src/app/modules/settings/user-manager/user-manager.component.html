@@ -1,0 +1,277 @@
+<div class="mg-b-20">
+    <form #f="ngForm" autocomplete="off"  (ngSubmit)="onCreateUser()">
+        <input autocomplete="false" name="hidden" type="text" style="display:none;">
+        <fieldset class="border pd-l-30 pd-r-30  pd-b-20 rounded bg-gray-100">
+            <legend class="w-auto tx-16 tx-bold">
+                User Profile Details
+                <ng-template #statusTemplate>
+                    To <code>create</code> a new user,<br />
+                    1. Provide the user profile details <br />
+                    2. Provide the user authentication details<br />
+                    3. Click on save button.<br />
+                    <small>
+                        <code>For Technical Support, Contact A System Administrator</code>
+                    </small>
+                </ng-template>
+                <i
+                    class="fa fa-info-circle fa-sm tx-12"
+                    [ngbPopover]="statusTemplate"
+                    placement="right"
+                    triggers="mouseenter:mouseleave"
+                    container="body"
+                    aria-hidden="true"
+                ></i>
+            </legend>
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label for="lastName">Last Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="lastName"
+                        [(ngModel)]="user.lastName"
+                        name="lastName"
+                        #lastName="ngModel"
+                        required
+                        [ngClass]="{
+                            'is-invalid': lastName.invalid && (lastName.touched || lastName.dirty)
+                        }"
+                    />
+                </div>
+                <div class="col-md-6">
+                    <label for="otherNames">Other Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="otherNames"
+                        [(ngModel)]="user.otherNames"
+                        name="otherNames"
+                        #otherNames="ngModel"
+                        required
+                        [ngClass]="{
+                            'is-invalid':
+                                otherNames.invalid && (otherNames.touched || otherNames.dirty)
+                        }"
+                    />
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        [(ngModel)]="user.email"
+                        name="email"
+                        #email="ngModel"
+                        required
+                        [ngClass]="{
+                            'is-invalid': email.invalid && (email.touched || email.dirty)
+                        }"
+                    />
+                </div>
+                <div class="col-md-6">
+                    <label for="phone">Phone Number</label>
+                    <input
+                        type="tel"
+                        class="form-control"
+                        id="phone"
+                        [(ngModel)]="user.phone"
+                        name="phone"
+                        required
+                        #phone="ngModel"
+                        [ngClass]="{
+                            'is-invalid': phone.invalid && (phone.touched || phone.dirty)
+                        }"
+                    />
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label>Select Department</label>
+                    <ng-select
+                        [(ngModel)]="user.department.id"
+                        name="department"
+                        #department="ngModel"
+                        required
+                        [ngClass]="{
+                            'is-invalid':
+                                department.invalid && (department.touched || department.dirty)
+                        }"
+                    >
+                        <ng-option *ngFor="let department of departments" [value]="department.id">{{
+                            department.name
+                        }}</ng-option>
+                    </ng-select>
+                </div>
+                <div class="col-md-6">
+                    <label>Assign Role</label>
+                    <!-- todo:: user should be able to select multiple roles using checkbox -->
+                    <ng-select
+                        [(ngModel)]="userRole.id"
+                        name="role"
+                        required
+                        #role="ngModel"
+                        [ngClass]="{
+                            'is-invalid': role.invalid && (role.touched || role.dirty)
+                        }"
+                    >
+                        <ng-option *ngFor="let role of roles" [value]="role.id">
+                            {{ role.name | uppercase }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="border pd-l-30 pd-r-30 pd-b-20 rounded bg-gray-100 mg-t-15">
+            <legend class="w-auto tx-16 tx-bold">
+                User Login Details
+                <ng-template #statusTemplate2>
+                    <code>Hint:</code> <br />
+                    Provide the user authentication details<br />
+                </ng-template>
+                <i
+                    class="fa fa-info-circle fa-sm tx-12"
+                    [ngbPopover]="statusTemplate2"
+                    placement="right"
+                    triggers="mouseenter:mouseleave"
+                    container="body"
+                    aria-hidden="true"
+                ></i>
+            </legend>
+
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label for="userName">Username</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="userName"
+                        [(ngModel)]="user.userName"
+                        required
+                        #userName="ngModel"
+                        name="userUsername"
+                        [ngClass]="{
+                            'is-invalid': userName.invalid && (userName.touched || userName.dirty)
+                        }"
+                        placeholder="Enter Username"
+                        autocomplete="disabled"
+                    />
+                </div>
+                <div class="col-md-6">
+                    <label>Account Expiry Date</label>
+                    <app-shared-date #dateComponent (selected)="onExpiryDateSelected($event)" [props]="{minDate: todayDate, hideCurrentDate: true}"></app-shared-date>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="password"
+                        [(ngModel)]="user.password"
+                        required
+                        #password="ngModel"
+                        name="userPasswords"
+                        [ngClass]="{
+                            'is-invalid': password.invalid && (password.touched || password.dirty)
+                        }"
+                        autocomplete
+                        #passwordInput
+                    />
+                    <i #passwordEye class="far fa-eye-slash password-toggle" (click)="passwordEyeToggle = !passwordEyeToggle; onToggleInputTypeEye(passwordInput, passwordEye)"></i>
+
+                </div>
+                <div class="col-md-6">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="confirmPassword"
+                        [(ngModel)]="user.confirmPassword"
+                        required
+                        #confirmPassword="ngModel"
+                        name="userConfirmPassword"
+                        [ngClass]="{
+                            'is-invalid':
+                                confirmPassword.invalid &&
+                                (confirmPassword.touched || confirmPassword.dirty)
+                        }"
+                        autocomplete="disable"
+                        #confirmPasswordInput
+                    />
+                    <i #confirmPasswordEye class="far fa-eye-slash password-toggle" (click)="confirmPasswordEyeToggle = !confirmPasswordEyeToggle; onToggleInputTypeEye(confirmPasswordInput, confirmPasswordEye)"></i>
+
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="form-group mg-t-15">
+            <button class="btn btn-primary" type="submit">
+                Add New User
+            </button>
+        </div>
+    </form>
+
+    <div class="table-responsive mg-t-20">
+        <table class="table table-bordered table-striped mg-b-0">
+            <thead>
+                <tr>
+                    <th class="wd-3">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <th>Last Name</th>
+                    <th>Other Names</th>
+                    <th>Phone</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Expiry Date</th>
+                    <th class="wd-3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="
+                        let user of usersList
+                            | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize
+                    "
+                >
+                    <th scope="row">
+                        <label>
+                            <input type="checkbox" />
+                        </label>
+                    </th>
+                    <td>{{ user.otherNames }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.userName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role[0].name }}</td>
+                    <td>{{ user.accountEnabled ? 'Active' : 'Inactive' }}</td>
+                    <td>{{ displayDate(user.expiryDate) | date }}</td>
+                    <td>
+                        <a class="btn" (click)="onUpdateUserDetail(user)">
+                            <i class="fa fa-pencil-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ngb-pagination
+            [collectionSize]="usersList?.length"
+            [(page)]="page"
+            [maxSize]="5"
+            [rotate]="true"
+            [ellipses]="false"
+            [boundaryLinks]="true"
+        ></ngb-pagination>
+    </div>
+</div>

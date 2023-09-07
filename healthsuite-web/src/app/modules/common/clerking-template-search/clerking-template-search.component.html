@@ -1,0 +1,28 @@
+<div class="input-wrapper">
+<!--    <label *ngIf="props?.showLabel">Type Scheme Name</label>-->
+    <ng-select #ngSelectComponent
+            [items]="responsePayload | async"
+            bindLabel="templateName"
+            [trackByFn]="trackByFn"
+            [minTermLength]="minLengthTerm"
+            [loading]="isLoading"
+            typeToSearchText="Please enter {{ minLengthTerm }} or more characters"
+            [typeahead]="searchInput$"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="selectedPayload"
+            (change)="onSelect($event)"
+            [clearable]="true"
+            placeholder="Start Typing Scheme Name..."
+    >
+        <ng-template ng-option-tmp let-item="item">
+            <strong>
+                {{ item.templateName  | uppercase }} -
+                <small> [ {{item.code | uppercase}} ]</small>
+            </strong>
+            <br />
+            <small>
+                <i> saved on: [ {{ item.savedDate | date }} ] @ {{item.deskTitle}} </i>
+            </small>
+        </ng-template>
+    </ng-select>
+</div>

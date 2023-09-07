@@ -1,0 +1,135 @@
+<div class="main-wrapper az-content-body">
+    <div class="flex-column">
+        <div class="pd-10 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-auto">
+                    <label class="rdiobox" for="create">
+                        <input
+                                id="create"
+                                name="scheme"
+                                type="radio"
+                                checked
+                                (change)="onTypeChange(newView)"
+                        />
+                        <span>New Sample</span>
+                    </label>
+                </div>
+                <div class="col-auto mg-t-20 mg-lg-t-0">
+                    <label class="rdiobox" for="edit">
+                        <input
+                                name="scheme"
+                                id="edit"
+                                type="radio"
+                                (change)="onTypeChange(editView)"
+                        />
+                        <span>Edit Sample</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-lab-test-request-shared [payload]="payload" ></app-lab-test-request-shared>
+
+    <!-- extras -->
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+                <div class="col-2 text-right">
+                    <label class="mg-t-5">Clinical Summary:</label>
+                </div>
+                <div class="col-10">
+                    <textarea class="form-control" cols="10" rows="2">{{payload.clinicalSummary}}</textarea>
+                </div>
+            </div>
+            <div class="row mg-t-10">
+                <div class="col-2 text-right">
+                    <label class="mg-t-5">Provisional Diagnosis:</label>
+                </div>
+                <div class="col-10">
+                    <textarea class="form-control" cols="10" rows="2">{{payload.provisionalDiagnosis}}</textarea>
+                </div>
+            </div>
+            <div class="row mg-t-10">
+                <div class="col-2 text-right">
+                    <label class="mg-t-5">Other Information:</label>
+                </div>
+                <div class="col-10">
+                    <textarea class="form-control" cols="10" rows="2">{{payload.otherInformation}}</textarea>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- table -->
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th class="text-center">TEST</th>
+                        <th class="text-center">SPECIMEN</th>
+                        <th class="text-center">DATE COLLECTED</th>
+                        <th class="text-center">COLLECTED BY</th>
+                        <th class="text-center">ACTION TAKEN</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <ng-container *ngIf="payload?.labBillTestRequest?.testItems; let i = index">
+                        <tr *ngFor="let item of payload.labBillTestRequest.testItems">
+                            <td class="text-center">{{item.testName}}</td>
+                            <td class="text-center">{{item.specimenDto.name}}</td>
+                            <td class="text-center">{{payload.labBillTestRequest.date | date}}</td>
+                            <td class="text-center">{{ item.collectedBy }}</td>
+                            <td>
+                                <app-specimen-action
+                                        (selected)="onSpecimenAckChange($event, item)"></app-specimen-action>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="border p-2 mg-t-10 rounded bg-gray-100">
+        <legend class="w-auto tx-16 tx-bold">
+        </legend>
+        <div class="pd-10 mg-t-15 pd-sm-15 bg-gray-200 wd-xl-100p">
+            <div class="row">
+
+                <div class="col-12 row">
+                    <div class="col-3 text-right">
+                        <label class="mg-t-5">Lab Number:</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" class="form-control" [(ngModel)]="payload.labNumber"/>
+                    </div>
+                </div>
+
+                <div class="col-12 row mg-t-10" *ngIf="payload.newOrEditSampleEnum === editView">
+                    <div class="col-3 text-right">
+                        <label class="mg-t-5">Previous Lab Number:</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- action button -->
+    <div class="mg-t-5 pd-sm-15 wd-xl-100p">
+        <div class="form-group text-center">
+            <button class="btn btn-primary" (click)="onSubmit()">SUBMIT</button>
+        </div>
+    </div>
+
+</div>
