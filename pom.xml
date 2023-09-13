@@ -19,7 +19,7 @@
         <relativePath/>
     </parent>
 
-    <artifactId>stocky</artifactId>
+    <artifactId>healthsuite</artifactId>
     <groupId>com.jamesaworo</groupId>
     <version>0.0.1-SNAPSHOT</version>
     <name>healthsuite</name>

@@ -5,7 +5,7 @@ export const environment = {
     apiEndPoint: '/api/v1',
     enforceLocation: true,
     currencySign: '₦',
-    appName: 'health suite - local',
+    appName: 'health suite',
     encSecret: 'aA9afRCFkOaJ2n81',
     version: 'v1.0.2',
 };

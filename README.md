@@ -2,9 +2,56 @@
 
 ## Description
 
-HealthSuite is a robust Hospital Management Information System built with Angular, TypeScript, Java, Spring Boot and PostgreSQL. It aims to help hospitals of any size manage their entire process in one place.
+HealthSuite is a robust Hospital Management Information System. It aims to help hospitals of any size manage their entire process in one place.
 
-- See a live demo on my website [healthsuite demo](https://healthsuite.jamesaworo.com)
+## Screen shot
+
+See a live demo on my website [healthsuite demo](https://healthsuite.jamesaworo.com)
+Learn more [here](https://jamesaworo.com/projects/)
+
+A few screenshot from Healthsuite in action.
+
+- Patient Registration
+    <div align="center">
+        <img src="screens/03-patient-reg.png" width="50%">
+    </div>
+
+
+- Patient Registration (Dark Mode)
+    <div align="center">
+        <img src="screens/02-p-registration-dark.png" width="50%">
+    </div>
+
+
+- Upload Drug & Services 
+    <div align="center">
+        <img src="screens/04-upload-drugs.png" width="50%">
+    </div>
+
+- Patient Drug Billing
+    <div align="center">
+        <img src="screens/05-drug-billing.png" width="50%">
+    </div>
+
+
+- Scheme Patient Billing
+    <div align="center">
+        <img src="screens/06-scheme-patient-billing.png" width="50%">
+    </div>
+
+
+- Cashier Shift Report
+    <div align="center">
+        <img src="screens/07-cashier-shift.png" width="50%">
+    </div>
+
+
+
+- Patient Bill Payment (Dark Mode)
+    <div align="center">
+        <img src="screens/01-p-payment-dark.png" width="50%">
+    </div>
+
 
 
 ## Features
@@ -31,6 +78,8 @@ HealthSuite has different modules that cover various aspects of hospital managem
 - **Radiology Module**: Provides features for radiology technicians to manage their tasks, such as performing scans, recording images, generating reports, etc.
 
 - **Reports Module**: Provides features for generating and viewing various reports, such as patient statistics, revenue analysis, performance evaluation, etc.
+
+- ** Users, Role and Permission Module **: For managing roles and access rights, users with certain permission can perform only allowed operations. (Role and Permission Base Authorization)
 
 - **and many more**..
 
@@ -80,20 +129,6 @@ For example,
 - If you log in as a pharmacist, you can see the list of prescriptions waiting to be dispensed, manage your inventory and invoices, etc.
 
 - If you log in as an administrator, you can see the dashboard with various reports and statistics, manage the system settings and configuration, add or remove users and roles, etc.
-
-## Screen shot
-
-A few screenshot from Healthsuite in action. 
-See a live demo on my website [healthsuite demo](https://healthsuite.jamesaworo.com) 
-
-- Payment Manager Screen 
-
-    - <img src="screens/p-payment.png" height="40%">
-
-----
-
-- Patient Registration Screen
-    -   <img src="screens/p-registration.png" height="40%">
 
 
 ## License
